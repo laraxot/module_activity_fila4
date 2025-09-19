@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Modules\Activity\Providers;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Override;
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+use Override;
+>>>>>>> 18dcd64 (.)
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 /**
@@ -48,9 +52,13 @@ class ActivityServiceProvider extends XotBaseServiceProvider
      * @return void
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     #[Override]
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+    #[Override]
+>>>>>>> 18dcd64 (.)
     public function boot(): void
     {
         parent::boot();
@@ -65,6 +73,7 @@ class ActivityServiceProvider extends XotBaseServiceProvider
      * @return void
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 
 =======
@@ -75,20 +84,29 @@ class ActivityServiceProvider extends XotBaseServiceProvider
     }
     
 >>>>>>> 0a00ff2 (.)
+=======
+    
+
+>>>>>>> 18dcd64 (.)
     /**
      * Registra le configurazioni del modulo.
      *
      * @return void
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     #[Override]
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+    #[Override]
+>>>>>>> 18dcd64 (.)
     protected function registerConfig(): void
     {
         $this->publishes([
             module_path($this->name, 'config/config.php') => config_path('activity.php'),
         ], 'config');
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), 'activity');
@@ -98,5 +116,9 @@ class ActivityServiceProvider extends XotBaseServiceProvider
             module_path($this->name, 'config/config.php'), 'activity'
         );
 >>>>>>> 0a00ff2 (.)
+=======
+
+        $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), 'activity');
+>>>>>>> 18dcd64 (.)
     }
 }

@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Modules\Activity\Filament\Resources;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Override;
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+use Override;
+>>>>>>> 18dcd64 (.)
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Textarea;
@@ -23,6 +27,9 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 class StoredEventResource extends XotBaseResource
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
     protected static null|string $model = StoredEvent::class;
 
     #[Override]
@@ -45,6 +52,7 @@ class StoredEventResource extends XotBaseResource
     }
 
     #[Override]
+<<<<<<< HEAD
 =======
     protected static ?string $model = StoredEvent::class;
 
@@ -79,6 +87,8 @@ class StoredEventResource extends XotBaseResource
     }
 
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     public static function getPages(): array
     {
         return [

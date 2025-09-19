@@ -13,10 +13,14 @@ abstract class ActivityBasePolicy
     use HandlesAuthorization;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function before(UserContract $user, string $_ability): null|bool
 =======
     public function before(UserContract $user, string $ability): ?bool
 >>>>>>> 0a00ff2 (.)
+=======
+    public function before(UserContract $user, string $_ability): null|bool
+>>>>>>> 18dcd64 (.)
     {
         $xotData = XotData::make();
         if ($user->hasRole('super-admin')) {
@@ -26,7 +30,11 @@ abstract class ActivityBasePolicy
         return null;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 0a00ff2 (.)
+=======
+}
+>>>>>>> 18dcd64 (.)

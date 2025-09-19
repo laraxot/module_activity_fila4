@@ -12,10 +12,15 @@ declare(strict_types=1);
 namespace Modules\Activity\Filament\Resources;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Filament\Schemas\Components\Component;
 use Override;
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+use Filament\Schemas\Components\Component;
+use Override;
+>>>>>>> 18dcd64 (.)
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\TextInput;
 use Modules\Activity\Models\Activity;
@@ -30,15 +35,22 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 class ActivityResource extends XotBaseResource
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     protected static null|string $model = Activity::class;
 =======
     protected static ?string $model = Activity::class;
 >>>>>>> 0a00ff2 (.)
+=======
+    protected static null|string $model = Activity::class;
+>>>>>>> 18dcd64 (.)
 
     /**
      * Define the form schema for the Activity resource.
      *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
      * @return array<string, Component>
      */
     #[Override]
@@ -53,6 +65,7 @@ class ActivityResource extends XotBaseResource
             'causer_id' => TextInput::make('causer_id')->numeric(),
             'properties' => KeyValue::make('properties')->columnSpanFull(),
             'batch_uuid' => TextInput::make('batch_uuid')->maxLength(36),
+<<<<<<< HEAD
 =======
      * @return array<string, \Filament\Schemas\Components\Component>
      */
@@ -87,6 +100,8 @@ class ActivityResource extends XotBaseResource
             'batch_uuid' => TextInput::make('batch_uuid')
                 ->maxLength(36),
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         ];
     }
 }

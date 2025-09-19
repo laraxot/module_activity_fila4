@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Modules\Activity\Tests\Feature;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Snapshot;
 use Tests\TestCase;
+<<<<<<< HEAD
 =======
 use Modules\Activity\Models\Snapshot;
 use Tests\TestCase;
@@ -17,6 +21,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 
 class SnapshotBusinessLogicTest extends TestCase
 {
@@ -215,11 +221,15 @@ class SnapshotBusinessLogicTest extends TestCase
 
         // Query per versione specifica
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 1)->first();
 
         $version5Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 5)->first();
 
         $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 10)->first();
+<<<<<<< HEAD
 =======
         $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)
             ->where('aggregate_version', 1)
@@ -233,6 +243,8 @@ class SnapshotBusinessLogicTest extends TestCase
             ->where('aggregate_version', 10)
             ->first();
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 
         $this->assertNotNull($version1Snapshot);
         $this->assertNotNull($version5Snapshot);
@@ -353,10 +365,14 @@ class SnapshotBusinessLogicTest extends TestCase
     {
         $now = now();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+
+>>>>>>> 18dcd64 (.)
         $snapshot = Snapshot::create([
             'aggregate_uuid' => Str::uuid()->toString(),
             'aggregate_version' => 1,

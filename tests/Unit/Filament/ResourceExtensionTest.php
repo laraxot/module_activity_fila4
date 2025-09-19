@@ -9,11 +9,15 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 
 test('activity resources extend xot base resource', function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
     expect(ActivityResource::class)->toBeSubclassOf(XotBaseResource::class);
 
     expect(SnapshotResource::class)->toBeSubclassOf(XotBaseResource::class);
 
     expect(StoredEventResource::class)->toBeSubclassOf(XotBaseResource::class);
+<<<<<<< HEAD
 =======
     expect(ActivityResource::class)
         ->toBeSubclassOf(XotBaseResource::class);
@@ -24,11 +28,16 @@ test('activity resources extend xot base resource', function () {
     expect(StoredEventResource::class)
         ->toBeSubclassOf(XotBaseResource::class);
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 });
 
 test('activity resource does not implement unnecessary methods', function () {
     $reflection = new ReflectionClass(ActivityResource::class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     expect($reflection->hasMethod('getPages'))
         ->toBeFalse()
@@ -38,6 +47,7 @@ test('activity resource does not implement unnecessary methods', function () {
         ->toBeFalse()
         ->and($reflection->hasMethod('table'))
         ->toBeFalse();
+<<<<<<< HEAD
 =======
     
     expect($reflection->hasMethod('getPages'))->toBeFalse()
@@ -45,11 +55,16 @@ test('activity resource does not implement unnecessary methods', function () {
         ->and($reflection->hasMethod('form'))->toBeFalse()
         ->and($reflection->hasMethod('table'))->toBeFalse();
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 });
 
 test('activity resource implements required getFormSchema method', function () {
     $reflection = new ReflectionClass(ActivityResource::class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     expect($reflection->hasMethod('getFormSchema'))->toBeTrue();
 
@@ -60,6 +75,7 @@ test('activity resource implements required getFormSchema method', function () {
         ->toBeTrue()
         ->and($method->getReturnType()?->getName())
         ->toBe('array');
+<<<<<<< HEAD
 =======
     
     expect($reflection->hasMethod('getFormSchema'))->toBeTrue();
@@ -69,11 +85,16 @@ test('activity resource implements required getFormSchema method', function () {
         ->and($method->isStatic())->toBeTrue()
         ->and($method->getReturnType()?->getName())->toBe('array');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 });
 
 test('snapshot resource should not implement unnecessary methods', function () {
     $reflection = new ReflectionClass(SnapshotResource::class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     // These methods should NOT be implemented (they return standard values)
     $hasUnnecessaryPages = $reflection->hasMethod('getPages');
@@ -101,6 +122,7 @@ test('snapshot resource should not implement unnecessary methods', function () {
         expect($isEmptyRelations)
             ->toBeFalse()
             ->with('SnapshotResource should not implement getRelations() for empty relations');
+<<<<<<< HEAD
 =======
     
     // These methods should NOT be implemented (they return standard values)
@@ -128,12 +150,17 @@ test('snapshot resource should not implement unnecessary methods', function () {
         
         expect($isEmptyRelations)->toBeFalse()->with('SnapshotResource should not implement getRelations() for empty relations');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     }
 });
 
 test('stored event resource should not implement unnecessary methods', function () {
     $reflection = new ReflectionClass(StoredEventResource::class);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     // These methods should NOT be implemented (they return standard values)
     $hasUnnecessaryPages = $reflection->hasMethod('getPages');
@@ -161,6 +188,7 @@ test('stored event resource should not implement unnecessary methods', function 
         expect($isEmptyRelations)
             ->toBeFalse()
             ->with('StoredEventResource should not implement getRelations() for empty relations');
+<<<<<<< HEAD
 =======
     
     // These methods should NOT be implemented (they return standard values)
@@ -188,16 +216,22 @@ test('stored event resource should not implement unnecessary methods', function 
         
         expect($isEmptyRelations)->toBeFalse()->with('StoredEventResource should not implement getRelations() for empty relations');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     }
 });
 
 test('activity resource has correct model configuration', function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
     expect(ActivityResource::getModel())->toBe('Modules\\Activity\\Models\\Activity');
 
     expect(SnapshotResource::getModel())->toBe('Modules\\Activity\\Models\\Snapshot');
 
     expect(StoredEventResource::getModel())->toBe('Modules\\Activity\\Models\\StoredEvent');
+<<<<<<< HEAD
 =======
     expect(ActivityResource::getModel())
         ->toBe('Modules\\Activity\\Models\\Activity');
@@ -208,11 +242,16 @@ test('activity resource has correct model configuration', function () {
     expect(StoredEventResource::getModel())
         ->toBe('Modules\\Activity\\Models\\StoredEvent');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 });
 
 test('activity resource form schema returns array', function () {
     $schema = ActivityResource::getFormSchema();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     expect($schema)->toBeArray()->not->toBeEmpty();
 
@@ -223,6 +262,7 @@ test('activity resource form schema returns array', function () {
         'subject_type',
         'subject_id',
         'properties',
+<<<<<<< HEAD
 =======
     
     expect($schema)->toBeArray()->not->toBeEmpty();
@@ -235,12 +275,15 @@ test('activity resource form schema returns array', function () {
         'subject_id',
         'properties'
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     ]);
 });
 
 test('snapshot resource form schema returns array', function () {
     $schema = SnapshotResource::getFormSchema();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     expect($schema)->toBeArray()->not->toBeEmpty();
 
@@ -249,21 +292,31 @@ test('snapshot resource form schema returns array', function () {
     expect($schema)->toBeArray()->not->toBeEmpty();
     
 >>>>>>> 0a00ff2 (.)
+=======
+
+    expect($schema)->toBeArray()->not->toBeEmpty();
+
+>>>>>>> 18dcd64 (.)
     // Verify it contains expected fields
     expect($schema)->toHaveKeys([
         'model_type',
         'model_id',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'state',
 =======
         'state'
 >>>>>>> 0a00ff2 (.)
+=======
+        'state',
+>>>>>>> 18dcd64 (.)
     ]);
 });
 
 test('stored event resource form schema returns array', function () {
     $schema = StoredEventResource::getFormSchema();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     expect($schema)->toBeArray()->not->toBeEmpty();
 
@@ -272,15 +325,24 @@ test('stored event resource form schema returns array', function () {
     expect($schema)->toBeArray()->not->toBeEmpty();
     
 >>>>>>> 0a00ff2 (.)
+=======
+
+    expect($schema)->toBeArray()->not->toBeEmpty();
+
+>>>>>>> 18dcd64 (.)
     // Verify it contains expected fields
     expect($schema)->toHaveKeys([
         'event_class',
         'event_properties',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'aggregate_uuid',
 =======
         'aggregate_uuid'
 >>>>>>> 0a00ff2 (.)
+=======
+        'aggregate_uuid',
+>>>>>>> 18dcd64 (.)
     ]);
 });
 
@@ -290,11 +352,15 @@ test('resources use proper xot base resource functionality', function () {
     $snapshotPages = SnapshotResource::getPages();
     $storedEventPages = StoredEventResource::getPages();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
     expect($activityPages)->toHaveKeys(['index', 'create', 'edit']);
     expect($snapshotPages)->toHaveKeys(['index', 'create', 'edit']);
     expect($storedEventPages)->toHaveKeys(['index', 'create', 'edit']);
 
+<<<<<<< HEAD
 =======
     
     expect($activityPages)->toHaveKeys(['index', 'create', 'edit']);
@@ -302,15 +368,21 @@ test('resources use proper xot base resource functionality', function () {
     expect($storedEventPages)->toHaveKeys(['index', 'create', 'edit']);
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     // Test relation discovery
     $activityRelations = ActivityResource::getRelations();
     $snapshotRelations = SnapshotResource::getRelations();
     $storedEventRelations = StoredEventResource::getRelations();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+
+>>>>>>> 18dcd64 (.)
     expect($activityRelations)->toBeArray();
     expect($snapshotRelations)->toBeArray();
     expect($storedEventRelations)->toBeArray();
@@ -319,6 +391,9 @@ test('resources use proper xot base resource functionality', function () {
 test('resources follow xot base resource naming conventions', function () {
     // Test that resource names follow conventions
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
     expect(class_basename(ActivityResource::class))->toBe('ActivityResource');
 
     expect(class_basename(SnapshotResource::class))->toBe('SnapshotResource');
@@ -332,6 +407,7 @@ test('resources follow xot base resource naming conventions', function () {
 
     expect(StoredEventResource::getModel())->toBe('Modules\\Activity\\Models\\StoredEvent');
 });
+<<<<<<< HEAD
 =======
     expect(class_basename(ActivityResource::class))
         ->toBe('ActivityResource');
@@ -353,3 +429,5 @@ test('resources follow xot base resource naming conventions', function () {
         ->toBe('Modules\\Activity\\Models\\StoredEvent');
 });
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
