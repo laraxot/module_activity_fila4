@@ -9,19 +9,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
-=======
-use Spatie\Activitylog\Models\Activity as SpatieActivity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
->>>>>>> 0a00ff2 (.)
-=======
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\Models\Activity as SpatieActivity;
->>>>>>> 18dcd64 (.)
 
 /**
  * Class Activity.
@@ -88,14 +77,7 @@ class Activity extends SpatieActivity
     {
         return ActivityFactory::new();
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
     /** @var list<string> */
     protected $fillable = [
         'id',

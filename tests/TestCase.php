@@ -4,18 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Illuminate\Foundation\Application;
 use Modules\Activity\Providers\ActivityServiceProvider;
-=======
-use Modules\Activity\Providers\ActivityServiceProvider;
-use Illuminate\Foundation\Application;
->>>>>>> 0a00ff2 (.)
-=======
-use Illuminate\Foundation\Application;
-use Modules\Activity\Providers\ActivityServiceProvider;
->>>>>>> 18dcd64 (.)
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
 
@@ -35,15 +25,7 @@ abstract class TestCase extends BaseTestCase
 
         // Load Activity module specific configurations
         $this->artisan('migrate', ['--database' => 'testing']);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Seed any required data for Activity tests
         $this->artisan('module:seed', ['module' => 'Activity']);
     }

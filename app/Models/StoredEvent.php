@@ -9,13 +9,6 @@ use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 
@@ -64,15 +57,7 @@ use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStored
 class StoredEvent extends SpatieStoredEvent
 {
     use HasFactory;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
     /** @var string */
     protected $connection = 'activity';
     /** @var string */
@@ -91,11 +76,4 @@ class StoredEvent extends SpatieStoredEvent
         'updated_by',
         'created_by',
     ];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 }
