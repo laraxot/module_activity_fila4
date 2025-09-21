@@ -1,8 +1,26 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+declare(strict_types=1);
+
+
+=======
+>>>>>>> a12f125f4a (.)
+=======
+declare(strict_types=1);
+
+
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,4 +46,20 @@ class ActivityFactory extends Factory
             'updated_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> a12f125f4a (.)
+=======
+}
+>>>>>>> b93ef594b4 (.)
+=======
+}
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)

@@ -4,11 +4,37 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
+<<<<<<< HEAD
 use Exception;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+=======
+<<<<<<< HEAD
+use Exception;
+use Modules\Activity\Database\Factories\ActivityFactory;
+<<<<<<< HEAD
+<<<<<<< HEAD
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+=======
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
+>>>>>>> a12f125f4a (.)
+=======
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+>>>>>>> b93ef594b4 (.)
+=======
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
@@ -26,6 +52,12 @@ class ActivityMassSeeder extends Seeder
     public function run(): void
     {
         $this->command->info('🚀 Inizializzazione seeding di massa per modulo Activity...');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
 
         $startTime = microtime(true);
 
@@ -50,12 +82,81 @@ class ActivityMassSeeder extends Seeder
         }
     }
 
+<<<<<<< HEAD
+=======
+=======
+        
+=======
+
+>>>>>>> b93ef594b4 (.)
+        $startTime = microtime(true);
+
+        try {
+            // 1. Creazione attività di sistema
+            $this->createSystemActivities();
+
+            // 2. Creazione snapshot
+            $this->createSnapshots();
+
+            // 3. Creazione eventi memorizzati
+            $this->createStoredEvents();
+
+            $endTime = microtime(true);
+            $executionTime = round($endTime - $startTime, 2);
+
+            $this->command->info("🎉 Seeding modulo Activity completato in {$executionTime} secondi!");
+            $this->displaySummary();
+        } catch (Exception $e) {
+            $this->command->error('❌ Errore durante il seeding: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+<<<<<<< HEAD
+    
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+        $startTime = microtime(true);
+        
+        try {
+            // 1. Creazione attività di sistema
+            $this->createSystemActivities();
+            
+            // 2. Creazione snapshot
+            $this->createSnapshots();
+            
+            // 3. Creazione eventi memorizzati
+            $this->createStoredEvents();
+            
+            $endTime = microtime(true);
+            $executionTime = round($endTime - $startTime, 2);
+            
+            $this->command->info("🎉 Seeding modulo Activity completato in {$executionTime} secondi!");
+            $this->displaySummary();
+            
+        } catch (\Exception $e) {
+            $this->command->error("❌ Errore durante il seeding: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     /**
      * Crea attività di sistema.
      */
     private function createSystemActivities(): void
     {
         $this->command->info('📝 Creazione attività di sistema...');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
 
         // Crea 2000 attività di sistema
         $activities = ActivityFactory::new()
@@ -67,12 +168,52 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Create ' . $activities->count() . ' attività di sistema');
     }
 
+<<<<<<< HEAD
+=======
+=======
+        
+=======
+
+>>>>>>> b93ef594b4 (.)
+        // Crea 2000 attività di sistema
+        $activities = ActivityFactory::new()
+            ->count(2000)
+            ->create([
+                'created_at' => Carbon::now()->subDays(rand(1, 90)),
+            ]);
+
+        $this->command->info('✅ Create ' . $activities->count() . ' attività di sistema');
+    }
+<<<<<<< HEAD
+    
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+        // Crea 2000 attività di sistema
+        $activities = \Modules\Activity\Database\Factories\ActivityFactory::new()->count(2000)->create([
+            'created_at' => Carbon::now()->subDays(rand(1, 90)),
+        ]);
+        
+        $this->command->info("✅ Create " . $activities->count() . " attività di sistema");
+    }
+    
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     /**
      * Crea snapshot.
      */
     private function createSnapshots(): void
     {
         $this->command->info('📸 Creazione snapshot...');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
 
         // Crea 500 snapshot
         $snapshots = Snapshot::factory()
@@ -84,12 +225,52 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Creati ' . $snapshots->count() . ' snapshot');
     }
 
+<<<<<<< HEAD
+=======
+=======
+        
+=======
+
+>>>>>>> b93ef594b4 (.)
+        // Crea 500 snapshot
+        $snapshots = Snapshot::factory()
+            ->count(500)
+            ->create([
+                'created_at' => Carbon::now()->subDays(rand(1, 180)),
+            ]);
+
+        $this->command->info('✅ Creati ' . $snapshots->count() . ' snapshot');
+    }
+<<<<<<< HEAD
+    
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+        // Crea 500 snapshot
+        $snapshots = Snapshot::factory()->count(500)->create([
+            'created_at' => Carbon::now()->subDays(rand(1, 180)),
+        ]);
+        
+        $this->command->info("✅ Creati " . $snapshots->count() . " snapshot");
+    }
+    
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     /**
      * Crea eventi memorizzati.
      */
     private function createStoredEvents(): void
     {
         $this->command->info('📦 Creazione eventi memorizzati...');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
 
         // Crea 1000 eventi memorizzati
         $events = StoredEvent::factory()
@@ -101,6 +282,40 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Creati ' . $events->count() . ' eventi memorizzati');
     }
 
+<<<<<<< HEAD
+=======
+=======
+        
+=======
+
+>>>>>>> b93ef594b4 (.)
+        // Crea 1000 eventi memorizzati
+        $events = StoredEvent::factory()
+            ->count(1000)
+            ->create([
+                'created_at' => Carbon::now()->subDays(rand(1, 365)),
+            ]);
+
+        $this->command->info('✅ Creati ' . $events->count() . ' eventi memorizzati');
+    }
+<<<<<<< HEAD
+    
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+        // Crea 1000 eventi memorizzati
+        $events = StoredEvent::factory()->count(1000)->create([
+            'created_at' => Carbon::now()->subDays(rand(1, 365)),
+        ]);
+        
+        $this->command->info("✅ Creati " . $events->count() . " eventi memorizzati");
+    }
+    
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     /**
      * Mostra un riassunto dei dati creati.
      */
@@ -108,11 +323,35 @@ class ActivityMassSeeder extends Seeder
     {
         $this->command->info('📊 RIASSUNTO DATI CREATI PER MODULO ACTIVITY:');
         $this->command->info('┌─────────────────────────────────────┐');
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
         try {
             // Conta attività
             $totalActivities = Activity::count();
             $recentActivities = Activity::where('created_at', '>=', Carbon::now()->subDays(7))->count();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+>>>>>>> b1cd7fc (.)
 
             $this->command->info('│ 📝 Attività totali:          ' .
             str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT) .
@@ -121,6 +360,10 @@ class ActivityMassSeeder extends Seeder
             str_pad((string) $recentActivities, 6, ' ', STR_PAD_LEFT) .
                 ' │');
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
             // Conta snapshot
             $totalSnapshots = Snapshot::count();
 
@@ -142,6 +385,63 @@ class ActivityMassSeeder extends Seeder
             $this->command->info('│ ❌ Errore nel conteggio: ' . $e->getMessage());
         }
 
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> origin/develop
+            
+            $this->command->info("│ 📝 Attività totali:          " . str_pad((string)$totalActivities, 6, ' ', STR_PAD_LEFT) . " │");
+            $this->command->info("│    - Ultimi 7 giorni:        " . str_pad((string)$recentActivities, 6, ' ', STR_PAD_LEFT) . " │");
+            
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+            // Conta snapshot
+            $totalSnapshots = Snapshot::count();
+
+            $this->command->info('│ 📸 Snapshot totali:           ' .
+            str_pad((string) $totalSnapshots, 6, ' ', STR_PAD_LEFT) .
+                ' │');
+
+            // Conta eventi memorizzati
+            $totalEvents = StoredEvent::count();
+            $recentEvents = StoredEvent::where('created_at', '>=', Carbon::now()->subDays(7))->count();
+
+            $this->command->info('│ 📦 Eventi memorizzati:       ' .
+            str_pad((string) $totalEvents, 6, ' ', STR_PAD_LEFT) .
+                ' │');
+            $this->command->info('│    - Ultimi 7 giorni:        ' .
+            str_pad((string) $recentEvents, 6, ' ', STR_PAD_LEFT) .
+                ' │');
+        } catch (Exception $e) {
+            $this->command->info('│ ❌ Errore nel conteggio: ' . $e->getMessage());
+        }
+<<<<<<< HEAD
+        
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+            // Conta snapshot
+            $totalSnapshots = Snapshot::count();
+            
+            $this->command->info("│ 📸 Snapshot totali:           " . str_pad((string)$totalSnapshots, 6, ' ', STR_PAD_LEFT) . " │");
+            
+            // Conta eventi memorizzati
+            $totalEvents = StoredEvent::count();
+            $recentEvents = StoredEvent::where('created_at', '>=', Carbon::now()->subDays(7))->count();
+            
+            $this->command->info("│ 📦 Eventi memorizzati:       " . str_pad((string)$totalEvents, 6, ' ', STR_PAD_LEFT) . " │");
+            $this->command->info("│    - Ultimi 7 giorni:        " . str_pad((string)$recentEvents, 6, ' ', STR_PAD_LEFT) . " │");
+            
+        } catch (\Exception $e) {
+            $this->command->info("│ ❌ Errore nel conteggio: " . $e->getMessage());
+        }
+        
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
         $this->command->info('└─────────────────────────────────────┘');
         $this->command->info('');
     }

@@ -4,8 +4,26 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests;
 
+<<<<<<< HEAD
 use Illuminate\Foundation\Application;
 use Modules\Activity\Providers\ActivityServiceProvider;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+use Illuminate\Foundation\Application;
+use Modules\Activity\Providers\ActivityServiceProvider;
+=======
+use Modules\Activity\Providers\ActivityServiceProvider;
+use Illuminate\Foundation\Application;
+>>>>>>> a12f125f4a (.)
+=======
+use Illuminate\Foundation\Application;
+use Modules\Activity\Providers\ActivityServiceProvider;
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
 
@@ -25,7 +43,23 @@ abstract class TestCase extends BaseTestCase
 
         // Load Activity module specific configurations
         $this->artisan('migrate', ['--database' => 'testing']);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+        
+>>>>>>> a12f125f4a (.)
+=======
+
+>>>>>>> b93ef594b4 (.)
+=======
+        
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
         // Seed any required data for Activity tests
         $this->artisan('module:seed', ['module' => 'Activity']);
     }
@@ -33,13 +67,29 @@ abstract class TestCase extends BaseTestCase
     /**
      * Get package providers.
      *
+<<<<<<< HEAD
      * @param Application $app
+=======
+<<<<<<< HEAD
+     * @param Application $app
+=======
+     * @param \Illuminate\Foundation\Application $app
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
      * @return array<int, class-string>
      */
     protected function getPackageProviders($app): array
     {
         return [
+<<<<<<< HEAD
             ActivityServiceProvider::class,
+=======
+<<<<<<< HEAD
+            ActivityServiceProvider::class,
+=======
+            \Modules\Activity\Providers\ActivityServiceProvider::class,
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
         ];
     }
 }
