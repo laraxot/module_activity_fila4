@@ -33,15 +33,9 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property string|null $created_by
  * @property string|null $deleted_at
  * @property string|null $deleted_by
-<<<<<<< HEAD
  * @property-read Model|\Eloquent $causer
  * @property-read Collection<int, mixed> $changes
  * @property-read Model|\Eloquent|null $subject
-=======
- * @property-read Model $causer
- * @property-read Collection<int, mixed> $changes
- * @property-read Model|null $subject
->>>>>>> 3b1902f (.)
  * @method static Builder<static>|Activity causedBy(Model $causer)
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
  * @method static Builder<static>|Activity forEvent(string $event)
@@ -68,10 +62,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
  * @mixin IdeHelperActivity
-<<<<<<< HEAD
  * @mixin \Eloquent
-=======
->>>>>>> 3b1902f (.)
  */
 class Activity extends SpatieActivity
 {
