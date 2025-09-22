@@ -9,56 +9,16 @@ use Modules\Activity\Models\Snapshot;
 
 /**
  * Snapshot Factory
-<<<<<<< HEAD
  *
  * Factory for creating Snapshot model instances for testing and seeding.
  *
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
- *
- * Factory for creating Snapshot model instances for testing and seeding.
- *
-=======
- * 
- * Factory for creating Snapshot model instances for testing and seeding.
- * 
->>>>>>> a12f125f4a (.)
-=======
- *
- * Factory for creating Snapshot model instances for testing and seeding.
- *
->>>>>>> b93ef594b4 (.)
-=======
- * 
- * Factory for creating Snapshot model instances for testing and seeding.
- * 
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
  * @extends Factory<Snapshot>
  */
 class SnapshotFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
-<<<<<<< HEAD
      *
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-     *
-=======
-     * 
->>>>>>> a12f125f4a (.)
-=======
-     *
->>>>>>> b93ef594b4 (.)
-=======
-     * 
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
      * @var class-string<Snapshot>
      */
     protected $model = Snapshot::class;
@@ -92,23 +52,7 @@ class SnapshotFactory extends Factory
      */
     public function withUuid(string $uuid): static
     {
-<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return $this->state(fn(array $_attributes): array => [
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> a12f125f4a (.)
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> b93ef594b4 (.)
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
             'aggregate_uuid' => $uuid,
         ]);
     }
@@ -121,23 +65,7 @@ class SnapshotFactory extends Factory
      */
     public function withVersion(int $version): static
     {
-<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return $this->state(fn(array $_attributes): array => [
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> a12f125f4a (.)
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> b93ef594b4 (.)
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
             'aggregate_version' => $version,
         ]);
     }
@@ -150,37 +78,8 @@ class SnapshotFactory extends Factory
      */
     public function withState(array $state): static
     {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> b1cd7fc (.)
         return $this->state(fn(array $_attributes): array => [
             'state' => $state,
         ]);
     }
 }
-<<<<<<< HEAD
-=======
-=======
-        return $this->state(fn (array $attributes): array => [
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> b93ef594b4 (.)
-            'state' => $state,
-        ]);
-    }
-}
-<<<<<<< HEAD
->>>>>>> a12f125f4a (.)
-=======
->>>>>>> b93ef594b4 (.)
-=======
-        return $this->state(fn (array $attributes): array => [
-            'state' => $state,
-        ]);
-    }
-}
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
