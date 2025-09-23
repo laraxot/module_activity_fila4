@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 199a372 (.)
 # 📊 **Activity Module** - Sistema Avanzato di Audit e Logging
 
 [![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
@@ -424,5 +427,9 @@ php artisan activity:test-dashboard
 **📦 Versione**: 2.3.0  
 **🐛 PHPStan Level 9**: File core certificati ✅  
 **🌐 Translation Standards**: File traduzione certificati ✅  
+<<<<<<< HEAD
 **🚀 Performance**: 94/100 score 
 >>>>>>> 8a1d805 (.)
+=======
+**🚀 Performance**: 94/100 score 
+>>>>>>> 199a372 (.)

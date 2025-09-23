@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Modules\Activity\Database\Factories\ActivityFactory;
+=======
+use Modules\Activity\Database\Factories\ActivityFactory;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+>>>>>>> 199a372 (.)
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
@@ -17,6 +26,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  *
  * This class extends the BaseActivity model to represent activities in the application.
  *
+<<<<<<< HEAD
  * @property int                               $id
  * @property string|null                       $log_name
  * @property string                            $description
@@ -37,6 +47,16 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property Collection<int, mixed>            $changes
  * @property Model|null                        $subject
  *
+=======
+ * @property int $id
+ * @property string|null $log_name
+ * @property string $description
+ * @property string|null $subject_type
+ * @property int|null $subject_id
+ * @property string|null $causer_type
+ * @property string $causer_id
+ * @property Collection<array-key, mixed>|null $properties
+>>>>>>> 199a372 (.)
  * @property string|null $batch_uuid
  * @property string|null $event
  * @property Carbon|null $created_at
@@ -73,7 +93,10 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
+<<<<<<< HEAD
  *
+=======
+>>>>>>> 199a372 (.)
  * @mixin IdeHelperActivity
  * @mixin \Eloquent
  */
@@ -83,6 +106,11 @@ class Activity extends SpatieActivity
 
     /**
      * Create a new factory instance for the model.
+<<<<<<< HEAD
+=======
+     *
+     * @return ActivityFactory
+>>>>>>> 199a372 (.)
      */
     protected static function newFactory(): ActivityFactory
     {
