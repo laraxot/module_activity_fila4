@@ -25,6 +25,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property string|null                       $causer_type
  * @property string                            $causer_id
  * @property Collection<array-key, mixed>|null $properties
+<<<<<<< HEAD
  * @property string|null                       $batch_uuid
  * @property string|null                       $event
  * @property Carbon|null                       $created_at
@@ -37,6 +38,19 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property Collection<int, mixed>            $changes
  * @property Model|null                        $subject
  *
+=======
+ * @property string|null $batch_uuid
+ * @property string|null $event
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_at
+ * @property string|null $deleted_by
+ * @property-read Model|\Eloquent $causer
+ * @property-read Collection<int, mixed> $changes
+ * @property-read Model|\Eloquent|null $subject
+>>>>>>> 4b7c568 (.)
  * @method static Builder<static>|Activity causedBy(Model $causer)
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
  * @method static Builder<static>|Activity forEvent(string $event)
