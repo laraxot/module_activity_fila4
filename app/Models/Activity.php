@@ -17,25 +17,25 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  *
  * This class extends the BaseActivity model to represent activities in the application.
  *
- * @property int                               $id
- * @property string|null                       $log_name
- * @property string                            $description
- * @property string|null                       $subject_type
- * @property int|null                          $subject_id
- * @property string|null                       $causer_type
- * @property string                            $causer_id
+ * @property int $id
+ * @property string|null $log_name
+ * @property string $description
+ * @property string|null $subject_type
+ * @property int|null $subject_id
+ * @property string|null $causer_type
+ * @property string $causer_id
  * @property Collection<array-key, mixed>|null $properties
- * @property string|null                       $batch_uuid
- * @property string|null                       $event
- * @property Carbon|null                       $created_at
- * @property Carbon|null                       $updated_at
- * @property string|null                       $updated_by
- * @property string|null                       $created_by
- * @property string|null                       $deleted_at
- * @property string|null                       $deleted_by
- * @property Model                             $causer
- * @property Collection<int, mixed>            $changes
- * @property Model|null                        $subject
+ * @property string|null $batch_uuid
+ * @property string|null $event
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property string|null $deleted_at
+ * @property string|null $deleted_by
+ * @property Model $causer
+ * @property Collection<int, mixed> $changes
+ * @property Model|null $subject
  *
  * @method static Builder<static>|Activity causedBy(Model $causer)
  * @method static Builder<static>|Activity forBatch(string $batchUuid)

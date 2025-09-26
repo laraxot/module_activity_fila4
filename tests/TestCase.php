@@ -7,7 +7,7 @@ namespace Modules\Activity\Tests;
 use Illuminate\Foundation\Application;
 use Modules\Activity\Providers\ActivityServiceProvider;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Tests\CreatesApplication;
+use Modules\Xot\Tests\CreatesApplication;
 
 /**
  * Base test case for Activity module tests.
