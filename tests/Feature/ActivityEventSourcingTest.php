@@ -20,15 +20,7 @@ test('activity event sourcing lifecycle works correctly', function () {
         'causer_type' => User::class,
         'causer_id' => $user->id,
         'properties' => ['action' => 'test', 'result' => 'success'],
-<<<<<<< HEAD
-<<<<<<< HEAD
         'event' => 'created',
-=======
-        'event' => 'created'
->>>>>>> 0a00ff2 (.)
-=======
-        'event' => 'created',
->>>>>>> 18dcd64 (.)
     ];
 
     $activity = Activity::create($activityData);
@@ -54,45 +46,21 @@ test('activity can be queried with complex scopes', function () {
         'log_name' => 'security',
         'event' => 'login',
         'causer_type' => User::class,
-<<<<<<< HEAD
-<<<<<<< HEAD
         'causer_id' => $user1->id,
-=======
-        'causer_id' => $user1->id
->>>>>>> 0a00ff2 (.)
-=======
-        'causer_id' => $user1->id,
->>>>>>> 18dcd64 (.)
     ]);
 
     $activity2 = Activity::factory()->create([
         'log_name' => 'security',
         'event' => 'logout',
         'causer_type' => User::class,
-<<<<<<< HEAD
-<<<<<<< HEAD
         'causer_id' => $user2->id,
-=======
-        'causer_id' => $user2->id
->>>>>>> 0a00ff2 (.)
-=======
-        'causer_id' => $user2->id,
->>>>>>> 18dcd64 (.)
     ]);
 
     $activity3 = Activity::factory()->create([
         'log_name' => 'audit',
         'event' => 'update',
         'causer_type' => User::class,
-<<<<<<< HEAD
-<<<<<<< HEAD
         'causer_id' => $user1->id,
-=======
-        'causer_id' => $user1->id
->>>>>>> 0a00ff2 (.)
-=======
-        'causer_id' => $user1->id,
->>>>>>> 18dcd64 (.)
     ]);
 
     $securityActivities = Activity::inLog('security')->get();
@@ -114,23 +82,10 @@ test('snapshot creation and retrieval works correctly', function () {
             'balance' => 1000,
             'transactions' => [
                 ['id' => 1, 'amount' => 100, 'type' => 'credit'],
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
                 ['id' => 2, 'amount' => 50, 'type' => 'debit'],
             ],
             'status' => 'active',
         ],
-<<<<<<< HEAD
-=======
-                ['id' => 2, 'amount' => 50, 'type' => 'debit']
-            ],
-            'status' => 'active'
-        ]
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
     ];
 
     $snapshot = Snapshot::create($snapshotData);
@@ -156,18 +111,8 @@ test('stored event creation and event reconstruction works', function () {
         'action' => 'test_action',
         'metadata' => [
             'ip' => '127.0.0.1',
-<<<<<<< HEAD
-<<<<<<< HEAD
             'user_agent' => 'Test Browser',
         ],
-=======
-            'user_agent' => 'Test Browser'
-        ]
->>>>>>> 0a00ff2 (.)
-=======
-            'user_agent' => 'Test Browser',
-        ],
->>>>>>> 18dcd64 (.)
     ];
 
     $storedEvent = StoredEvent::create([
@@ -176,15 +121,7 @@ test('stored event creation and event reconstruction works', function () {
         'event_version' => 1,
         'event_class' => $eventClass,
         'event_properties' => $eventProperties,
-<<<<<<< HEAD
-<<<<<<< HEAD
         'meta_data' => ['processed' => true, 'retry_count' => 0],
-=======
-        'meta_data' => ['processed' => true, 'retry_count' => 0]
->>>>>>> 0a00ff2 (.)
-=======
-        'meta_data' => ['processed' => true, 'retry_count' => 0],
->>>>>>> 18dcd64 (.)
     ]);
 
     expect($storedEvent)
@@ -199,25 +136,12 @@ test('stored event creation and event reconstruction works', function () {
 test('activity batch operations work correctly', function () {
     $batchUuid = Str::uuid();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
     $activities = Activity::factory()
         ->count(3)
         ->create([
             'batch_uuid' => $batchUuid,
             'log_name' => 'batch_operation',
         ]);
-<<<<<<< HEAD
-=======
-    $activities = Activity::factory()->count(3)->create([
-        'batch_uuid' => $batchUuid,
-        'log_name' => 'batch_operation'
-    ]);
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 
     $batchActivities = Activity::forBatch($batchUuid)->get();
 
@@ -233,17 +157,7 @@ test('activity with batch scope returns correct results', function () {
 
     $activitiesWithBatch = Activity::hasBatch()->get();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     expect($activitiesWithBatch)->toHaveCount(1)->first()->id->toBe($withBatch->id);
-=======
-    expect($activitiesWithBatch)
-        ->toHaveCount(1)
-        ->first()->id->toBe($withBatch->id);
->>>>>>> 0a00ff2 (.)
-=======
-    expect($activitiesWithBatch)->toHaveCount(1)->first()->id->toBe($withBatch->id);
->>>>>>> 18dcd64 (.)
 });
 
 test('activity properties support complex nested structures', function () {
@@ -252,58 +166,25 @@ test('activity properties support complex nested structures', function () {
             'id' => 1,
             'name' => 'Test User',
             'roles' => ['admin', 'user'],
-<<<<<<< HEAD
-<<<<<<< HEAD
             'permissions' => ['read', 'write', 'delete'],
-=======
-            'permissions' => ['read', 'write', 'delete']
->>>>>>> 0a00ff2 (.)
-=======
-            'permissions' => ['read', 'write', 'delete'],
->>>>>>> 18dcd64 (.)
         ],
         'action' => 'complex_operation',
         'context' => [
             'request' => [
                 'method' => 'POST',
                 'url' => '/api/test',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
                 'headers' => ['Content-Type' => 'application/json'],
             ],
             'response' => [
                 'status' => 200,
                 'data' => ['success' => true, 'message' => 'Operation completed'],
             ],
-<<<<<<< HEAD
-=======
-                'headers' => ['Content-Type' => 'application/json']
-            ],
-            'response' => [
-                'status' => 200,
-                'data' => ['success' => true, 'message' => 'Operation completed']
-            ]
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
         ],
         'timestamps' => [
             'started_at' => now()->subMinutes(5)->toISOString(),
             'completed_at' => now()->toISOString(),
-<<<<<<< HEAD
-<<<<<<< HEAD
             'duration' => 300,
         ],
-=======
-            'duration' => 300
-        ]
->>>>>>> 0a00ff2 (.)
-=======
-            'duration' => 300,
-        ],
->>>>>>> 18dcd64 (.)
     ];
 
     $activity = Activity::factory()->create(['properties' => $complexProperties]);
@@ -321,10 +202,6 @@ test('activity properties support complex nested structures', function () {
 
 test('snapshot state maintains data integrity with large datasets', function () {
     $largeState = [
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
         'users' => array_map(
             fn($i) => [
                 'id' => $i,
@@ -344,27 +221,6 @@ test('snapshot state maintains data integrity with large datasets', function () 
             'version' => '1.0.0',
             'checksum' => md5('test'),
         ],
-<<<<<<< HEAD
-=======
-        'users' => array_map(fn($i) => [
-            'id' => $i,
-            'name' => "User {$i}",
-            'email' => "user{$i}@example.com",
-            'active' => $i % 2 === 0,
-            'preferences' => [
-                'theme' => $i % 2 === 0 ? 'dark' : 'light',
-                'notifications' => true,
-                'language' => 'en'
-            ]
-        ], range(1, 100)),
-        'metadata' => [
-            'generated_at' => now()->toISOString(),
-            'version' => '1.0.0',
-            'checksum' => md5('test')
-        ]
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
     ];
 
     $snapshot = Snapshot::factory()->create(['state' => $largeState]);
@@ -381,10 +237,6 @@ test('stored event handles complex event properties with nested arrays', functio
     $complexEvent = [
         'order' => [
             'id' => 12345,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
             'items' => array_map(
                 fn($i) => [
                     'product_id' => $i,
@@ -395,34 +247,12 @@ test('stored event handles complex event properties with nested arrays', functio
                 ],
                 range(1, 50),
             ),
-<<<<<<< HEAD
-=======
-            'items' => array_map(fn($i) => [
-                'product_id' => $i,
-                'name' => "Product {$i}",
-                'quantity' => rand(1, 5),
-                'price' => rand(1000, 5000) / 100,
-                'attributes' => ['color' => 'red', 'size' => 'M']
-            ], range(1, 50)),
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
             'totals' => [
                 'subtotal' => 1234.56,
                 'tax' => 123.46,
                 'shipping' => 15.00,
-<<<<<<< HEAD
-<<<<<<< HEAD
                 'total' => 1373.02,
             ],
-=======
-                'total' => 1373.02
-            ]
->>>>>>> 0a00ff2 (.)
-=======
-                'total' => 1373.02,
-            ],
->>>>>>> 18dcd64 (.)
         ],
         'customer' => [
             'id' => 67890,
@@ -433,35 +263,15 @@ test('stored event handles complex event properties with nested arrays', functio
                 'city' => 'Anytown',
                 'state' => 'CA',
                 'zip' => '12345',
-<<<<<<< HEAD
-<<<<<<< HEAD
                 'country' => 'US',
             ],
-=======
-                'country' => 'US'
-            ]
->>>>>>> 0a00ff2 (.)
-=======
-                'country' => 'US',
-            ],
->>>>>>> 18dcd64 (.)
         ],
         'payment' => [
             'method' => 'credit_card',
             'transaction_id' => 'txn_123456789',
             'status' => 'completed',
-<<<<<<< HEAD
-<<<<<<< HEAD
             'amount' => 1373.02,
         ],
-=======
-            'amount' => 1373.02
-        ]
->>>>>>> 0a00ff2 (.)
-=======
-            'amount' => 1373.02,
-        ],
->>>>>>> 18dcd64 (.)
     ];
 
     $storedEvent = StoredEvent::factory()->create(['event_properties' => $complexEvent]);

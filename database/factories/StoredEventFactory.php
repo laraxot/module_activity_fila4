@@ -9,36 +9,16 @@ use Modules\Activity\Models\StoredEvent;
 
 /**
  * StoredEvent Factory
-<<<<<<< HEAD
-<<<<<<< HEAD
  *
  * Factory for creating StoredEvent model instances for testing and seeding.
  *
-=======
- * 
- * Factory for creating StoredEvent model instances for testing and seeding.
- * 
->>>>>>> 0a00ff2 (.)
-=======
- *
- * Factory for creating StoredEvent model instances for testing and seeding.
- *
->>>>>>> 18dcd64 (.)
  * @extends Factory<StoredEvent>
  */
 class StoredEventFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
-<<<<<<< HEAD
-<<<<<<< HEAD
      *
-=======
-     * 
->>>>>>> 0a00ff2 (.)
-=======
-     *
->>>>>>> 18dcd64 (.)
      * @var class-string<StoredEvent>
      */
     protected $model = StoredEvent::class;
@@ -85,15 +65,7 @@ class StoredEventFactory extends Factory
      */
     public function withUuid(string $uuid): static
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> 0a00ff2 (.)
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> 18dcd64 (.)
             'aggregate_uuid' => $uuid,
         ]);
     }
@@ -106,15 +78,7 @@ class StoredEventFactory extends Factory
      */
     public function withVersion(int $version): static
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> 0a00ff2 (.)
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> 18dcd64 (.)
             'aggregate_version' => $version,
         ]);
     }
@@ -127,15 +91,7 @@ class StoredEventFactory extends Factory
      */
     public function withEventClass(string $eventClass): static
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
-=======
-        return $this->state(fn (array $attributes): array => [
->>>>>>> 0a00ff2 (.)
-=======
-        return $this->state(fn(array $_attributes): array => [
->>>>>>> 18dcd64 (.)
             'event_class' => $eventClass,
         ]);
     }
@@ -147,10 +103,6 @@ class StoredEventFactory extends Factory
      */
     public function userEvent(): static
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
         return $this->state(fn(array $attributes): array => [
             'event_class' => 'App\\Events\\UserRegistered',
             'event_properties' => array_merge((array) ($attributes['event_properties'] ?? []), [
@@ -160,20 +112,3 @@ class StoredEventFactory extends Factory
         ]);
     }
 }
-<<<<<<< HEAD
-=======
-        return $this->state(fn (array $attributes): array => [
-            'event_class' => 'App\\Events\\UserRegistered',
-            'event_properties' => array_merge(
-                (array) ($attributes['event_properties'] ?? []),
-                [
-                    'user_id' => $this->faker->numberBetween(1, 100),
-                    'action' => 'user_registered',
-                ]
-            ),
-        ]);
-    }
-}
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
