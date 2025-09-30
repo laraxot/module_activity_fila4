@@ -1,16 +1,25 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+declare(strict_types=1);
+
+
+>>>>>>> 18dcd64 (.)
 return [
     'fields' => [
         'id' => [
             'label' => 'ID',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             'tooltip' => 'Identificativo univoco dell\'attività',
         ],
         'description' => [
@@ -37,6 +46,7 @@ return [
             'label' => 'Data Creazione',
             'tooltip' => 'Data e ora di creazione dell\'attività',
         ],
+<<<<<<< HEAD
 =======
             'tooltip' => 'Identificativo univoco dell\'attività'
         ],
@@ -65,19 +75,26 @@ return [
             'tooltip' => 'Data e ora di creazione dell\'attività'
         ]
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     ],
     'actions' => [
         'view' => [
             'label' => 'Visualizza',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'tooltip' => 'Visualizza i dettagli dell\'attività',
 =======
             'tooltip' => 'Visualizza i dettagli dell\'attività'
 >>>>>>> 0a00ff2 (.)
+=======
+            'tooltip' => 'Visualizza i dettagli dell\'attività',
+>>>>>>> 18dcd64 (.)
         ],
         'delete' => [
             'label' => 'Elimina',
             'tooltip' => 'Elimina questa attività',
+<<<<<<< HEAD
 <<<<<<< HEAD
             'confirmation' => 'Sei sicuro di voler eliminare questa attività?',
         ],
@@ -85,17 +102,25 @@ return [
             'confirmation' => 'Sei sicuro di voler eliminare questa attività?'
         ]
 >>>>>>> 0a00ff2 (.)
+=======
+            'confirmation' => 'Sei sicuro di voler eliminare questa attività?',
+        ],
+>>>>>>> 18dcd64 (.)
     ],
     'filters' => [
         'date' => [
             'label' => 'Data',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             'tooltip' => 'Filtra per data di creazione',
         ],
         'type' => [
             'label' => 'Tipo',
             'tooltip' => 'Filtra per tipo di attività',
         ],
+<<<<<<< HEAD
 =======
             'tooltip' => 'Filtra per data di creazione'
         ],
@@ -104,12 +129,17 @@ return [
             'tooltip' => 'Filtra per tipo di attività'
         ]
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     ],
     'snapshots' => [
         'fields' => [
             'id' => [
                 'label' => 'ID',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
                 'help' => 'Identificativo univoco dello snapshot',
             ],
             'aggregate_uuid' => [
@@ -135,6 +165,7 @@ return [
         ],
     ],
 ];
+<<<<<<< HEAD
 =======
                 'help' => 'Identificativo univoco dello snapshot'
             ],
@@ -162,3 +193,5 @@ return [
     ]
 ]; 
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)

@@ -7,6 +7,7 @@ namespace Modules\Activity\Database\Seeders;
 use Exception;
 use Modules\Activity\Database\Factories\ActivityFactory;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,11 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Carbon\Carbon;
 >>>>>>> 0a00ff2 (.)
+=======
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+>>>>>>> 18dcd64 (.)
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
@@ -33,6 +39,9 @@ class ActivityMassSeeder extends Seeder
     {
         $this->command->info('🚀 Inizializzazione seeding di massa per modulo Activity...');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
         $startTime = microtime(true);
 
@@ -57,6 +66,7 @@ class ActivityMassSeeder extends Seeder
         }
     }
 
+<<<<<<< HEAD
 =======
         
         $startTime = microtime(true);
@@ -84,6 +94,8 @@ class ActivityMassSeeder extends Seeder
     }
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     /**
      * Crea attività di sistema.
      */
@@ -91,6 +103,9 @@ class ActivityMassSeeder extends Seeder
     {
         $this->command->info('📝 Creazione attività di sistema...');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
         // Crea 2000 attività di sistema
         $activities = ActivityFactory::new()
@@ -102,6 +117,7 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Create ' . $activities->count() . ' attività di sistema');
     }
 
+<<<<<<< HEAD
 =======
         
         // Crea 2000 attività di sistema
@@ -113,6 +129,8 @@ class ActivityMassSeeder extends Seeder
     }
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     /**
      * Crea snapshot.
      */
@@ -120,6 +138,9 @@ class ActivityMassSeeder extends Seeder
     {
         $this->command->info('📸 Creazione snapshot...');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
         // Crea 500 snapshot
         $snapshots = Snapshot::factory()
@@ -131,6 +152,7 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Creati ' . $snapshots->count() . ' snapshot');
     }
 
+<<<<<<< HEAD
 =======
         
         // Crea 500 snapshot
@@ -142,6 +164,8 @@ class ActivityMassSeeder extends Seeder
     }
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     /**
      * Crea eventi memorizzati.
      */
@@ -149,6 +173,9 @@ class ActivityMassSeeder extends Seeder
     {
         $this->command->info('📦 Creazione eventi memorizzati...');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
         // Crea 1000 eventi memorizzati
         $events = StoredEvent::factory()
@@ -160,6 +187,7 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('✅ Creati ' . $events->count() . ' eventi memorizzati');
     }
 
+<<<<<<< HEAD
 =======
         
         // Crea 1000 eventi memorizzati
@@ -171,6 +199,8 @@ class ActivityMassSeeder extends Seeder
     }
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     /**
      * Mostra un riassunto dei dati creati.
      */
@@ -179,15 +209,22 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📊 RIASSUNTO DATI CREATI PER MODULO ACTIVITY:');
         $this->command->info('┌─────────────────────────────────────┐');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+
+>>>>>>> 18dcd64 (.)
         try {
             // Conta attività
             $totalActivities = Activity::count();
             $recentActivities = Activity::where('created_at', '>=', Carbon::now()->subDays(7))->count();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 
             $this->command->info('│ 📝 Attività totali:          ' .
             str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT) .
@@ -217,6 +254,7 @@ class ActivityMassSeeder extends Seeder
             $this->command->info('│ ❌ Errore nel conteggio: ' . $e->getMessage());
         }
 
+<<<<<<< HEAD
 =======
             
             $this->command->info("│ 📝 Attività totali:          " . str_pad((string)$totalActivities, 6, ' ', STR_PAD_LEFT) . " │");
@@ -239,6 +277,8 @@ class ActivityMassSeeder extends Seeder
         }
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         $this->command->info('└─────────────────────────────────────┘');
         $this->command->info('');
     }

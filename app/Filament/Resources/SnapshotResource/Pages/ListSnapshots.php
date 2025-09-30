@@ -5,23 +5,32 @@ declare(strict_types=1);
 namespace Modules\Activity\Filament\Resources\SnapshotResource\Pages;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 use Filament\Actions\BulkAction;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+<<<<<<< HEAD
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -44,12 +53,16 @@ class ListSnapshots extends XotBaseListRecords
     {
         return [
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             TextColumn::make('id')->sortable()->searchable(),
             TextColumn::make('aggregate_uuid')->searchable(),
             TextColumn::make('aggregate_version')->sortable(),
             TextColumn::make('state')->searchable(),
             TextColumn::make('created_at')->dateTime()->sortable(),
             TextColumn::make('updated_at')->dateTime()->sortable(),
+<<<<<<< HEAD
 =======
             TextColumn::make('id')
                 ->sortable()
@@ -67,6 +80,8 @@ class ListSnapshots extends XotBaseListRecords
                 ->dateTime()
                 ->sortable(),
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         ];
     }
 
@@ -100,10 +115,14 @@ class ListSnapshots extends XotBaseListRecords
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return array<BulkAction>
 =======
      * @return array<\Filament\Actions\BulkAction>
 >>>>>>> 0a00ff2 (.)
+=======
+     * @return array<BulkAction>
+>>>>>>> 18dcd64 (.)
      */
     public function getTableBulkActions(): array
     {

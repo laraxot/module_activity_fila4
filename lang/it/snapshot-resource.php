@@ -1,16 +1,25 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+declare(strict_types=1);
+
+
+>>>>>>> 18dcd64 (.)
 return [
     'fields' => [
         'id' => [
             'label' => 'ID',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             'tooltip' => 'Identificativo univoco dello snapshot',
         ],
         'aggregate_uuid' => [
@@ -29,6 +38,7 @@ return [
             'label' => 'Data Creazione',
             'tooltip' => 'Data e ora di creazione dello snapshot',
         ],
+<<<<<<< HEAD
 =======
             'tooltip' => 'Identificativo univoco dello snapshot'
         ],
@@ -49,19 +59,26 @@ return [
             'tooltip' => 'Data e ora di creazione dello snapshot'
         ]
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     ],
     'actions' => [
         'view' => [
             'label' => 'Visualizza',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'tooltip' => 'Visualizza i dettagli dello snapshot',
 =======
             'tooltip' => 'Visualizza i dettagli dello snapshot'
 >>>>>>> 0a00ff2 (.)
+=======
+            'tooltip' => 'Visualizza i dettagli dello snapshot',
+>>>>>>> 18dcd64 (.)
         ],
         'delete' => [
             'label' => 'Elimina',
             'tooltip' => 'Elimina questo snapshot',
+<<<<<<< HEAD
 <<<<<<< HEAD
             'confirmation' => 'Sei sicuro di voler eliminare questo snapshot?',
         ],
@@ -69,11 +86,18 @@ return [
             'confirmation' => 'Sei sicuro di voler eliminare questo snapshot?'
         ]
 >>>>>>> 0a00ff2 (.)
+=======
+            'confirmation' => 'Sei sicuro di voler eliminare questo snapshot?',
+        ],
+>>>>>>> 18dcd64 (.)
     ],
     'filters' => [
         'date' => [
             'label' => 'Data',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             'tooltip' => 'Filtra per data di creazione',
         ],
         'state' => [
@@ -82,6 +106,7 @@ return [
         ],
     ],
 ];
+<<<<<<< HEAD
 =======
             'tooltip' => 'Filtra per data di creazione'
         ],
@@ -92,3 +117,5 @@ return [
     ]
 ]; 
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)

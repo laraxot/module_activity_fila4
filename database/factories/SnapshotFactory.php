@@ -10,6 +10,7 @@ use Modules\Activity\Models\Snapshot;
 /**
  * Snapshot Factory
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
  * Factory for creating Snapshot model instances for testing and seeding.
  *
@@ -18,6 +19,11 @@ use Modules\Activity\Models\Snapshot;
  * Factory for creating Snapshot model instances for testing and seeding.
  * 
 >>>>>>> 0a00ff2 (.)
+=======
+ *
+ * Factory for creating Snapshot model instances for testing and seeding.
+ *
+>>>>>>> 18dcd64 (.)
  * @extends Factory<Snapshot>
  */
 class SnapshotFactory extends Factory
@@ -25,10 +31,14 @@ class SnapshotFactory extends Factory
     /**
      * The name of the factory's corresponding model.
 <<<<<<< HEAD
+<<<<<<< HEAD
      *
 =======
      * 
 >>>>>>> 0a00ff2 (.)
+=======
+     *
+>>>>>>> 18dcd64 (.)
      * @var class-string<Snapshot>
      */
     protected $model = Snapshot::class;
@@ -63,10 +73,14 @@ class SnapshotFactory extends Factory
     public function withUuid(string $uuid): static
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
 =======
         return $this->state(fn (array $attributes): array => [
 >>>>>>> 0a00ff2 (.)
+=======
+        return $this->state(fn(array $_attributes): array => [
+>>>>>>> 18dcd64 (.)
             'aggregate_uuid' => $uuid,
         ]);
     }
@@ -80,10 +94,14 @@ class SnapshotFactory extends Factory
     public function withVersion(int $version): static
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return $this->state(fn(array $_attributes): array => [
 =======
         return $this->state(fn (array $attributes): array => [
 >>>>>>> 0a00ff2 (.)
+=======
+        return $this->state(fn(array $_attributes): array => [
+>>>>>>> 18dcd64 (.)
             'aggregate_version' => $version,
         ]);
     }
@@ -97,11 +115,15 @@ class SnapshotFactory extends Factory
     public function withState(array $state): static
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         return $this->state(fn(array $_attributes): array => [
             'state' => $state,
         ]);
     }
 }
+<<<<<<< HEAD
 =======
         return $this->state(fn (array $attributes): array => [
             'state' => $state,
@@ -109,3 +131,5 @@ class SnapshotFactory extends Factory
     }
 }
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)

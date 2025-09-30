@@ -1,11 +1,17 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+declare(strict_types=1);
+
+
+>>>>>>> 18dcd64 (.)
 namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +38,11 @@ class ActivityFactory extends Factory
         ];
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 0a00ff2 (.)
+=======
+}
+>>>>>>> 18dcd64 (.)

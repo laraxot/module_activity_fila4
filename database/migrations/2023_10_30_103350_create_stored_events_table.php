@@ -6,11 +6,15 @@ use Illuminate\Database\Schema\Blueprint;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 return new class extends XotBaseMigration {
 =======
 return new class extends XotBaseMigration
 {
 >>>>>>> 0a00ff2 (.)
+=======
+return new class extends XotBaseMigration {
+>>>>>>> 18dcd64 (.)
     public function up(): void
     {
         $this->tableCreate(
@@ -30,10 +34,14 @@ return new class extends XotBaseMigration
                 $table->index('aggregate_uuid');
                 $table->unique(['aggregate_uuid', 'aggregate_version']);
 <<<<<<< HEAD
+<<<<<<< HEAD
             },
 =======
             }
 >>>>>>> 0a00ff2 (.)
+=======
+            },
+>>>>>>> 18dcd64 (.)
         );
 
         $this->tableUpdate(
@@ -43,10 +51,14 @@ return new class extends XotBaseMigration
             function (Blueprint $table) {
                 $this->updateTimestamps($table, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
             },
 =======
             }
 >>>>>>> 0a00ff2 (.)
+=======
+            },
+>>>>>>> 18dcd64 (.)
         );
     }
 };

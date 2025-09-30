@@ -7,16 +7,23 @@ use Modules\Activity\Models\Activity;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 return new class extends XotBaseMigration {
 =======
 return new class extends XotBaseMigration
 {
 >>>>>>> 0a00ff2 (.)
+=======
+return new class extends XotBaseMigration {
+>>>>>>> 18dcd64 (.)
     // protected ?string $model_class = Activity::class;
     public function up(): void
     {
         // -- CREATE --
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         $this->tableCreate(function (Blueprint $table): void {
             $table->bigIncrements('id');
             $table->string('log_name')->nullable();
@@ -39,6 +46,7 @@ return new class extends XotBaseMigration
             }
             $this->updateTimestamps($table, true);
         });
+<<<<<<< HEAD
 =======
         $this->tableCreate(
             function (Blueprint $table): void {
@@ -67,5 +75,7 @@ return new class extends XotBaseMigration
             }
         );
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     }
 };
