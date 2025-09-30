@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources;
 
+<<<<<<< HEAD
 use Override;
+=======
+>>>>>>> 0a00ff2 (.)
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Textarea;
@@ -19,6 +22,7 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class StoredEventResource extends XotBaseResource
 {
+<<<<<<< HEAD
     protected static null|string $model = StoredEvent::class;
 
     #[Override]
@@ -41,6 +45,40 @@ class StoredEventResource extends XotBaseResource
     }
 
     #[Override]
+=======
+    protected static ?string $model = StoredEvent::class;
+
+    public static function getFormSchema(): array
+    {
+        return [
+            'event_class' => TextInput::make('event_class')
+                ->required()
+                ->maxLength(255),
+
+            'event_properties' => KeyValue::make('event_properties')
+                ->columnSpanFull(),
+
+            'aggregate_uuid' => TextInput::make('aggregate_uuid')
+                ->maxLength(36),
+
+            'aggregate_version' => TextInput::make('aggregate_version')
+                ->numeric(),
+
+            'meta_data' => Textarea::make('meta_data')
+                ->columnSpanFull(),
+
+            'created_at' => DateTimePicker::make('created_at')
+                ->required(),
+        ];
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+        ];
+    }
+
+>>>>>>> 0a00ff2 (.)
     public static function getPages(): array
     {
         return [

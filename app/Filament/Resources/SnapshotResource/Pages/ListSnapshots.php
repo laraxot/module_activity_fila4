@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources\SnapshotResource\Pages;
 
+<<<<<<< HEAD
 use Filament\Actions\BulkAction;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+=======
+>>>>>>> 0a00ff2 (.)
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+<<<<<<< HEAD
+=======
+use Filament\Tables\Filters\BaseFilter;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
+>>>>>>> 0a00ff2 (.)
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -34,12 +43,30 @@ class ListSnapshots extends XotBaseListRecords
     public function getTableColumns(): array
     {
         return [
+<<<<<<< HEAD
             TextColumn::make('id')->sortable()->searchable(),
             TextColumn::make('aggregate_uuid')->searchable(),
             TextColumn::make('aggregate_version')->sortable(),
             TextColumn::make('state')->searchable(),
             TextColumn::make('created_at')->dateTime()->sortable(),
             TextColumn::make('updated_at')->dateTime()->sortable(),
+=======
+            TextColumn::make('id')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('aggregate_uuid')
+                ->searchable(),
+            TextColumn::make('aggregate_version')
+                ->sortable(),
+            TextColumn::make('state')
+                ->searchable(),
+            TextColumn::make('created_at')
+                ->dateTime()
+                ->sortable(),
+            TextColumn::make('updated_at')
+                ->dateTime()
+                ->sortable(),
+>>>>>>> 0a00ff2 (.)
         ];
     }
 
@@ -72,7 +99,11 @@ class ListSnapshots extends XotBaseListRecords
     }
 
     /**
+<<<<<<< HEAD
      * @return array<BulkAction>
+=======
+     * @return array<\Filament\Actions\BulkAction>
+>>>>>>> 0a00ff2 (.)
      */
     public function getTableBulkActions(): array
     {

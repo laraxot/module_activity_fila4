@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Unit\Models;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Activity\Models\BaseModel;
+=======
+use Modules\Activity\Models\BaseModel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> 0a00ff2 (.)
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);

@@ -1,8 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 
+=======
+>>>>>>> 0a00ff2 (.)
 return [
     'navigation' => [
         'name' => 'Aktivität',

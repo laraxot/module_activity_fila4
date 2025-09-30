@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
+=======
+use Spatie\Activitylog\Models\Activity as SpatieActivity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+>>>>>>> 0a00ff2 (.)
 
 /**
  * Class Activity.
@@ -77,7 +83,10 @@ class Activity extends SpatieActivity
     {
         return ActivityFactory::new();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a00ff2 (.)
     /** @var list<string> */
     protected $fillable = [
         'id',

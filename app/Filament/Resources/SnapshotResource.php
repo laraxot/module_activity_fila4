@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources;
 
+<<<<<<< HEAD
 use Override;
+=======
+>>>>>>> 0a00ff2 (.)
 use Modules\Activity\Filament\Resources\SnapshotResource\Pages\ListSnapshots;
 use Modules\Activity\Filament\Resources\SnapshotResource\Pages\CreateSnapshot;
 use Modules\Activity\Filament\Resources\SnapshotResource\Pages\EditSnapshot;
@@ -16,6 +19,7 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class SnapshotResource extends XotBaseResource
 {
+<<<<<<< HEAD
     protected static null|string $model = Snapshot::class;
 
     #[Override]
@@ -37,6 +41,34 @@ class SnapshotResource extends XotBaseResource
     }
 
     #[Override]
+=======
+    protected static ?string $model = Snapshot::class;
+
+    public static function getFormSchema(): array
+    {
+        return [
+            'model_type' => TextInput::make('model_type')
+                ->required()
+                ->maxLength(255),
+            'model_id' => TextInput::make('model_id')
+                ->numeric()
+                ->required(),
+            'state' => KeyValue::make('state')
+                ->columnSpanFull(),
+            'created_by_type' => TextInput::make('created_by_type')
+                ->maxLength(255),
+            'created_by_id' => TextInput::make('created_by_id')
+                ->numeric(),
+        ];
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+        ];
+    }
+
+>>>>>>> 0a00ff2 (.)
     public static function getPages(): array
     {
         return [
