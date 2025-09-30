@@ -53,12 +53,9 @@ Homestead.json
 /.idea
 .phpintel
 .vscode/
-<<<<<<< HEAD
 *.swp
 *.swo
 *~
-=======
->>>>>>> 4b7c568 (.)
 
 # 🔄 Git specifici
 .git-blame-ignore-revs
