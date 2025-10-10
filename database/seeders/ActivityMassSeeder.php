@@ -12,6 +12,7 @@ use Modules\Activity\Database\Factories\ActivityFactory;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * Seeder per creare grandi quantità di dati per il modulo Activity.
@@ -64,6 +65,7 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 90)),
             ]);
 
+        Assert::isInstanceOf($activities, \Illuminate\Database\Eloquent\Collection::class);
         $this->command->info('✅ Create '.$activities->count().' attività di sistema');
     }
 
@@ -75,12 +77,16 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📸 Creazione snapshot...');
 
         // Crea 500 snapshot
-        $snapshots = Snapshot::factory()
+        $factory = Snapshot::factory();
+        Assert::isInstanceOf($factory, \Illuminate\Database\Eloquent\Factories\Factory::class);
+        
+        $snapshots = $factory
             ->count(500)
             ->create([
                 'created_at' => Carbon::now()->subDays(rand(1, 180)),
             ]);
 
+        Assert::isInstanceOf($snapshots, \Illuminate\Database\Eloquent\Collection::class);
         $this->command->info('✅ Creati '.$snapshots->count().' snapshot');
     }
 
@@ -92,12 +98,16 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📦 Creazione eventi memorizzati...');
 
         // Crea 1000 eventi memorizzati
-        $events = StoredEvent::factory()
+        $factory = StoredEvent::factory();
+        Assert::isInstanceOf($factory, \Illuminate\Database\Eloquent\Factories\Factory::class);
+        
+        $events = $factory
             ->count(1000)
             ->create([
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
             ]);
 
+        Assert::isInstanceOf($events, \Illuminate\Database\Eloquent\Collection::class);
         $this->command->info('✅ Creati '.$events->count().' eventi memorizzati');
     }
 

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Xot\Models\Traits\HasXotFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
@@ -16,6 +18,8 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * Class Activity.
  *
  * This class extends the BaseActivity model to represent activities in the application.
+ *
+ * @use HasXotFactory<ActivityFactory>
  *
  * @property int $id
  * @property string|null $log_name
@@ -57,31 +61,20 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereEvent($value)
  * @method static Builder<static>|Activity whereId($value)
  * @method static Builder<static>|Activity whereLogName($value)
- * @method static Builder<static>|Activity whereProperties($value)
  * @method static Builder<static>|Activity whereSubjectId($value)
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
  *
- * @mixin IdeHelperActivity
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
 {
-    use HasFactory;
-
-    /**
-     * Create a new factory instance for the model.
-     */
-    protected static function newFactory(): ActivityFactory
-    {
-        return ActivityFactory::new();
-    }
+    use \Modules\Xot\Models\Traits\HasXotFactory;
 
     /** @var list<string> */
     protected $fillable = [
         'id',
-        'log_name',
         'description',
         'subject_type',
         'event',
@@ -95,6 +88,16 @@ class Activity extends SpatieActivity
     ];
 
     protected $connection = 'activity';
+
+    /**
+     * Get the user that caused the activity.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Modules\User\Models\User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(\Modules\User\Models\User::class, 'causer_id');
+    }
 
     // Additional methods or relationships can be defined here as needed
 }

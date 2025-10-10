@@ -17,6 +17,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  *
  * Represents a stored event in the activity module.
  *
+ * @use HasXotFactory<\Modules\Activity\Database\Factories\StoredEventFactory>
+ *
  * @property int $id
  * @property string|null $aggregate_uuid
  * @property int|null $aggregate_version
@@ -53,12 +55,11 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
  *
- * @mixin IdeHelperStoredEvent
  * @mixin \Eloquent
  */
 class StoredEvent extends SpatieStoredEvent
 {
-    use HasFactory;
+    use \Modules\Xot\Models\Traits\HasXotFactory;
 
     /** @var string */
     protected $connection = 'activity';

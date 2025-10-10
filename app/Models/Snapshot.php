@@ -12,10 +12,12 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 /**
  * Modules\Activity\Models\Snapshot.
  *
+ * @use HasXotFactory<\Modules\Activity\Database\Factories\SnapshotFactory>
+ *
  * @property int $id
  * @property string $aggregate_uuid
  * @property int $aggregate_version
- * @property array $state
+ * @property array<string, mixed> $state
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
@@ -34,12 +36,11 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @method static Builder|Snapshot whereUpdatedAt($value)
  * @method static Builder|Snapshot whereUpdatedBy($value)
  *
- * @mixin IdeHelperSnapshot
  * @mixin \Eloquent
  */
 class Snapshot extends SpatieSnapshot
 {
-    use HasFactory;
+    use \Modules\Xot\Models\Traits\HasXotFactory;
 
     /** @var string */
     protected $connection = 'activity';
