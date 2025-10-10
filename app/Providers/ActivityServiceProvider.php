@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Providers;
 
-use Override;
 use Modules\Xot\Providers\XotBaseServiceProvider;
+use Override;
 
 /**
  * Service Provider per il modulo Activity.
@@ -18,22 +18,16 @@ class ActivityServiceProvider extends XotBaseServiceProvider
 {
     /**
      * Nome del modulo.
-     *
-     * @var string
      */
     public string $name = 'Activity';
 
     /**
      * Directory del modulo.
-     *
-     * @var string
      */
     protected string $module_dir = __DIR__;
 
     /**
      * Namespace del modulo.
-     *
-     * @var string
      */
     protected string $module_ns = __NAMESPACE__;
 
@@ -41,8 +35,6 @@ class ActivityServiceProvider extends XotBaseServiceProvider
      * Boot del service provider.
      *
      * Configura il modulo Activity e registra le configurazioni specifiche.
-     *
-     * @return void
      */
     #[Override]
     public function boot(): void
@@ -55,15 +47,10 @@ class ActivityServiceProvider extends XotBaseServiceProvider
 
     /**
      * Registra i servizi del provider.
-     *
-     * @return void
      */
-    
 
     /**
      * Registra le configurazioni del modulo.
-     *
-     * @return void
      */
     #[Override]
     protected function registerConfig(): void

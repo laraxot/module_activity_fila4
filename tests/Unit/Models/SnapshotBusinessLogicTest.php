@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-use Modules\Activity\Models\BaseSnapshot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Activity\Models\BaseSnapshot;
 use Modules\Activity\Models\Snapshot;
 
 describe('Snapshot Business Logic', function () {
     test('snapshot has correct connection configured', function () {
-        $snapshot = new Snapshot();
+        $snapshot = new Snapshot;
 
         expect($snapshot->getConnectionName())->toBe('activity');
     });
 
     test('snapshot has expected fillable fields for event sourcing', function () {
-        $snapshot = new Snapshot();
+        $snapshot = new Snapshot;
         $expectedFillable = [
             'id',
             'aggregate_uuid',

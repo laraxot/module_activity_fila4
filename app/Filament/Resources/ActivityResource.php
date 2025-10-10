@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources;
 
-use Filament\Schemas\Components\Component;
-use Override;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Component;
 use Modules\Activity\Models\Activity;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Override;
 
 /**
  * Activity Resource Class.
@@ -26,7 +26,7 @@ use Modules\Xot\Filament\Resources\XotBaseResource;
  */
 class ActivityResource extends XotBaseResource
 {
-    protected static null|string $model = Activity::class;
+    protected static ?string $model = Activity::class;
 
     /**
      * Define the form schema for the Activity resource.

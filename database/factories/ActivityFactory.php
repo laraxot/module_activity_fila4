@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;

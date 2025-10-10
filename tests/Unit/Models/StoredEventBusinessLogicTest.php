@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\StoredEvent;
+use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 
 describe('StoredEvent Business Logic', function () {
     test('stored event has correct connection configured', function () {
-        $storedEvent = new StoredEvent();
+        $storedEvent = new StoredEvent;
 
         expect($storedEvent->getConnectionName())->toBe('activity');
     });
 
     test('stored event has correct table configured', function () {
-        $storedEvent = new StoredEvent();
+        $storedEvent = new StoredEvent;
 
         expect($storedEvent->getTable())->toBe('stored_events');
     });
 
     test('stored event has expected fillable fields for event sourcing', function () {
-        $storedEvent = new StoredEvent();
+        $storedEvent = new StoredEvent;
         $expectedFillable = [
             'id',
             'aggregate_uuid',

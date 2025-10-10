@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 
 /**
@@ -20,6 +20,7 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
  * @property string|null $created_by
+ *
  * @method static Builder|Snapshot newModelQuery()
  * @method static Builder|Snapshot newQuery()
  * @method static Builder|Snapshot query()
@@ -32,6 +33,7 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @method static Builder|Snapshot whereState($value)
  * @method static Builder|Snapshot whereUpdatedAt($value)
  * @method static Builder|Snapshot whereUpdatedBy($value)
+ *
  * @mixin IdeHelperSnapshot
  * @mixin \Eloquent
  */

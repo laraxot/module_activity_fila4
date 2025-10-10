@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
-use Exception;
-use Modules\Activity\Database\Factories\ActivityFactory;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\Activity\Database\Factories\ActivityFactory;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
@@ -45,7 +45,7 @@ class ActivityMassSeeder extends Seeder
             $this->command->info("🎉 Seeding modulo Activity completato in {$executionTime} secondi!");
             $this->displaySummary();
         } catch (Exception $e) {
-            $this->command->error('❌ Errore durante il seeding: ' . $e->getMessage());
+            $this->command->error('❌ Errore durante il seeding: '.$e->getMessage());
             throw $e;
         }
     }
@@ -64,7 +64,7 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 90)),
             ]);
 
-        $this->command->info('✅ Create ' . $activities->count() . ' attività di sistema');
+        $this->command->info('✅ Create '.$activities->count().' attività di sistema');
     }
 
     /**
@@ -81,7 +81,7 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 180)),
             ]);
 
-        $this->command->info('✅ Creati ' . $snapshots->count() . ' snapshot');
+        $this->command->info('✅ Creati '.$snapshots->count().' snapshot');
     }
 
     /**
@@ -98,7 +98,7 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
             ]);
 
-        $this->command->info('✅ Creati ' . $events->count() . ' eventi memorizzati');
+        $this->command->info('✅ Creati '.$events->count().' eventi memorizzati');
     }
 
     /**
@@ -114,32 +114,32 @@ class ActivityMassSeeder extends Seeder
             $totalActivities = Activity::count();
             $recentActivities = Activity::where('created_at', '>=', Carbon::now()->subDays(7))->count();
 
-            $this->command->info('│ 📝 Attività totali:          ' .
-            str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT) .
+            $this->command->info('│ 📝 Attività totali:          '.
+            str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT).
                 ' │');
-            $this->command->info('│    - Ultimi 7 giorni:        ' .
-            str_pad((string) $recentActivities, 6, ' ', STR_PAD_LEFT) .
+            $this->command->info('│    - Ultimi 7 giorni:        '.
+            str_pad((string) $recentActivities, 6, ' ', STR_PAD_LEFT).
                 ' │');
 
             // Conta snapshot
             $totalSnapshots = Snapshot::count();
 
-            $this->command->info('│ 📸 Snapshot totali:           ' .
-            str_pad((string) $totalSnapshots, 6, ' ', STR_PAD_LEFT) .
+            $this->command->info('│ 📸 Snapshot totali:           '.
+            str_pad((string) $totalSnapshots, 6, ' ', STR_PAD_LEFT).
                 ' │');
 
             // Conta eventi memorizzati
             $totalEvents = StoredEvent::count();
             $recentEvents = StoredEvent::where('created_at', '>=', Carbon::now()->subDays(7))->count();
 
-            $this->command->info('│ 📦 Eventi memorizzati:       ' .
-            str_pad((string) $totalEvents, 6, ' ', STR_PAD_LEFT) .
+            $this->command->info('│ 📦 Eventi memorizzati:       '.
+            str_pad((string) $totalEvents, 6, ' ', STR_PAD_LEFT).
                 ' │');
-            $this->command->info('│    - Ultimi 7 giorni:        ' .
-            str_pad((string) $recentEvents, 6, ' ', STR_PAD_LEFT) .
+            $this->command->info('│    - Ultimi 7 giorni:        '.
+            str_pad((string) $recentEvents, 6, ' ', STR_PAD_LEFT).
                 ' │');
         } catch (Exception $e) {
-            $this->command->info('│ ❌ Errore nel conteggio: ' . $e->getMessage());
+            $this->command->info('│ ❌ Errore nel conteggio: '.$e->getMessage());
         }
 
         $this->command->info('└─────────────────────────────────────┘');

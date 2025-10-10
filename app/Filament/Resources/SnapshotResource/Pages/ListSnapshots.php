@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources\SnapshotResource\Pages;
 
-use Filament\Actions\BulkAction;
-use Filament\Tables\Filters\BaseFilter;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
+use Filament\Actions\BulkAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ViewColumn;
+use Filament\Tables\Filters\BaseFilter;
+use Filament\Tables\Filters\SelectFilter;
 use Modules\Activity\Filament\Resources\SnapshotResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 

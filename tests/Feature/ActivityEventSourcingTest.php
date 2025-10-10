@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
@@ -203,7 +203,7 @@ test('activity properties support complex nested structures', function () {
 test('snapshot state maintains data integrity with large datasets', function () {
     $largeState = [
         'users' => array_map(
-            fn($i) => [
+            fn ($i) => [
                 'id' => $i,
                 'name' => "User {$i}",
                 'email' => "user{$i}@example.com",
@@ -238,7 +238,7 @@ test('stored event handles complex event properties with nested arrays', functio
         'order' => [
             'id' => 12345,
             'items' => array_map(
-                fn($i) => [
+                fn ($i) => [
                     'product_id' => $i,
                     'name' => "Product {$i}",
                     'quantity' => rand(1, 5),

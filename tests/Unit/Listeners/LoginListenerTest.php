@@ -18,7 +18,7 @@ test('login listener handles login event and creates activity', function () {
     $user = User::factory()->create();
     $event = new Login('web', $user, false);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_type', User::class)
@@ -38,7 +38,7 @@ test('login listener creates activity with correct properties', function () {
     $user = User::factory()->create();
     $event = new Login('api', $user, true);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
@@ -57,7 +57,7 @@ test('login listener handles multiple login events correctly', function () {
     $event1 = new Login('web', $user1, false);
     $event2 = new Login('api', $user2, true);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -78,7 +78,7 @@ test('login listener includes request information in activity properties', funct
     $user = User::factory()->create();
     $event = new Login('web', $user, false);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -90,7 +90,7 @@ test('login listener uses correct log name for activities', function () {
     $user = User::factory()->create();
     $event = new Login('web', $user, false);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -101,9 +101,9 @@ test('login listener uses correct log name for activities', function () {
 test('login listener handles event without user gracefully', function () {
     $event = new Login('web', null, false);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
 
-    expect(fn() => $listener->handle($event))->not->toThrow(Exception::class);
+    expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
 
     $activities = Activity::where('event', 'login')->get();
     expect($activities)->toBeEmpty();
@@ -115,7 +115,7 @@ test('login listener creates unique activities for same user different sessions'
     $event1 = new Login('web', $user, false);
     $event2 = new Login('web', $user, true);
 
-    $listener = new LoginListener();
+    $listener = new LoginListener;
     $listener->handle($event1);
     $listener->handle($event2);
 

@@ -139,7 +139,7 @@ test('activity module handles concurrent operations correctly', function () {
         };
     }
 
-    $results = array_map(fn($promise) => $promise(), $promises);
+    $results = array_map(fn ($promise) => $promise(), $promises);
 
     expect($results)->toHaveCount(10)->each->toBeTrue();
 
