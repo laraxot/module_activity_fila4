@@ -4,21 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Providers;
 
-<<<<<<< HEAD
 use Override;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-use Override;
-=======
->>>>>>> a12f125f4a (.)
-=======
-use Override;
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
 use Modules\Xot\Providers\XotBaseServiceProvider;
 
 /**
@@ -58,21 +44,7 @@ class ActivityServiceProvider extends XotBaseServiceProvider
      *
      * @return void
      */
-<<<<<<< HEAD
     #[Override]
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    #[Override]
-=======
->>>>>>> a12f125f4a (.)
-=======
-    #[Override]
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     public function boot(): void
     {
         parent::boot();
@@ -86,82 +58,20 @@ class ActivityServiceProvider extends XotBaseServiceProvider
      *
      * @return void
      */
-<<<<<<< HEAD
     
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-
-=======
-=======
->>>>>>> origin/develop
-    public function register(): void
-    {
-        parent::register();
-        // Additional register logic can be added here
-    }
-    
-<<<<<<< HEAD
->>>>>>> a12f125f4a (.)
-=======
-    
-
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     /**
      * Registra le configurazioni del modulo.
      *
      * @return void
      */
-<<<<<<< HEAD
     #[Override]
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    #[Override]
-=======
->>>>>>> a12f125f4a (.)
-=======
-    #[Override]
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     protected function registerConfig(): void
     {
         $this->publishes([
             module_path($this->name, 'config/config.php') => config_path('activity.php'),
         ], 'config');
-<<<<<<< HEAD
 
         $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), 'activity');
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), 'activity');
-=======
-=======
->>>>>>> origin/develop
-        
-        $this->mergeConfigFrom(
-            module_path($this->name, 'config/config.php'), 'activity'
-        );
-<<<<<<< HEAD
->>>>>>> a12f125f4a (.)
-=======
-
-        $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), 'activity');
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     }
 }
