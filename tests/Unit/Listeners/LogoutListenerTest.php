@@ -16,7 +16,7 @@ test('logout listener is registered for logout event', function (): void {
 
 test('logout listener handles logout event and creates activity', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
@@ -40,7 +40,7 @@ test('logout listener handles logout event and creates activity', function (): v
 
 test('logout listener creates activity with correct properties', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Logout('api', $user);
 
@@ -60,10 +60,10 @@ test('logout listener creates activity with correct properties', function (): vo
 
 test('logout listener handles multiple logout events correctly', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user1 = User::factory()->create();
+    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user1 instanceof User);
     /* @phpstan-ignore-next-line method.nonObject */
-    $user2 = User::factory()->create();
+    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user2 instanceof User);
 
     $event1 = new Logout('web', $user1);
@@ -91,7 +91,7 @@ test('logout listener handles multiple logout events correctly', function (): vo
 
 test('logout listener includes session duration when available', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $loginTime = now()->subHours(2);
@@ -116,7 +116,7 @@ test('logout listener includes session duration when available', function (): vo
 
 test('logout listener uses correct log name for activities', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
@@ -145,7 +145,7 @@ test('logout listener handles event without user gracefully', function (): void 
 
 test('logout listener creates unique activities for same user different sessions', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $event1 = new Logout('web', $user);
@@ -174,7 +174,7 @@ test('logout listener creates unique activities for same user different sessions
 
 test('logout listener tracks logout reason when provided', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
