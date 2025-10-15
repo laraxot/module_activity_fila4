@@ -16,11 +16,10 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
  * Class Activity.
- *
+ * 
  * This class extends the BaseActivity model to represent activities in the application.
  *
  * @use HasXotFactory<ActivityFactory>
- *
  * @property int $id
  * @property string|null $log_name
  * @property string $description
@@ -40,7 +39,6 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property Model $causer
  * @property Collection<int, mixed> $changes
  * @property Model|null $subject
- *
  * @method static Builder<static>|Activity causedBy(Model $causer)
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
  * @method static Builder<static>|Activity forEvent(string $event)
@@ -65,7 +63,9 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
- *
+ * @property-read \Modules\User\Models\User|null $user
+ * @method static \Modules\Activity\Database\Factories\ActivityFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Activity whereProperties($value)
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
