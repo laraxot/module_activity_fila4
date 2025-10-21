@@ -23,7 +23,7 @@ class LogModelDeletedAction
         public Model $model,
         public ?User $user = null,
     ) {
-        Assert::isInstanceOf($model, Model::class);
+        // Model is already type-hinted, no assert needed
     }
 
     public function execute(): Activity

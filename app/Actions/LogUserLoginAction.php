@@ -21,7 +21,7 @@ class LogUserLoginAction
     public function __construct(
         public User $user
     ) {
-        Assert::isInstanceOf($user, User::class);
+        // User is already type-hinted, no assert needed
     }
 
     public function execute(): Activity

@@ -117,7 +117,6 @@ class ActivityLogger
      */
     public function getUserActivities(User $user, int $limit = 50): Collection
     {
-        Assert::isInstanceOf($user, User::class);
         Assert::positiveInteger($limit, 'Limit must be positive');
 
         return Activity::with('subject')
