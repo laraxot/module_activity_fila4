@@ -11,6 +11,7 @@ class Dashboard extends XotBaseDashboard
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     //protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
 =======
     //protected static ?string $navigationIcon = 'heroicon-o-home';
@@ -18,6 +19,9 @@ class Dashboard extends XotBaseDashboard
 =======
     //protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
 >>>>>>> 3b1902f (.)
+=======
+    //protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
+>>>>>>> 8aceea5 (.)
     //protected static string $view = 'activity::filament.pages.dashboard';
     // public function mount(): void
     // {
