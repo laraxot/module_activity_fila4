@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Activity\Actions;
 
 use Modules\Activity\Models\Activity;
-use Modules\User\Models\User;
+use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
 
@@ -19,17 +19,25 @@ class LogUserLogoutAction
     use QueueableAction;
 
     public function __construct(
-        public User $user
+        public mixed $user
     ) {
-        // User is already type-hinted, no assert needed
+        $userClass = XotData::make()->getUserClass();
+        Assert::isInstanceOf($user, $userClass);
     }
 
     public function execute(): Activity
     {
+        // Cast user to Model for type safety
+        $userClass = XotData::make()->getUserClass();
+        Assert::isInstanceOf($this->user, $userClass);
+        
+        /** @var \Illuminate\Database\Eloquent\Model&\Modules\Xot\Contracts\UserContract $userModel */
+        $userModel = $this->user;
+        
         $action = new LogActivityAction(
             type: 'logout',
             user: $this->user,
-            subject: $this->user,
+            subject: $userModel,
             description: 'User logged out'
         );
 

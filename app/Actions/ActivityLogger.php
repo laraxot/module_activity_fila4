@@ -26,14 +26,28 @@ class ActivityLogger
      */
     public function log(
         string $type,
-        ?User $user = null,
+        mixed $user = null,
         ?Model $subject = null,
         ?array $properties = null,
         ?string $description = null,
     ): Activity {
+        $userId = null;
+        if ($user !== null) {
+            // Use XotData to get the user class for type checking
+            $userClass = \Modules\Xot\Datas\XotData::make()->getUserClass();
+            \Webmozart\Assert\Assert::isInstanceOf($user, $userClass);
+            
+            // Type narrowing for user ID
+            if (property_exists($user, 'id')) {
+                $userId = $user->id;
+            }
+        } else {
+            $userId = auth()->id();
+        }
+        
         $activity = Activity::create([
             'type' => $type,
-            'user_id' => $user->id ?? auth()->id(),
+            'user_id' => $userId,
             'subject_type' => $subject ? get_class($subject) : null,
             'subject_id' => $subject?->getKey(),
             'properties' => $properties,

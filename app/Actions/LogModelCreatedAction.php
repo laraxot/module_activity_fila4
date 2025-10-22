@@ -6,7 +6,7 @@ namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Activity\Models\Activity;
-use Modules\User\Models\User;
+use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
 
@@ -21,9 +21,12 @@ class LogModelCreatedAction
 
     public function __construct(
         public Model $model,
-        public ?User $user = null,
+        public mixed $user = null,
     ) {
-        // Model is already type-hinted, no assert needed
+        if ($user !== null) {
+            $userClass = XotData::make()->getUserClass();
+            Assert::isInstanceOf($user, $userClass);
+        }
     }
 
     public function execute(): Activity
