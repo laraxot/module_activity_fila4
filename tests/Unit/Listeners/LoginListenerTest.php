@@ -55,7 +55,7 @@ test('login listener handles login event and creates activity', function () {
 <<<<<<< HEAD
 >>>>>>> b1cd7fc (.)
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event);
 
 <<<<<<< HEAD
@@ -133,7 +133,7 @@ test('login listener creates activity with correct properties', function () {
 <<<<<<< HEAD
 >>>>>>> b1cd7fc (.)
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
@@ -192,7 +192,7 @@ test('login listener handles multiple login events correctly', function () {
     $event1 = new Login('web', $user1, false);
     $event2 = new Login('api', $user2, true);
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -266,7 +266,7 @@ test('login listener includes request information in activity properties', funct
 <<<<<<< HEAD
 >>>>>>> b1cd7fc (.)
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -325,7 +325,7 @@ test('login listener uses correct log name for activities', function () {
 <<<<<<< HEAD
 >>>>>>> b1cd7fc (.)
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -369,7 +369,7 @@ test('login listener handles event without user gracefully', function () {
 <<<<<<< HEAD
 >>>>>>> b1cd7fc (.)
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
 
     expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
 
@@ -418,7 +418,7 @@ test('login listener creates unique activities for same user different sessions'
     $event1 = new Login('web', $user, false);
     $event2 = new Login('web', $user, true);
 
-    $listener = new LoginListener;
+    $listener = new LoginListener();
     $listener->handle($event1);
     $listener->handle($event2);
 
