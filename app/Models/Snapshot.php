@@ -12,7 +12,7 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 /**
  * Modules\Activity\Models\Snapshot.
  *
- * @use HasXotFactory<\Modules\Activity\Database\Factories\SnapshotFactory>
+ * @use HasXotFactory
  * @property int $id
  * @property string $aggregate_uuid
  * @property int $aggregate_version

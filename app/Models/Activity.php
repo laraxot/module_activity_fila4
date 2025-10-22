@@ -19,7 +19,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * 
  * This class extends the BaseActivity model to represent activities in the application.
  *
- * @use HasXotFactory<ActivityFactory>
+ * @use HasXotFactory
  * @property int $id
  * @property string|null $log_name
  * @property string $description
