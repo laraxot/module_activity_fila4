@@ -1,6 +1,9 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 declare(strict_types=1);
 
 return [
@@ -333,6 +336,7 @@ return [
         ],
     ],
 ];
+<<<<<<< HEAD
 =======
 return array (
   'navigation' => 
@@ -729,3 +733,5 @@ return array (
   ),
 );
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
