@@ -42,4 +42,3 @@ class LogModelDeletedAction
         return $action->execute();
     }
 }
-

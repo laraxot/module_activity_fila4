@@ -46,7 +46,7 @@ expect()->extend('toBeActivity', function (): mixed {
  */
 
 /**
- * @param array<string, mixed> $attributes
+ * @param  array<string, mixed>  $attributes
  */
 function createActivity(array $attributes = []): Activity
 {
@@ -56,11 +56,12 @@ function createActivity(array $attributes = []): Activity
     /* @phpstan-ignore-next-line method.nonObject */
     $activity = $factory->create($attributes);
     assert($activity instanceof Activity);
+
     return $activity;
 }
 
 /**
- * @param array<string, mixed> $attributes
+ * @param  array<string, mixed>  $attributes
  */
 function makeActivity(array $attributes = []): Activity
 {
@@ -70,5 +71,6 @@ function makeActivity(array $attributes = []): Activity
     /* @phpstan-ignore-next-line method.nonObject */
     $activity = $factory->make($attributes);
     assert($activity instanceof Activity);
+
     return $activity;
 }

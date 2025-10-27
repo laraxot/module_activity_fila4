@@ -20,7 +20,7 @@ test('logout listener handles logout event and creates activity', function (): v
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_type', User::class)
@@ -44,7 +44,7 @@ test('logout listener creates activity with correct properties', function (): vo
     assert($user instanceof User);
     $event = new Logout('api', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
@@ -69,7 +69,7 @@ test('logout listener handles multiple logout events correctly', function (): vo
     $event1 = new Logout('web', $user1);
     $event2 = new Logout('api', $user2);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -101,7 +101,7 @@ test('logout listener includes session duration when available', function (): vo
 
     $event = new Logout('web', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -120,7 +120,7 @@ test('logout listener uses correct log name for activities', function (): void {
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -135,7 +135,7 @@ test('logout listener handles event without user gracefully', function (): void 
     /** @phpstan-ignore-next-line argument.type */
     $event = new Logout('web', null);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
 
     expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
 
@@ -151,7 +151,7 @@ test('logout listener creates unique activities for same user different sessions
     $event1 = new Logout('web', $user);
     $event2 = new Logout('api', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -178,7 +178,7 @@ test('logout listener tracks logout reason when provided', function (): void {
     assert($user instanceof User);
     $event = new Logout('web', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -199,7 +199,7 @@ test('logout listener handles concurrent logout events', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $events = $users->map(fn ($user) => new Logout('web', $user));
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
 
     /* @phpstan-ignore-next-line foreach.nonIterable */
     foreach ($events as $event) {

@@ -79,7 +79,7 @@ class ActivityMassSeeder extends Seeder
         // Crea 500 snapshot
         $factory = Snapshot::factory();
         Assert::isInstanceOf($factory, \Illuminate\Database\Eloquent\Factories\Factory::class);
-        
+
         $snapshots = $factory
             ->count(500)
             ->create([
@@ -100,7 +100,7 @@ class ActivityMassSeeder extends Seeder
         // Crea 1000 eventi memorizzati
         $factory = StoredEvent::factory();
         Assert::isInstanceOf($factory, \Illuminate\Database\Eloquent\Factories\Factory::class);
-        
+
         $events = $factory
             ->count(1000)
             ->create([

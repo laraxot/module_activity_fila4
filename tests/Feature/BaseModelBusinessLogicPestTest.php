@@ -8,10 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
 use Modules\Xot\Traits\Updater;
+use Tests\TestCase;
 
 use function Safe\class_uses;
-
-use Tests\TestCase;
 
 /**
  * Test model for BaseModel business logic testing.
@@ -52,7 +51,7 @@ uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function (): void {
     /* @phpstan-ignore-next-line property.notFound */
-    $this->model = new TestActivityModel();
+    $this->model = new TestActivityModel;
 });
 
 test('can create base model instance', function (): void {

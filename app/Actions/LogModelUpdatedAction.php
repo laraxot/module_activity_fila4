@@ -46,4 +46,3 @@ class LogModelUpdatedAction
         return $action->execute();
     }
 }
-

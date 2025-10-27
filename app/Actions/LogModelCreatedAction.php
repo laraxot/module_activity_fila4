@@ -42,4 +42,3 @@ class LogModelCreatedAction
         return $action->execute();
     }
 }
-

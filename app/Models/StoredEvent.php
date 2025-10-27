@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
@@ -14,10 +13,9 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 /**
  * Class StoredEvent.
- * 
+ *
  * Represents a stored event in the activity module.
  *
- * @use HasXotFactory
  * @property int $id
  * @property string|null $aggregate_uuid
  * @property int|null $aggregate_version
@@ -29,6 +27,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property-read ShouldBeStored|null $event
+ *
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent afterVersion(int $version)
  * @method static EloquentStoredEventCollection<EloquentStoredEvent> all()
  * @method static EloquentStoredEventCollection<EloquentStoredEvent> get()
@@ -53,6 +52,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
  * @method static \Modules\Activity\Database\Factories\StoredEventFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class StoredEvent extends SpatieStoredEvent
