@@ -65,7 +65,10 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 90)),
             ]);
 
+<<<<<<< HEAD
         Assert::isInstanceOf($activities, \Illuminate\Database\Eloquent\Collection::class);
+=======
+>>>>>>> 9baa519 (.)
         $this->command->info('✅ Create '.$activities->count().' attività di sistema');
     }
 
@@ -86,7 +89,10 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 180)),
             ]);
 
+<<<<<<< HEAD
         Assert::isInstanceOf($snapshots, \Illuminate\Database\Eloquent\Collection::class);
+=======
+>>>>>>> 9baa519 (.)
         $this->command->info('✅ Creati '.$snapshots->count().' snapshot');
     }
 
@@ -107,7 +113,10 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
             ]);
 
+<<<<<<< HEAD
         Assert::isInstanceOf($events, \Illuminate\Database\Eloquent\Collection::class);
+=======
+>>>>>>> 9baa519 (.)
         $this->command->info('✅ Creati '.$events->count().' eventi memorizzati');
     }
 

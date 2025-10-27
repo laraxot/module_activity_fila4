@@ -244,6 +244,14 @@ return [
             'error' => 'Errore nell\'eliminazione delle attività',
             'confirmation' => 'Sei sicuro di voler eliminare le attività selezionate?',
         ],
+        'applyFilters' => [
+            'tooltip' => 'applyFilters',
+            'icon' => 'applyFilters',
+            'label' => 'applyFilters',
+        ],
+        'delete' => [
+            'tooltip' => 'delete',
+        ],
     ],
     'messages' => [
         'no_activities' => 'Nessuna attività trovata per i filtri selezionati',
@@ -318,17 +326,17 @@ return [
     'pagination' => [
         'per_page' => 25,
         'options' => [
-            0 => 10,
-            1 => 25,
-            2 => 50,
-            3 => 100,
+            10,
+            25,
+            50,
+            100,
         ],
     ],
     'cache' => [
         'ttl' => 300,
         'tags' => [
-            0 => 'activities',
-            1 => 'monitoring',
+            'activities',
+            'monitoring',
         ],
     ],
 ];

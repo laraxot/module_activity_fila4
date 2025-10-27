@@ -13,10 +13,10 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(UserContract $user): bool
-    {
-        return $user->hasPermissionTo('stored_event.viewAny');
-    }
+    // public function viewAny(UserContract $user): bool
+    // {
+    //     return $user->hasPermissionTo('stored_event.viewAny');
+    // }
 
     /**
      * Determine whether the user can view the model.

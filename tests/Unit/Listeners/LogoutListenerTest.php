@@ -196,7 +196,10 @@ test('logout listener handles concurrent logout events', function (): void {
     $users = $usersFactory->count(5)->create();
     assert($users instanceof \Illuminate\Database\Eloquent\Collection);
 
+<<<<<<< HEAD
     /* @phpstan-ignore-next-line method.nonObject */
+=======
+>>>>>>> 9baa519 (.)
     $events = $users->map(fn ($user) => new Logout('web', $user));
 
     $listener = new LogoutListener;

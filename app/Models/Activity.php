@@ -70,7 +70,21 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  */
 class Activity extends SpatieActivity
 {
+<<<<<<< HEAD
     use \Modules\Xot\Models\Traits\HasXotFactory;
+=======
+    use HasFactory;
+
+    protected $connection = 'activity';
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): ActivityFactory
+    {
+        return ActivityFactory::new();
+    }
+>>>>>>> 9baa519 (.)
 
     /** @var list<string> */
     protected $fillable = [
@@ -87,7 +101,7 @@ class Activity extends SpatieActivity
         'updated_at',
     ];
 
-    protected $connection = 'activity';
+    
 
     /**
      * Get the user that caused the activity.
