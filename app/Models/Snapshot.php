@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-<<<<<<< HEAD
-=======
 use Illuminate\Database\Eloquent\Factories\HasFactory;
->>>>>>> 9baa519 (.)
 use Illuminate\Support\Carbon;
 use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 
@@ -18,7 +15,7 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @property int $id
  * @property string $aggregate_uuid
  * @property int $aggregate_version
- * @property array<string, mixed> $state
+ * @property array $state
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $updated_by
@@ -36,18 +33,13 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @method static Builder|Snapshot whereState($value)
  * @method static Builder|Snapshot whereUpdatedAt($value)
  * @method static Builder|Snapshot whereUpdatedBy($value)
-<<<<<<< HEAD
- * @method static \Modules\Activity\Database\Factories\SnapshotFactory factory($count = null, $state = [])
- *
-=======
  *
  * @mixin IdeHelperSnapshot
->>>>>>> 9baa519 (.)
  * @mixin \Eloquent
  */
 class Snapshot extends SpatieSnapshot
 {
-    use \Modules\Xot\Models\Traits\HasXotFactory;
+    use HasFactory;
 
     /** @var string */
     protected $connection = 'activity';

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Modules\Activity\Database\Factories\ActivityFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
@@ -56,23 +57,17 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereEvent($value)
  * @method static Builder<static>|Activity whereId($value)
  * @method static Builder<static>|Activity whereLogName($value)
+ * @method static Builder<static>|Activity whereProperties($value)
  * @method static Builder<static>|Activity whereSubjectId($value)
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
  *
- * @property-read \Modules\User\Models\User|null $user
- *
- * @method static \Modules\Activity\Database\Factories\ActivityFactory factory($count = null, $state = [])
- * @method static Builder<static>|Activity whereProperties($value)
- *
+ * @mixin IdeHelperActivity
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
 {
-<<<<<<< HEAD
-    use \Modules\Xot\Models\Traits\HasXotFactory;
-=======
     use HasFactory;
 
     protected $connection = 'activity';
@@ -84,11 +79,11 @@ class Activity extends SpatieActivity
     {
         return ActivityFactory::new();
     }
->>>>>>> 9baa519 (.)
 
     /** @var list<string> */
     protected $fillable = [
         'id',
+        'log_name',
         'description',
         'subject_type',
         'event',
@@ -102,16 +97,6 @@ class Activity extends SpatieActivity
     ];
 
     
-
-    /**
-     * Get the user that caused the activity.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Modules\User\Models\User, $this>
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(\Modules\User\Models\User::class, 'causer_id');
-    }
 
     // Additional methods or relationships can be defined here as needed
 }

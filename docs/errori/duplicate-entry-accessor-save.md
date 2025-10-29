@@ -465,3 +465,4 @@ class SchedaObserver
 **Fix Definitivo**: Refactoring accessor in SchedaTrait  
 **Impatto**: Tutti i modelli che usano BaseScheda (IndennitaResponsabilita, Progressioni, etc.)
 
+

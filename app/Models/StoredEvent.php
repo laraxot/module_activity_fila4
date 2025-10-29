@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-<<<<<<< HEAD
-=======
 use Illuminate\Database\Eloquent\Factories\HasFactory;
->>>>>>> 9baa519 (.)
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
@@ -55,18 +52,13 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIsNot(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
-<<<<<<< HEAD
- * @method static \Modules\Activity\Database\Factories\StoredEventFactory factory($count = null, $state = [])
- *
-=======
  *
  * @mixin IdeHelperStoredEvent
->>>>>>> 9baa519 (.)
  * @mixin \Eloquent
  */
 class StoredEvent extends SpatieStoredEvent
 {
-    use \Modules\Xot\Models\Traits\HasXotFactory;
+    use HasFactory;
 
     /** @var string */
     protected $connection = 'activity';

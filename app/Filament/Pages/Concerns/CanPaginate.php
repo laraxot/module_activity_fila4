@@ -36,14 +36,14 @@ trait CanPaginate
 
         if (PaginationMode::Simple === $mode) {
             return $query->simplePaginate(
-                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : $perPage,
+                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : (int)$perPage,
                 pageName: $this->getPaginationPageName(),
             );
         }
 
         if (PaginationMode::Cursor === $mode) {
             return $query->cursorPaginate(
-                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : $perPage,
+                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : (int)$perPage,
                 cursorName: $this->getPaginationPageName(),
             );
         }
@@ -52,7 +52,7 @@ trait CanPaginate
 
         /** @var LengthAwarePaginator $records */
         $records = $query->paginate(
-            perPage: ('all' === $perPage) ? $total : $perPage,
+            perPage: ('all' === $perPage) ? $total : (int)$perPage,
             pageName: $this->getPaginationPageName(),
             total: $total,
         );
@@ -67,7 +67,7 @@ trait CanPaginate
 
     public function getTablePage(): int
     {
-        return $this->getPage($this->getPaginationPageName());
+        return (int)$this->getPage($this->getPaginationPageName());
     }
 
     public function getDefaultRecordsPerPageSelectOption(): int|string
@@ -79,13 +79,13 @@ trait CanPaginate
 
         $pageOptions = $this->getRecordsPerPageSelectOptions();
 
-        if (in_array($option, $pageOptions)) {
-            return $option;
+        if (is_array($pageOptions) && in_array($option, $pageOptions)) {
+            return (int)$option;
         }
 
         session()->remove($this->getPerPageSessionKey());
 
-        return $pageOptions[0];
+        return (int)($pageOptions[0] ?? 10);
     }
 
     public function getPaginationPageName(): string

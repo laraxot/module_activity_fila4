@@ -116,3 +116,4 @@ activity()
 **Ultimo aggiornamento**: 27 Ottobre 2025  
 **Prossimo check**: Sprint Planning
 
+

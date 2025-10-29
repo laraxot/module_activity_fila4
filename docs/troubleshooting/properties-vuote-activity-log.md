@@ -351,3 +351,4 @@ $record->update(['stabi' => 999]);
 **Severità**: Media (funziona ma properties vuote)  
 **Soluzione**: Aggiungere `->logAll()` o `->logOnly()` in getActivitylogOptions()
 
+

@@ -325,3 +325,4 @@ foreach (glob('Modules/*/app/Filament/Resources/*/Pages/*.php') as $file) {
 **Severità**: Alta (blocca registrazione Resource Pages)  
 **Causa**: Confusione tra Standalone Page e Resource Page
 
+

@@ -41,7 +41,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
     protected static Collection $fieldLabelMap;
 
-    public function mount($record)
+    public function mount(int|string $record): void
     {
         $this->record = $this->resolveRecord($record);
         $this->recordsPerPage = $this->getDefaultRecordsPerPageSelectOption();

@@ -362,3 +362,4 @@ class ListMyModelActivities extends ListLogActivities
 **Pattern**: DRY + KISS per Actions riutilizzabili  
 **Conformità**: ✅ PHPStan livello 9+, ✅ Pint, ✅ Test Suite
 
+

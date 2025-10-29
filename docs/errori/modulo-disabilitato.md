@@ -327,3 +327,4 @@ Se `module:enable Activity` non funziona:
 **Soluzione Verificata**: ✅ Testata e funzionante  
 **Severità**: Critica (blocca completamente feature Activity Log)
 
+

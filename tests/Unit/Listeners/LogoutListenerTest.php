@@ -8,16 +8,14 @@ use Modules\Activity\Listeners\LogoutListener;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 
-test('logout listener is registered for logout event', function (): void {
+test('logout listener is registered for logout event', function () {
     Event::fake();
 
     Event::assertListening(Logout::class, LogoutListener::class);
 });
 
-test('logout listener handles logout event and creates activity', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener handles logout event and creates activity', function () {
+    $user = User::factory()->create();
     $event = new Logout('web', $user);
 
     $listener = new LogoutListener;
@@ -28,20 +26,16 @@ test('logout listener handles logout event and creates activity', function (): v
         ->where('event', 'logout')
         ->first();
 
-    expect($activity)->not->toBeNull();
-
-    if ($activity instanceof Activity) {
-        expect($activity->description)->toContain('logout');
-        expect($activity->causer_id)->toBe($user->id);
-        expect($activity->causer_type)->toBe(User::class);
-        expect($activity->properties)->toHaveKey('guard', 'web');
-    }
+    expect($activity)
+        ->not->toBeNull()
+        ->description->toContain('logout')
+        ->causer_id->toBe($user->id)
+        ->causer_type->toBe(User::class)
+        ->properties->toHaveKey('guard', 'web');
 });
 
-test('logout listener creates activity with correct properties', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener creates activity with correct properties', function () {
+    $user = User::factory()->create();
     $event = new Logout('api', $user);
 
     $listener = new LogoutListener;
@@ -49,22 +43,16 @@ test('logout listener creates activity with correct properties', function (): vo
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
 
-    expect($activity)->toBeInstanceOf(Activity::class);
-    if ($activity instanceof Activity) {
-        expect($activity->properties)->toHaveKey('guard', 'api');
-        expect($activity->properties)->toHaveKey('ip_address');
-        expect($activity->properties)->toHaveKey('user_agent');
-        expect($activity->properties)->toHaveKey('timestamp');
-    }
+    expect($activity->properties)
+        ->toHaveKey('guard', 'api')
+        ->toHaveKey('ip_address')
+        ->toHaveKey('user_agent')
+        ->toHaveKey('timestamp');
 });
 
-test('logout listener handles multiple logout events correctly', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user1 instanceof User);
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user2 instanceof User);
+test('logout listener handles multiple logout events correctly', function () {
+    $user1 = User::factory()->create();
+    $user2 = User::factory()->create();
 
     $event1 = new Logout('web', $user1);
     $event2 = new Logout('api', $user2);
@@ -80,22 +68,14 @@ test('logout listener handles multiple logout events correctly', function (): vo
     $user1Activity = $activities->where('causer_id', $user1->id)->first();
     $user2Activity = $activities->where('causer_id', $user2->id)->first();
 
-    expect($user1Activity)->toBeInstanceOf(Activity::class);
-    expect($user2Activity)->toBeInstanceOf(Activity::class);
-
-    if ($user1Activity instanceof Activity && $user2Activity instanceof Activity) {
-        expect($user1Activity->properties['guard'] ?? null)->toBe('web');
-        expect($user2Activity->properties['guard'] ?? null)->toBe('api');
-    }
+    expect($user1Activity->properties['guard'])->toBe('web');
+    expect($user2Activity->properties['guard'])->toBe('api');
 });
 
-test('logout listener includes session duration when available', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener includes session duration when available', function () {
+    $user = User::factory()->create();
 
     $loginTime = now()->subHours(2);
-    /* @phpstan-ignore-next-line property.notFound */
     $user->last_login_at = $loginTime;
     $user->save();
 
@@ -106,18 +86,11 @@ test('logout listener includes session duration when available', function (): vo
 
     $activity = Activity::where('causer_id', $user->id)->first();
 
-    expect($activity)->toBeInstanceOf(Activity::class);
-    if ($activity instanceof Activity) {
-        expect($activity->properties)->toHaveKey('session_duration');
-        $sessionDuration = $activity->properties['session_duration'] ?? 0;
-        expect($sessionDuration)->toBeGreaterThanOrEqual(7200);
-    }
+    expect($activity->properties)->toHaveKey('session_duration')->session_duration->toBeGreaterThanOrEqual(7200);
 });
 
-test('logout listener uses correct log name for activities', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener uses correct log name for activities', function () {
+    $user = User::factory()->create();
     $event = new Logout('web', $user);
 
     $listener = new LogoutListener;
@@ -125,14 +98,10 @@ test('logout listener uses correct log name for activities', function (): void {
 
     $activity = Activity::where('causer_id', $user->id)->first();
 
-    expect($activity)->toBeInstanceOf(Activity::class);
-    if ($activity instanceof Activity) {
-        expect($activity->log_name)->toBe('auth');
-    }
+    expect($activity->log_name)->toBe('auth');
 });
 
-test('logout listener handles event without user gracefully', function (): void {
-    /** @phpstan-ignore-next-line argument.type */
+test('logout listener handles event without user gracefully', function () {
     $event = new Logout('web', null);
 
     $listener = new LogoutListener;
@@ -143,10 +112,8 @@ test('logout listener handles event without user gracefully', function (): void 
     expect($activities)->toBeEmpty();
 });
 
-test('logout listener creates unique activities for same user different sessions', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener creates unique activities for same user different sessions', function () {
+    $user = User::factory()->create();
 
     $event1 = new Logout('web', $user);
     $event2 = new Logout('api', $user);
@@ -162,20 +129,13 @@ test('logout listener creates unique activities for same user different sessions
     $firstActivity = $activities->first();
     $lastActivity = $activities->last();
 
-    expect($firstActivity)->toBeInstanceOf(Activity::class);
-    expect($lastActivity)->toBeInstanceOf(Activity::class);
-
-    if ($firstActivity instanceof Activity && $lastActivity instanceof Activity) {
-        expect($firstActivity->properties['guard'] ?? null)->toBe('web');
-        expect($lastActivity->properties['guard'] ?? null)->toBe('api');
-        expect($firstActivity->id)->not->toBe($lastActivity->id);
-    }
+    expect($firstActivity->properties['guard'])->toBe('web');
+    expect($lastActivity->properties['guard'])->toBe('api');
+    expect($firstActivity->id)->not->toBe($lastActivity->id);
 });
 
-test('logout listener tracks logout reason when provided', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('logout listener tracks logout reason when provided', function () {
+    $user = User::factory()->create();
     $event = new Logout('web', $user);
 
     $listener = new LogoutListener;
@@ -183,28 +143,16 @@ test('logout listener tracks logout reason when provided', function (): void {
 
     $activity = Activity::where('causer_id', $user->id)->first();
 
-    expect($activity)->toBeInstanceOf(Activity::class);
-    if ($activity instanceof Activity) {
-        expect($activity->properties)->toHaveKey('logout_reason', 'user_initiated');
-    }
+    expect($activity->properties)->toHaveKey('logout_reason', 'user_initiated');
 });
 
-test('logout listener handles concurrent logout events', function (): void {
-    $usersFactory = User::factory();
-    assert($usersFactory !== null);
-    /* @phpstan-ignore-next-line method.nonObject */
-    $users = $usersFactory->count(5)->create();
-    assert($users instanceof \Illuminate\Database\Eloquent\Collection);
+test('logout listener handles concurrent logout events', function () {
+    $users = User::factory()->count(5)->create();
 
-<<<<<<< HEAD
-    /* @phpstan-ignore-next-line method.nonObject */
-=======
->>>>>>> 9baa519 (.)
     $events = $users->map(fn ($user) => new Logout('web', $user));
 
     $listener = new LogoutListener;
 
-    /* @phpstan-ignore-next-line foreach.nonIterable */
     foreach ($events as $event) {
         $listener->handle($event);
     }
