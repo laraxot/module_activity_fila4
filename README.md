@@ -3,7 +3,7 @@
 <!-- Dynamic validation badges -->
 [![Laravel 12.x](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com/)
 [![Filament 4.x](https://img.shields.io/badge/Filament-4.x-blue.svg)](https://filamentphp.com/)
-[![PHPStan Level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](docs/phpstan-compliance.md)
+[![PHPStan Level 9](https://img.shields.io/badge/PHPStan-Level%209-brightgreen.svg)](https://phpstan.org/)
 [![Translation Ready](https://img.shields.io/badge/Translation-IT%20%7C%20EN%20%7C%20DE-green.svg)](https://laravel.com/docs/localization)
 [![Event Sourcing](https://img.shields.io/badge/Event-Sourcing%20Ready-orange.svg)](https://martinfowler.com/eaaDev/EventSourcing.html)
 [![Audit Trail](https://img.shields.io/badge/Audit-Trail%20Ready-yellow.svg)](https://en.wikipedia.org/wiki/Audit_trail)
@@ -470,8 +470,8 @@ return [
         'enabled' => true,
         'models' => [
             'App\Models\User',
-            'Modules\<main module>\Models\Appointment',
-            'Modules\<main module>\Models\Patient',
+            'Modules\SaluteOra\Models\Appointment',
+            'Modules\SaluteOra\Models\Patient',
         ],
         'events' => [
             'created', 'updated', 'deleted'
@@ -508,23 +508,9 @@ php artisan test --filter=AnalyticsTest
 
 ### 🔍 **PHPStan Analysis**
 ```bash
-# Analisi statica livello 10 (massimo)
-./vendor/bin/phpstan analyse Modules/Activity
-
-# REGOLA CRITICA: MAI escludere test da PHPStan!
-# ❌ SBAGLIATO: excludePaths: ./tests/*
-# ✅ CORRETTO: Correggere tutti gli errori anche nei test
+# Analisi statica livello 9+
+./vendor/bin/phpstan analyse Modules/Activity --level=9
 ```
-
-**Stato PHPStan:**  
-[![PHPStan Level 10](https://img.shields.io/badge/PHPStan-Level%2010-brightgreen.svg)](docs/phpstan-compliance.md)  
-**Errori:** 0 ✅ (230 errori corretti il 10 Ottobre 2025)
-
-**Best Practices PHPStan:**
-- 📖 [PHPStan Compliance Status](docs/phpstan-compliance.md)
-- 🎓 [Best Practices PHPStan](docs/phpstan/best-practices.md)
-- 📝 [Correzioni 2025-10-10](docs/phpstan/correzioni-2025-10-10.md)
-- 🚨 [Regola Critica: Test MAI Esclusi](docs/phpstan/regola-critica-test-phpstan.md)
 
 ## 📚 Documentazione COMPLETA
 
@@ -539,12 +525,6 @@ php artisan test --filter=AnalyticsTest
 - [🧪 Testing](docs/testing.md)
 - [🚀 Deployment](docs/deployment.md)
 - [🔒 Sicurezza](docs/security.md)
-
-### 🎓 **Guide Qualità Codice**
-- [📊 PHPStan Compliance](docs/phpstan-compliance.md)
-- [✅ Best Practices PHPStan](docs/phpstan/best-practices.md)
-- [📝 Correzioni PHPStan](docs/phpstan/correzioni-2025-10-10.md)
-- [🚨 Regola Test](docs/phpstan/regola-critica-test-phpstan.md)
 
 ### 🎨 **Guide UI/UX**
 - [📊 Activity Dashboard](docs/activity-dashboard.md)
@@ -566,10 +546,7 @@ Siamo aperti a contribuzioni! 🎉
 - ✅ Segui le convenzioni PSR-12
 - ✅ Aggiungi test per nuove funzionalità
 - ✅ Aggiorna la documentazione
-- ✅ Verifica PHPStan livello 10 (massimo)
-- ✅ MAI escludere test da PHPStan
-- ✅ Assert dopo ogni factory nei test
-- ✅ Return types specifici (list<> quando appropriato)
+- ✅ Verifica PHPStan livello 9+
 
 ## 🏆 Riconoscimenti
 

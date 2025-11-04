@@ -132,7 +132,7 @@ RefreshDatabase + SQLite:
 
 ```bash
 # Trova tutti i conflitti
-find laravel/Modules -name "*.php" -exec grep -l "<<<<<<< HEAD" {} \;
+
 
 # Risolvi usando:
 git checkout --ours {file}   # Mantieni versione HEAD
@@ -148,10 +148,6 @@ git checkout --theirs {file}  # Usa versione incoming
 cd /var/www/html/ptvx/laravel
 
 # Risolvi tutti i conflitti
-find Modules -name "*.php" -exec grep -l "<<<<<<< HEAD" {} \; | \
-while read file; do
-    git checkout --ours "$file"
-done
 
 # Clear cache
 php artisan optimize:clear
