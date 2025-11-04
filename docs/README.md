@@ -1,320 +1,351 @@
-# Modulo Activity - Documentazione
+# Activity Module - Spatie Laravel Activity Log Integration
 
-## Descrizione
+## 📋 Overview
 
-Modulo per il tracciamento delle attività degli utenti e la gestione di log delle azioni nel sistema PTVX. Utilizza il package Spatie Activity Log per registrare e visualizzare le modifiche sui modelli Eloquent.
+Modulo per il tracking completo delle attività utente utilizzando `spatie/laravel-activitylog`.
 
-## Caratteristiche Principali
+**Pacchetto:** [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) v4.10.2  
+**Namespace:** `Modules\Activity`  
+**Database:** `activity_log` table
 
-- Tracciamento automatico delle attività sui modelli
-- Visualizzazione storico modifiche con interfaccia Filament
-- Ripristino di versioni precedenti dei record
-- Integrazione con Event Sourcing di Spatie
-- Pagina custom per visualizzare le attività di ogni record
+---
 
-## Struttura del Modulo
+## 🎯 Funzionalità Principali
+
+### 1. Activity Log Automatico
+
+- ✅ Tracking automatico modifiche modelli Eloquent
+- ✅ Log eventi custom (email, PDF, export, etc.)
+- ✅ Tracking utente autenticato (causedBy)
+- ✅ Associazione a record specifico (performedOn)
+- ✅ Properties JSON strutturate
+
+### 2. Filament Integration
+
+- ✅ `ListLogActivitiesAction` - Visualizza storico attività
+- ✅ `ListLogActivities` Page - Pagina dettaglio attività
+- ✅ Tabella formattata con filtri e ricerca
+- ✅ Navigazione fluida tra Resource e Activity Log
+
+### 3. Models
+
+- ✅ `Activity` - Model activity log Spatie
+
+---
+
+## 🏗️ Struttura
 
 ```
-Activity/
+Modules/Activity/
 ├── app/
 │   ├── Filament/
 │   │   ├── Actions/
-│   │   │   └── ListLogActivitiesAction.php (action per visualizzare attività)
-│   │   └── Pages/
-│   │       ├── ListLogActivities.php (classe base per activity log)
-│   │       └── Concerns/
-│   │           └── CanPaginate.php
-│   ├── Providers/
-│   │   ├── ActivityServiceProvider.php
-│   │   └── Filament/
-│   │       └── AdminPanelProvider.php
-├── resources/
-│   └── views/
-│       └── filament/
-│           └── pages/
-│               └── list-log-activities.blade.php
-├── config/
-│   └── config.php
-└── docs/
-    ├── README.md
-    └── errori/
-        └── no-hint-path-defined.md
+│   │   │   └── ListLogActivitiesAction.php ⭐ Action per visualizzare log
+│   │   ├── Pages/
+│   │   │   └── ListLogActivities.php        Pagina dettaglio attività
+│   │   └── Resources/
+│   │       └── ActivityResource/
+│   │           └── Pages/
+│   │               └── ListActivities.php   Tabella tutte le attività
+│   ├── Models/
+│   │   └── Activity.php                     Model Spatie Activity
+│   └── Providers/
+│       └── ActivityServiceProvider.php      Service Provider
+├── docs/
+│   ├── README.md                            Questo file
+│   ├── business-logic-analysis.md           Analisi logica business
+│   ├── bugfix-filament-facade-namespace.md  ⭐ Bugfix namespace facade
+│   └── use-cases/
+│       └── tracking-email-sent-schede.md    Use case email schede
+└── database/
+    └── migrations/
+        └── create_activity_log_table.php
 ```
 
-## ServiceProvider
+---
 
-Il modulo utilizza `ActivityServiceProvider` che estende `XotBaseServiceProvider`. Questo garantisce la corretta registrazione di:
+## 🚀 Utilizzo
 
-- **View namespace**: `activity::` per le view blade
-- **Traduzioni**: namespace `activity` per i file di lingua
-- **Configurazioni**: merge del file config/config.php
-- **Migrazioni**: caricamento automatico delle migration
-- **Blade Icons**: registrazione icone SVG custom
-
-### Configurazione ServiceProvider
+### 1. Logging Manuale
 
 ```php
-<?php
+use function activity;
 
-namespace Modules\Activity\Providers;
+// Log activity semplice
+activity()
+    ->log('Utente ha visualizzato il report');
 
-use Modules\Xot\Providers\XotBaseServiceProvider;
+// Log con record e utente
+activity()
+    ->performedOn($record)
+    ->causedBy($user)
+    ->log('Record modificato');
 
-class ActivityServiceProvider extends XotBaseServiceProvider
-{
-    public string $name = 'Activity'; // Nome modulo (PascalCase)
-    protected string $module_dir = __DIR__;
-    protected string $module_ns = __NAMESPACE__;
-}
+// Log con properties strutturate
+activity()
+    ->performedOn($record)
+    ->causedBy($user)
+    ->withProperties([
+        'old' => ['status' => 'draft'],
+        'new' => ['status' => 'published'],
+    ])
+    ->log('Status cambiato');
 ```
 
-## Dipendenze
-
-- **Modulo Xot**: Base framework per tutti i moduli
-- **Modulo User**: Per tracciare gli utenti che eseguono le azioni
-- **spatie/laravel-activitylog**: Core per il tracciamento attività
-- **spatie/laravel-event-sourcing**: Event sourcing pattern
-- **spatie/laravel-translatable**: Per campi multilingua (se necessario)
-
-## Componenti Forniti
-
-### 1. ListLogActivities (Pagina Base)
-
-Classe astratta base per visualizzare lo storico attività di un record.
-
-**Regola Critica**: Estende `Modules\Xot\Filament\Pages\XotBasePage`, **NON** `Filament\Pages\Page` direttamente.
-
-**Uso**: Estendere questa classe per creare una pagina custom di activity log.
+### 2. Filament Action in Resource
 
 ```php
-<?php
-
-namespace Modules\IndennitaResponsabilita\Filament\Resources\IndennitaResponsabilitaResource\Pages;
-
-use Modules\Activity\Filament\Pages\ListLogActivities;
-use Modules\IndennitaResponsabilita\Filament\Resources\IndennitaResponsabilitaResource;
-
-class ListSchedaLogActivities extends ListLogActivities
-{
-    protected static string $resource = IndennitaResponsabilitaResource::class;
-}
-```
-
-### 2. ListLogActivitiesAction (Table Action)
-
-Action Filament completa per aggiungere un pulsante "Cronologia" in qualsiasi tabella.
-
-**Caratteristiche**:
-- **Modal Preview**: Mostra anteprima delle ultime 5 attività
-- **Auto-Discovery**: Trova automaticamente la pagina delle attività per il modello
-- **Navigation**: Navigazione diretta alla pagina completa delle attività
-- **Traduzioni Complete**: Supporto multilingua (IT/EN/DE)
-- **Responsive Design**: Ottimizzato per mobile e desktop
-
-**Uso**: Aggiungere nelle table actions di una Resource:
-
-```php
-<?php
-
-namespace Modules\IndennitaResponsabilita\Filament\Resources\IndennitaResponsabilitaResource;
-
 use Modules\Activity\Filament\Actions\ListLogActivitiesAction;
-use Modules\Xot\Filament\Resources\XotBaseResource;
 
-class IndennitaResponsabilitaResource extends XotBaseResource
+class MyResource extends XotBaseResource
 {
-    protected function getTableActions(): array
+    public function getTableActions(): array
     {
         return [
-            ListLogActivitiesAction::make(),
+            'log_activity' => ListLogActivitiesAction::make(),
+            // Altre actions...
         ];
     }
 }
 ```
 
-**Documentazione completa**: [ListLogActivitiesAction](./actions/list-log-activities-action.md)
+### 3. Filament Page per Activity Log
 
-## Regole Critiche Laraxot
-
-### 🚫 **Estensioni Classi Filament Vietate**
-**Nel modulo Activity:**
-- ❌ `extends Filament\Pages\Page` → VIETATO
-- ❌ `extends Filament\Actions\Action` → VIETATO
-- ✅ `extends Modules\Xot\Filament\Pages\XotBasePage` → CORRETTO
-- ✅ `extends Modules\Xot\Filament\Actions\XotBaseAction` → CORRETTO
-
-### 🚫 **Proprietà Vietate**
-**Chi estende `XotBasePage` NON DEVE avere:**
 ```php
-// ❌ VIETATO
-protected static ?string $navigationIcon = 'heroicon-o-clock';
-protected static ?string $title = 'Cronologia';
-protected static ?string $navigationLabel = 'Attività';
-```
-
-### 🚫 **Traduzioni Hardcoded Vietate**
-**NON usare mai:**
-```php
-// ❌ VIETATO
-Action::make('view')->label('Visualizza')
-TextColumn::make('event')->tooltip('Evento')
-```
-
-**✅ Traduzioni gestite automaticamente:**
-```php
-// ✅ CORRETTO
-Action::make('view')
-TextColumn::make('event')
-```
-
-### ✅ **Pattern Corretto per Actions**
-```php
-<?php
-
-use Modules\Xot\Filament\Actions\XotBaseAction;
-
-class ListLogActivitiesAction extends XotBaseAction
+// In MyResource.php
+public static function getPages(): array
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->label(__('activity::actions.list_log_activities.label'))
-            ->icon('heroicon-o-clock')
-            ->color('gray')
-            ->url(fn (Model $record) => ActivityPage::getUrl(['record' => $record]));
-    }
+    return [
+        'index' => Pages\ListRecords::route('/'),
+        'create' => Pages\CreateRecord::route('/create'),
+        'edit' => Pages\EditRecord::route('/{record}/edit'),
+        'log-activity' => Pages\ListLogActivities::route('/{record}/log-activity'),
+    ];
 }
 ```
 
-## Errori Comuni
+---
 
-### No hint path defined for [activity]
+## 📊 Database Schema
 
-Questo errore può avere diverse cause. Consultare la documentazione appropriata:
+### Tabella `activity_log`
 
-1. **[Modulo Disabilitato](./errori/modulo-disabilitato.md)** ⭐ **CASO PIÙ COMUNE**
-   - Il modulo Activity è disabilitato nel sistema
-   - Soluzione: `php artisan module:enable Activity`
-   
-2. **[Errore Completo "No hint path defined"](./errori/no-hint-path-defined.md)**
-   - ServiceProvider non caricato
-   - Cache Laravel stale
-   - Configurazione errata
-   - 6 cause possibili con soluzioni complete
-
-**Diagnosi Rapida**:
-```bash
-# Verificare se modulo è abilitato
-php artisan module:list | grep Activity
-
-# Se disabilitato → soluzione 1
-# Se abilitato → soluzione 2
+```sql
+CREATE TABLE `activity_log` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `log_name` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `subject_type` varchar(255) DEFAULT NULL,
+  `subject_id` bigint unsigned DEFAULT NULL,
+  `causer_type` varchar(255) DEFAULT NULL,
+  `causer_id` bigint unsigned DEFAULT NULL,
+  `properties` json DEFAULT NULL,
+  `batch_uuid` char(36) DEFAULT NULL,
+  `event` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subject` (`subject_type`,`subject_id`),
+  KEY `causer` (`causer_type`,`causer_id`),
+  KEY `activity_log_log_name_index` (`log_name`)
+);
 ```
 
-### Duplicate Entry Durante Edit con Activity Log
+### Properties JSON Structure
 
-⚠️ **ERRORE CRITICO** - Activity Log temporaneamente disabilitato in `BaseScheda`
-
-**Errore**: `SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'XXX' for key 'PRIMARY'`
-
-**Causa**: SchedaTrait ha 15+ accessor che chiamano `$this->save()` al loro interno. Quando Activity Log fa `$model->toArray()` per serializzare le properties, triggera questi accessor, causando errori di Duplicate Entry.
-
-**Status**: 
-- ❌ Activity Log DISABILITATO in BaseScheda (IndennitaResponsabilita, Progressioni, etc.)
-- ✅ Edit funziona correttamente senza errore
-- ⏳ Refactoring SchedaTrait in pianificazione
-
-**Documentazione Completa**: 
-- [Duplicate Entry Error - Analisi](./errori/duplicate-entry-accessor-save.md)
-- [Status Attuale Activity Module](./current-status.md)
-- [SchedaTrait Refactoring Plan](../../Sigma/docs/refactoring/scheda-trait-accessor-save-issue.md)
-
-## Collegamenti Documentazione
-
-### Documentazione Interna
-- [Filament Actions - Guida Uso](./filament-actions-usage.md)
-- [ListLogActivitiesAction - Table Action](./actions/list-log-activities-action.md)
-
-### Errori e Fix
-- [Errore: route() Method Does Not Exist](./errori/route-method-does-not-exist.md) ⚠️ **CRITICO**
-- [Errore: Modulo Disabilitato](./errori/modulo-disabilitato.md)
-- [Errore: No Hint Path Defined](./errori/no-hint-path-defined.md)
-
-### Altri Moduli
-- [IndennitaResponsabilita - Integrazione Activity Log](../../IndennitaResponsabilita/docs/activity-log-integration.md)
-- [Xot - README](../../Xot/docs/README.md)
-- [Xot - Service Provider Architecture](../../Xot/docs/service-provider-architecture.md)
-- [UI - Componenti](../../UI/docs/README.md)
-
-### Guide Generali
-- [Laraxot Conventions](../../../docs/laraxot-conventions.md)
-- [Spatie Translatable](../../../docs/spatie-translatable.md)
-
-## Testing
-
-Il modulo include test completi per:
-
-### Test Unitari
-- **ListLogActivitiesActionTest**: Test completi per l'Action di visualizzazione attività
-- Registrazione corretta del ServiceProvider
-- Caricamento view con namespace corretto
-- Tracciamento attività sui modelli
-- Visualizzazione pagina activity log
-
-### Test Actions
-- Istanziamento corretto dell'Action
-- Configurazione proprietà (icona, colore, URL)
-- Auto-discovery Resource e pagina appropriata
-- Estrazione etichette campi
-- Gestione record senza attività
-- Generazione contenuto modal con attività
-- Navigazione corretta
-
-```bash
-# Eseguire tutti i test del modulo
-php artisan test --filter=Activity
-
-# Eseguire solo i test delle Actions
-php artisan test --filter=ListLogActivitiesActionTest
-
-# Eseguire solo i test di conformità PHPStan
-php artisan test --filter=PHPStanComplianceTest
-
-# Eseguire solo i test di qualità del codice
-php artisan test --filter=CodeQualityTest
-
-# Analizzare qualità del codice con PHPInsights
-./vendor/bin/phpinsights analyze Modules/Activity --no-interaction
-
-# Eseguire test specifici
-php artisan test --filter="test_can_instantiate_action"
+```json
+{
+  "old": {
+    "status": "draft"
+  },
+  "attributes": {
+    "status": "published"
+  },
+  "custom_data": {
+    "reason": "Manual approval",
+    "approved_by": 123
+  }
+}
 ```
-
-## Manutenzione
-
-### Aggiungere Nuovo Campo Tracciato
-
-1. Aggiungere il campo al modello nel metodo `getActivityLogOptions()`
-2. Aggiungere traduzione etichetta campo
-3. Aggiornare test per il nuovo campo
-
-### Estendere Funzionalità Activity Log
-
-1. Creare nuova classe in `app/Filament/Pages/`
-2. Estendere `ListLogActivities`
-3. Personalizzare metodi necessari (es. `getActivities()`)
-4. Registrare route in `RouteServiceProvider`
-
-## Note Importanti
-
-- Il namespace delle view DEVE essere in lowercase (`activity::`)
-- Il nome del modulo nel ServiceProvider DEVE essere PascalCase (`Activity`)
-- Le view DEVONO essere in `resources/views/`
-- Il ServiceProvider DEVE chiamare `parent::boot()` per registrare le view
 
 ---
 
-**Autore**: Sistema di documentazione automatica
-**Versione**: 1.0
+## 🎯 Use Cases
 
+### 1. Email Tracking (Schede Valutazione)
+
+**File:** [use-cases/tracking-email-sent-schede.md](./use-cases/tracking-email-sent-schede.md)
+
+```php
+activity()
+    ->performedOn($scheda)
+    ->causedBy($user)
+    ->withProperties([
+        'recipient' => 'user@example.com',
+        'template' => 'schede',
+        'filename' => 'scheda_123.pdf',
+        'evaluation_data' => [
+            'matr' => '12345',
+            'cognome' => 'Rossi',
+            // ...
+        ],
+    ])
+    ->log('Email inviata per scheda');
+```
+
+### 2. Data Export Tracking
+
+```php
+activity()
+    ->causedBy($user)
+    ->withProperties([
+        'format' => 'xlsx',
+        'filters' => ['year' => 2024],
+        'records_count' => 1500,
+    ])
+    ->log('Export dati eseguito');
+```
+
+### 3. PDF Generation Tracking
+
+```php
+activity()
+    ->performedOn($record)
+    ->causedBy($user)
+    ->withProperties([
+        'template' => 'report_valutazione',
+        'pdf_size' => 245678,
+    ])
+    ->log('PDF generato');
+```
+
+---
+
+## 🐛 Bugfix e Troubleshooting
+
+### Errore: "Class Filament\Support\Facades\Filament not found"
+
+**Causa:** Namespace facade errato (Filament 2.x vs 4.x)
+
+**Versione Progetto:** Filament v4.2.0
+
+**Fix:**
+```php
+// ❌ ERRATO (Filament 2.x)
+use Filament\Support\Facades\Filament;
+
+// ✅ CORRETTO (Filament 4.x)
+use Filament\Facades\Filament;
+```
+
+**Nota Filament 4.x:** Parametro `panel:` rimosso da `getUrl()`:
+```php
+// ✅ CORRETTO (panel automatico dal contesto)
+$resource::getUrl('edit', ['record' => $record]);
+```
+
+**Documentazione:** [bugfix-filament-facade-namespace.md](./bugfix-filament-facade-namespace.md)
+
+---
+
+## 📚 Collegamenti
+
+### Documentazione Interna
+
+- [Business Logic Analysis](./business-logic-analysis.md)
+- [Bugfix Filament Facade](./bugfix-filament-facade-namespace.md)
+- [Use Case: Email Tracking](./use-cases/tracking-email-sent-schede.md)
+
+### Documentazione Esterna
+
+- [Spatie Laravel Activity Log](https://spatie.be/docs/laravel-activitylog)
+- [Filament 4.x Documentation](https://filamentphp.com/docs/4.x)
+- [Filament 4.x Upgrade Guide](https://filamentphp.com/docs/4.x/panels/upgrade-guide)
+
+### Altri Moduli
+
+- [Ptv Module - Activity Log Email](../../Ptv/docs/activity-log-final-summary.md)
+- [Xot Module - Filament Best Practices](../../Xot/docs/FILAMENT-BEST-PRACTICES.md)
+
+---
+
+## 🎓 Best Practices
+
+### 1. Properties Strutturate
+
+```php
+// ✅ CORRETTO: Properties strutturate
+activity()
+    ->withProperties([
+        'action_type' => 'email_sent',
+        'metadata' => [
+            'recipient' => 'user@example.com',
+            'template' => 'welcome',
+        ],
+        'business_data' => [
+            'entity_id' => 123,
+            'entity_type' => 'Scheda',
+        ],
+    ])
+    ->log('Email inviata');
+
+// ❌ ERRATO: Properties piatte
+activity()
+    ->withProperties([
+        'recipient' => 'user@example.com',
+        'template' => 'welcome',
+        'entity_id' => 123,
+    ])
+    ->log('Email inviata');
+```
+
+### 2. Description Standardizzate
+
+```php
+// ✅ CORRETTO: Description chiare e specifiche
+activity()->log('Email scheda valutazione inviata con successo');
+activity()->log('PDF report generato');
+activity()->log('Dati esportati in formato Excel');
+
+// ❌ ERRATO: Description generiche
+activity()->log('Azione eseguita');
+activity()->log('Operazione completata');
+```
+
+### 3. Namespace Facade e API Filament 4.x
+
+**Versione Progetto:** Filament v4.2.0
+
+```php
+// ✅ SEMPRE usare Filament 4.x namespace
+use Filament\Facades\Filament;
+
+// ❌ MAI usare Filament 2.x namespace
+use Filament\Support\Facades\Filament;
+```
+
+**Filament 4.x Breaking Change:**
+```php
+// ✅ CORRETTO (v4.x - panel automatico)
+$resource::getUrl('edit', ['record' => $record]);
+
+// ❌ OBSOLETO (v3.x - parametro panel rimosso)
+$resource::getUrl('edit', ['record' => $record], panel: $panelId);
+```
+
+---
+
+## 🔄 Prossimi Sviluppi
+
+- [ ] Activity Log API REST
+- [ ] Export attività in CSV/Excel
+- [ ] Dashboard analytics attività
+- [ ] Notifiche real-time attività critiche
+- [ ] Retention policy automatica (GDPR)
+- [ ] Activity Log bulk operations
+
+---
+
+**Ultimo Aggiornamento:** 2025-01-22  
+**Versione:** 1.0.0  
+**Status:** ✅ Production Ready

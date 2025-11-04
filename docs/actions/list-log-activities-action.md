@@ -37,6 +37,27 @@ class ListLogActivitiesAction extends XotBaseAction
 - Usa traduzioni strutturate del modulo Activity (NO label hardcoded)
 - Supporta injection di dipendenze tramite closure
 
+### ⚠️ Filament 4 - Panel Context Automatico
+
+**IMPORTANTE**: Questo progetto utilizza **Filament 4**, NON Filament 3.
+
+In Filament 4, quando si chiama `Resource::getUrl()` da un contesto Livewire (come `ListRecords`), Filament **determina automaticamente il panel corretto** dal contesto del livewire. Non è necessario passare esplicitamente il panel.
+
+**✅ CORRETTO (Filament 4)**:
+```php
+// Filament 4 determina automaticamente il panel dal contesto
+return $resource::getUrl('log-activity', ['record' => $record]);
+```
+
+**❌ ERRATO**:
+```php
+// NON esiste Filament\Support\Facades\Filament::getCurrentPanel() in Filament 4
+$panel = Filament::getCurrentPanel(); // ❌ CLASSE NON ESISTENTE
+return $resource::getUrl('log-activity', ['record' => $record], panel: $panelId);
+```
+
+Vedi [Filament 4 Important Notes](../../../../../docs/filament4-important.md) per dettagli completi.
+
 ### Metodi Principali
 
 #### `setUp()`

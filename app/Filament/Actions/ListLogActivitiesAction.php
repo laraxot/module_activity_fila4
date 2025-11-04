@@ -57,7 +57,7 @@ class ListLogActivitiesAction extends XotBaseAction
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->iconButton();
         $this->icon('heroicon-o-clock')
             ->color('gray')
             ->url(function (ListRecords $livewire, Model $record): string {
