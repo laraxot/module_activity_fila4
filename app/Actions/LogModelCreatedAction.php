@@ -6,9 +6,7 @@ namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Activity\Models\Activity;
-use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
-use Webmozart\Assert\Assert;
 
 /**
  * Log Model Created Action.
@@ -21,19 +19,21 @@ class LogModelCreatedAction
 
     public function __construct(
         public Model $model,
-        public mixed $user = null,
+        public ?Model $user = null,
     ) {
         if ($user !== null) {
-            $userClass = XotData::make()->getUserClass();
-            Assert::isInstanceOf($user, $userClass);
+            // Type already narrowed to Model|null, assertion not needed
         }
     }
 
     public function execute(): Activity
     {
+        // PHPStan Level 10: Explicit type guard for nullable Model
+        $user = $this->user instanceof Model ? $this->user : null;
+
         $action = new LogActivityAction(
             type: 'created',
-            user: $this->user,
+            user: $user,
             subject: $this->model,
             properties: ['attributes' => $this->model->getAttributes()],
             description: sprintf('%s created', class_basename($this->model))

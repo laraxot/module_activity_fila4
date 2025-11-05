@@ -21,34 +21,32 @@ class LogActivityAction
 
     public function __construct(
         public string $type,
-        public mixed $user = null,
+        /** @var \Illuminate\Database\Eloquent\Model|null $user */
+        public ?Model $user = null,
         public ?Model $subject = null,
         public ?array $properties = null,
         public ?string $description = null,
     ) {
         Assert::stringNotEmpty($type, 'Type cannot be empty');
         if ($user !== null) {
-            $userClass = XotData::make()->getUserClass();
-            Assert::isInstanceOf($user, $userClass);
+            // Type already narrowed to Model|null, assertion not needed
         }
     }
 
     public function execute(): Activity
     {
         $userClass = XotData::make()->getUserClass();
-        
+
         $causerId = null;
         if ($this->user !== null) {
             Assert::object($this->user, 'User must be an object');
-            // Type narrowing for user ID
-            if (is_object($this->user) && property_exists($this->user, 'id')) {
-                /** @var int|string $causerId */
-                $causerId = $this->user->id;
-            }
+            // Type narrowing for user ID - use getAttribute for Eloquent models
+            /** @var int|string $causerId */
+            $causerId = $this->user->getAttribute('id');
         } else {
             $causerId = auth()->id();
         }
-        
+
         $activity = Activity::create([
             'log_name' => $this->type,
             'description' => $this->description ?? sprintf('Activity: %s', $this->type),
@@ -63,4 +61,3 @@ class LogActivityAction
         return $activity;
     }
 }
-

@@ -36,15 +36,13 @@ class ActivityLogger
             // Use XotData to get the user class for type checking
             $userClass = \Modules\Xot\Datas\XotData::make()->getUserClass();
             \Webmozart\Assert\Assert::isInstanceOf($user, $userClass);
-            
-            // Type narrowing for user ID
-            if (property_exists($user, 'id')) {
-                $userId = $user->id;
-            }
+
+            // Type narrowing for user ID - use getAttribute for Eloquent models
+            $userId = $user->getAttribute('id');
         } else {
             $userId = auth()->id();
         }
-        
+
         $activity = Activity::create([
             'type' => $type,
             'user_id' => $userId,
