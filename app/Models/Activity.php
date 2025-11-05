@@ -14,7 +14,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
  * Class Activity.
- *
+ * 
  * This class extends the BaseActivity model to represent activities in the application.
  *
  * @property int $id
@@ -23,8 +23,8 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property string|null $subject_type
  * @property int|null $subject_id
  * @property string|null $causer_type
- * @property string $causer_id
- * @property Collection<array-key, mixed>|null $properties
+ * @property string|null $causer_id
+ * @property \Illuminate\Support\Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
  * @property string|null $event
  * @property Carbon|null $created_at
@@ -33,14 +33,14 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property string|null $created_by
  * @property string|null $deleted_at
  * @property string|null $deleted_by
- * @property Model $causer
- * @property Collection<int, mixed> $changes
- * @property Model|null $subject
- *
- * @method static Builder<static>|Activity causedBy(Model $causer)
+ * @property-read \Illuminate\Database\Eloquent\Model|null $causer
+ * @property-read Collection $changes
+ * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ * @method static Builder<static>|Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
+ * @method static \Modules\Activity\Database\Factories\ActivityFactory factory($count = null, $state = [])
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
  * @method static Builder<static>|Activity forEvent(string $event)
- * @method static Builder<static>|Activity forSubject(Model $subject)
+ * @method static Builder<static>|Activity forSubject(\Illuminate\Database\Eloquent\Model $subject)
  * @method static Builder<static>|Activity hasBatch()
  * @method static Builder<static>|Activity inLog(...$logNames)
  * @method static Builder<static>|Activity newModelQuery()
@@ -62,8 +62,6 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
- *
- * @mixin IdeHelperActivity
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
@@ -95,8 +93,6 @@ class Activity extends SpatieActivity
         'created_at',
         'updated_at',
     ];
-
-    
 
     // Additional methods or relationships can be defined here as needed
 }

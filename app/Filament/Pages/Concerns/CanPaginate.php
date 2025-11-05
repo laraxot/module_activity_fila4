@@ -28,7 +28,10 @@ trait CanPaginate
         $this->resetLivewirePage();
     }
 
-    protected function paginateQuery(Builder $query): Paginator|CursorPaginator
+    /**
+     * PHPStan Level 10: Include LengthAwarePaginator in return type.
+     */
+    protected function paginateQuery(Builder $query): Paginator|CursorPaginator|LengthAwarePaginator
     {
         $perPage = $this->getRecordsPerPage();
 

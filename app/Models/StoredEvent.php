@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder;
-use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 /**
@@ -27,11 +25,11 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @property string $created_at
  * @property string|null $updated_by
  * @property string|null $created_by
- * @property-read ShouldBeStored|null $event
+ * @property-read \Spatie\EventSourcing\StoredEvents\ShouldBeStored|null $event
  *
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent afterVersion(int $version)
- * @method static EloquentStoredEventCollection<EloquentStoredEvent> all()
- * @method static EloquentStoredEventCollection<EloquentStoredEvent> get()
+ * @method static EloquentStoredEventCollection<static> all($columns = ['*'])
+ * @method static EloquentStoredEventCollection<static> get($columns = ['*'])
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent lastEvent(string ...$eventClasses)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent newModelQuery()
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent newQuery()
@@ -51,9 +49,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIs(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIsNot(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
- * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
+ * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
  *
- * @mixin IdeHelperStoredEvent
  * @mixin \Eloquent
  */
 class StoredEvent extends SpatieStoredEvent

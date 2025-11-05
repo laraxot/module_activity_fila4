@@ -15,14 +15,11 @@ parameters:
         - tests/coverage/*
         - vendor/*
 
-    checkMissingIterableValueType: true
-    checkGenericClassInNonGenericObjectType: true
-
     ignoreErrors:
         - '#Static call to instance method Nwidart\\Modules\\Facades\\Module#'
         - '#PHPDoc tag @mixin contains unknown class #'
 
     tmpDir: build/phpstan
 
-    bootStrapFiles:
+    bootstrapFiles:
         - ../../vendor/autoload.php

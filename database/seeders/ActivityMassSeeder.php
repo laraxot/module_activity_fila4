@@ -64,7 +64,12 @@ class ActivityMassSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 90)),
             ]);
 
-        $this->command->info('✅ Create '.$activities->count().' attività di sistema');
+        // PHPStan Level 10: Type safety for Eloquent collection
+        $activitiesCount = $activities instanceof \Illuminate\Database\Eloquent\Collection
+            ? $activities->count()
+            : 0;
+
+        $this->command->info('✅ Create '.$activitiesCount.' attività di sistema');
     }
 
     /**
@@ -75,13 +80,26 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📸 Creazione snapshot...');
 
         // Crea 500 snapshot
-        $snapshots = Snapshot::factory()
+        /** @var \Illuminate\Database\Eloquent\Factories\Factory<Snapshot> $snapshotFactory */
+        $snapshotFactory = Snapshot::factory();
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $snapshotFactory,
+            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            'Snapshot factory must be a Factory instance'
+        );
+
+        $snapshots = $snapshotFactory
             ->count(500)
             ->create([
                 'created_at' => Carbon::now()->subDays(rand(1, 180)),
             ]);
 
-        $this->command->info('✅ Creati '.$snapshots->count().' snapshot');
+        // PHPStan Level 10: Type safety for Eloquent collection
+        $snapshotsCount = $snapshots instanceof \Illuminate\Database\Eloquent\Collection
+            ? $snapshots->count()
+            : 0;
+
+        $this->command->info('✅ Creati '.$snapshotsCount.' snapshot');
     }
 
     /**
@@ -92,13 +110,31 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📦 Creazione eventi memorizzati...');
 
         // Crea 1000 eventi memorizzati
-        $events = StoredEvent::factory()
-            ->count(1000)
-            ->create([
-                'created_at' => Carbon::now()->subDays(rand(1, 365)),
-            ]);
+        /** @var \Illuminate\Database\Eloquent\Factories\Factory<StoredEvent> $storedEventFactory */
+        $storedEventFactory = StoredEvent::factory();
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $storedEventFactory,
+            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            'StoredEvent factory must be a Factory instance'
+        );
 
-        $this->command->info('✅ Creati '.$events->count().' eventi memorizzati');
+        $countedFactory = $storedEventFactory->count(1000);
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $countedFactory,
+            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            'Factory after count() must be a Factory instance'
+        );
+        
+        $events = $countedFactory->create([
+            'created_at' => Carbon::now()->subDays(rand(1, 365)),
+        ]);
+
+        // PHPStan Level 10: Type safety for Eloquent collection
+        $eventsCount = $events instanceof \Illuminate\Database\Eloquent\Collection
+            ? $events->count()
+            : 0;
+
+        $this->command->info('✅ Creati '.$eventsCount.' eventi memorizzati');
     }
 
     /**
