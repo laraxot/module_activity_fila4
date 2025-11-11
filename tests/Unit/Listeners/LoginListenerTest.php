@@ -16,7 +16,7 @@ test('login listener is registered for login event', function (): void {
 
 test('login listener handles login event and creates activity', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Login('web', $user, false);
 
@@ -40,7 +40,7 @@ test('login listener handles login event and creates activity', function (): voi
 
 test('login listener creates activity with correct properties', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Login('api', $user, true);
 
@@ -60,10 +60,10 @@ test('login listener creates activity with correct properties', function (): voi
 
 test('login listener handles multiple login events correctly', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user1 = User::factory()->create();
+    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user1 instanceof User);
     /* @phpstan-ignore-next-line method.nonObject */
-    $user2 = User::factory()->create();
+    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user2 instanceof User);
 
     $event1 = new Login('web', $user1, false);
@@ -93,7 +93,7 @@ test('login listener handles multiple login events correctly', function (): void
 
 test('login listener includes request information in activity properties', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Login('web', $user, false);
 
@@ -112,7 +112,7 @@ test('login listener includes request information in activity properties', funct
 
 test('login listener uses correct log name for activities', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $event = new Login('web', $user, false);
 
@@ -141,7 +141,7 @@ test('login listener handles event without user gracefully', function (): void {
 
 test('login listener creates unique activities for same user different sessions', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $event1 = new Login('web', $user, false);
