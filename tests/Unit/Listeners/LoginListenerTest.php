@@ -8,14 +8,16 @@ use Modules\Activity\Listeners\LoginListener;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 
-test('login listener is registered for login event', function () {
+test('login listener is registered for login event', function (): void {
     Event::fake();
 
     Event::assertListening(Login::class, LoginListener::class);
 });
 
-test('login listener handles login event and creates activity', function () {
-    $user = User::factory()->create();
+test('login listener handles login event and creates activity', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user instanceof User);
     $event = new Login('web', $user, false);
 
     $listener = new LoginListener;
@@ -26,16 +28,20 @@ test('login listener handles login event and creates activity', function () {
         ->where('event', 'login')
         ->first();
 
-    expect($activity)
-        ->not->toBeNull()
-        ->description->toContain('login')
-        ->causer_id->toBe($user->id)
-        ->causer_type->toBe(User::class)
-        ->properties->toHaveKey('guard', 'web');
+    expect($activity)->not->toBeNull();
+
+    if ($activity instanceof Activity) {
+        expect($activity->description)->toContain('login');
+        expect($activity->causer_id)->toBe($user->id);
+        expect($activity->causer_type)->toBe(User::class);
+        expect($activity->properties)->toHaveKey('guard', 'web');
+    }
 });
 
-test('login listener creates activity with correct properties', function () {
-    $user = User::factory()->create();
+test('login listener creates activity with correct properties', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user instanceof User);
     $event = new Login('api', $user, true);
 
     $listener = new LoginListener;
@@ -43,16 +49,22 @@ test('login listener creates activity with correct properties', function () {
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
 
-    expect($activity->properties)
-        ->toHaveKey('guard', 'api')
-        ->toHaveKey('remember', true)
-        ->toHaveKey('ip_address')
-        ->toHaveKey('user_agent');
+    expect($activity)->toBeInstanceOf(Activity::class);
+    if ($activity instanceof Activity) {
+        expect($activity->properties)->toHaveKey('guard', 'api');
+        expect($activity->properties)->toHaveKey('remember', true);
+        expect($activity->properties)->toHaveKey('ip_address');
+        expect($activity->properties)->toHaveKey('user_agent');
+    }
 });
 
-test('login listener handles multiple login events correctly', function () {
-    $user1 = User::factory()->create();
-    $user2 = User::factory()->create();
+test('login listener handles multiple login events correctly', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user1 instanceof User);
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user2 instanceof User);
 
     $event1 = new Login('web', $user1, false);
     $event2 = new Login('api', $user2, true);
@@ -68,14 +80,21 @@ test('login listener handles multiple login events correctly', function () {
     $user1Activity = $activities->where('causer_id', $user1->id)->first();
     $user2Activity = $activities->where('causer_id', $user2->id)->first();
 
-    expect($user1Activity->properties['guard'])->toBe('web');
-    expect($user2Activity->properties['guard'])->toBe('api');
-    expect($user1Activity->properties['remember'])->toBeFalse();
-    expect($user2Activity->properties['remember'])->toBeTrue();
+    expect($user1Activity)->toBeInstanceOf(Activity::class);
+    expect($user2Activity)->toBeInstanceOf(Activity::class);
+
+    if ($user1Activity instanceof Activity && $user2Activity instanceof Activity) {
+        expect($user1Activity->properties['guard'] ?? null)->toBe('web');
+        expect($user2Activity->properties['guard'] ?? null)->toBe('api');
+        expect($user1Activity->properties['remember'] ?? null)->toBeFalse();
+        expect($user2Activity->properties['remember'] ?? null)->toBeTrue();
+    }
 });
 
-test('login listener includes request information in activity properties', function () {
-    $user = User::factory()->create();
+test('login listener includes request information in activity properties', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user instanceof User);
     $event = new Login('web', $user, false);
 
     $listener = new LoginListener;
@@ -83,11 +102,18 @@ test('login listener includes request information in activity properties', funct
 
     $activity = Activity::where('causer_id', $user->id)->first();
 
-    expect($activity->properties)->toHaveKey('ip_address')->toHaveKey('user_agent')->toHaveKey('timestamp');
+    expect($activity)->toBeInstanceOf(Activity::class);
+    if ($activity instanceof Activity) {
+        expect($activity->properties)->toHaveKey('ip_address');
+        expect($activity->properties)->toHaveKey('user_agent');
+        expect($activity->properties)->toHaveKey('timestamp');
+    }
 });
 
-test('login listener uses correct log name for activities', function () {
-    $user = User::factory()->create();
+test('login listener uses correct log name for activities', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user instanceof User);
     $event = new Login('web', $user, false);
 
     $listener = new LoginListener;
@@ -95,10 +121,14 @@ test('login listener uses correct log name for activities', function () {
 
     $activity = Activity::where('causer_id', $user->id)->first();
 
-    expect($activity->log_name)->toBe('auth');
+    expect($activity)->toBeInstanceOf(Activity::class);
+    if ($activity instanceof Activity) {
+        expect($activity->log_name)->toBe('auth');
+    }
 });
 
-test('login listener handles event without user gracefully', function () {
+test('login listener handles event without user gracefully', function (): void {
+    /** @phpstan-ignore-next-line argument.type */
     $event = new Login('web', null, false);
 
     $listener = new LoginListener;
@@ -109,8 +139,10 @@ test('login listener handles event without user gracefully', function () {
     expect($activities)->toBeEmpty();
 });
 
-test('login listener creates unique activities for same user different sessions', function () {
-    $user = User::factory()->create();
+test('login listener creates unique activities for same user different sessions', function (): void {
+    /* @phpstan-ignore-next-line method.nonObject */
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
+    assert($user instanceof User);
 
     $event1 = new Login('web', $user, false);
     $event2 = new Login('web', $user, true);
@@ -126,7 +158,12 @@ test('login listener creates unique activities for same user different sessions'
     $firstActivity = $activities->first();
     $lastActivity = $activities->last();
 
-    expect($firstActivity->properties['remember'])->toBeFalse();
-    expect($lastActivity->properties['remember'])->toBeTrue();
-    expect($firstActivity->id)->not->toBe($lastActivity->id);
+    expect($firstActivity)->toBeInstanceOf(Activity::class);
+    expect($lastActivity)->toBeInstanceOf(Activity::class);
+
+    if ($firstActivity instanceof Activity && $lastActivity instanceof Activity) {
+        expect($firstActivity->properties['remember'] ?? null)->toBeFalse();
+        expect($lastActivity->properties['remember'] ?? null)->toBeTrue();
+        expect($firstActivity->id)->not->toBe($lastActivity->id);
+    }
 });

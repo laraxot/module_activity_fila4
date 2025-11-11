@@ -15,16 +15,19 @@ class ListActivities extends XotBaseListRecords
 {
     protected static string $resource = ActivityResource::class;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getTableColumns(): array
     {
         return [
-            TextColumn::make('id')->sortable()->searchable(),
-            TextColumn::make('description')->searchable()->limit(50),
-            TextColumn::make('subject_type')->searchable(),
-            TextColumn::make('subject_id')->searchable(),
-            TextColumn::make('causer_type')->searchable(),
-            TextColumn::make('causer_id')->searchable(),
-            TextColumn::make('created_at')->dateTime()->sortable(),
+            'id' => TextColumn::make('id')->sortable()->searchable(),
+            'description' => TextColumn::make('description')->searchable()->limit(50),
+            'subject_type' => TextColumn::make('subject_type')->searchable(),
+            'subject_id' => TextColumn::make('subject_id')->searchable(),
+            'causer_type' => TextColumn::make('causer_type')->searchable(),
+            'causer_id' => TextColumn::make('causer_id')->searchable(),
+            'created_at' => TextColumn::make('created_at')->dateTime()->sortable(),
         ];
     }
 }
