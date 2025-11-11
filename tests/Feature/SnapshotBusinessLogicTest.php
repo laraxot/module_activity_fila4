@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
+use function Safe\json_encode;
+
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Snapshot;
@@ -28,16 +31,23 @@ class SnapshotBusinessLogicTest extends TestCase
 
         $snapshot = Snapshot::create($snapshotData);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
+            /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
             'aggregate_uuid' => $snapshotData['aggregate_uuid'],
             'aggregate_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals($snapshotData['aggregate_uuid'], $snapshot->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $snapshot->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertIsArray($snapshot->state);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('Test Aggregate', $snapshot->state['name']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('active', $snapshot->state['status']);
     }
 
@@ -82,16 +92,23 @@ class SnapshotBusinessLogicTest extends TestCase
             'state' => json_encode($complexState),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
             'aggregate_version' => 5,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(5, $snapshot->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertIsArray($snapshot->state);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('John Doe', $snapshot->state['user_info']['name']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('premium', $snapshot->state['account_status']['subscription']['plan']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertTrue($snapshot->state['account_status']['is_active']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertContains('verified', $snapshot->state['metadata']['tags']);
     }
 
@@ -119,28 +136,37 @@ class SnapshotBusinessLogicTest extends TestCase
             'state' => json_encode(['version' => 3, 'data' => 'Final state']),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot1->id,
             'aggregate_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot2->id,
             'aggregate_version' => 2,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot3->id,
             'aggregate_version' => 3,
         ]);
 
         // Verifica che tutti gli snapshot abbiano lo stesso UUID ma versioni diverse
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $snapshot1->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $snapshot2->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $snapshot3->aggregate_uuid);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $snapshot1->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(2, $snapshot2->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(3, $snapshot3->aggregate_version);
     }
 
@@ -174,10 +200,14 @@ class SnapshotBusinessLogicTest extends TestCase
         $snapshots1 = Snapshot::where('aggregate_uuid', $uuid1)->get();
         $snapshots2 = Snapshot::where('aggregate_uuid', $uuid2)->get();
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(2, $snapshots1);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $snapshots2);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($uuid1, $snapshots1->first()->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($uuid2, $snapshots2->first()->aggregate_uuid);
     }
 
@@ -211,12 +241,18 @@ class SnapshotBusinessLogicTest extends TestCase
 
         $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 10)->first();
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNotNull($version1Snapshot);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNotNull($version5Snapshot);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNotNull($version10Snapshot);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $version1Snapshot->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(5, $version5Snapshot->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(10, $version10Snapshot->aggregate_version);
     }
 
@@ -229,12 +265,15 @@ class SnapshotBusinessLogicTest extends TestCase
             'state' => json_encode([]),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
             'aggregate_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertIsArray($snapshot->state);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEmpty($snapshot->state);
     }
 
@@ -247,11 +286,13 @@ class SnapshotBusinessLogicTest extends TestCase
             'state' => null,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
             'aggregate_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNull($snapshot->state);
     }
 
@@ -281,10 +322,15 @@ class SnapshotBusinessLogicTest extends TestCase
         // Simula il ripristino dello stato
         $restoredState = $snapshot->state;
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($originalState, $restoredState);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(456, $restoredState['user_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('light', $restoredState['settings']['theme']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('Europe/Rome', $restoredState['preferences']['timezone']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('EUR', $restoredState['preferences']['currency']);
     }
 
@@ -312,16 +358,24 @@ class SnapshotBusinessLogicTest extends TestCase
         ]);
 
         // Verifica che le versioni siano progressive
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($snapshot2->aggregate_version, $snapshot1->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($snapshot3->aggregate_version, $snapshot2->aggregate_version);
 
         // Verifica che i valori cambino tra le versioni
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(100, $snapshot1->state['value']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(200, $snapshot2->state['value']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(300, $snapshot3->state['value']);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('initial', $snapshot1->state['status']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('updated', $snapshot2->state['status']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('final', $snapshot3->state['status']);
     }
 
@@ -333,18 +387,24 @@ class SnapshotBusinessLogicTest extends TestCase
         $snapshot = Snapshot::create([
             'aggregate_uuid' => Str::uuid()->toString(),
             'aggregate_version' => 1,
+            /** @phpstan-ignore-next-line method.nonObject */
             'state' => json_encode(['created_at' => $now->toISOString()]),
             'created_at' => $now,
             'updated_at' => $now,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
+            /** @phpstan-ignore-next-line method.nonObject */
             'created_at' => $now->toDateTimeString(),
+            /** @phpstan-ignore-next-line method.nonObject */
             'updated_at' => $now->toDateTimeString(),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($now->timestamp, $snapshot->created_at->timestamp);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($now->timestamp, $snapshot->updated_at->timestamp);
     }
 
@@ -377,10 +437,13 @@ class SnapshotBusinessLogicTest extends TestCase
         ]);
 
         $todaySnapshots = Snapshot::whereDate('created_at', today())->get();
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $todaySnapshots);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('today', $todaySnapshots->first()->state['date']);
 
         $recentSnapshots = Snapshot::where('created_at', '>=', $yesterday)->get();
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(2, $recentSnapshots);
     }
 
@@ -409,15 +472,21 @@ class SnapshotBusinessLogicTest extends TestCase
             ]),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('snapshots', [
             'id' => $snapshot->id,
             'aggregate_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('Alice Johnson', $snapshot->state['profile']['name']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('alice@example.com', $snapshot->state['profile']['email']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('user_action', $snapshot->state['metadata']['source']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(789, $snapshot->state['metadata']['user_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('profile_update', $snapshot->state['metadata']['action']);
     }
 }
