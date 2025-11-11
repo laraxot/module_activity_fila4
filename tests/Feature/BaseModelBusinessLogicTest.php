@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
-use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Traits\Updater;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
+use Modules\Xot\Traits\Updater;
 use Tests\TestCase;
 
 class BaseModelBusinessLogicTest extends TestCase
@@ -22,7 +21,8 @@ class BaseModelBusinessLogicTest extends TestCase
     public function it_can_create_base_model_instance(): void
     {
         // Creiamo una classe concreta che estende BaseModel per i test
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -36,7 +36,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_connection_setting(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -46,7 +47,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_primary_key_setting(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -58,7 +60,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_timestamps_setting(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -69,7 +72,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_per_page_setting(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -79,7 +83,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_snake_attributes_setting(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -89,7 +94,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_casts_configuration(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -126,7 +132,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_factory(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -140,7 +147,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_updater_trait(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -151,7 +159,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_has_factory_trait(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -162,7 +171,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_handle_uuid_generation(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -180,7 +190,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_handle_timestamps(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -198,7 +209,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_handle_soft_deletes(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -214,7 +226,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_handle_published_at_timestamp(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -230,7 +243,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_handle_user_tracking_fields(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -249,7 +263,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_has_correct_hidden_attributes(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -264,7 +279,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_connection_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -275,7 +291,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_table_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -285,7 +302,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_key_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -297,7 +315,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_timestamp_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -311,7 +330,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_per_page_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -325,7 +345,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_snake_attributes_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -343,7 +364,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_casts_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
         };
 
@@ -362,7 +384,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_fillable_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -383,7 +406,8 @@ class BaseModelBusinessLogicTest extends TestCase
     /** @test */
     public function it_can_use_hidden_methods(): void
     {
-        $concreteModel = new class extends BaseModel {
+        $concreteModel = new class extends BaseModel
+        {
             protected $table = 'test_models';
 
             /** @var list<string> */
