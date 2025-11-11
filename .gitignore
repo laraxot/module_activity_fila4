@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8aceea5 (.)
 # ==============================================
 # LARAXOT MODULE ACTIVITY - .GITIGNORE
 # ==============================================
@@ -59,9 +62,12 @@ lerna-debug.log*
 # ==============================================
 # LARAVEL SPECIFIC
 # ==============================================
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 3b1902f (.)
+=======
+>>>>>>> 8aceea5 (.)
 # 🔧 Activity Module .gitignore
 # File di configurazione per ignorare file e directory nel modulo Activity
 
@@ -93,9 +99,12 @@ build/
 
 # 📱 Laravel specifici
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 2506997 (.)
 =======
 >>>>>>> 3b1902f (.)
+=======
+>>>>>>> 8aceea5 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -107,6 +116,9 @@ storage/*.key
 .env.*
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8aceea5 (.)
 !.env.example
 
 # ==============================================
@@ -198,9 +210,12 @@ test_activity_logs.sql
 # ==============================================
 
 # File specifici del progetto
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 3b1902f (.)
+=======
+>>>>>>> 8aceea5 (.)
 
 # 🗃️ Database directories
 database/Factories_old
@@ -256,9 +271,12 @@ resources/views/Components_old
 
 # 🚫 File specifici del progetto
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 2506997 (.)
 =======
 >>>>>>> 3b1902f (.)
+=======
+>>>>>>> 8aceea5 (.)
 *.fila2
 laravel
 public_html
