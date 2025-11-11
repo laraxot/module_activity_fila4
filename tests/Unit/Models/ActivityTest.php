@@ -38,10 +38,10 @@ test('activity can be soft deleted', function (): void {
 
 test('activity factory creates valid instances', function (): void {
     $factory = Activity::factory();
-    if (!is_object($factory) || !method_exists($factory, 'make')) {
+    if (! is_object($factory) || ! method_exists($factory, 'make')) {
         throw new \RuntimeException('Activity factory not available');
     }
-    
+
     $activity = $factory->make();
     assert($activity instanceof Activity);
 
