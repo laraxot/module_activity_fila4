@@ -21,16 +21,12 @@ class LogActivityAction
 
     public function __construct(
         public string $type,
-        /** @var \Illuminate\Database\Eloquent\Model|null $user */
         public ?Model $user = null,
         public ?Model $subject = null,
         public ?array $properties = null,
         public ?string $description = null,
     ) {
         Assert::stringNotEmpty($type, 'Type cannot be empty');
-        if ($user !== null) {
-            // Type already narrowed to Model|null, assertion not needed
-        }
     }
 
     public function execute(): Activity
