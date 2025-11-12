@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', static fn (): string => 'Activity workbench up');
+=======
+Route::get('/', fn () => view('welcome'));
+>>>>>>> 97b542c (.)
