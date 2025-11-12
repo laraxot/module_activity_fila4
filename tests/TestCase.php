@@ -36,7 +36,7 @@ abstract class TestCase extends BaseTestCase
      * @param  Application  $app
      * @return array<int, class-string>
      */
-    protected function getPackageProviders($app): array
+    protected function getPackageProviders($_app): array
     {
         return [
             ActivityServiceProvider::class,

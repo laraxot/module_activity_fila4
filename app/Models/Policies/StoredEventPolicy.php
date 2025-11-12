@@ -21,7 +21,7 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(UserContract $user, StoredEvent $_stored_event): bool
+    public function view(UserContract $user): bool
     {
         return $user->hasPermissionTo('stored_event.view');
     }
@@ -37,7 +37,7 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(UserContract $user, StoredEvent $_stored_event): bool
+    public function update(UserContract $user): bool
     {
         return $user->hasPermissionTo('stored_event.update');
     }
@@ -45,7 +45,7 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(UserContract $user, StoredEvent $_stored_event): bool
+    public function delete(UserContract $user): bool
     {
         return $user->hasPermissionTo('stored_event.delete');
     }
@@ -53,7 +53,7 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(UserContract $user, StoredEvent $_stored_event): bool
+    public function restore(UserContract $user): bool
     {
         return $user->hasPermissionTo('stored_event.restore');
     }
@@ -61,7 +61,7 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(UserContract $user, StoredEvent $stored_event): bool
+    public function forceDelete(UserContract $user): bool
     {
         return $user->hasPermissionTo('stored_event.forceDelete');
     }

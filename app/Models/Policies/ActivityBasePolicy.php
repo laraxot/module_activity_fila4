@@ -6,15 +6,13 @@ namespace Modules\Activity\Models\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Datas\XotData;
 
 abstract class ActivityBasePolicy
 {
     use HandlesAuthorization;
 
-    public function before(UserContract $user, string $_ability): ?bool
+    public function before(UserContract $user): ?bool
     {
-        $xotData = XotData::make();
         if ($user->hasRole('super-admin')) {
             return true;
         }
