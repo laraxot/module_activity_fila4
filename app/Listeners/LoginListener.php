@@ -11,7 +11,11 @@ class LoginListener
     /**
      * Handle the event.
      */
+<<<<<<< HEAD
     public function handle(Login $_event): void
+=======
+    public function handle(Login $event): void
+>>>>>>> 0a00ff2 (.)
     {
         // ...
     }
