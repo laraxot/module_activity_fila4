@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Xot\Models\Traits\HasXotFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
@@ -66,19 +67,11 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  */
 class Activity extends SpatieActivity
 {
-    use HasFactory;
+    use HasXotFactory;
 
     protected $connection = 'activity';
 
-    /**
-     * Create a new factory instance for the model.
-     */
-    protected static function newFactory(): ActivityFactory
-    {
-        return ActivityFactory::new();
-    }
-
-    /** @var list<string> */
+        /** @var list<string> */
     protected $fillable = [
         'id',
         'log_name',
