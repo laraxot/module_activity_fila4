@@ -5,35 +5,10 @@ declare(strict_types=1);
 namespace Modules\Activity\Models\Policies;
 
 use Modules\Activity\Models\Activity;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> b1cd7fc (.)
 use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
 class ActivityPolicy extends UserBasePolicy
-<<<<<<< HEAD
-=======
-=======
-use Modules\Xot\Contracts\UserContract;
-
-class ActivityPolicy extends ActivityBasePolicy
->>>>>>> a12f125f4a (.)
-=======
-use Modules\User\Models\Policies\UserBasePolicy;
-use Modules\Xot\Contracts\UserContract;
-
-class ActivityPolicy extends UserBasePolicy
->>>>>>> b93ef594b4 (.)
-=======
-use Modules\Xot\Contracts\UserContract;
-
-class ActivityPolicy extends ActivityBasePolicy
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
 {
     /**
      * Determine whether the user can view any models.
@@ -46,23 +21,7 @@ class ActivityPolicy extends ActivityBasePolicy
     /**
      * Determine whether the user can view the model.
      */
-<<<<<<< HEAD
     public function view(UserContract $user, Activity $_activity): bool
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function view(UserContract $user, Activity $_activity): bool
-=======
-    public function view(UserContract $user, Activity $activity): bool
->>>>>>> a12f125f4a (.)
-=======
-    public function view(UserContract $user, Activity $_activity): bool
->>>>>>> b93ef594b4 (.)
-=======
-    public function view(UserContract $user, Activity $activity): bool
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     {
         return $user->hasPermissionTo('activity.view');
     }
@@ -78,23 +37,7 @@ class ActivityPolicy extends ActivityBasePolicy
     /**
      * Determine whether the user can update the model.
      */
-<<<<<<< HEAD
     public function update(UserContract $user, Activity $_activity): bool
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function update(UserContract $user, Activity $_activity): bool
-=======
-    public function update(UserContract $user, Activity $activity): bool
->>>>>>> a12f125f4a (.)
-=======
-    public function update(UserContract $user, Activity $_activity): bool
->>>>>>> b93ef594b4 (.)
-=======
-    public function update(UserContract $user, Activity $activity): bool
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     {
         return $user->hasPermissionTo('activity.update');
     }
@@ -102,23 +45,7 @@ class ActivityPolicy extends ActivityBasePolicy
     /**
      * Determine whether the user can delete the model.
      */
-<<<<<<< HEAD
     public function delete(UserContract $user, Activity $_activity): bool
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function delete(UserContract $user, Activity $_activity): bool
-=======
-    public function delete(UserContract $user, Activity $activity): bool
->>>>>>> a12f125f4a (.)
-=======
-    public function delete(UserContract $user, Activity $_activity): bool
->>>>>>> b93ef594b4 (.)
-=======
-    public function delete(UserContract $user, Activity $activity): bool
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     {
         return $user->hasPermissionTo('activity.delete');
     }
@@ -126,23 +53,7 @@ class ActivityPolicy extends ActivityBasePolicy
     /**
      * Determine whether the user can restore the model.
      */
-<<<<<<< HEAD
     public function restore(UserContract $user, Activity $_activity): bool
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function restore(UserContract $user, Activity $_activity): bool
-=======
-    public function restore(UserContract $user, Activity $activity): bool
->>>>>>> a12f125f4a (.)
-=======
-    public function restore(UserContract $user, Activity $_activity): bool
->>>>>>> b93ef594b4 (.)
-=======
-    public function restore(UserContract $user, Activity $activity): bool
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
     {
         return $user->hasPermissionTo('activity.restore');
     }
@@ -154,20 +65,4 @@ class ActivityPolicy extends ActivityBasePolicy
     {
         return $user->hasPermissionTo('activity.forceDelete');
     }
-<<<<<<< HEAD
 }
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> a12f125f4a (.)
-=======
-}
->>>>>>> b93ef594b4 (.)
-=======
-}
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
