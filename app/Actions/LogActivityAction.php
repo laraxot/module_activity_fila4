@@ -27,9 +27,6 @@ class LogActivityAction
         public ?string $description = null,
     ) {
         Assert::stringNotEmpty($type, 'Type cannot be empty');
-        if ($user !== null) {
-            // Type already narrowed to Model|null, assertion not needed
-        }
     }
 
     public function execute(): Activity
