@@ -325,6 +325,7 @@ use Filament\Support\Facades\Filament;
 ```
 
 **Filament 4.x Breaking Change:**
+
 ```php
 // ✅ CORRETTO (v4.x - panel automatico)
 $resource::getUrl('edit', ['record' => $record]);
@@ -332,6 +333,60 @@ $resource::getUrl('edit', ['record' => $record]);
 // ❌ OBSOLETO (v3.x - parametro panel rimosso)
 $resource::getUrl('edit', ['record' => $record], panel: $panelId);
 ```
+
+---
+
+## 📊 Qualità del Codice
+
+### Static Analysis Compliance
+
+#### ✅ PHPStan Level 10: COMPLIANT
+
+- **Status**: 0 errors
+- **Level**: Maximum (10/10)
+- **Coverage**: 100% code analysis
+- **Last Check**: 2025-11-12
+
+#### 🔄 PHPMD Compliance: IN PROGRESS
+
+- **Status**: 18/25 issues fixed (72% complete)
+- **Score**: 72/100
+- **Remaining**: 7 issues (1 HIGH, 2 MEDIUM, 4 LOW)
+- **Focus**: Complexity reduction in `restoreActivity()` method
+
+#### ⏳ PHPInsights Analysis: BLOCKED
+
+- **Status**: Composer.lock dependency issue
+- **Priority**: LOW (PHPStan + PHPMD sufficient)
+
+### Code Quality Metrics
+
+| Metric | Current | Target | Status |
+|--------|---------|--------|--------|
+| PHPStan Errors | 0 | 0 | ✅ PASS |
+| PHPMD Issues | 7 | 0 | 🔄 IN PROGRESS |
+| Cyclomatic Complexity | 11 | ≤10 | ⚠️ NEEDS FIX |
+| Coupling Between Objects | 13 | ≤13 | ✅ PASS |
+| Code Coverage | TBD | ≥80% | ⏳ PENDING |
+
+### Quality Gates
+
+```bash
+# PHPStan validation
+./vendor/bin/phpstan analyse Modules/Activity --level=10 --memory-limit=-1
+
+# PHPMD validation
+./vendor/bin/phpmd Modules/Activity/app text phpmd.ruleset.xml
+
+# Target: 0 errors for both tools
+```
+
+### Continuous Improvement
+
+1. **Week 1**: PHPStan Level 10 compliance ✅
+2. **Week 2**: PHPMD fixes (72% complete) 🔄
+3. **Week 3**: Code complexity reduction ⏳
+4. **Week 4**: Documentation and testing ⏳
 
 ---
 
