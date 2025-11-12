@@ -15,6 +15,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  *
  * Represents a stored event in the activity module.
  *
+ * @use HasXotFactory<\Modules\Activity\Database\Factories\StoredEventFactory>
+ *
  * @property int $id
  * @property string|null $aggregate_uuid
  * @property int|null $aggregate_version
@@ -55,7 +57,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  */
 class StoredEvent extends SpatieStoredEvent
 {
-    use HasFactory;
+    use \Modules\Xot\Models\Traits\HasXotFactory;
 
     /** @var string */
     protected $connection = 'activity';
