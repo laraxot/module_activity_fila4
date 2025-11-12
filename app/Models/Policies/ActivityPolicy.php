@@ -6,15 +6,21 @@ namespace Modules\Activity\Models\Policies;
 
 use Modules\Activity\Models\Activity;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
 class ActivityPolicy extends UserBasePolicy
+<<<<<<< HEAD
 =======
 use Modules\Xot\Contracts\UserContract;
 
 class ActivityPolicy extends ActivityBasePolicy
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 {
     /**
      * Determine whether the user can view any models.
@@ -28,10 +34,14 @@ class ActivityPolicy extends ActivityBasePolicy
      * Determine whether the user can view the model.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function view(UserContract $user, Activity $_activity): bool
 =======
     public function view(UserContract $user, Activity $activity): bool
 >>>>>>> 0a00ff2 (.)
+=======
+    public function view(UserContract $user, Activity $_activity): bool
+>>>>>>> 18dcd64 (.)
     {
         return $user->hasPermissionTo('activity.view');
     }
@@ -48,10 +58,14 @@ class ActivityPolicy extends ActivityBasePolicy
      * Determine whether the user can update the model.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function update(UserContract $user, Activity $_activity): bool
 =======
     public function update(UserContract $user, Activity $activity): bool
 >>>>>>> 0a00ff2 (.)
+=======
+    public function update(UserContract $user, Activity $_activity): bool
+>>>>>>> 18dcd64 (.)
     {
         return $user->hasPermissionTo('activity.update');
     }
@@ -60,10 +74,14 @@ class ActivityPolicy extends ActivityBasePolicy
      * Determine whether the user can delete the model.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function delete(UserContract $user, Activity $_activity): bool
 =======
     public function delete(UserContract $user, Activity $activity): bool
 >>>>>>> 0a00ff2 (.)
+=======
+    public function delete(UserContract $user, Activity $_activity): bool
+>>>>>>> 18dcd64 (.)
     {
         return $user->hasPermissionTo('activity.delete');
     }
@@ -72,10 +90,14 @@ class ActivityPolicy extends ActivityBasePolicy
      * Determine whether the user can restore the model.
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function restore(UserContract $user, Activity $_activity): bool
 =======
     public function restore(UserContract $user, Activity $activity): bool
 >>>>>>> 0a00ff2 (.)
+=======
+    public function restore(UserContract $user, Activity $_activity): bool
+>>>>>>> 18dcd64 (.)
     {
         return $user->hasPermissionTo('activity.restore');
     }
@@ -88,7 +110,11 @@ class ActivityPolicy extends ActivityBasePolicy
         return $user->hasPermissionTo('activity.forceDelete');
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 0a00ff2 (.)
+=======
+}
+>>>>>>> 18dcd64 (.)
