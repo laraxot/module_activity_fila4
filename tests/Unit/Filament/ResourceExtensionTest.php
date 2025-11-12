@@ -111,11 +111,7 @@ test('activity resource has correct model configuration', function () {
 });
 
 test('activity resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = ActivityResource::getFormSchema();
-=======
-    $schema = ActivityResource::getFormSchema();
->>>>>>> 8a1d805 (.)
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
@@ -130,11 +126,7 @@ test('activity resource form schema returns array', function () {
 });
 
 test('snapshot resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = SnapshotResource::getFormSchema();
-=======
-    $schema = SnapshotResource::getFormSchema();
->>>>>>> 8a1d805 (.)
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
@@ -147,11 +139,7 @@ test('snapshot resource form schema returns array', function () {
 });
 
 test('stored event resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = StoredEventResource::getFormSchema();
-=======
-    $schema = StoredEventResource::getFormSchema();
->>>>>>> 8a1d805 (.)
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
