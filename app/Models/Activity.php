@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-<<<<<<< HEAD
-=======
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
->>>>>>> 97b542c (.)
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -75,21 +69,9 @@ class Activity extends SpatieActivity
 {
     use HasXotFactory;
 
-<<<<<<< HEAD
     protected $connection = 'activity';
 
         /** @var list<string> */
-=======
-    /**
-     * Create a new factory instance for the model.
-     */
-    protected static function newFactory(): ActivityFactory
-    {
-        return ActivityFactory::new();
-    }
-
-    /** @var list<string> */
->>>>>>> 97b542c (.)
     protected $fillable = [
         'id',
         'log_name',
