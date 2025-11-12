@@ -111,21 +111,12 @@ test('activity resource has correct model configuration', function () {
 });
 
 test('activity resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = ActivityResource::getFormSchema();
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
     // Verify it contains expected fields
     expect($form)->toHaveKeys([
-=======
-    $schema = ActivityResource::getFormSchema();
-
-    expect($schema)->toBeArray()->not->toBeEmpty();
-
-    // Verify it contains expected fields
-    expect($schema)->toHaveKeys([
->>>>>>> 199a372 (.)
         'log_name',
         'description',
         'subject_type',
@@ -135,21 +126,12 @@ test('activity resource form schema returns array', function () {
 });
 
 test('snapshot resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = SnapshotResource::getFormSchema();
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
     // Verify it contains expected fields
     expect($form)->toHaveKeys([
-=======
-    $schema = SnapshotResource::getFormSchema();
-
-    expect($schema)->toBeArray()->not->toBeEmpty();
-
-    // Verify it contains expected fields
-    expect($schema)->toHaveKeys([
->>>>>>> 199a372 (.)
         'model_type',
         'model_id',
         'state',
@@ -157,21 +139,12 @@ test('snapshot resource form schema returns array', function () {
 });
 
 test('stored event resource form schema returns array', function () {
-<<<<<<< HEAD
     $form = StoredEventResource::getFormSchema();
 
     expect($form)->toBeArray()->not->toBeEmpty();
 
     // Verify it contains expected fields
     expect($form)->toHaveKeys([
-=======
-    $schema = StoredEventResource::getFormSchema();
-
-    expect($schema)->toBeArray()->not->toBeEmpty();
-
-    // Verify it contains expected fields
-    expect($schema)->toHaveKeys([
->>>>>>> 199a372 (.)
         'event_class',
         'event_properties',
         'aggregate_uuid',
