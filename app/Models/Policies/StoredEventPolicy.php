@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace Modules\Activity\Models\Policies;
 
 use Modules\Activity\Models\StoredEvent;
+<<<<<<< HEAD
 use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
 class StoredEventPolicy extends UserBasePolicy
+=======
+use Modules\Xot\Contracts\UserContract;
+
+class StoredEventPolicy extends ActivityBasePolicy
+>>>>>>> 0a00ff2 (.)
 {
     /**
      * Determine whether the user can view any models.
@@ -21,7 +27,11 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can view the model.
      */
+<<<<<<< HEAD
     public function view(UserContract $user, StoredEvent $_stored_event): bool
+=======
+    public function view(UserContract $user, StoredEvent $stored_event): bool
+>>>>>>> 0a00ff2 (.)
     {
         return $user->hasPermissionTo('stored_event.view');
     }
@@ -37,7 +47,11 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can update the model.
      */
+<<<<<<< HEAD
     public function update(UserContract $user, StoredEvent $_stored_event): bool
+=======
+    public function update(UserContract $user, StoredEvent $stored_event): bool
+>>>>>>> 0a00ff2 (.)
     {
         return $user->hasPermissionTo('stored_event.update');
     }
@@ -45,7 +59,11 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can delete the model.
      */
+<<<<<<< HEAD
     public function delete(UserContract $user, StoredEvent $_stored_event): bool
+=======
+    public function delete(UserContract $user, StoredEvent $stored_event): bool
+>>>>>>> 0a00ff2 (.)
     {
         return $user->hasPermissionTo('stored_event.delete');
     }
@@ -53,7 +71,11 @@ class StoredEventPolicy extends UserBasePolicy
     /**
      * Determine whether the user can restore the model.
      */
+<<<<<<< HEAD
     public function restore(UserContract $user, StoredEvent $_stored_event): bool
+=======
+    public function restore(UserContract $user, StoredEvent $stored_event): bool
+>>>>>>> 0a00ff2 (.)
     {
         return $user->hasPermissionTo('stored_event.restore');
     }
@@ -65,4 +87,8 @@ class StoredEventPolicy extends UserBasePolicy
     {
         return $user->hasPermissionTo('stored_event.forceDelete');
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0a00ff2 (.)
