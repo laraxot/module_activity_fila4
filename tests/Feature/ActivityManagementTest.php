@@ -7,7 +7,7 @@ use Modules\User\Models\User;
 
 test('user can create activity', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $activityData = [
@@ -55,7 +55,7 @@ test('activity can be deleted', function (): void {
 
 test('activity belongs to user', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $activity = createActivity(['user_id' => $user->id]);
 

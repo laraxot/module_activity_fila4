@@ -11,7 +11,7 @@ use Modules\User\Models\User;
 
 test('activity event sourcing lifecycle works correctly', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $activityData = [
@@ -44,16 +44,16 @@ test('activity event sourcing lifecycle works correctly', function (): void {
 test('activity can be queried with complex scopes', function (): void {
     /** @var User $user1 */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user1 = User::factory()->create();
+    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user1 instanceof User);
     /** @var User $user2 */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user2 = User::factory()->create();
+    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user2 instanceof User);
 
     /** @var Activity $activity1 */
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity1 = Activity::factory()->create([
+    $activity1 = Activity/** @phpstan-ignore-line */ ::factory()->create([
         'log_name' => 'security',
         'event' => 'login',
         'causer_type' => User::class,
@@ -63,7 +63,7 @@ test('activity can be queried with complex scopes', function (): void {
 
     /** @var Activity $activity2 */
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity2 = Activity::factory()->create([
+    $activity2 = Activity/** @phpstan-ignore-line */ ::factory()->create([
         'log_name' => 'security',
         'event' => 'logout',
         'causer_type' => User::class,
@@ -73,7 +73,7 @@ test('activity can be queried with complex scopes', function (): void {
 
     /** @var Activity $activity3 */
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity3 = Activity::factory()->create([
+    $activity3 = Activity/** @phpstan-ignore-line */ ::factory()->create([
         'log_name' => 'audit',
         'event' => 'update',
         'causer_type' => User::class,
@@ -196,11 +196,11 @@ test('activity batch operations work correctly', function (): void {
 test('activity with batch scope returns correct results', function (): void {
     /** @var Activity $withBatch */
     /* @phpstan-ignore-next-line method.nonObject */
-    $withBatch = Activity::factory()->create(['batch_uuid' => Str::uuid()]);
+    $withBatch = Activity/** @phpstan-ignore-line */ ::factory()->create(['batch_uuid' => Str::uuid()]);
     assert($withBatch instanceof Activity);
     /** @var Activity $withoutBatch */
     /* @phpstan-ignore-next-line method.nonObject */
-    $withoutBatch = Activity::factory()->create(['batch_uuid' => null]);
+    $withoutBatch = Activity/** @phpstan-ignore-line */ ::factory()->create(['batch_uuid' => null]);
     assert($withoutBatch instanceof Activity);
 
     $activitiesWithBatch = Activity::hasBatch()->get();
@@ -243,7 +243,7 @@ test('activity properties support complex nested structures', function (): void 
 
     /** @var Activity $activity */
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity = Activity::factory()->create(['properties' => $complexProperties]);
+    $activity = Activity/** @phpstan-ignore-line */ ::factory()->create(['properties' => $complexProperties]);
     assert($activity instanceof Activity);
 
     $freshActivity = $activity->fresh();
@@ -295,7 +295,7 @@ test('snapshot state maintains data integrity with large datasets', function ():
 
     /** @var Snapshot $snapshot */
     /* @phpstan-ignore-next-line method.nonObject */
-    $snapshot = Snapshot::factory()->create(['state' => $largeState]);
+    $snapshot = Snapshot/** @phpstan-ignore-line */ ::factory()->create(['state' => $largeState]);
     assert($snapshot instanceof Snapshot);
 
     $freshSnapshot = $snapshot->fresh();
@@ -358,7 +358,7 @@ test('stored event handles complex event properties with nested arrays', functio
 
     /** @var StoredEvent $storedEvent */
     /* @phpstan-ignore-next-line method.nonObject */
-    $storedEvent = StoredEvent::factory()->create(['event_properties' => $complexEvent]);
+    $storedEvent = StoredEvent/** @phpstan-ignore-line */ ::factory()->create(['event_properties' => $complexEvent]);
     assert($storedEvent instanceof StoredEvent);
 
     $freshStoredEvent = $storedEvent->fresh();
