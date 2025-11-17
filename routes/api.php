@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
  * |--------------------------------------------------------------------------
  * | API Routes
  * |--------------------------------------------------------------------------
@@ -13,6 +16,7 @@ declare(strict_types=1);
  * | is assigned the "api" middleware group. Enjoy building your API!
  * |
  */
+<<<<<<< HEAD
 =======
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +28,8 @@ declare(strict_types=1);
 |
 */
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 
 // Route::middleware('auth:api')->get('/activity', function (Request $request) {//
 //    return $request->user();
