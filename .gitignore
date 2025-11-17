@@ -308,9 +308,12 @@ Homestead.json
 /.idea
 .phpintel
 .vscode/
+<<<<<<< HEAD
 *.swp
 *.swo
 *~
+=======
+>>>>>>> 4b7c568 (.)
 
 # 🔄 Git specifici
 <<<<<<< HEAD
@@ -354,6 +357,7 @@ Homestead.json
 <<<<<<< HEAD
 <<<<<<< HEAD
 Thumbs.db
+*~
 
 # 📋 Backup files
 =======
@@ -385,7 +389,7 @@ resources/views/Components_old
 .cursor/
 >>>>>>> b1cd7fc (.)
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 <<<<<<< HEAD
