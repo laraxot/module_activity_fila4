@@ -11,12 +11,12 @@ use Modules\User\Models\User;
 test('activity module models work together in integrated scenarios', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity = Activity::factory()->create([
+    $activity = Activity/** @phpstan-ignore-line */ ::factory()->create([
         'causer_type' => User::class,
         'causer_id' => $user->id,
         'subject_type' => User::class,
@@ -32,7 +32,7 @@ test('activity module models work together in integrated scenarios', function ()
 
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $snapshot = Snapshot::factory()->create([
+    $snapshot = Snapshot/** @phpstan-ignore-line */ ::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'state' => [
             'user' => $user->toArray(),
@@ -43,7 +43,7 @@ test('activity module models work together in integrated scenarios', function ()
     assert($snapshot instanceof Snapshot);
 
     /* @phpstan-ignore-next-line method.nonObject */
-    $storedEvent = StoredEvent::factory()->create([
+    $storedEvent = StoredEvent/** @phpstan-ignore-line */ ::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'event_class' => 'App\\Events\\UserProfileUpdated',
         'event_properties' => [
@@ -84,7 +84,7 @@ test('activity batch processing with multiple models', function (): void {
 
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     /* @phpstan-ignore-next-line method.nonObject */
@@ -103,7 +103,7 @@ test('activity batch processing with multiple models', function (): void {
 
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $snapshot = Snapshot::factory()->create([
+    $snapshot = Snapshot/** @phpstan-ignore-line */ ::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'state' => [
             'batch_id' => $batchUuid,
@@ -153,7 +153,7 @@ test('activity batch processing with multiple models', function (): void {
 test('activity module handles concurrent operations correctly', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $concurrentActivities = [];
@@ -165,7 +165,7 @@ test('activity module handles concurrent operations correctly', function (): voi
         $promises[] = function () use ($user, &$concurrentActivities, &$concurrentSnapshots, $i) {
             /* @phpstan-ignore-next-line method.nonObject */
             /* @phpstan-ignore-next-line method.nonObject */
-            $activity = Activity::factory()->create([
+            $activity = Activity/** @phpstan-ignore-line */ ::factory()->create([
                 'causer_type' => User::class,
                 'causer_id' => $user->id,
                 'properties' => ['iteration' => $i, 'timestamp' => now()->toISOString()],
@@ -177,7 +177,7 @@ test('activity module handles concurrent operations correctly', function (): voi
             if (($i % 2) === 0) {
                 /* @phpstan-ignore-next-line method.nonObject */
                 /* @phpstan-ignore-next-line method.nonObject */
-                $snapshot = Snapshot::factory()->create([
+                $snapshot = Snapshot/** @phpstan-ignore-line */ ::factory()->create([
                     'state' => [
                         'activity_id' => $activity->id,
                         'iteration' => $i,
@@ -210,11 +210,11 @@ test('activity module handles concurrent operations correctly', function (): voi
 test('activity module supports complex query patterns', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user1 = User::factory()->create();
+    $user1 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user1 instanceof User);
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $user2 = User::factory()->create();
+    $user2 = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user2 instanceof User);
 
     /* @phpstan-ignore-next-line method.nonObject */
@@ -286,12 +286,12 @@ test('activity module supports complex query patterns', function (): void {
 
 test('activity module handles data consistency across models', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
     $aggregateUuid = Str::uuid();
 
     /* @phpstan-ignore-next-line method.nonObject */
-    $activity = Activity::factory()->create([
+    $activity = Activity/** @phpstan-ignore-line */ ::factory()->create([
         'causer_type' => User::class,
         'causer_id' => $user->id,
         'properties' => ['action' => 'data_consistency_test'],
@@ -300,7 +300,7 @@ test('activity module handles data consistency across models', function (): void
 
     /* @phpstan-ignore-next-line method.nonObject */
     /* @phpstan-ignore-next-line method.nonObject */
-    $snapshot = Snapshot::factory()->create([
+    $snapshot = Snapshot/** @phpstan-ignore-line */ ::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'state' => [
             'activity_id' => $activity->id,
@@ -311,7 +311,7 @@ test('activity module handles data consistency across models', function (): void
     assert($snapshot instanceof Snapshot);
 
     /* @phpstan-ignore-next-line method.nonObject */
-    $storedEvent = StoredEvent::factory()->create([
+    $storedEvent = StoredEvent/** @phpstan-ignore-line */ ::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'event_properties' => [
             'activity_id' => $activity->id,
@@ -350,7 +350,7 @@ test('activity module handles data consistency across models', function (): void
 
 test('activity module supports bulk operations efficiently', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
-    $user = User::factory()->create();
+    $user = User/** @phpstan-ignore-line */ ::factory()->create();
     assert($user instanceof User);
 
     $activitiesData = [];
