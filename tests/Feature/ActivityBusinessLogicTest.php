@@ -3,12 +3,17 @@
 declare(strict_types=1);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 =======
 use Modules\Activity\Models\Activity;
 use Illuminate\Support\Str;
 >>>>>>> 0a00ff2 (.)
+=======
+use Illuminate\Support\Str;
+use Modules\Activity\Models\Activity;
+>>>>>>> 18dcd64 (.)
 
 use function Safe\json_encode;
 use function Safe\json_decode;
@@ -36,6 +41,9 @@ describe('Activity Business Logic', function (): void {
         expect($activity)
             ->toBeInstanceOf(Activity::class)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
             ->and($activity->log_name)
             ->toBe('default')
             ->and($activity->description)
@@ -46,6 +54,7 @@ describe('Activity Business Logic', function (): void {
             ->toBe(123)
             ->and($activity->event)
             ->toBe('created');
+<<<<<<< HEAD
 =======
             ->and($activity->log_name)->toBe('default')
             ->and($activity->description)->toBe('User logged in')
@@ -53,6 +62,8 @@ describe('Activity Business Logic', function (): void {
             ->and($activity->subject_id)->toBe(123)
             ->and($activity->event)->toBe('created');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     });
 
     it('can track user authentication activities', function (): void {
@@ -87,6 +98,9 @@ describe('Activity Business Logic', function (): void {
         ]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         expect($loginActivity->event)
             ->toBe('login')
             ->and($logoutActivity->event)
@@ -95,12 +109,15 @@ describe('Activity Business Logic', function (): void {
             ->toBe('auth')
             ->and($logoutActivity->log_name)
             ->toBe('auth');
+<<<<<<< HEAD
 =======
         expect($loginActivity->event)->toBe('login')
             ->and($logoutActivity->event)->toBe('logout')
             ->and($loginActivity->log_name)->toBe('auth')
             ->and($logoutActivity->log_name)->toBe('auth');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     });
 
     it('can track model crud activities', function (): void {
@@ -142,6 +159,9 @@ describe('Activity Business Logic', function (): void {
         ]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         expect($createActivity->event)
             ->toBe('created')
             ->and($updateActivity->event)
@@ -150,12 +170,15 @@ describe('Activity Business Logic', function (): void {
             ->toBe(789)
             ->and($updateActivity->subject_id)
             ->toBe(789);
+<<<<<<< HEAD
 =======
         expect($createActivity->event)->toBe('created')
             ->and($updateActivity->event)->toBe('updated')
             ->and($createActivity->subject_id)->toBe(789)
             ->and($updateActivity->subject_id)->toBe(789);
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     });
 
     it('can use batch uuid for grouping activities', function (): void {
@@ -186,11 +209,15 @@ describe('Activity Business Logic', function (): void {
         ]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
 =======
         expect($activity1->batch_uuid)->toBe($batchUuid)
             ->and($activity2->batch_uuid)->toBe($batchUuid);
 >>>>>>> 0a00ff2 (.)
+=======
+        expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
+>>>>>>> 18dcd64 (.)
 
         $batchActivities = Activity::where('batch_uuid', $batchUuid)->get();
         expect($batchActivities)->toHaveCount(2);
@@ -223,6 +250,9 @@ describe('Activity Business Logic', function (): void {
         $modelActivities = Activity::where('log_name', 'models')->get();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         expect($authActivities)
             ->toHaveCount(1)
             ->and($modelActivities)
@@ -233,12 +263,15 @@ describe('Activity Business Logic', function (): void {
             /** @phpstan-ignore-next-line method.nonObject */
             ->and($modelActivities->first()->log_name)
             ->toBe('models');
+<<<<<<< HEAD
 =======
         expect($authActivities)->toHaveCount(1)
             ->and($modelActivities)->toHaveCount(1)
             ->and($authActivities->first()->log_name)->toBe('auth')
             ->and($modelActivities->first()->log_name)->toBe('models');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     });
 
     it('can handle activity with complex properties', function (): void {
@@ -267,6 +300,9 @@ describe('Activity Business Logic', function (): void {
         ]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
         expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
 
         /** @phpstan-ignore-next-line argument.type */
@@ -277,6 +313,7 @@ describe('Activity Business Logic', function (): void {
             /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
             ->and($properties['customer_info']['name'])
             ->toBe('Jane Smith');
+<<<<<<< HEAD
 =======
         expect($complexActivity->event)->toBe('order_placed')
             ->and($complexActivity->log_name)->toBe('complex');
@@ -285,5 +322,7 @@ describe('Activity Business Logic', function (): void {
         expect($properties['order_details']['total_amount'])->toBe(67.48)
             ->and($properties['customer_info']['name'])->toBe('Jane Smith');
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     });
 });
