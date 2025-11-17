@@ -354,10 +354,6 @@ Homestead.json
 <<<<<<< HEAD
 <<<<<<< HEAD
 Thumbs.db
-<<<<<<< HEAD
-*~
-=======
->>>>>>> 199a372 (.)
 
 # 📋 Backup files
 =======
@@ -389,11 +385,7 @@ resources/views/Components_old
 .cursor/
 >>>>>>> b1cd7fc (.)
 
-<<<<<<< HEAD
-# File specifici del progetto
-=======
 # 🚫 File specifici del progetto
->>>>>>> 199a372 (.)
 *.fila2
 laravel
 <<<<<<< HEAD
