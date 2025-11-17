@@ -6,25 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\BaseSnapshot;
 use Modules\Activity\Models\Snapshot;
 
-<<<<<<< HEAD
-use function Safe\class_uses;
-
-describe('Snapshot Business Logic', function (): void {
-    test('snapshot has correct connection configured', function (): void {
-=======
 describe('Snapshot Business Logic', function () {
     test('snapshot has correct connection configured', function () {
->>>>>>> 9baa519 (.)
         $snapshot = new Snapshot;
 
         expect($snapshot->getConnectionName())->toBe('activity');
     });
 
-<<<<<<< HEAD
-    test('snapshot has expected fillable fields for event sourcing', function (): void {
-=======
     test('snapshot has expected fillable fields for event sourcing', function () {
->>>>>>> 9baa519 (.)
         $snapshot = new Snapshot;
         $expectedFillable = [
             'id',
@@ -38,10 +27,21 @@ describe('Snapshot Business Logic', function () {
         expect($snapshot->getFillable())->toEqual($expectedFillable);
     });
 
-    test('snapshot has factory trait for testing', function (): void {
+    test('snapshot extends base snapshot', function () {
+        expect(is_subclass_of(Snapshot::class, BaseSnapshot::class))->toBeTrue();
+    });
+
+    test('snapshot has factory trait for testing', function () {
         $traits = class_uses(Snapshot::class);
 
         expect($traits)->toHaveKey(HasFactory::class);
     });
 
+    test('snapshot has uuid scope method', function () {
+        expect(method_exists(Snapshot::class, 'scopeUuid'))->toBeTrue();
+    });
+
+    test('snapshot can query by aggregate version', function () {
+        expect(method_exists(Snapshot::class, 'whereAggregateVersion'))->toBeTrue();
+    });
 });
