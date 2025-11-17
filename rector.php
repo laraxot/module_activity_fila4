@@ -10,6 +10,7 @@ use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictScalarReturnEx
 use RectorLaravel\Set\LaravelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
+<<<<<<< HEAD
     $rectorConfig->paths([
         __DIR__,
     ]);
@@ -18,10 +19,25 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/vendor',
         __DIR__.'/docs',
     ]);
+=======
+    $rectorConfig->paths(
+        [
+            __DIR__,
+        ]
+    );
+
+    $rectorConfig->skip(
+        [
+            __DIR__.'/vendor',
+            __DIR__.'/docs',
+        ]
+    );
+>>>>>>> 0a00ff2 (.)
 
     // register a single rule
     // $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
     // $rectorConfig->rule(RedirectRouteToToRouteHelperRector::class);
+<<<<<<< HEAD
     $rectorConfig->rules([
         ReturnTypeFromStrictNativeCallRector::class,
         ReturnTypeFromStrictScalarReturnExprRector::class,
@@ -41,6 +57,32 @@ return static function (RectorConfig $rectorConfig): void {
         // SetList::EARLY_RETURN,
         // SetList::INSTANCEOF,
     ]);
+=======
+    $rectorConfig->rules(
+        [
+            ReturnTypeFromStrictNativeCallRector::class,
+            ReturnTypeFromStrictScalarReturnExprRector::class,
+        ]
+    );
+
+    // define sets of rules
+    $rectorConfig->sets(
+        [
+            PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
+            // SetList::DEAD_CODE,
+            // SetList::CODE_QUALITY,
+            LevelSetList::UP_TO_PHP_81,
+            LaravelSetList::LARAVEL_100,
+
+            // SetList::NAMING, //problemi con injuction
+            // SetList::TYPE_DECLARATION,
+            // SetList::CODING_STYLE,
+            // SetList::PRIVATIZATION,//problemi con final
+            // SetList::EARLY_RETURN,
+            // SetList::INSTANCEOF,
+        ]
+    );
+>>>>>>> 0a00ff2 (.)
 
     $rectorConfig->importNames();
 };
