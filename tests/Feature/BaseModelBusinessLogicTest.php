@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Traits\Updater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,16 +13,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
 use Tests\TestCase;
-<<<<<<< HEAD
-=======
-use Modules\Activity\Models\BaseModel;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 
 class BaseModelBusinessLogicTest extends TestCase
 {
@@ -38,29 +24,13 @@ class BaseModelBusinessLogicTest extends TestCase
         // Creiamo una classe concreta che estende BaseModel per i test
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name', 'value'];
         };
 
         $this->assertInstanceOf(BaseModel::class, $concreteModel);
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->assertInstanceOf(Model::class, $concreteModel);
-=======
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Model::class, $concreteModel);
->>>>>>> 0a00ff2 (.)
-=======
-        $this->assertInstanceOf(Model::class, $concreteModel);
->>>>>>> 18dcd64 (.)
     }
 
     /** @test */
@@ -124,10 +94,6 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $casts = $concreteModel->getCasts();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 
         $this->assertArrayHasKey('id', $casts);
         $this->assertEquals('string', $casts['id']);
@@ -153,36 +119,6 @@ class BaseModelBusinessLogicTest extends TestCase
         $this->assertArrayHasKey('deleted_by', $casts);
         $this->assertEquals('string', $casts['deleted_by']);
 
-<<<<<<< HEAD
-=======
-        
-        $this->assertArrayHasKey('id', $casts);
-        $this->assertEquals('string', $casts['id']);
-        
-        $this->assertArrayHasKey('uuid', $casts);
-        $this->assertEquals('string', $casts['uuid']);
-        
-        $this->assertArrayHasKey('created_at', $casts);
-        $this->assertEquals('datetime', $casts['created_at']);
-        
-        $this->assertArrayHasKey('updated_at', $casts);
-        $this->assertEquals('datetime', $casts['updated_at']);
-        
-        $this->assertArrayHasKey('deleted_at', $casts);
-        $this->assertEquals('datetime', $casts['deleted_at']);
-        
-        $this->assertArrayHasKey('updated_by', $casts);
-        $this->assertEquals('string', $casts['updated_by']);
-        
-        $this->assertArrayHasKey('created_by', $casts);
-        $this->assertEquals('string', $casts['created_by']);
-        
-        $this->assertArrayHasKey('deleted_by', $casts);
-        $this->assertEquals('string', $casts['deleted_by']);
-        
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
         $this->assertArrayHasKey('published_at', $casts);
         $this->assertEquals('datetime', $casts['published_at']);
     }
@@ -192,15 +128,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name', 'value'];
         };
@@ -217,15 +145,7 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $traits = class_uses($concreteModel);
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->assertContains(Updater::class, $traits);
-=======
-        $this->assertContains(\Modules\Xot\Traits\Updater::class, $traits);
->>>>>>> 0a00ff2 (.)
-=======
-        $this->assertContains(Updater::class, $traits);
->>>>>>> 18dcd64 (.)
     }
 
     /** @test */
@@ -236,15 +156,7 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $traits = class_uses($concreteModel);
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->assertContains(HasFactory::class, $traits);
-=======
-        $this->assertContains(\Illuminate\Database\Eloquent\Factories\HasFactory::class, $traits);
->>>>>>> 0a00ff2 (.)
-=======
-        $this->assertContains(HasFactory::class, $traits);
->>>>>>> 18dcd64 (.)
     }
 
     /** @test */
@@ -252,15 +164,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['uuid', 'name'];
         };
@@ -278,15 +182,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name'];
         };
@@ -304,15 +200,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name'];
         };
@@ -328,15 +216,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name'];
         };
@@ -352,15 +232,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name'];
         };
@@ -382,15 +254,7 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $hidden = $concreteModel->getHidden();
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Verifica che gli attributi nascosti siano configurati correttamente
         $this->assertIsArray($hidden);
         // Nota: il BaseModel ha un array vuoto per $hidden, quindi non dovrebbe contenere 'password'
@@ -405,15 +269,7 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $this->assertEquals('activity', $concreteModel->getConnectionName());
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->assertInstanceOf(ConnectionInterface::class, $concreteModel->getConnection());
-=======
-        $this->assertInstanceOf(\Illuminate\Database\ConnectionInterface::class, $concreteModel->getConnection());
->>>>>>> 0a00ff2 (.)
-=======
-        $this->assertInstanceOf(ConnectionInterface::class, $concreteModel->getConnection());
->>>>>>> 18dcd64 (.)
     }
 
     /** @test */
@@ -447,15 +303,7 @@ class BaseModelBusinessLogicTest extends TestCase
 
         $this->assertTrue($concreteModel->usesTimestamps());
         $this->assertTrue($concreteModel->timestamps);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         $this->assertEquals('created_at', $concreteModel->getCreatedAtColumn());
         $this->assertEquals('updated_at', $concreteModel->getUpdatedAtColumn());
     }
@@ -468,15 +316,7 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $this->assertEquals(30, $concreteModel->getPerPage());
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Test setPerPage
         $concreteModel->setPerPage(50);
         $this->assertEquals(50, $concreteModel->getPerPage());
@@ -490,25 +330,11 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $this->assertTrue($concreteModel::$snakeAttributes);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 
         // Test setSnakeAttributes
         $concreteModel::$snakeAttributes = false;
         $this->assertFalse($concreteModel::$snakeAttributes);
 
-<<<<<<< HEAD
-=======
-        
-        // Test setSnakeAttributes
-        $concreteModel::$snakeAttributes = false;
-        $this->assertFalse($concreteModel::$snakeAttributes);
-        
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
         // Ripristina il valore originale
         $concreteModel::$snakeAttributes = true;
         $this->assertTrue($concreteModel::$snakeAttributes);
@@ -526,15 +352,7 @@ class BaseModelBusinessLogicTest extends TestCase
         $this->assertArrayHasKey('id', $casts);
         $this->assertArrayHasKey('created_at', $casts);
         $this->assertArrayHasKey('updated_at', $casts);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Test setCasts
         $newCasts = ['test_field' => 'string'];
         $concreteModel->setCasts($newCasts);
@@ -546,15 +364,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $fillable = ['name', 'value'];
         };
@@ -563,15 +373,7 @@ class BaseModelBusinessLogicTest extends TestCase
         $this->assertIsArray($fillable);
         $this->assertContains('name', $fillable);
         $this->assertContains('value', $fillable);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Test setFillable
         $newFillable = ['new_field'];
         $concreteModel->setFillable($newFillable);
@@ -583,15 +385,7 @@ class BaseModelBusinessLogicTest extends TestCase
     {
         $concreteModel = new class extends BaseModel {
             protected $table = 'test_models';
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
             /** @var list<string> */
             protected $hidden = ['secret_field'];
         };
@@ -599,15 +393,7 @@ class BaseModelBusinessLogicTest extends TestCase
         $hidden = $concreteModel->getHidden();
         $this->assertIsArray($hidden);
         $this->assertContains('secret_field', $hidden);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 0a00ff2 (.)
-=======
-
->>>>>>> 18dcd64 (.)
         // Test setHidden
         $newHidden = ['new_secret'];
         $concreteModel->setHidden($newHidden);
