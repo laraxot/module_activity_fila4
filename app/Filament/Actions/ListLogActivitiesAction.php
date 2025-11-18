@@ -34,17 +34,6 @@ use Modules\Xot\Filament\Actions\XotBaseAction;
 class ListLogActivitiesAction extends XotBaseAction
 {
     /**
-     * Nome di default dell'action.
-     *
-     * Questo nome viene utilizzato come chiave nell'array delle actions
-     * e per la generazione automatica delle traduzioni tramite LangServiceProvider.
-     */
-    public static function getDefaultName(): ?string
-    {
-        return 'list_log_activities';
-    }
-
-    /**
      * Configura l'action.
      *
      * Override del metodo setUp() per configurare tutte le proprietà
@@ -66,5 +55,16 @@ class ListLogActivitiesAction extends XotBaseAction
 
                 return $resource::getUrl('log-activity', ['record' => $record]);
             });
+    }
+
+    /**
+     * Nome di default dell'action.
+     *
+     * Questo nome viene utilizzato come chiave nell'array delle actions
+     * e per la generazione automatica delle traduzioni tramite LangServiceProvider.
+     */
+    public static function getDefaultName(): ?string
+    {
+        return 'list_log_activities';
     }
 }

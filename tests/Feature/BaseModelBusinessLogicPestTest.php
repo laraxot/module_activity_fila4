@@ -7,45 +7,11 @@ namespace Modules\Activity\Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
+use Modules\Activity\Tests\Feature\TestActivityModel;
 use Modules\Xot\Traits\Updater;
 use Tests\TestCase;
 
 use function Safe\class_uses;
-
-/**
- * Test model for BaseModel business logic testing.
- *
- * @property string $id
- * @property string $uuid
- * @property string $name
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $published_at
- * @property string|null $created_by
- * @property string|null $updated_by
- * @property string|null $deleted_by
- */
-class TestActivityModel extends BaseModel
-{
-    /** @var string */
-    protected $connection = 'activity';
-
-    /** @var string */
-    protected $table = 'test_models';
-
-    /** @var string */
-    protected $keyType = 'string';
-
-    /** @var bool */
-    public $incrementing = true;
-
-    /** @var int */
-    protected $perPage = 30;
-
-    /** @var bool */
-    public static $snakeAttributes = true;
-}
 
 uses(TestCase::class, RefreshDatabase::class);
 

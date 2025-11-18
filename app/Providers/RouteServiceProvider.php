@@ -13,6 +13,8 @@ use Modules\Xot\Providers\XotBaseRouteServiceProvider;
  */
 class RouteServiceProvider extends XotBaseRouteServiceProvider
 {
+    public string $name = 'Activity';
+
     /**
      * The module namespace to assume when generating URLs to actions.
      */
@@ -21,6 +23,4 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
     protected string $moduleDir = __DIR__;
 
     protected string $moduleNs = __NAMESPACE__;
-
-    public string $name = 'Activity';
 }

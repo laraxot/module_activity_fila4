@@ -21,7 +21,6 @@ class LogActivityAction
 
     public function __construct(
         public string $type,
-        /** @var \Illuminate\Database\Eloquent\Model|null $user */
         public ?Model $user = null,
         public ?Model $subject = null,
         public ?array $properties = null,
@@ -47,7 +46,7 @@ class LogActivityAction
             $causerId = auth()->id();
         }
 
-        $activity = Activity::create([
+        return Activity::create([
             'log_name' => $this->type,
             'description' => $this->description ?? sprintf('Activity: %s', $this->type),
             'subject_type' => $this->subject ? get_class($this->subject) : null,
@@ -57,7 +56,5 @@ class LogActivityAction
             'properties' => $this->properties,
             'event' => $this->type,
         ]);
-
-        return $activity;
     }
 }

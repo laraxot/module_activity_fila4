@@ -127,53 +127,6 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         return $fieldLabel;
     }
 
-    protected function createFieldLabelMap(): Collection
-    {
-        $schema = static::getResource()::form(new Schema($this));
-
-        // PHPStan Level 10: Type safety for schema components
-        \Webmozart\Assert\Assert::isInstanceOf(
-            $schema,
-            Schema::class,
-            'Form must return a Schema instance'
-        );
-
-        $componentsArray = $schema->getComponents();
-
-        // componentsArray is always an array from getComponents()
-        $components = collect($componentsArray);
-        $extracted = collect();
-
-        while (($component = $components->shift()) !== null) {
-            if ($component instanceof Field || $component instanceof MorphToSelect) {
-                $extracted->push($component);
-
-                continue;
-            }
-
-            // PHPStan Level 10: Type-safe child components
-            if (method_exists($component, 'getChildComponents')) {
-                $children = $component->getChildComponents();
-
-                if (\is_array($children) && count($children) > 0) {
-                    /** @var array<int|string, \Filament\Schemas\Components\Component> $safeChildren */
-                    $safeChildren = $children;
-                    $components = $components->merge($safeChildren);
-
-                    continue;
-                }
-            }
-
-            $extracted->push($component);
-        }
-
-        return $extracted
-            ->filter(fn ($field) => $field instanceof Field)
-            ->mapWithKeys(fn (Field $field) => [
-                $field->getName() => $field->getLabel(),
-            ]);
-    }
-
     public function canRestoreActivity(): bool
     {
         $resource = static::getResource();
@@ -238,6 +191,53 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         } catch (\Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
+    }
+
+    protected function createFieldLabelMap(): Collection
+    {
+        $schema = static::getResource()::form(new Schema($this));
+
+        // PHPStan Level 10: Type safety for schema components
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $schema,
+            Schema::class,
+            'Form must return a Schema instance'
+        );
+
+        $componentsArray = $schema->getComponents();
+
+        // componentsArray is always an array from getComponents()
+        $components = collect($componentsArray);
+        $extracted = collect();
+
+        while (($component = $components->shift()) !== null) {
+            if ($component instanceof Field || $component instanceof MorphToSelect) {
+                $extracted->push($component);
+
+                continue;
+            }
+
+            // PHPStan Level 10: Type-safe child components
+            if (method_exists($component, 'getChildComponents')) {
+                $children = $component->getChildComponents();
+
+                if (\is_array($children) && count($children) > 0) {
+                    /** @var array<int|string, \Filament\Schemas\Components\Component> $safeChildren */
+                    $safeChildren = $children;
+                    $components = $components->merge($safeChildren);
+
+                    continue;
+                }
+            }
+
+            $extracted->push($component);
+        }
+
+        return $extracted
+            ->filter(fn ($field) => $field instanceof Field)
+            ->mapWithKeys(fn (Field $field) => [
+                $field->getName() => $field->getLabel(),
+            ]);
     }
 
     protected function sendRestoreSuccessNotification(): Notification

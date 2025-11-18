@@ -46,7 +46,7 @@ class ActivityLogger
         $activity = Activity::create([
             'type' => $type,
             'user_id' => $userId,
-            'subject_type' => $subject ? get_class($subject) : null,
+            'subject_type' => $subject ? $subject::class : null,
             'subject_id' => $subject?->getKey(),
             'properties' => $properties,
             'description' => $description,
@@ -145,7 +145,7 @@ class ActivityLogger
     public function getModelActivities(Model $model, int $limit = 50): Collection
     {
         return Activity::with('causer')
-            ->where('subject_type', get_class($model))
+            ->where('subject_type', $model::class)
             ->where('subject_id', $model->getKey())
             ->latest()
             ->limit($limit)

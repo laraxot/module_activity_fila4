@@ -28,41 +28,6 @@ trait CanPaginate
         $this->resetLivewirePage();
     }
 
-    /**
-     * PHPStan Level 10: Include LengthAwarePaginator in return type.
-     */
-    protected function paginateQuery(Builder $query): Paginator|CursorPaginator|LengthAwarePaginator
-    {
-        $perPage = $this->getRecordsPerPage();
-
-        $mode = $this->getPaginationMode();
-
-        if (PaginationMode::Simple === $mode) {
-            return $query->simplePaginate(
-                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : (int)$perPage,
-                pageName: $this->getPaginationPageName(),
-            );
-        }
-
-        if (PaginationMode::Cursor === $mode) {
-            return $query->cursorPaginate(
-                perPage: ('all' === $perPage) ? $query->toBase()->getCountForPagination() : (int)$perPage,
-                cursorName: $this->getPaginationPageName(),
-            );
-        }
-
-        $total = $query->toBase()->getCountForPagination();
-
-        /** @var LengthAwarePaginator $records */
-        $records = $query->paginate(
-            perPage: ('all' === $perPage) ? $total : (int)$perPage,
-            pageName: $this->getPaginationPageName(),
-            total: $total,
-        );
-
-        return $records->onEachSide(0);
-    }
-
     public function getRecordsPerPage(): int|string|null
     {
         return $this->recordsPerPage;
@@ -70,7 +35,7 @@ trait CanPaginate
 
     public function getTablePage(): int
     {
-        return (int)$this->getPage($this->getPaginationPageName());
+        return (int) $this->getPage($this->getPaginationPageName());
     }
 
     public function getDefaultRecordsPerPageSelectOption(): int|string
@@ -83,12 +48,12 @@ trait CanPaginate
         $pageOptions = $this->getRecordsPerPageSelectOptions();
 
         if (is_array($pageOptions) && in_array($option, $pageOptions)) {
-            return (int)$option;
+            return (int) $option;
         }
 
         session()->remove($this->getPerPageSessionKey());
 
-        return (int)($pageOptions[0] ?? 10);
+        return (int) ($pageOptions[0] ?? 10);
     }
 
     public function getPaginationPageName(): string
@@ -101,6 +66,41 @@ trait CanPaginate
         $name = md5($this::class);
 
         return "pages.{$name}_per_page";
+    }
+
+    /**
+     * PHPStan Level 10: Include LengthAwarePaginator in return type.
+     */
+    protected function paginateQuery(Builder $query): Paginator|CursorPaginator|LengthAwarePaginator
+    {
+        $perPage = $this->getRecordsPerPage();
+
+        $mode = $this->getPaginationMode();
+
+        if ($mode === PaginationMode::Simple) {
+            return $query->simplePaginate(
+                perPage: $perPage === 'all' ? $query->toBase()->getCountForPagination() : (int) $perPage,
+                pageName: $this->getPaginationPageName(),
+            );
+        }
+
+        if ($mode === PaginationMode::Cursor) {
+            return $query->cursorPaginate(
+                perPage: $perPage === 'all' ? $query->toBase()->getCountForPagination() : (int) $perPage,
+                cursorName: $this->getPaginationPageName(),
+            );
+        }
+
+        $total = $query->toBase()->getCountForPagination();
+
+        /** @var LengthAwarePaginator $records */
+        $records = $query->paginate(
+            perPage: $perPage === 'all' ? $total : (int) $perPage,
+            pageName: $this->getPaginationPageName(),
+            total: $total,
+        );
+
+        return $records->onEachSide(0);
     }
 
     /**

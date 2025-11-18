@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Modules\Xot\Models\Traits\HasXotFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Activity\Database\Factories\ActivityFactory;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
  * Class Activity.
- * 
+ *
  * This class extends the BaseActivity model to represent activities in the application.
  *
  * @property int $id
@@ -37,6 +34,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property-read \Illuminate\Database\Eloquent\Model|null $causer
  * @property-read Collection $changes
  * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ *
  * @method static Builder<static>|Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static \Modules\Activity\Database\Factories\ActivityFactory factory($count = null, $state = [])
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
@@ -63,6 +61,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity whereSubjectType($value)
  * @method static Builder<static>|Activity whereUpdatedAt($value)
  * @method static Builder<static>|Activity whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
@@ -71,7 +70,7 @@ class Activity extends SpatieActivity
 
     protected $connection = 'activity';
 
-        /** @var list<string> */
+    /** @var list<string> */
     protected $fillable = [
         'id',
         'log_name',

@@ -30,10 +30,10 @@ class LogUserLogoutAction
         // Cast user to Model for type safety
         $userClass = XotData::make()->getUserClass();
         Assert::isInstanceOf($this->user, $userClass);
-        
+
         /** @var \Illuminate\Database\Eloquent\Model&\Modules\Xot\Contracts\UserContract $userModel */
         $userModel = $this->user;
-        
+
         $action = new LogActivityAction(
             type: 'logout',
             user: $this->user,
@@ -44,4 +44,3 @@ class LogUserLogoutAction
         return $action->execute();
     }
 }
-

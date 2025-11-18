@@ -124,7 +124,7 @@ class ActivityMassSeeder extends Seeder
             \Illuminate\Database\Eloquent\Factories\Factory::class,
             'Factory after count() must be a Factory instance'
         );
-        
+
         $events = $countedFactory->create([
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
         ]);

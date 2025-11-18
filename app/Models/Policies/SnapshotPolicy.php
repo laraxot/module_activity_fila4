@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models\Policies;
 
-use Modules\Activity\Models\Snapshot;
 use Modules\User\Models\Policies\UserBasePolicy;
 use Modules\Xot\Contracts\UserContract;
 
