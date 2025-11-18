@@ -15,8 +15,6 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  *
  * Represents a stored event in the activity module.
  *
- * @use HasXotFactory<\Modules\Activity\Database\Factories\StoredEventFactory>
- *
  * @property int $id
  * @property string|null $aggregate_uuid
  * @property int|null $aggregate_version
