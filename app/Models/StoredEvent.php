@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+use Modules\Xot\Models\Traits\HasXotFactory;
+use Spatie\SchemalessAttributes\SchemalessAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder;
-use Spatie\SchemalessAttributes\SchemalessAttributes;
+use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 
 /**
  * Class StoredEvent.
@@ -55,7 +56,7 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
  */
 class StoredEvent extends SpatieStoredEvent
 {
-    use \Modules\Xot\Models\Traits\HasXotFactory;
+    use HasXotFactory;
 
     /** @var string */
     protected $connection = 'activity';
