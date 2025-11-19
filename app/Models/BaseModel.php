@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class BaseModel.
  *
- * @template TFactory of \Illuminate\Database\Eloquent\Factories\Factory
  */
 abstract class BaseModel extends Model
 {
