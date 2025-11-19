@@ -14,6 +14,7 @@
 - Resolved all syntax errors caused by unresolved git merge conflict markers
 - Fixed all PHPStan compliance issues
 - Verified module functionality after fixes
+- **2025-11-18**: ripulito `database/factories/BaseActivityFactory.php` eliminando i marker `<<<<<<<`/`>>>>>>>` rimasti da un merge. Il factory ora estende correttamente `Activity::class`, ristabilendo la parsabilità del modulo e permettendo a PHPStan di completare l’analisi.
 
 ## Verification
 - `./vendor/bin/phpstan analyse Modules/Activity` returns [OK] No errors
