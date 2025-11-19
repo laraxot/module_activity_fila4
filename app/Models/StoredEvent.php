@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 use Modules\Xot\Models\Traits\HasXotFactory;
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +27,7 @@ use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStored
  * @property string $created_at
  * @property string|null $updated_by
  * @property string|null $created_by
- * @property-read \Spatie\EventSourcing\StoredEvents\ShouldBeStored|null $event
+ * @property-read ShouldBeStored|null $event
  *
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent afterVersion(int $version)
  * @method static EloquentStoredEventCollection<static> all($columns = ['*'])
@@ -50,7 +51,7 @@ use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStored
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIs(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIsNot(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
- * @method static \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
+ * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
  *
  * @mixin \Eloquent
  */

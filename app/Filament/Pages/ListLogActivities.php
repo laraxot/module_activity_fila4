@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Pages;
 
+use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Webmozart\Assert\Assert;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Builder;
+use Exception;
+use Modules\Activity\Models\Activity;
+use Filament\Schemas\Components\Component;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Contracts\HasForms;
@@ -30,7 +40,7 @@ use Modules\Xot\Filament\Resources\Pages\XotBasePage;
  */
 abstract class ListLogActivities extends XotBasePage implements HasForms
 {
-    use Concerns\CanPaginate;
+    use CanPaginate;
     use InteractsWithFormActions;
     use InteractsWithRecord;
     use WithPagination {
@@ -56,32 +66,32 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
     {
         // PHPStan Level 10: Convert Htmlable to string
         $recordTitle = $this->getRecordTitle();
-        $titleString = $recordTitle instanceof \Illuminate\Contracts\Support\Htmlable
+        $titleString = $recordTitle instanceof Htmlable
             ? $recordTitle->toHtml()
             : (string) $recordTitle;
 
         return __('activity::activities.title', ['record' => $titleString]);
     }
 
-    public function getActivities(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function getActivities(): LengthAwarePaginator
     {
         // PHPStan Level 10: Type safety for Eloquent relations
         $record = $this->record;
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $record,
-            \Illuminate\Database\Eloquent\Model::class,
+            Model::class,
             'Record must be an Eloquent Model'
         );
 
-        \Webmozart\Assert\Assert::true(
+        Assert::true(
             method_exists($record, 'activities'),
             'Record must have activities relationship'
         );
 
         $relation = $record->activities();
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $relation,
-            \Illuminate\Database\Eloquent\Relations\Relation::class,
+            Relation::class,
             'activities() must return a Relation'
         );
 
@@ -90,18 +100,18 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             ->latest()
             ->getQuery();
 
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $builderQuery,
-            \Illuminate\Database\Eloquent\Builder::class,
+            Builder::class,
             'Query must be an Eloquent Builder'
         );
 
-        /** @var \Illuminate\Database\Eloquent\Builder<\Modules\Activity\Models\Activity> $builderQuery */
+        /** @var Builder<Activity> $builderQuery */
         $paginated = $this->paginateQuery($builderQuery);
 
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $paginated,
-            \Illuminate\Contracts\Pagination\LengthAwarePaginator::class,
+            LengthAwarePaginator::class,
             'paginateQuery() with PaginationMode::Default must return LengthAwarePaginator'
         );
 
@@ -188,7 +198,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             $record->update($safeProperties);
 
             $this->sendRestoreSuccessNotification();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
     }
@@ -198,7 +208,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         $schema = static::getResource()::form(new Schema($this));
 
         // PHPStan Level 10: Type safety for schema components
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $schema,
             Schema::class,
             'Form must return a Schema instance'
@@ -222,7 +232,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
                 $children = $component->getChildComponents();
 
                 if (\is_array($children) && count($children) > 0) {
-                    /** @var array<int|string, \Filament\Schemas\Components\Component> $safeChildren */
+                    /** @var array<int|string, Component> $safeChildren */
                     $safeChildren = $children;
                     $components = $components->merge($safeChildren);
 

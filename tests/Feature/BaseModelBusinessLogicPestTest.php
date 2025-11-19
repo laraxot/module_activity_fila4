@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
@@ -26,7 +29,7 @@ test('can create base model instance', function (): void {
     expect($this->model)->toBeInstanceOf(BaseModel::class);
     /* @phpstan-ignore-next-line property.notFound */
     /* @phpstan-ignore-next-line property.notFound */
-    expect($this->model)->toBeInstanceOf(\Illuminate\Database\Eloquent\Model::class);
+    expect($this->model)->toBeInstanceOf(Model::class);
 });
 
 test('has correct connection setting', function (): void {
@@ -120,7 +123,7 @@ test('has has factory trait', function (): void {
     /** @phpstan-ignore-next-line property.notFound */
     $model = $this->model;
     $traits = class_uses($model);
-    expect($traits)->toContain(\Illuminate\Database\Eloquent\Factories\HasFactory::class);
+    expect($traits)->toContain(HasFactory::class);
 });
 
 test('can handle uuid generation', function (): void {
@@ -216,7 +219,7 @@ test('has timestamps enabled', function (): void {
 test('can get connection', function (): void {
     /** @phpstan-ignore-next-line property.notFound */
     $connection = $this->model->getConnection();
-    expect($connection)->toBeInstanceOf(\Illuminate\Database\ConnectionInterface::class);
+    expect($connection)->toBeInstanceOf(ConnectionInterface::class);
     /* @phpstan-ignore-next-line property.notFound */
     expect($this->model->getConnectionName())->toBe('activity');
 });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Actions;
 
+use Modules\Xot\Datas\XotData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -34,8 +35,8 @@ class ActivityLogger
         $userId = null;
         if ($user !== null) {
             // Use XotData to get the user class for type checking
-            $userClass = \Modules\Xot\Datas\XotData::make()->getUserClass();
-            \Webmozart\Assert\Assert::isInstanceOf($user, $userClass);
+            $userClass = XotData::make()->getUserClass();
+            Assert::isInstanceOf($user, $userClass);
 
             // Type narrowing for user ID - use getAttribute for Eloquent models
             $userId = $user->getAttribute('id');

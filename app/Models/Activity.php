@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Modules\Activity\Database\Factories\ActivityFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -22,7 +24,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property int|null $subject_id
  * @property string|null $causer_type
  * @property string|null $causer_id
- * @property \Illuminate\Support\Collection<array-key, mixed>|null $properties
+ * @property Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
  * @property string|null $event
  * @property Carbon|null $created_at
@@ -31,15 +33,15 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property string|null $created_by
  * @property string|null $deleted_at
  * @property string|null $deleted_by
- * @property-read \Illuminate\Database\Eloquent\Model|null $causer
+ * @property-read Model|null $causer
  * @property-read Collection $changes
- * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ * @property-read Model|null $subject
  *
- * @method static Builder<static>|Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
- * @method static \Modules\Activity\Database\Factories\ActivityFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Activity causedBy(Model $causer)
+ * @method static ActivityFactory factory($count = null, $state = [])
  * @method static Builder<static>|Activity forBatch(string $batchUuid)
  * @method static Builder<static>|Activity forEvent(string $event)
- * @method static Builder<static>|Activity forSubject(\Illuminate\Database\Eloquent\Model $subject)
+ * @method static Builder<static>|Activity forSubject(Model $subject)
  * @method static Builder<static>|Activity hasBatch()
  * @method static Builder<static>|Activity inLog(...$logNames)
  * @method static Builder<static>|Activity newModelQuery()

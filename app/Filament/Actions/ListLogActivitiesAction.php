@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Actions;
 
+use Filament\Resources\Resource;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Filament\Actions\XotBaseAction;
@@ -50,7 +51,7 @@ class ListLogActivitiesAction extends XotBaseAction
         $this->icon('heroicon-o-clock')
             ->color('gray')
             ->url(function (ListRecords $livewire, Model $record): string {
-                /** @var class-string<\Filament\Resources\Resource> $resource */
+                /** @var class-string<Resource> $resource */
                 $resource = $livewire->getResource();
 
                 return $resource::getUrl('log-activity', ['record' => $record]);

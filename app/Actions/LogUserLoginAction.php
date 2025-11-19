@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Actions;
 
+use Illuminate\Database\Eloquent\Model;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Activity\Models\Activity;
 use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
@@ -31,7 +33,7 @@ class LogUserLoginAction
         $userClass = XotData::make()->getUserClass();
         Assert::isInstanceOf($this->user, $userClass);
 
-        /** @var \Illuminate\Database\Eloquent\Model&\Modules\Xot\Contracts\UserContract $userModel */
+        /** @var Model&UserContract $userModel */
         $userModel = $this->user;
 
         $action = new LogActivityAction(
