@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
+=======
+namespace Modules\Activity\Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+>>>>>>> 9baa519 (.)
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Tests\TestCase;
