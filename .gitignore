@@ -1,25 +1,11 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 # 🔧 Activity Module .gitignore
 # File di configurazione per ignorare file e directory nel modulo Activity
 
 # 📦 Dipendenze e packages
-<<<<<<< HEAD
-=======
-# Dependencies and packages
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 /vendor/
 /node_modules/
 /docs/vendor/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 # 🔒 Lock files e cache
 *.lock
 *.cache
@@ -27,52 +13,21 @@
 *.jar
 package-lock.json
 composer.lock
-<<<<<<< HEAD
-=======
-# Lock files and cache
-*.lock
-*.cache
-*.phar
-package-lock.json
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 yarn-error.log
 npm-debug.log
 .phpunit.result.cache
 .php-cs-fixer.cache
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 # 📝 Log files
 *.log
 error_log
 
 # 🏗️ Build directories
-<<<<<<< HEAD
-=======
-# Log files
-*.log
-
-# Build directories
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 /build/
 /build
 build/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # 📱 Laravel specifici
-=======
-# Laravel specific
->>>>>>> 0a00ff2 (.)
-=======
-# 📱 Laravel specifici
->>>>>>> 18dcd64 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -81,10 +36,6 @@ public_html/storage
 public_html/hot
 storage/*.key
 .env
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 .env.*
 
 # 🗃️ Database directories
@@ -94,21 +45,10 @@ database/Seeders_old
 database_old
 
 # ⚙️ Configurazioni locali
-<<<<<<< HEAD
-=======
-
-# Local configurations
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 Homestead.yaml
 Homestead.json
 /.vagrant
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 # 🛠️ IDE e editor
 /.idea
 .phpintel
@@ -118,54 +58,23 @@ Homestead.json
 *~
 
 # 🔄 Git specifici
-<<<<<<< HEAD
-=======
-# Git specific
->>>>>>> 0a00ff2 (.)
-=======
->>>>>>> 18dcd64 (.)
 .git-blame-ignore-revs
 .git-rewrite/
 .git-rewrite
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # 🗂️ File temporanei e di sistema
 *.tmp
-=======
-# Temporary and system files
-*.tmp
-*.swp
-*.swo
->>>>>>> 0a00ff2 (.)
-=======
-# 🗂️ File temporanei e di sistema
-*.tmp
->>>>>>> 18dcd64 (.)
 *.stackdump
 *.exe
 *:Zone.Identifier
 .DS_Store
-<<<<<<< HEAD
-<<<<<<< HEAD
 Thumbs.db
 
 # 📋 Backup files
-=======
->>>>>>> 0a00ff2 (.)
-=======
-Thumbs.db
-
-# 📋 Backup files
->>>>>>> 18dcd64 (.)
 *.old
 *.old1
 *.backup
 *.backup.*
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 18dcd64 (.)
 *.bak
 *.new
 
@@ -184,15 +93,4 @@ resources/views/Components_old
 # 🚫 File specifici del progetto
 *.fila2
 laravel
-<<<<<<< HEAD
 public_html
-=======
-
-# Documentation and cache
-docs/phpstan/
-docs/cache/
-cache/
->>>>>>> 0a00ff2 (.)
-=======
-public_html
->>>>>>> 18dcd64 (.)
