@@ -62,3 +62,4 @@
 - PHPInsights: Da eseguire per score completo
 - Activity logging: Funzionalità critica ben implementata
 
+
