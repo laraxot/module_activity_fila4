@@ -99,7 +99,7 @@ test('successful login regenerates session', function (): void {
 ## 🚀 Quality Assurance
 
 ### **Code Quality Standards**
-- ✅ **PHPStan Level 9+** compatibility
+- ✅ **PHPStan level 10+** compatibility
 - ✅ **Type Safety** complete enforcement
 - ✅ **Pest Framework** modern testing approach
 - ✅ **Descriptive Naming** ogni test self-documenting
