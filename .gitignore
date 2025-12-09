@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 # 🔧 Activity Module .gitignore
 # File di configurazione per ignorare file e directory nel modulo Activity
 
 # 📦 Dipendenze e packages
+=======
+# Dependencies and packages
+>>>>>>> 0a00ff2 (.)
 /vendor/
 /node_modules/
 /docs/vendor/
 
+<<<<<<< HEAD
 # 🔒 Lock files e cache
 *.lock
 *.cache
@@ -13,21 +18,39 @@
 *.jar
 package-lock.json
 composer.lock
+=======
+# Lock files and cache
+*.lock
+*.cache
+*.phar
+package-lock.json
+>>>>>>> 0a00ff2 (.)
 yarn-error.log
 npm-debug.log
 .phpunit.result.cache
 .php-cs-fixer.cache
 
+<<<<<<< HEAD
 # 📝 Log files
 *.log
 error_log
 
 # 🏗️ Build directories
+=======
+# Log files
+*.log
+
+# Build directories
+>>>>>>> 0a00ff2 (.)
 /build/
 /build
 build/
 
+<<<<<<< HEAD
 # 📱 Laravel specifici
+=======
+# Laravel specific
+>>>>>>> 0a00ff2 (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -36,6 +59,7 @@ public_html/storage
 public_html/hot
 storage/*.key
 .env
+<<<<<<< HEAD
 .env.*
 
 # 🗃️ Database directories
@@ -45,10 +69,15 @@ database/Seeders_old
 database_old
 
 # ⚙️ Configurazioni locali
+=======
+
+# Local configurations
+>>>>>>> 0a00ff2 (.)
 Homestead.yaml
 Homestead.json
 /.vagrant
 
+<<<<<<< HEAD
 # 🛠️ IDE e editor
 /.idea
 .phpintel
@@ -61,24 +90,38 @@ Homestead.json
 >>>>>>> 4b7c568 (.)
 
 # 🔄 Git specifici
+=======
+# Git specific
+>>>>>>> 0a00ff2 (.)
 .git-blame-ignore-revs
 .git-rewrite/
 .git-rewrite
 
+<<<<<<< HEAD
 # 🗂️ File temporanei e di sistema
 *.tmp
+=======
+# Temporary and system files
+*.tmp
+*.swp
+*.swo
+>>>>>>> 0a00ff2 (.)
 *.stackdump
 *.exe
 *:Zone.Identifier
 .DS_Store
+<<<<<<< HEAD
 Thumbs.db
 *~
 
 # 📋 Backup files
+=======
+>>>>>>> 0a00ff2 (.)
 *.old
 *.old1
 *.backup
 *.backup.*
+<<<<<<< HEAD
 *.bak
 *.new
 
@@ -98,3 +141,10 @@ resources/views/Components_old
 *.fila2
 laravel
 public_html
+=======
+
+# Documentation and cache
+docs/phpstan/
+docs/cache/
+cache/
+>>>>>>> 0a00ff2 (.)
