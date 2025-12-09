@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Modules\Activity\Tests\Feature;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\StoredEvent;
 use Tests\TestCase;
+<<<<<<< HEAD
 =======
 use Modules\Activity\Models\StoredEvent;
 use Tests\TestCase;
@@ -16,6 +20,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 
 class StoredEventBusinessLogicTest extends TestCase
 {
@@ -430,10 +436,14 @@ class StoredEventBusinessLogicTest extends TestCase
     {
         $now = now();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+
+>>>>>>> 18dcd64 (.)
         $storedEvent = StoredEvent::create([
             'aggregate_uuid' => Str::uuid()->toString(),
             'aggregate_version' => 1,

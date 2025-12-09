@@ -7,6 +7,9 @@ use Modules\Activity\Tests\TestCase;
 
 /*
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
  * |--------------------------------------------------------------------------
  * | Test Case
  * |--------------------------------------------------------------------------
@@ -45,6 +48,7 @@ expect()->extend('toBeActivity', function (): mixed {
  * | global functions to help you to reduce the number of lines of code in your test files.
  * |
  */
+<<<<<<< HEAD
 =======
 |--------------------------------------------------------------------------
 | Test Case
@@ -85,6 +89,8 @@ expect()->extend('toBeActivity', function () {
 |
 */
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 
 /**
  * @param  array<string, mixed>  $attributes
