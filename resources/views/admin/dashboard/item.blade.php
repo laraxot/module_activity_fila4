@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 <?php
 
 declare(strict_types=1);
 
 ?>
+<<<<<<< HEAD
 =======
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 <!-- Example DataTable for Dashboard Demo-->
 <div class="card mb-4">
     <div class="card-header">Personnel Management</div>
