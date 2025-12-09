@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 use Modules\Activity\Models\Activity;
 
-describe('Activity Business Logic', function (): void {
-    test('activity has correct connection configured', function (): void {
+describe('Activity Business Logic', function () {
+    test('activity has correct connection configured', function () {
         $activity = new Activity;
 
         expect($activity->getConnectionName())->toBe('activity');
     });
 
-    test('activity has expected fillable fields', function (): void {
+    test('activity has expected fillable fields', function () {
         $activity = new Activity;
         $expectedFillable = [
             'id',
@@ -31,23 +31,19 @@ describe('Activity Business Logic', function (): void {
         expect($activity->getFillable())->toEqual($expectedFillable);
     });
 
-    test('activity extends spatie activity functionality', function (): void {
-        // @phpstan-ignore-next-line
+    test('activity extends spatie activity functionality', function () {
         expect(is_subclass_of(Activity::class, \Spatie\Activitylog\Models\Activity::class))->toBeTrue();
     });
 
-    test('activity has in log scope method', function (): void {
-        // @phpstan-ignore-next-line
+    test('activity has in log scope method', function () {
         expect(method_exists(Activity::class, 'scopeInLog'))->toBeTrue();
     });
 
-    test('activity has for event scope method', function (): void {
-        // @phpstan-ignore-next-line
+    test('activity has for event scope method', function () {
         expect(method_exists(Activity::class, 'scopeForEvent'))->toBeTrue();
     });
 
-    test('activity has batch scope method', function (): void {
-        // @phpstan-ignore-next-line
+    test('activity has batch scope method', function () {
         expect(method_exists(Activity::class, 'scopeHasBatch'))->toBeTrue();
     });
 });

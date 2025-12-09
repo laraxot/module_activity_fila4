@@ -5,10 +5,8 @@ declare(strict_types=1);
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 
-test('user can create activity', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('user can create activity', function () {
+    $user = User::factory()->create();
 
     $activityData = [
         'name' => 'Test Activity',
@@ -18,15 +16,15 @@ test('user can create activity', function (): void {
 
     $activity = createActivity($activityData);
 
-    /* @phpstan-ignore-next-line argument.templateType */
-    expect($activity)->toBeInstanceOf(Activity::class);
-    /* @phpstan-ignore-next-line property.notFound */
-    expect($activity->name)->toBe('Test Activity');
-    /* @phpstan-ignore-next-line property.notFound */
-    expect($activity->user_id)->toBe($user->id);
+    expect($activity)
+        ->toBeActivity()
+        ->and($activity->name)
+        ->toBe('Test Activity')
+        ->and($activity->user_id)
+        ->toBe($user->id);
 });
 
-test('activity can be updated', function (): void {
+test('activity can be updated', function () {
     $activity = createActivity();
 
     $activity->update([
@@ -34,18 +32,10 @@ test('activity can be updated', function (): void {
         'description' => 'Updated Description',
     ]);
 
-    $freshActivity = $activity->fresh();
-    /* @phpstan-ignore-next-line argument.templateType */
-    expect($freshActivity)->toBeInstanceOf(Activity::class);
-    assert($freshActivity instanceof Activity);
-
-    /* @phpstan-ignore-next-line property.notFound */
-    expect($freshActivity->name)->toBe('Updated Activity');
-    /* @phpstan-ignore-next-line property.notFound */
-    expect($freshActivity->description)->toBe('Updated Description');
+    expect($activity->fresh())->name->toBe('Updated Activity')->description->toBe('Updated Description');
 });
 
-test('activity can be deleted', function (): void {
+test('activity can be deleted', function () {
     $activity = createActivity();
 
     $activity->delete();
@@ -53,16 +43,9 @@ test('activity can be deleted', function (): void {
     expect(Activity::find($activity->id))->toBeNull();
 });
 
-test('activity belongs to user', function (): void {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $user = User/** @phpstan-ignore-line */ ::factory()->create();
-    assert($user instanceof User);
+test('activity belongs to user', function () {
+    $user = User::factory()->create();
     $activity = createActivity(['user_id' => $user->id]);
 
-    expect($activity->user)->toBeInstanceOf(User::class);
-
-    $activityUser = $activity->user;
-    if ($activityUser instanceof User) {
-        expect($activityUser->id)->toBe($user->id);
-    }
+    expect($activity->user)->toBeInstanceOf(User::class)->and($activity->user->id)->toBe($user->id);
 });
