@@ -10,11 +10,7 @@ return new class extends XotBaseMigration
     public function up(): void
     {
         $this->tableCreate(
-<<<<<<< HEAD
-            function (Blueprint $table): void {
-=======
             function (Blueprint $table) {
->>>>>>> 9baa519 (.)
                 $table->bigIncrements('id');
                 $table->string('log_name')->nullable();
                 $table->text('description');
@@ -28,11 +24,7 @@ return new class extends XotBaseMigration
         );
 
         $this->tableUpdate(
-<<<<<<< HEAD
-            function (Blueprint $table): void {
-=======
             function (Blueprint $table) {
->>>>>>> 9baa519 (.)
                 // Assicuriamoci che causer_id sia nullable se esiste
                 if ($this->hasColumn('causer_id')) {
                     $table->string('causer_id')->nullable()->change();
