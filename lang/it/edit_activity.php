@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 return [
@@ -15,3 +16,22 @@ return [
         ],
     ],
 ];
+=======
+return array (
+  'actions' => 
+  array (
+    'delete' => 
+    array (
+      'label' => 'delete',
+    ),
+    'save' => 
+    array (
+      'label' => 'save',
+    ),
+    'cancel' => 
+    array (
+      'label' => 'cancel',
+    ),
+  ),
+);
+>>>>>>> 0a00ff2 (.)
