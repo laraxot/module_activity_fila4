@@ -22,14 +22,14 @@ class StoredEventResource extends XotBaseResource
     #[Override]
     public static function getFormSchema(): array
     {
-        return [
+        return array_values([
             'event_class' => TextInput::make('event_class')->required()->maxLength(255),
             'event_properties' => KeyValue::make('event_properties')->columnSpanFull(),
             'aggregate_uuid' => TextInput::make('aggregate_uuid')->maxLength(36),
             'aggregate_version' => TextInput::make('aggregate_version')->numeric(),
             'meta_data' => Textarea::make('meta_data')->columnSpanFull(),
             'created_at' => DateTimePicker::make('created_at')->required(),
-        ];
+        ]);
     }
 
     #[Override]
