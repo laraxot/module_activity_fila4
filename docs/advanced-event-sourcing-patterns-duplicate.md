@@ -214,5 +214,9 @@ Event Sourcing provides a robust foundation for healthcare applications by ensur
 
 ## References
 - [Event Sourcing in Laravel by Brent Roose](https://event-sourcing-laravel.com/)
+<<<<<<< HEAD
 - [Spatie Laravel Event Sourcing Documentation](https://spatie.be/project_docs/laravel-event-sourcing/v7/)
+=======
+- [Spatie Laravel Event Sourcing Documentation](https://spatie.be/docs/laravel-event-sourcing/v7/)
+>>>>>>> e02cccb (.)
 - [Domain-Driven Design by Eric Evans](https://domainlanguage.com/ddd/)
