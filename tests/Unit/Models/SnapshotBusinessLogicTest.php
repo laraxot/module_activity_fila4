@@ -21,15 +21,7 @@ describe('Snapshot Business Logic', function () {
             'aggregate_version',
             'state',
             'created_at',
-<<<<<<< HEAD
-<<<<<<< HEAD
             'updated_at',
-=======
-            'updated_at'
->>>>>>> 0a00ff2 (.)
-=======
-            'updated_at',
->>>>>>> 18dcd64 (.)
         ];
 
         expect($snapshot->getFillable())->toEqual($expectedFillable);
