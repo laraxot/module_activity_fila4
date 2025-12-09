@@ -21,7 +21,6 @@ class LogActivityAction
 
     public function __construct(
         public string $type,
-        /** @var \Illuminate\Database\Eloquent\Model|null $user */
         public ?Model $user = null,
         public ?Model $subject = null,
         public ?array $properties = null,
