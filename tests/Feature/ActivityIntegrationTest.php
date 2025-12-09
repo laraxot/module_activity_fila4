@@ -93,12 +93,12 @@ test('activity batch processing with multiple models', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $activities = $factory
     /* @phpstan-ignore-next-line method.nonObject */
-    ->count(5)
-    ->create([
-        'batch_uuid' => $batchUuid,
-        'causer_type' => User::class,
-        'causer_id' => $user->id,
-    ]);
+        ->count(5)
+        ->create([
+            'batch_uuid' => $batchUuid,
+            'causer_type' => User::class,
+            'causer_id' => $user->id,
+        ]);
     assert($activities instanceof \Illuminate\Database\Eloquent\Collection);
 
     /* @phpstan-ignore-next-line method.nonObject */
@@ -119,14 +119,14 @@ test('activity batch processing with multiple models', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $storedEvents = $storedEventsFactory
     /* @phpstan-ignore-next-line method.nonObject */
-    ->count(3)
-    ->create([
-        'aggregate_uuid' => $aggregateUuid,
-        'event_properties' => [
-            'batch_id' => $batchUuid,
-            'processed_activities' => $activities->pluck('id')->toArray(),
-        ],
-    ]);
+        ->count(3)
+        ->create([
+            'aggregate_uuid' => $aggregateUuid,
+            'event_properties' => [
+                'batch_id' => $batchUuid,
+                'processed_activities' => $activities->pluck('id')->toArray(),
+            ],
+        ]);
     assert($storedEvents instanceof \Illuminate\Database\Eloquent\Collection);
 
     $batchActivities = Activity::forBatch($batchUuid)->get();
@@ -161,7 +161,7 @@ test('activity module handles concurrent operations correctly', function (): voi
 
     $promises = [];
 
-    for ($i = 0; $i < 10; ++$i) {
+    for ($i = 0; $i < 10; $i++) {
         $promises[] = function () use ($user, &$concurrentActivities, &$concurrentSnapshots, $i) {
             /* @phpstan-ignore-next-line method.nonObject */
             /* @phpstan-ignore-next-line method.nonObject */
@@ -223,12 +223,12 @@ test('activity module supports complex query patterns', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $securityActivities = $securityFactory
     /* @phpstan-ignore-next-line method.nonObject */
-    ->count(3)
-    ->create([
-        'log_name' => 'security',
-        'causer_type' => User::class,
-        'causer_id' => $user1->id,
-    ]);
+        ->count(3)
+        ->create([
+            'log_name' => 'security',
+            'causer_type' => User::class,
+            'causer_id' => $user1->id,
+        ]);
     assert($securityActivities instanceof \Illuminate\Database\Eloquent\Collection);
 
     /* @phpstan-ignore-next-line method.nonObject */
@@ -237,12 +237,12 @@ test('activity module supports complex query patterns', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $auditActivities = $auditFactory
     /* @phpstan-ignore-next-line method.nonObject */
-    ->count(2)
-    ->create([
-        'log_name' => 'audit',
-        'causer_type' => User::class,
-        'causer_id' => $user2->id,
-    ]);
+        ->count(2)
+        ->create([
+            'log_name' => 'audit',
+            'causer_type' => User::class,
+            'causer_id' => $user2->id,
+        ]);
     assert($auditActivities instanceof \Illuminate\Database\Eloquent\Collection);
 
     /* @phpstan-ignore-next-line method.nonObject */
@@ -251,12 +251,12 @@ test('activity module supports complex query patterns', function (): void {
     /* @phpstan-ignore-next-line method.nonObject */
     $applicationActivities = $applicationFactory
     /* @phpstan-ignore-next-line method.nonObject */
-    ->count(4)
-    ->create([
-        'log_name' => 'application',
-        'causer_type' => User::class,
-        'causer_id' => $user1->id,
-    ]);
+        ->count(4)
+        ->create([
+            'log_name' => 'application',
+            'causer_type' => User::class,
+            'causer_id' => $user1->id,
+        ]);
     assert($applicationActivities instanceof \Illuminate\Database\Eloquent\Collection);
 
     $complexQuery = Activity::query()
@@ -354,7 +354,7 @@ test('activity module supports bulk operations efficiently', function (): void {
     assert($user instanceof User);
 
     $activitiesData = [];
-    for ($i = 0; $i < 100; ++$i) {
+    for ($i = 0; $i < 100; $i++) {
         $activitiesData[] = [
             'log_name' => 'bulk_operation',
             'description' => "Bulk activity {$i}",
