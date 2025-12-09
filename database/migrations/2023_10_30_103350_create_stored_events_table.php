@@ -10,7 +10,7 @@ return new class extends XotBaseMigration
     public function up(): void
     {
         $this->tableCreate(
-            function (Blueprint $table): void {
+            function (Blueprint $table) {
                 $table->id();
                 $table->uuid('aggregate_uuid')->nullable();
                 $table->unsignedBigInteger('aggregate_version')->nullable();
@@ -26,7 +26,7 @@ return new class extends XotBaseMigration
         );
 
         $this->tableUpdate(
-            function (Blueprint $table): void {
+            function (Blueprint $table) {
                 $this->updateTimestamps($table, false);
             },
         );
