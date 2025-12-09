@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Modules\Activity\Database\Seeders;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use Database\Seeders\ActivitySeeder;
 use Database\Seeders\SnapshotSeeder;
 use Database\Seeders\StoredEventSeeder;
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +26,7 @@ class ActivityDatabaseSeeder extends Seeder
         Model::unguard();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->call([]);
 =======
         $this->call([
@@ -31,5 +35,8 @@ class ActivityDatabaseSeeder extends Seeder
             StoredEventSeeder::class,
         ]);
 >>>>>>> 0a00ff2 (.)
+=======
+        $this->call([]);
+>>>>>>> 18dcd64 (.)
     }
 }
