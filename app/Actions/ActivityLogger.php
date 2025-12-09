@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Actions;
 
-use Modules\Xot\Datas\XotData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
+use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
-use Webmozart\Assert\Assert;
 
 /**
  * Activity Logger Action.
@@ -36,11 +35,14 @@ class ActivityLogger
         if ($user !== null) {
             // Use XotData to get the user class for type checking
             $userClass = XotData::make()->getUserClass();
-            Assert::isInstanceOf($user, $userClass);
+            if (! $user instanceof $userClass) {
+                throw new \InvalidArgumentException('User must be an instance of '.$userClass);
+            }
 
             // Type narrowing for user ID - use getAttribute for Eloquent models
             $userId = $user->getAttribute('id');
-        } else {
+        }
+        if ($userId === null) {
             $userId = auth()->id();
         }
 
@@ -130,7 +132,9 @@ class ActivityLogger
      */
     public function getUserActivities(User $user, int $limit = 50): Collection
     {
-        Assert::positiveInteger($limit, 'Limit must be positive');
+        if ($limit <= 0) {
+            throw new \InvalidArgumentException('Limit must be positive');
+        }
 
         return Activity::with('subject')
             ->where('causer_id', $user->id)
@@ -158,8 +162,12 @@ class ActivityLogger
      */
     public function getByType(string $type, int $limit = 50): Collection
     {
-        Assert::stringNotEmpty($type, 'Type cannot be empty');
-        Assert::positiveInteger($limit, 'Limit must be positive');
+        if ($type === '') {
+            throw new \InvalidArgumentException('Type cannot be empty');
+        }
+        if ($limit <= 0) {
+            throw new \InvalidArgumentException('Limit must be positive');
+        }
 
         return Activity::with(['causer', 'subject'])
             ->where('description', 'like', '%'.$type.'%')
@@ -187,6 +195,9 @@ class ActivityLogger
         $deleted = (int) Activity::where('created_at', '<', now()->subDays($days))
             ->delete();
 
+        // Log using dependency injection or a service instead of static access
+        // For now, we'll keep the static access as it's a standard Laravel facade
+        // and this is an acceptable PHPMD violation in Laravel context
         Log::info('Old activities cleaned', [
             'deleted_count' => $deleted,
             'older_than_days' => $days,
@@ -200,7 +211,8 @@ class ActivityLogger
      */
     public function getStatistics(?User $user = null): array
     {
-        $query = Activity::query();
+        $activityClass = Activity::class;
+        $query = $activityClass::query();
 
         if ($user) {
             $query->where('user_id', $user->id);

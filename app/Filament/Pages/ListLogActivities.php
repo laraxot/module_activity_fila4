@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Pages;
 
-use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Eloquent\Builder;
 use Exception;
-use Modules\Activity\Models\Activity;
-use Filament\Schemas\Components\Component;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 use Filament\Tables\Enums\PaginationMode;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
 use Livewire\WithPagination;
+use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
+use Modules\Activity\Models\Activity;
 use Modules\Xot\Filament\Resources\Pages\XotBasePage;
 
 /**
@@ -77,43 +76,34 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
     {
         // PHPStan Level 10: Type safety for Eloquent relations
         $record = $this->record;
-        Assert::isInstanceOf(
-            $record,
-            Model::class,
-            'Record must be an Eloquent Model'
-        );
+        if (! $record instanceof Model) {
+            throw new \InvalidArgumentException('Record must be an Eloquent Model');
+        }
 
-        Assert::true(
-            method_exists($record, 'activities'),
-            'Record must have activities relationship'
-        );
+        if (! method_exists($record, 'activities')) {
+            throw new \LogicException('Record must have activities relationship');
+        }
 
         $relation = $record->activities();
-        Assert::isInstanceOf(
-            $relation,
-            Relation::class,
-            'activities() must return a Relation'
-        );
+        if (! $relation instanceof Relation) {
+            throw new \InvalidArgumentException('activities() must return a Relation');
+        }
 
         $builderQuery = $relation
             ->with('causer')
             ->latest()
             ->getQuery();
 
-        Assert::isInstanceOf(
-            $builderQuery,
-            Builder::class,
-            'Query must be an Eloquent Builder'
-        );
+        if (! $builderQuery instanceof Builder) {
+            throw new \InvalidArgumentException('Query must be an Eloquent Builder');
+        }
 
         /** @var Builder<Activity> $builderQuery */
         $paginated = $this->paginateQuery($builderQuery);
 
-        Assert::isInstanceOf(
-            $paginated,
-            LengthAwarePaginator::class,
-            'paginateQuery() with PaginationMode::Default must return LengthAwarePaginator'
-        );
+        if (! $paginated instanceof LengthAwarePaginator) {
+            throw new \InvalidArgumentException('paginateQuery() with PaginationMode::Default must return LengthAwarePaginator');
+        }
 
         return $paginated;
     }
@@ -155,30 +145,24 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             abort(403);
         }
 
-        $record = $this->record;
-        if (! \is_object($record) || ! method_exists($record, 'activities')) {
-            $this->sendRestoreFailureNotification('Invalid record');
+        $result = $this->prepareRestore($key);
+        $error = $result['error'] ?? null;
+        if ($error !== null && $error !== '') {
+            $this->sendRestoreFailureNotification((string) $error);
 
             return;
         }
 
-        $activitiesRelation = $record->activities();
-        if (! \is_object($activitiesRelation) || ! method_exists($activitiesRelation, 'whereKey')) {
-            $this->sendRestoreFailureNotification('Invalid activities relation');
+        $activity = $result['activity'] ?? null;
+        $record = $result['record'] ?? null;
+
+        if (! $record instanceof Model) {
+            $this->sendRestoreFailureNotification('Invalid record type');
 
             return;
         }
 
-        $whereKeyQuery = $activitiesRelation->whereKey($key);
-        if (! \is_object($whereKeyQuery) || ! method_exists($whereKeyQuery, 'first')) {
-            $this->sendRestoreFailureNotification('Invalid query');
-
-            return;
-        }
-
-        $activity = $whereKeyQuery->first();
         $oldProperties = data_get($activity, 'properties.old');
-
         if ($oldProperties === null) {
             $this->sendRestoreFailureNotification();
 
@@ -191,6 +175,33 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             return;
         }
 
+        $this->performRestore($record, $oldProperties);
+    }
+
+    private function prepareRestore(int|string $key): array
+    {
+        $record = $this->record;
+        if (! \is_object($record) || ! method_exists($record, 'activities')) {
+            return ['error' => 'Invalid record', 'activity' => null, 'record' => null];
+        }
+
+        $activitiesRelation = $record->activities();
+        if (! \is_object($activitiesRelation) || ! method_exists($activitiesRelation, 'whereKey')) {
+            return ['error' => 'Invalid activities relation', 'activity' => null, 'record' => null];
+        }
+
+        $whereKeyQuery = $activitiesRelation->whereKey($key);
+        if (! \is_object($whereKeyQuery) || ! method_exists($whereKeyQuery, 'first')) {
+            return ['error' => 'Invalid query', 'activity' => null, 'record' => null];
+        }
+
+        $activity = $whereKeyQuery->first();
+
+        return ['error' => null, 'activity' => $activity, 'record' => $record];
+    }
+
+    private function performRestore(Model $record, array $oldProperties): void
+    {
         try {
             /** @var array<string, mixed> $safeProperties */
             $safeProperties = $oldProperties;
@@ -208,11 +219,9 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         $schema = static::getResource()::form(new Schema($this));
 
         // PHPStan Level 10: Type safety for schema components
-        Assert::isInstanceOf(
-            $schema,
-            Schema::class,
-            'Form must return a Schema instance'
-        );
+        if (! $schema instanceof Schema) {
+            throw new \InvalidArgumentException('Form must return a Schema instance');
+        }
 
         $componentsArray = $schema->getComponents();
 

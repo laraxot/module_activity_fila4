@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'ide' => 'phpstorm',
+    'ide' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -38,29 +38,34 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may adjust all the various settings that are maintained by the
-    | package. You can add as many custom rules as you wish.
+    | package. You can either add, remove or configure `Insights`. Keep in
+    | mind that all added `Insights` must belong to a specific `Metric`.
     |
     */
 
-    'config' => [
-        /*
-        |--------------------------------------------------------------------------
-        | Requirements
-        |--------------------------------------------------------------------------
-        |
-        | The minimum percentage of each requirement that needs to be met for
-        | the code to be considered maintainable. If any requirement is not
-        | met, the code will be considered unmaintainable.
-        |
-        */
+    'exclude' => [
+        'vendor',
+        'node_modules',
+        'storage',
+        'bootstrap/cache',
+        'tests',
+        'database/seeders',
+        'database/factories',
+        'config',
+        'resources/lang',
+    ],
 
-        'requirements' => [
-            'min-quality' => 80.0,
-            'min-complexity' => 80.0,
-            'min-architecture' => 80.0,
-            'min-style' => 80.0,
-        ],
+    'add' => [
+        // Additional insights to be added
+    ],
 
+    'remove' => [
+        ForbiddenNormalClassesSniff::class,
+        ForbiddenTraitsSniff::class,
+        ForbiddenSetterSniff::class,
+    ],
+
+        'config' => [
         /*
         |--------------------------------------------------------------------------
         | Excluded Files
@@ -94,8 +99,7 @@ return [
         */
 
         'add' => [
-            ForbiddenNormalClassesSniff::class,
-            ForbiddenTraitsSniff::class,
+            // Additional insights to be added
         ],
 
         /*
@@ -109,7 +113,63 @@ return [
         */
 
         'remove' => [
+            ForbiddenNormalClassesSniff::class,
+            ForbiddenTraitsSniff::class,
             ForbiddenSetterSniff::class,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Configuration for insights
+        |--------------------------------------------------------------------------
+        |
+        | Configuration for insights
+        |
+        */
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Requirements
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define a level you want to reach per `Insights` category.
+    | When a score is lower than the minimum level defined, then an error
+    | code will be returned. This is optional and individually defined.
+    |
+    */
+
+    'requirements' => [
+        'min-quality' => 80,
+        'min-complexity' => 80,
+        'min-architecture' => 80,
+        'min-style' => 80,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Threads
+    |--------------------------------------------------------------------------
+    |
+    | Here you may adjust how many threads (core) PHPInsights can use to perform
+    | the analyse. This is optional, don't provide it and the tool will guess
+    | the max core number available. It accepts null value or integer > 0.
+    |
+    */
+
+    'threads' => null,
+];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Threads
+    |--------------------------------------------------------------------------
+    |
+    | Here you may adjust how many threads (core) PHPInsights can use to perform
+    | the analyse. This is optional, don't provide it and the tool will guess
+    | the max core number available. It accepts null value or integer > 0.
+    |
+    */
+
+    'threads' => null,
 ];

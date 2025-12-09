@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-declare(strict_types=1);
-
-?>
-=======
->>>>>>> 0a00ff2 (.)
 <!DOCTYPE html>
 <html lang="en">
     <head>

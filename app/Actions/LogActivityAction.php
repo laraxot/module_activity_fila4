@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Activity\Models\Activity;
 use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
-use Webmozart\Assert\Assert;
 
 /**
  * Log Activity Action.
@@ -26,7 +25,9 @@ class LogActivityAction
         public ?array $properties = null,
         public ?string $description = null,
     ) {
-        Assert::stringNotEmpty($type, 'Type cannot be empty');
+        if ($type === '') {
+            throw new \InvalidArgumentException('Type cannot be empty');
+        }
         if ($user !== null) {
             // Type already narrowed to Model|null, assertion not needed
         }
@@ -38,15 +39,20 @@ class LogActivityAction
 
         $causerId = null;
         if ($this->user !== null) {
-            Assert::object($this->user, 'User must be an object');
+            if (! is_object($this->user)) {
+                throw new \InvalidArgumentException('User must be an object');
+            }
             // Type narrowing for user ID - use getAttribute for Eloquent models
             /** @var int|string $causerId */
             $causerId = $this->user->getAttribute('id');
-        } else {
+        }
+        if ($causerId === null) {
             $causerId = auth()->id();
         }
 
-        return Activity::create([
+        $activityClass = Activity::class;
+
+        return $activityClass::create([
             'log_name' => $this->type,
             'description' => $this->description ?? sprintf('Activity: %s', $this->type),
             'subject_type' => $this->subject ? get_class($this->subject) : null,

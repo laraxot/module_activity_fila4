@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Collection;
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Seeder;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * Seeder per creare grandi quantità di dati per il modulo Activity.
