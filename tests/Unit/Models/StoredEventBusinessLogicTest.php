@@ -1,11 +1,11 @@
 <?php
 
 declare(strict_types=1);
-use function Safe\class_uses;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\StoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
+
+use function Safe\class_uses;
 
 describe('StoredEvent Business Logic', function (): void {
     test('stored event has correct connection configured', function (): void {
