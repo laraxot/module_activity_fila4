@@ -53,9 +53,12 @@ Homestead.json
 /.idea
 .phpintel
 .vscode/
+<<<<<<< HEAD
 *.swp
 *.swo
 *~
+=======
+>>>>>>> 4b7c568 (.)
 
 # 🔄 Git specifici
 .git-blame-ignore-revs
@@ -69,6 +72,7 @@ Homestead.json
 *:Zone.Identifier
 .DS_Store
 Thumbs.db
+*~
 
 # 📋 Backup files
 *.old
@@ -90,7 +94,7 @@ resources/views/Components_old
 .windsurf/
 .cursor/
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html
