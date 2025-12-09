@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Xot\Models\Traits\HasXotFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
 
 /**
@@ -38,7 +39,7 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  */
 class Snapshot extends SpatieSnapshot
 {
-    use \Modules\Xot\Models\Traits\HasXotFactory;
+    use HasXotFactory;
 
     /** @var string */
     protected $connection = 'activity';

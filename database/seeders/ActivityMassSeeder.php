@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
+use Illuminate\Database\Eloquent\Collection;
+use Webmozart\Assert\Assert;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -65,7 +68,7 @@ class ActivityMassSeeder extends Seeder
             ]);
 
         // PHPStan Level 10: Type safety for Eloquent collection
-        $activitiesCount = $activities instanceof \Illuminate\Database\Eloquent\Collection
+        $activitiesCount = $activities instanceof Collection
             ? $activities->count()
             : 0;
 
@@ -80,11 +83,11 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📸 Creazione snapshot...');
 
         // Crea 500 snapshot
-        /** @var \Illuminate\Database\Eloquent\Factories\Factory<Snapshot> $snapshotFactory */
+        /** @var Factory<Snapshot> $snapshotFactory */
         $snapshotFactory = Snapshot::factory();
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $snapshotFactory,
-            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            Factory::class,
             'Snapshot factory must be a Factory instance'
         );
 
@@ -95,7 +98,7 @@ class ActivityMassSeeder extends Seeder
             ]);
 
         // PHPStan Level 10: Type safety for Eloquent collection
-        $snapshotsCount = $snapshots instanceof \Illuminate\Database\Eloquent\Collection
+        $snapshotsCount = $snapshots instanceof Collection
             ? $snapshots->count()
             : 0;
 
@@ -110,18 +113,18 @@ class ActivityMassSeeder extends Seeder
         $this->command->info('📦 Creazione eventi memorizzati...');
 
         // Crea 1000 eventi memorizzati
-        /** @var \Illuminate\Database\Eloquent\Factories\Factory<StoredEvent> $storedEventFactory */
+        /** @var Factory<StoredEvent> $storedEventFactory */
         $storedEventFactory = StoredEvent::factory();
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $storedEventFactory,
-            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            Factory::class,
             'StoredEvent factory must be a Factory instance'
         );
 
         $countedFactory = $storedEventFactory->count(1000);
-        \Webmozart\Assert\Assert::isInstanceOf(
+        Assert::isInstanceOf(
             $countedFactory,
-            \Illuminate\Database\Eloquent\Factories\Factory::class,
+            Factory::class,
             'Factory after count() must be a Factory instance'
         );
 
@@ -130,7 +133,7 @@ class ActivityMassSeeder extends Seeder
         ]);
 
         // PHPStan Level 10: Type safety for Eloquent collection
-        $eventsCount = $events instanceof \Illuminate\Database\Eloquent\Collection
+        $eventsCount = $events instanceof Collection
             ? $events->count()
             : 0;
 

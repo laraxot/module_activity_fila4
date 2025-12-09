@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenNormalClassesSniff;
+use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenTraitsSniff;
+use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -90,8 +94,8 @@ return [
         */
 
         'add' => [
-            \NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenNormalClassesSniff::class,
-            \NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenTraitsSniff::class,
+            ForbiddenNormalClassesSniff::class,
+            ForbiddenTraitsSniff::class,
         ],
 
         /*
@@ -105,7 +109,7 @@ return [
         */
 
         'remove' => [
-            \NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff::class,
+            ForbiddenSetterSniff::class,
         ],
     ],
 ];
