@@ -18,8 +18,13 @@ test('activity module models work together in integrated scenarios', function ()
         'subject_id' => $user->id,
         'properties' => [
             'action' => 'user_registration',
+<<<<<<< HEAD
             'details' => ['source' => 'web', 'campaign' => 'test'],
         ],
+=======
+            'details' => ['source' => 'web', 'campaign' => 'test']
+        ]
+>>>>>>> 0a00ff2 (.)
     ]);
 
     $aggregateUuid = Str::uuid();
@@ -29,8 +34,13 @@ test('activity module models work together in integrated scenarios', function ()
         'state' => [
             'user' => $user->toArray(),
             'activities' => [$activity->toArray()],
+<<<<<<< HEAD
             'metadata' => ['version' => '1.0.0'],
         ],
+=======
+            'metadata' => ['version' => '1.0.0']
+        ]
+>>>>>>> 0a00ff2 (.)
     ]);
 
     $storedEvent = StoredEvent::factory()->create([
@@ -40,8 +50,13 @@ test('activity module models work together in integrated scenarios', function ()
             'user_id' => $user->id,
             'activity_id' => $activity->id,
             'snapshot_id' => $snapshot->id,
+<<<<<<< HEAD
             'changes' => ['profile_completed' => true],
         ],
+=======
+            'changes' => ['profile_completed' => true]
+        ]
+>>>>>>> 0a00ff2 (.)
     ]);
 
     expect($activity->causer->id)->toBe($user->id);
@@ -64,6 +79,7 @@ test('activity batch processing with multiple models', function () {
 
     $user = User::factory()->create();
 
+<<<<<<< HEAD
     $activities = Activity::factory()
         ->count(5)
         ->create([
@@ -71,12 +87,20 @@ test('activity batch processing with multiple models', function () {
             'causer_type' => User::class,
             'causer_id' => $user->id,
         ]);
+=======
+    $activities = Activity::factory()->count(5)->create([
+        'batch_uuid' => $batchUuid,
+        'causer_type' => User::class,
+        'causer_id' => $user->id
+    ]);
+>>>>>>> 0a00ff2 (.)
 
     $snapshot = Snapshot::factory()->create([
         'aggregate_uuid' => $aggregateUuid,
         'state' => [
             'batch_id' => $batchUuid,
             'activities_count' => $activities->count(),
+<<<<<<< HEAD
             'user_id' => $user->id,
         ],
     ]);
@@ -90,6 +114,19 @@ test('activity batch processing with multiple models', function () {
                 'processed_activities' => $activities->pluck('id')->toArray(),
             ],
         ]);
+=======
+            'user_id' => $user->id
+        ]
+    ]);
+
+    $storedEvents = StoredEvent::factory()->count(3)->create([
+        'aggregate_uuid' => $aggregateUuid,
+        'event_properties' => [
+            'batch_id' => $batchUuid,
+            'processed_activities' => $activities->pluck('id')->toArray()
+        ]
+    ]);
+>>>>>>> 0a00ff2 (.)
 
     $batchActivities = Activity::forBatch($batchUuid)->get();
     expect($batchActivities)->toHaveCount(5);
@@ -118,18 +155,31 @@ test('activity module handles concurrent operations correctly', function () {
             $activity = Activity::factory()->create([
                 'causer_type' => User::class,
                 'causer_id' => $user->id,
+<<<<<<< HEAD
                 'properties' => ['iteration' => $i, 'timestamp' => now()->toISOString()],
+=======
+                'properties' => ['iteration' => $i, 'timestamp' => now()->toISOString()]
+>>>>>>> 0a00ff2 (.)
             ]);
 
             $concurrentActivities[] = $activity->id;
 
+<<<<<<< HEAD
             if (($i % 2) === 0) {
+=======
+            if ($i % 2 === 0) {
+>>>>>>> 0a00ff2 (.)
                 $snapshot = Snapshot::factory()->create([
                     'state' => [
                         'activity_id' => $activity->id,
                         'iteration' => $i,
+<<<<<<< HEAD
                         'user_id' => $user->id,
                     ],
+=======
+                        'user_id' => $user->id
+                    ]
+>>>>>>> 0a00ff2 (.)
                 ]);
 
                 $concurrentSnapshots[] = $snapshot->id;
@@ -154,6 +204,7 @@ test('activity module supports complex query patterns', function () {
     $user1 = User::factory()->create();
     $user2 = User::factory()->create();
 
+<<<<<<< HEAD
     $securityActivities = Activity::factory()
         ->count(3)
         ->create([
@@ -177,12 +228,36 @@ test('activity module supports complex query patterns', function () {
             'causer_type' => User::class,
             'causer_id' => $user1->id,
         ]);
+=======
+    $securityActivities = Activity::factory()->count(3)->create([
+        'log_name' => 'security',
+        'causer_type' => User::class,
+        'causer_id' => $user1->id
+    ]);
+
+    $auditActivities = Activity::factory()->count(2)->create([
+        'log_name' => 'audit',
+        'causer_type' => User::class,
+        'causer_id' => $user2->id
+    ]);
+
+    $applicationActivities = Activity::factory()->count(4)->create([
+        'log_name' => 'application',
+        'causer_type' => User::class,
+        'causer_id' => $user1->id
+    ]);
+>>>>>>> 0a00ff2 (.)
 
     $complexQuery = Activity::query()
         ->where('causer_type', User::class)
         ->whereIn('log_name', ['security', 'audit'])
         ->where(function ($query) use ($user1, $user2) {
+<<<<<<< HEAD
             $query->where('causer_id', $user1->id)->orWhere('causer_id', $user2->id);
+=======
+            $query->where('causer_id', $user1->id)
+                  ->orWhere('causer_id', $user2->id);
+>>>>>>> 0a00ff2 (.)
         })
         ->orderBy('created_at', 'desc');
 
@@ -210,7 +285,11 @@ test('activity module handles data consistency across models', function () {
     $activity = Activity::factory()->create([
         'causer_type' => User::class,
         'causer_id' => $user->id,
+<<<<<<< HEAD
         'properties' => ['action' => 'data_consistency_test'],
+=======
+        'properties' => ['action' => 'data_consistency_test']
+>>>>>>> 0a00ff2 (.)
     ]);
 
     $snapshot = Snapshot::factory()->create([
@@ -218,8 +297,13 @@ test('activity module handles data consistency across models', function () {
         'state' => [
             'activity_id' => $activity->id,
             'user_id' => $user->id,
+<<<<<<< HEAD
             'consistent' => true,
         ],
+=======
+            'consistent' => true
+        ]
+>>>>>>> 0a00ff2 (.)
     ]);
 
     $storedEvent = StoredEvent::factory()->create([
@@ -228,8 +312,13 @@ test('activity module handles data consistency across models', function () {
             'activity_id' => $activity->id,
             'snapshot_id' => $snapshot->id,
             'user_id' => $user->id,
+<<<<<<< HEAD
             'consistent' => true,
         ],
+=======
+            'consistent' => true
+        ]
+>>>>>>> 0a00ff2 (.)
     ]);
 
     $activity->update(['properties' => array_merge($activity->properties->toArray(), ['verified' => true])]);
@@ -263,7 +352,11 @@ test('activity module supports bulk operations efficiently', function () {
             'causer_id' => $user->id,
             'properties' => ['index' => $i, 'batch' => 'bulk_test'],
             'created_at' => now(),
+<<<<<<< HEAD
             'updated_at' => now(),
+=======
+            'updated_at' => now()
+>>>>>>> 0a00ff2 (.)
         ];
     }
 
