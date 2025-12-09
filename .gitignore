@@ -132,7 +132,10 @@ Homestead.json
 *:Zone.Identifier
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 *~
+=======
+>>>>>>> 199a372 (.)
 
 # 📋 Backup files
 *.old
@@ -243,7 +246,11 @@ test_activity_logs.sql
 # ==============================================
 >>>>>>> e02cccb (.)
 
+<<<<<<< HEAD
 # File specifici del progetto
+=======
+# 🚫 File specifici del progetto
+>>>>>>> 199a372 (.)
 *.fila2
 laravel
 public_html
