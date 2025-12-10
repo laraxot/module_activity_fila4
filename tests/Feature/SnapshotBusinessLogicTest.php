@@ -7,7 +7,6 @@ namespace Modules\Activity\Tests\Feature;
 use Modules\Activity\Models\Snapshot;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class SnapshotBusinessLogicTest extends TestCase

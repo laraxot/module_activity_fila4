@@ -27,7 +27,7 @@ test('logout listener handles logout event and creates activity', function () {
     $listener->handle($event);
     
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_type', User::class)
@@ -52,7 +52,7 @@ test('logout listener creates activity with correct properties', function () {
     $event = new Logout('api', $user);
     
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->latest()->first();
@@ -78,7 +78,7 @@ test('logout listener handles multiple logout events correctly', function () {
     $event1 = new Logout('web', $user1);
     $event2 = new Logout('api', $user2);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -146,7 +146,7 @@ test('logout listener uses correct log name for activities', function () {
     $event = new Logout('web', $user);
     
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -164,9 +164,9 @@ test('logout listener handles event without user gracefully', function () {
     $event = new Logout('web', null);
     
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
 
-    expect(fn() => $listener->handle($event))->not->toThrow(Exception::class);
+    expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
 
     
     $listener = new LogoutListener();
@@ -184,7 +184,7 @@ test('logout listener creates unique activities for same user different sessions
     $event1 = new Logout('web', $user);
     $event2 = new Logout('api', $user);
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event1);
     $listener->handle($event2);
 
@@ -220,7 +220,7 @@ test('logout listener tracks logout reason when provided', function () {
     $event = new Logout('web', $user);
     
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();
@@ -240,9 +240,9 @@ test('logout listener handles concurrent logout events', function () {
     $users = User::factory()->count(5)->create();
     
 
-    $events = $users->map(fn($user) => new Logout('web', $user));
+    $events = $users->map(fn ($user) => new Logout('web', $user));
 
-    $listener = new LogoutListener();
+    $listener = new LogoutListener;
 
     foreach ($events as $event) {
         $listener->handle($event);
