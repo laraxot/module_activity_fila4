@@ -4,68 +4,43 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Modules\Xot\Traits\Updater;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Models\Traits\HasXotFactory;
-use Modules\Xot\Actions\Factory\GetFactoryAction;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Xot\Models\XotBaseModel;
 
 /**
- * Class BaseModel.
+ * Base Model for Activity module.
  *
+ * Extends XotBaseModel which provides:
+ * - Standard properties (snakeAttributes, incrementing, timestamps, perPage, etc.)
+ * - HasXotFactory trait
+ * - Updater trait
+ * - Standard casts (published_at, timestamps, audit fields)
+ *
+ * @see \Modules\Xot\Models\XotBaseModel
  */
-abstract class BaseModel extends Model
+abstract class BaseModel extends XotBaseModel
 {
-    use HasXotFactory;
-    use Updater;
-
     /**
-     * Indicates whether attributes are snake cased on arrays.
+     * The connection name for the model.
      *
-     * @see https://laravel-news.com/6-eloquent-secrets
+     * This is the ONLY property specific to Activity module.
      *
-     * @var bool
+     * @var string
      */
-    public static $snakeAttributes = true;
-
-    /** @var bool */
-    public $incrementing = true;
-
-    /** @var bool */
-    public $timestamps = true;
-
-    /** @var int */
-    protected $perPage = 30;
-
-    /** @var string */
     protected $connection = 'activity';
 
-    /** @var string */
-    protected $primaryKey = 'id';
-
-    /** @var string */
-    protected $keyType = 'string';
-
-    /** @var list<string> */
-    protected $hidden = [];
-
-    
-
-    /** @return array<string, string> */
+    /**
+     * Get the attributes that should be cast.
+     *
+     * Extends parent casts with Activity-specific fields.
+     * Common casts (id, uuid, published_at, created_at, updated_at, deleted_at, etc.)
+     * are inherited from XotBaseModel.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
-        return [
-            'id' => 'string',
-            'uuid' => 'string',
-            'published_at' => 'datetime',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
-            'updated_by' => 'string',
-            'created_by' => 'string',
-            'deleted_by' => 'string',
-        ];
+        return array_merge(parent::casts(), [
+            // Module-specific casts only
+        ]);
     }
 }
-
