@@ -2,8 +2,28 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+use Illuminate\Support\Str;
+use Modules\Activity\Models\Activity;
+=======
+use Modules\Activity\Models\Activity;
+use Illuminate\Support\Str;
+>>>>>>> a12f125f4a (.)
+=======
+use Illuminate\Support\Str;
+use Modules\Activity\Models\Activity;
+>>>>>>> b93ef594b4 (.)
+=======
+use Modules\Activity\Models\Activity;
+use Illuminate\Support\Str;
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 
 describe('Activity Business Logic', function () {
     it('can create activity with basic information', function () {
@@ -27,6 +47,14 @@ describe('Activity Business Logic', function () {
 
         expect($activity)
             ->toBeInstanceOf(Activity::class)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+>>>>>>> b1cd7fc (.)
             ->and($activity->log_name)
             ->toBe('default')
             ->and($activity->description)
@@ -37,6 +65,24 @@ describe('Activity Business Logic', function () {
             ->toBe(123)
             ->and($activity->event)
             ->toBe('created');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/develop
+            ->and($activity->log_name)->toBe('default')
+            ->and($activity->description)->toBe('User logged in')
+            ->and($activity->subject_type)->toBe('App\Models\User')
+            ->and($activity->subject_id)->toBe(123)
+            ->and($activity->event)->toBe('created');
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     });
 
     it('can track user authentication activities', function () {
@@ -70,6 +116,14 @@ describe('Activity Business Logic', function () {
             'event' => 'logout',
         ]);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+>>>>>>> b1cd7fc (.)
         expect($loginActivity->event)
             ->toBe('login')
             ->and($logoutActivity->event)
@@ -78,6 +132,23 @@ describe('Activity Business Logic', function () {
             ->toBe('auth')
             ->and($logoutActivity->log_name)
             ->toBe('auth');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/develop
+        expect($loginActivity->event)->toBe('login')
+            ->and($logoutActivity->event)->toBe('logout')
+            ->and($loginActivity->log_name)->toBe('auth')
+            ->and($logoutActivity->log_name)->toBe('auth');
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     });
 
     it('can track model crud activities', function () {
@@ -118,6 +189,14 @@ describe('Activity Business Logic', function () {
             'event' => 'updated',
         ]);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+>>>>>>> b1cd7fc (.)
         expect($createActivity->event)
             ->toBe('created')
             ->and($updateActivity->event)
@@ -126,6 +205,23 @@ describe('Activity Business Logic', function () {
             ->toBe(789)
             ->and($updateActivity->subject_id)
             ->toBe(789);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/develop
+        expect($createActivity->event)->toBe('created')
+            ->and($updateActivity->event)->toBe('updated')
+            ->and($createActivity->subject_id)->toBe(789)
+            ->and($updateActivity->subject_id)->toBe(789);
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     });
 
     it('can use batch uuid for grouping activities', function () {
@@ -155,7 +251,25 @@ describe('Activity Business Logic', function () {
             'batch_uuid' => $batchUuid,
         ]);
 
+<<<<<<< HEAD
         expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
+=======
+        expect($activity1->batch_uuid)->toBe($batchUuid)
+            ->and($activity2->batch_uuid)->toBe($batchUuid);
+>>>>>>> a12f125f4a (.)
+=======
+        expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
+>>>>>>> b93ef594b4 (.)
+=======
+        expect($activity1->batch_uuid)->toBe($batchUuid)
+            ->and($activity2->batch_uuid)->toBe($batchUuid);
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 
         $batchActivities = Activity::where('batch_uuid', $batchUuid)->get();
         expect($batchActivities)->toHaveCount(2);
@@ -187,6 +301,14 @@ describe('Activity Business Logic', function () {
         $authActivities = Activity::where('log_name', 'auth')->get();
         $modelActivities = Activity::where('log_name', 'models')->get();
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+>>>>>>> b1cd7fc (.)
         expect($authActivities)
             ->toHaveCount(1)
             ->and($modelActivities)
@@ -195,6 +317,23 @@ describe('Activity Business Logic', function () {
             ->toBe('auth')
             ->and($modelActivities->first()->log_name)
             ->toBe('models');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/develop
+        expect($authActivities)->toHaveCount(1)
+            ->and($modelActivities)->toHaveCount(1)
+            ->and($authActivities->first()->log_name)->toBe('auth')
+            ->and($modelActivities->first()->log_name)->toBe('models');
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     });
 
     it('can handle activity with complex properties', function () {
@@ -222,6 +361,12 @@ describe('Activity Business Logic', function () {
             'event' => 'order_placed',
         ]);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> b1cd7fc (.)
         expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
 
         $properties = json_decode($complexActivity->properties, true);
@@ -229,5 +374,30 @@ describe('Activity Business Logic', function () {
             ->toBe(67.48)
             ->and($properties['customer_info']['name'])
             ->toBe('Jane Smith');
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> origin/develop
+        expect($complexActivity->event)->toBe('order_placed')
+            ->and($complexActivity->log_name)->toBe('complex');
+
+        $properties = json_decode($complexActivity->properties, true);
+        expect($properties['order_details']['total_amount'])->toBe(67.48)
+            ->and($properties['customer_info']['name'])->toBe('Jane Smith');
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+        expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
+
+        $properties = json_decode($complexActivity->properties, true);
+        expect($properties['order_details']['total_amount'])
+            ->toBe(67.48)
+            ->and($properties['customer_info']['name'])
+            ->toBe('Jane Smith');
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
     });
 });
