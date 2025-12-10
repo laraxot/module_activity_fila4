@@ -15,9 +15,12 @@ return [
         'icon' => 'activity-stored-event-animated',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'fields' => [
         'id' => [
             'label' => 'ID',
@@ -25,9 +28,12 @@ return [
             'validation' => 'required|integer|min:1',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'event_class' => [
             'label' => 'Classe Evento',
             'placeholder' => 'Inserisci la classe dell\'evento',
@@ -36,9 +42,12 @@ return [
             'searchable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'event_properties' => [
             'label' => 'Proprietà Evento',
             'placeholder' => 'Proprietà dell\'evento',
@@ -48,9 +57,12 @@ return [
             'format' => 'json',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'aggregate_uuid' => [
             'label' => 'UUID Aggregato',
             'placeholder' => 'UUID dell\'aggregato',
@@ -59,9 +71,12 @@ return [
             'searchable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'aggregate_version' => [
             'label' => 'Versione Aggregato',
             'placeholder' => 'Inserisci la versione',
@@ -70,9 +85,12 @@ return [
             'sortable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'event_version' => [
             'label' => 'Versione Evento',
             'placeholder' => 'Versione dell\'evento',
@@ -80,9 +98,12 @@ return [
             'validation' => 'nullable|string|max:20',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'meta_data' => [
             'label' => 'Metadata',
             'placeholder' => 'Metadata aggiuntivi',
@@ -92,9 +113,12 @@ return [
             'format' => 'json',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'created_at' => [
             'label' => 'Data Creazione',
             'placeholder' => 'Seleziona data e ora',
@@ -104,9 +128,12 @@ return [
             'sortable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'created_by' => [
             'label' => 'Creato Da',
             'placeholder' => 'Utente creatore',
@@ -115,9 +142,12 @@ return [
             'searchable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'updated_by' => [
             'label' => 'Aggiornato Da',
             'placeholder' => 'Utente aggiornatore',
@@ -125,9 +155,12 @@ return [
             'validation' => 'nullable|integer|exists:users,id',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'stream_name' => [
             'label' => 'Nome Stream',
             'placeholder' => 'Nome del flusso di eventi',
@@ -136,9 +169,12 @@ return [
             'searchable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'stream_position' => [
             'label' => 'Posizione Stream',
             'placeholder' => 'Posizione nel flusso',
@@ -147,9 +183,12 @@ return [
             'sortable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'toggleColumns' => [
             'label' => 'Mostra/Nascondi Colonne',
             'placeholder' => '',
@@ -157,9 +196,12 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'filters' => [
         'event_class' => [
             'label' => 'Classe Evento',
@@ -170,9 +212,12 @@ return [
             'multiple' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'aggregate_uuid' => [
             'label' => 'UUID Aggregato',
             'placeholder' => 'Filtra per aggregato',
@@ -181,9 +226,12 @@ return [
             'validation' => 'nullable|uuid',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'aggregate_version_range' => [
             'label' => 'Range Versione Aggregato',
             'placeholder' => 'Da versione - A versione',
@@ -191,9 +239,12 @@ return [
             'type' => 'number_range',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'date_range' => [
             'label' => 'Intervallo Date',
             'placeholder' => 'Seleziona intervallo',
@@ -210,9 +261,12 @@ return [
             ],
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'stream_name' => [
             'label' => 'Nome Stream',
             'placeholder' => 'Filtra per stream',
@@ -221,9 +275,12 @@ return [
             'searchable' => true,
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'created_by' => [
             'label' => 'Creato Da',
             'placeholder' => 'Filtra per utente',
@@ -233,9 +290,12 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'actions' => [
         'view' => [
             'label' => 'Visualizza',
@@ -243,9 +303,12 @@ return [
             'error' => 'Errore nel caricamento dell\'evento',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'view_json' => [
             'label' => 'Visualizza JSON',
             'icon' => 'heroicon-o-code-bracket',
@@ -254,9 +317,12 @@ return [
             'error' => 'Errore nel caricamento dei dati JSON',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'replay' => [
             'label' => 'Replay Evento',
             'success' => 'Replay dell\'evento completato con successo',
@@ -265,9 +331,12 @@ return [
             'requires_permission' => 'events.replay',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'replay_from' => [
             'label' => 'Replay da Questo Evento',
             'icon' => 'heroicon-o-play',
@@ -278,9 +347,12 @@ return [
             'requires_permission' => 'events.replay_from',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'export' => [
             'label' => 'Esporta Eventi',
             'success' => 'Eventi esportati con successo',
@@ -288,9 +360,12 @@ return [
             'confirmation' => 'Vuoi esportare gli eventi selezionati?',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'snapshot_create' => [
             'label' => 'Crea Snapshot',
             'icon' => 'heroicon-o-camera',
@@ -301,9 +376,12 @@ return [
             'requires_permission' => 'events.snapshot',
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
         'bulk_replay' => [
             'label' => 'Replay Multiplo',
             'icon' => 'heroicon-o-forward',
@@ -315,9 +393,12 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'messages' => [
         'no_events' => 'Nessun evento trovato',
         'event_replayed' => 'Evento riprodotto con successo',
@@ -332,9 +413,12 @@ return [
         'replay_warning' => 'Il replay degli eventi può modificare lo stato del sistema. Procedi con cautela.',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'export' => [
         'formats' => [
             'json' => [
@@ -392,9 +476,12 @@ return [
         'include_properties' => false, // Per performance, escludi di default i JSON payload
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'permissions' => [
         'view' => 'stored_events.view',
         'create' => 'stored_events.create',
@@ -407,26 +494,35 @@ return [
         'snapshot' => 'stored_events.snapshot',
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'pagination' => [
         'per_page' => 50,
         'options' => [25, 50, 100, 200],
         'simple' => false, // Usa paginazione completa per event sourcing
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'cache' => [
         'ttl' => 600, // 10 minuti - cache più lunga per eventi immutabili
         'tags' => ['stored_events', 'event_sourcing', 'monitoring'],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'event_sourcing' => [
         'replay_batch_size' => 100,
         'snapshot_frequency' => 1000, // Crea snapshot ogni 1000 eventi
@@ -438,9 +534,12 @@ return [
         ],
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
     'monitoring' => [
         'alert_on_replay_errors' => true,
         'alert_on_missing_events' => true,
