@@ -5,32 +5,19 @@ declare(strict_types=1);
 namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-<<<<<<< HEAD
 use Modules\Activity\Models\Activity;
 
 /**
  * @extends Factory<Activity>
-=======
-use Modules\Activity\Models\BaseActivity;
-
-/**
- * @extends Factory<BaseActivity>
->>>>>>> b1cd7fc (.)
  */
 class BaseActivityFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-<<<<<<< HEAD
      * @var class-string<Activity>
      */
     protected $model = Activity::class;
-=======
-     * @var string
-     */
-    protected $model = BaseActivity::class;
->>>>>>> b1cd7fc (.)
 
     /**
      * Define the model's default state.
@@ -42,7 +29,7 @@ class BaseActivityFactory extends Factory
         return [
             'log_name' => $this->faker->randomElement(['default', 'auth', 'user', 'system']),
             'description' => $this->faker->sentence(),
-            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\SaluteOra\Models\Appointment']),
+            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\<nome progetto>\Models\Appointment']),
             'subject_id' => $this->faker->numberBetween(1, 1000),
             'causer_type' => $this->faker->randomElement(['Modules\User\Models\User', null]),
             'causer_id' => $this->faker->optional(0.8)->numberBetween(1, 100),
