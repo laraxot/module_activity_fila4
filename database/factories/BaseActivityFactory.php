@@ -6,22 +6,29 @@ namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c3e59d8 (.)
 use Modules\Activity\Models\Activity;
 
 /**
  * @extends Factory<Activity>
+<<<<<<< HEAD
 =======
 use Modules\Activity\Models\BaseActivity;
 
 /**
  * @extends Factory<BaseActivity>
 >>>>>>> 97b542c (.)
+=======
+>>>>>>> c3e59d8 (.)
  */
 class BaseActivityFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
+<<<<<<< HEAD
 <<<<<<< HEAD
      * @var class-string<Activity>
      */
@@ -31,6 +38,11 @@ class BaseActivityFactory extends Factory
      */
     protected $model = BaseActivity::class;
 >>>>>>> 97b542c (.)
+=======
+     * @var class-string<Activity>
+     */
+    protected $model = Activity::class;
+>>>>>>> c3e59d8 (.)
 
     /**
      * Define the model's default state.
@@ -43,10 +55,14 @@ class BaseActivityFactory extends Factory
             'log_name' => $this->faker->randomElement(['default', 'auth', 'user', 'system']),
             'description' => $this->faker->sentence(),
 <<<<<<< HEAD
+<<<<<<< HEAD
             'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\<nome progetto>\Models\Appointment']),
 =======
             'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\SaluteOra\Models\Appointment']),
 >>>>>>> 97b542c (.)
+=======
+            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\<nome progetto>\Models\Appointment']),
+>>>>>>> c3e59d8 (.)
             'subject_id' => $this->faker->numberBetween(1, 1000),
             'causer_type' => $this->faker->randomElement(['Modules\User\Models\User', null]),
             'causer_id' => $this->faker->optional(0.8)->numberBetween(1, 100),
@@ -72,10 +88,14 @@ class BaseActivityFactory extends Factory
                 'User logged out',
                 'Password changed',
 <<<<<<< HEAD
+<<<<<<< HEAD
                 'Profile updated',
 =======
                 'Profile updated'
 >>>>>>> 97b542c (.)
+=======
+                'Profile updated',
+>>>>>>> c3e59d8 (.)
             ]),
         ]);
     }
@@ -92,10 +112,14 @@ class BaseActivityFactory extends Factory
                 'User updated',
                 'User deleted',
 <<<<<<< HEAD
+<<<<<<< HEAD
                 'User profile modified',
 =======
                 'User profile modified'
 >>>>>>> 97b542c (.)
+=======
+                'User profile modified',
+>>>>>>> c3e59d8 (.)
             ]),
         ]);
     }

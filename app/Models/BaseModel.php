@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Modules\Activity\Models;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c3e59d8 (.)
 use Modules\Xot\Models\XotBaseModel;
 
 /**
@@ -43,6 +46,7 @@ abstract class BaseModel extends XotBaseModel
         return array_merge(parent::casts(), [
             // Module-specific casts only
         ]);
+<<<<<<< HEAD
 =======
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -117,5 +121,7 @@ abstract class BaseModel extends EloquentModel
     {
         return app(GetFactoryAction::class)->execute(static::class);
 >>>>>>> 97b542c (.)
+=======
+>>>>>>> c3e59d8 (.)
     }
 }

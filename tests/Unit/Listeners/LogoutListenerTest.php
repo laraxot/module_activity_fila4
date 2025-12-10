@@ -35,14 +35,12 @@ test('logout listener handles logout event and creates activity', function () {
         ->where('event', 'logout')
         ->first();
     
-    expect($activity)->not->toBeNull()
+    expect($activity)->not->toBeNull();
 
     expect($activity)
         ->not->toBeNull()
-    
-    expect($activity)->not->toBeNull()
         ->description->toContain('logout')
-        ->causer_id->toBe($user->id)
+        ->causer_id->toBe($user->id);
         ->causer_type->toBe(User::class)
         ->properties->toHaveKey('guard', 'web');
 });

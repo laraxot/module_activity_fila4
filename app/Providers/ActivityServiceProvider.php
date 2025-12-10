@@ -52,7 +52,6 @@ class ActivityServiceProvider extends XotBaseServiceProvider
     /**
      * Registra le configurazioni del modulo.
      */
-    #[Override]
     protected function registerConfig(): void
     {
         $this->publishes([
