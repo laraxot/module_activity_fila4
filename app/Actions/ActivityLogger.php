@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
-use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -33,10 +32,9 @@ class ActivityLogger
     ): Activity {
         $userId = null;
         if ($user !== null) {
-            // Use XotData to get the user class for type checking
-            $userClass = XotData::make()->getUserClass();
-            if (! $user instanceof $userClass) {
-                throw new \InvalidArgumentException('User must be an instance of '.$userClass);
+            // Type checking for User model
+            if (! $user instanceof User) {
+                throw new \InvalidArgumentException('User must be an instance of User');
             }
 
             // Type narrowing for user ID - use getAttribute for Eloquent models

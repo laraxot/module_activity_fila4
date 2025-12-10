@@ -24,7 +24,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @property int|null $subject_id
  * @property string|null $causer_type
  * @property string|null $causer_id
- * @property Collection<array-key, mixed>|null $properties
+ * @property array<string, mixed>|Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
  * @property string|null $event
  * @property Carbon|null $created_at

@@ -6,6 +6,7 @@ use Modules\Activity\Models\StoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 
 use function Safe\class_uses;
+use function Safe\class_uses;
 
 describe('StoredEvent Business Logic', function (): void {
     test('stored event has correct connection configured', function (): void {

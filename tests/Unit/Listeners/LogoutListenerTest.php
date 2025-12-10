@@ -6,7 +6,10 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Event;
 use Modules\Activity\Listeners\LogoutListener;
 use Modules\Activity\Models\Activity;
+use Modules\Activity\Tests\TestCase;
 use Modules\User\Models\User;
+
+uses(TestCase::class);
 
 test('logout listener is registered for logout event', function () {
     Event::fake();
@@ -35,12 +38,14 @@ test('logout listener handles logout event and creates activity', function () {
         ->where('event', 'logout')
         ->first();
     
-    expect($activity)->not->toBeNull();
+    expect($activity)->not->toBeNull()
 
     expect($activity)
         ->not->toBeNull()
+    
+    expect($activity)->not->toBeNull()
         ->description->toContain('logout')
-        ->causer_id->toBe($user->id);
+        ->causer_id->toBe($user->id)
         ->causer_type->toBe(User::class)
         ->properties->toHaveKey('guard', 'web');
 });
@@ -162,7 +167,7 @@ test('logout listener handles event without user gracefully', function () {
     $event = new Logout('web', null);
     
 
-    $listener = new LogoutListener;
+    $listener = new LogoutListener();
 
     expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
 
@@ -218,7 +223,10 @@ test('logout listener tracks logout reason when provided', function () {
     $event = new Logout('web', $user);
     
 
-    $listener = new LogoutListener;
+    // Assuming implementation checks request()
+    request()->merge(['logout_reason' => 'user_initiated']);
+
+    $listener = new LogoutListener();
     $listener->handle($event);
 
     $activity = Activity::where('causer_id', $user->id)->first();

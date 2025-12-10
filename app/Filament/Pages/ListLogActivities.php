@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Pages;
 
-use Exception;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Contracts\HasForms;
@@ -34,7 +33,7 @@ use Modules\Xot\Filament\Resources\Pages\XotBasePage;
  * Motivo: Questa classe è usata in getPages() delle Resources, quindi DEVE
  *         essere una Resource Page per avere il metodo route().
  *
- * @see \Modules\Xot\Filament\Resources\Pages\XotBasePage
+ * @see XotBasePage
  * @see \Modules\Activity\docs\errori\route-method-does-not-exist.md
  */
 abstract class ListLogActivities extends XotBasePage implements HasForms
@@ -147,7 +146,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
         $result = $this->prepareRestore($key);
         $error = $result['error'] ?? null;
-        if ($error !== null && $error !== '') {
+        if (null !== $error && '' !== $error) {
             $this->sendRestoreFailureNotification((string) $error);
 
             return;
@@ -163,7 +162,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         }
 
         $oldProperties = data_get($activity, 'properties.old');
-        if ($oldProperties === null) {
+        if (null === $oldProperties) {
             $this->sendRestoreFailureNotification();
 
             return;
@@ -209,7 +208,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             $record->update($safeProperties);
 
             $this->sendRestoreSuccessNotification();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
     }
