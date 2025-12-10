@@ -11,7 +11,11 @@
 
 ## Introduction
 
+<<<<<<< HEAD
 Event Sourcing is particularly valuable in healthcare applications like `saluteora` where data integrity, audit trails, and historical tracking are crucial. This document expands on the basic concepts with advanced patterns and practical implementations.
+=======
+Event Sourcing is particularly valuable in healthcare applications like `<nome progetto>` where data integrity, audit trails, and historical tracking are crucial. This document expands on the basic concepts with advanced patterns and practical implementations.
+>>>>>>> 3cf55f7 (.)
 
 ## Core Concepts
 
@@ -210,7 +214,11 @@ class PatientRegistrationTest extends TestCase
 
 ## Conclusion
 
+<<<<<<< HEAD
 Event Sourcing provides a robust foundation for healthcare applications by ensuring data integrity, auditability, and flexibility. By implementing these advanced patterns, `saluteora` can build a system that not only meets current requirements but can also evolve with future needs.
+=======
+Event Sourcing provides a robust foundation for healthcare applications by ensuring data integrity, auditability, and flexibility. By implementing these advanced patterns, `<nome progetto>` can build a system that not only meets current requirements but can also evolve with future needs.
+>>>>>>> 3cf55f7 (.)
 
 ## References
 - [Event Sourcing in Laravel by Brent Roose](https://event-sourcing-laravel.com/)

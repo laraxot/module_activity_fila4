@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+# Struttura Corretta dei Test di Login - Analisi Completa 
+>>>>>>> 3cf55f7 (.)
 # Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
@@ -165,3 +169,7 @@ function createTestUser(array $attributes = []): UserContract
 3. **SEMPRE** usare pattern XotData
 4. **SEMPRE** approfondire prima di agire
 
+<<<<<<< HEAD
+=======
+*Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
+>>>>>>> 3cf55f7 (.)

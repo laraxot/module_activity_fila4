@@ -37,6 +37,10 @@ Per modificare una tabella esistente:
 ## 🎯 **LEZIONE CRITICA: Polimorfismo con ID Misti**
 
 ### **Problema Identificato**
+<<<<<<< HEAD
+=======
+Nel sistema <nome progetto> abbiamo modelli con tipi di ID diversi:
+>>>>>>> 3cf55f7 (.)
 Nel sistema SaluteOra abbiamo modelli con tipi di ID diversi:
 - **User**: UUID (string 36 caratteri)
 - **Admin**: Integer auto-increment
@@ -59,6 +63,10 @@ causer_type = "Modules\User\Models\User"
 
 // Caso 2: Admin con integer
 causer_id = "123" (integer convertito in string)
+<<<<<<< HEAD
+=======
+causer_type = "Modules\<nome progetto>\Models\Admin"
+>>>>>>> 3cf55f7 (.)
 causer_type = "Modules\SaluteOra\Models\Admin"
 ```
 
@@ -162,6 +170,10 @@ Questa lezione è ora memorizzata permanentemente per:
 
 ### Moduli Correlati
 - [User Module UUID](../../User/docs/uuid_implementation.md)
+<<<<<<< HEAD
+=======
+- [<nome progetto> Models](../../<nome progetto>/docs/model_architecture.md)
+>>>>>>> 3cf55f7 (.)
 - [SaluteOra Models](../../SaluteOra/docs/model_architecture.md)
 - [Activity Logging](./activity_logging_system.md)
 
