@@ -5,8 +5,11 @@ declare(strict_types=1);
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 
-describe('Activity Business Logic', function () {
-    it('can create activity with basic information', function () {
+use function Safe\json_encode;
+use function Safe\json_decode;
+
+describe('Activity Business Logic', function (): void {
+    it('can create activity with basic information', function (): void {
         $activityData = [
             'log_name' => 'default',
             'description' => 'User logged in',
@@ -39,7 +42,7 @@ describe('Activity Business Logic', function () {
             ->toBe('created');
     });
 
-    it('can track user authentication activities', function () {
+    it('can track user authentication activities', function (): void {
         $loginActivity = Activity::create([
             'log_name' => 'auth',
             'description' => 'User logged in successfully',
@@ -80,7 +83,7 @@ describe('Activity Business Logic', function () {
             ->toBe('auth');
     });
 
-    it('can track model crud activities', function () {
+    it('can track model crud activities', function (): void {
         $createActivity = Activity::create([
             'log_name' => 'models',
             'description' => 'User created',
@@ -128,7 +131,7 @@ describe('Activity Business Logic', function () {
             ->toBe(789);
     });
 
-    it('can use batch uuid for grouping activities', function () {
+    it('can use batch uuid for grouping activities', function (): void {
         $batchUuid = Str::uuid()->toString();
 
         $activity1 = Activity::create([
@@ -161,7 +164,7 @@ describe('Activity Business Logic', function () {
         expect($batchActivities)->toHaveCount(2);
     });
 
-    it('can filter activities by log name', function () {
+    it('can filter activities by log name', function (): void {
         Activity::create([
             'log_name' => 'auth',
             'description' => 'Login activity',
@@ -191,13 +194,15 @@ describe('Activity Business Logic', function () {
             ->toHaveCount(1)
             ->and($modelActivities)
             ->toHaveCount(1)
+            /** @phpstan-ignore-next-line method.nonObject */
             ->and($authActivities->first()->log_name)
             ->toBe('auth')
+            /** @phpstan-ignore-next-line method.nonObject */
             ->and($modelActivities->first()->log_name)
             ->toBe('models');
     });
 
-    it('can handle activity with complex properties', function () {
+    it('can handle activity with complex properties', function (): void {
         $complexActivity = Activity::create([
             'log_name' => 'complex',
             'description' => 'Complex operation with nested data',
@@ -224,9 +229,12 @@ describe('Activity Business Logic', function () {
 
         expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
 
+        /** @phpstan-ignore-next-line argument.type */
         $properties = json_decode($complexActivity->properties, true);
+        /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
         expect($properties['order_details']['total_amount'])
             ->toBe(67.48)
+            /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
             ->and($properties['customer_info']['name'])
             ->toBe('Jane Smith');
     });
