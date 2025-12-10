@@ -29,10 +29,7 @@ pest()->extend(TestCase::class)->in('Feature', 'Unit');
 |
 */
 
-expect()->extend('toBeActivity', function (): mixed {
-    /** @phpstan-ignore-next-line variable.undefined */
-    return $this->toBeInstanceOf(Activity::class);
-});
+expect()->extend('toBeActivity', fn () => $this->toBeInstanceOf(Activity::class));
 
 /*
 |--------------------------------------------------------------------------
@@ -45,30 +42,12 @@ expect()->extend('toBeActivity', function (): mixed {
 |
 */
 
-/**
- * @param array<string, mixed> $attributes
- */
 function createActivity(array $attributes = []): Activity
 {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $factory = Activity::factory();
-    assert($factory !== null);
-    /* @phpstan-ignore-next-line method.nonObject */
-    $activity = $factory->create($attributes);
-    assert($activity instanceof Activity);
-    return $activity;
+    return Activity::factory()->create($attributes);
 }
 
-/**
- * @param array<string, mixed> $attributes
- */
 function makeActivity(array $attributes = []): Activity
 {
-    /* @phpstan-ignore-next-line method.nonObject */
-    $factory = Activity::factory();
-    assert($factory !== null);
-    /* @phpstan-ignore-next-line method.nonObject */
-    $activity = $factory->make($attributes);
-    assert($activity instanceof Activity);
-    return $activity;
+    return Activity::factory()->make($attributes);
 }

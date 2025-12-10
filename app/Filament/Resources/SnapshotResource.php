@@ -20,13 +20,13 @@ class SnapshotResource extends XotBaseResource
     #[Override]
     public static function getFormSchema(): array
     {
-        return array_values([
+        return [
             'model_type' => TextInput::make('model_type')->required()->maxLength(255),
             'model_id' => TextInput::make('model_id')->numeric()->required(),
             'state' => KeyValue::make('state')->columnSpanFull(),
             'created_by_type' => TextInput::make('created_by_type')->maxLength(255),
             'created_by_id' => TextInput::make('created_by_id')->numeric(),
-        ]);
+        ];
     }
 
     #[Override]
