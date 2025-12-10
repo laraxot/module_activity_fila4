@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use function Safe\class_uses;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\Snapshot;
+
+use function Safe\class_uses;
 
 describe('Snapshot Business Logic', function (): void {
     test('snapshot has correct connection configured', function (): void {
@@ -34,5 +34,4 @@ describe('Snapshot Business Logic', function (): void {
         expect($traits)->toHaveKey(HasFactory::class);
     });
 
-   
 });
