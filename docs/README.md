@@ -2,11 +2,13 @@
 
 ## 📋 Overview
 
-Modulo per il tracking completo delle attività utente utilizzando `spatie/laravel-activitylog`.
+Modulo per il tracking completo delle attività utente utilizzando `spatie/laravel-activitylog`. Fornisce audit trail completo, logging eventi custom e integrazione nativa con Filament 4.x.
 
 **Pacchetto:** [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) v4.10.2  
 **Namespace:** `Modules\Activity`  
-**Database:** `activity_log` table
+**Database:** `activity_log` table  
+**Filament:** v4.2.0 (Full Integration)  
+**PHPStan:** Level 10 Compliant
 
 ---
 
@@ -215,8 +217,29 @@ activity()
     ->withProperties([
         'template' => 'report_valutazione',
         'pdf_size' => 245678,
+        'pdf_engine' => 'spipu/html2pdf',
+        'generation_time_ms' => 1234,
     ])
     ->log('PDF generato');
+```
+
+### 4. HTML2PDF Error Tracking
+
+```php
+try {
+    $pdf = app(ContentPdfAction::class)->execute(/* ... */);
+} catch (Html2PdfException $e) {
+    activity()
+        ->performedOn($record)
+        ->causedBy($user)
+        ->withProperties([
+            'error_type' => 'HtmlParsingException',
+            'error_message' => $e->getMessage(),
+            'pdf_template' => 'report_standard',
+            'html_preview' => substr($html, 0, 500),
+        ])
+        ->log('Errore generazione PDF');
+}
 ```
 
 ---
@@ -255,6 +278,8 @@ $resource::getUrl('edit', ['record' => $record]);
 - [Business Logic Analysis](./business-logic-analysis.md)
 - [Bugfix Filament Facade](./bugfix-filament-facade-namespace.md)
 - [Use Case: Email Tracking](./use-cases/tracking-email-sent-schede.md)
+- [HTML2PDF Integration Guide](../../Xot/docs/html2pdf-best-practices.md)
+- [Activity Log PDF Reports](./activity-pdf-reports.md)
 
 ### Documentazione Esterna
 
@@ -411,6 +436,35 @@ $resource::getUrl('edit', ['record' => $record], panel: $panelId);
 
 ---
 
-**Ultimo Aggiornamento:** 2025-01-22  
-**Versione:** 1.0.0  
-**Status:** ✅ Production Ready
+## 📋 UI/UX Improvements (2025-12-04)
+
+### ListLogActivities Page Enhancement
+
+La pagina `ListLogActivities` è stata significativamente migliorata seguendo i principi DRY + KISS:
+
+#### 🔥 Miglioramenti Principali
+1. **Header Contestuale**: Informazioni complete sul record e statistiche attività
+2. **Description in Evidenza**: Box blu dedicato per importance (molto importante!)
+3. **Card Attività Avanzate**: Avatar, badge evento colorati, subject info
+4. **Tabella Cambiamenti Potenziata**: Icone tipo campo con tooltip, formattazione intelligente
+5. **Empty State Utilizzabile**: Metadati record e guida utente
+
+#### 🎨 Principi DRY + KISS
+- **DRY**: Componenti riutilizzabili, helper functions, classi CSS condivise
+- **KISS**: Struttura lineare, logica semplice, HTML pulito, feedback chiaro
+
+#### 📊 Quality Metrics
+- ✅ PHPStan Livello 10: No errors
+- ✅ PHPInsights: 97.0% qualità
+- ✅ Pint: Formattazione conforme
+
+#### 📚 Documentazione
+- Dettagli completi in [list-log-activities-improvements-2025-12-04.md](./list-log-activities-improvements-2025-12-04.md)
+
+---
+
+**Ultimo Aggiornamento:** 2025-12-09  
+**Versione:** 1.2.0  
+**Status:** ✅ Production Ready  
+**PHPStan Level:** 10 ✅  
+**Filament Version:** 4.2.0 ✅

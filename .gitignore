@@ -69,6 +69,7 @@ Homestead.json
 *:Zone.Identifier
 .DS_Store
 Thumbs.db
+*~
 
 # 📋 Backup files
 *.old
@@ -90,7 +91,7 @@ resources/views/Components_old
 .windsurf/
 .cursor/
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html
