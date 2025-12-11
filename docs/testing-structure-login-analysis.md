@@ -1,5 +1,5 @@
 # Struttura Corretta dei Test di Login - Analisi Completa 
-# Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
+# Struttura Corretta dei Test di Login - Analisi Completa <nome progetto>
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
 
