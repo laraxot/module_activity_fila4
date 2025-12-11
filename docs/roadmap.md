@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🎯 ACTIVITY MODULE - ROADMAP 2025
 
 **Modulo**: Activity ([Description])  
@@ -215,7 +214,6 @@ Activity Module
 ---
 
 *Questa roadmap è specifica per il modulo Activity e viene aggiornata regolarmente in base ai progressi e alle nuove esigenze.*
-=======
 # Roadmap Modulo Activity
 
 ## Stato Attuale
@@ -422,4 +420,3 @@ Activity Module
 * [roadmap.md](laravel/Modules/Cms/docs/roadmap.md)
 * [roadmap.md](laravel/Themes/One/docs/roadmap.md)
 
->>>>>>> 3cf55f7 (.)

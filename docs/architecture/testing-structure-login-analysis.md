@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 # Struttura Corretta dei Test di Login - Analisi Completa 
->>>>>>> 3cf55f7 (.)
 # Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
 
 ## 🎯 **Struttura del Sistema di Autenticazione**

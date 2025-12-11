@@ -1,6 +1,5 @@
 # Collegamento alle Traduzioni del Modulo Activity
 
-<<<<<<< HEAD
 Questo modulo utilizza le traduzioni centralizzate nella cartella [Lang](../../Lang/project_docs/).
 
 Consulta la documentazione delle traduzioni qui:
@@ -8,14 +7,12 @@ Consulta la documentazione delle traduzioni qui:
 - [Struttura delle Traduzioni](../../Lang/project_docs/structure.md)
 - [Gestione dei File di Lingua](../../Lang/project_docs/module_lang.md)
 
-=======
 Questo modulo utilizza le traduzioni centralizzate nella cartella [Lang](../../Lang/docs/).
 
 Consulta la documentazione delle traduzioni qui:
 - [Introduzione alle Traduzioni](../../Lang/docs/introduction.md)
 - [Struttura delle Traduzioni](../../Lang/docs/structure.md)
 - [Gestione dei File di Lingua](../../Lang/docs/module_lang.md)
->>>>>>> 3cf55f7 (.)
 
 ## Collegamento Bidirezionale
 
@@ -25,23 +22,18 @@ Consulta la documentazione delle traduzioni qui:
 - [Vai a Struttura](./structure.md)
 - [Vai a Traduzioni](./translations.md)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
-=======
 
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/project_docs/).
->>>>>>> c3e59d8 (.)
 
-=======
+
 
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
->>>>>>> 3cf55f7 (.)
+
 
 > Aggiorna entrambi i riferimenti se aggiungi nuove chiavi di traduzione o modifichi la struttura.
 
 ## Collegamenti tra versioni di lang-link.md
-<<<<<<< HEAD
 * [lang-link.md](laravel/Modules/Chart/project_docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Reporting/project_docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Gdpr/project_docs/lang-link.md)
@@ -57,7 +49,6 @@ Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in quest
 * [lang-link.md](laravel/Modules/Patient/project_docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Cms/project_docs/lang-link.md)
 
-=======
 * [lang-link.md](laravel/Modules/Chart/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Reporting/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Gdpr/docs/lang-link.md)
@@ -72,5 +63,4 @@ Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in quest
 * [lang-link.md](laravel/Modules/Activity/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Patient/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Cms/docs/lang-link.md)
->>>>>>> 3cf55f7 (.)
 

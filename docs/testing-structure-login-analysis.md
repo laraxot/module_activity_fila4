@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 # Struttura Corretta dei Test di Login - Analisi Completa 
->>>>>>> 3cf55f7 (.)
 # Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
@@ -144,21 +141,18 @@ function createTestUser(array $attributes = []): UserContract
 ## 🔗 **Collegamenti Documentazione**
 
 ### **Pattern Architetturali**
-<<<<<<< HEAD
 - [laravel/Modules/Cms/docs/architecture-xotdata-pattern.md](../laravel/Modules/Cms/docs/architecture-xotdata-pattern.md)
 - [laravel/Modules/Xot/docs/architecture-violations-and-fixes.md](../laravel/Modules/Xot/docs/architecture-violations-and-fixes.md)
 
 ### **Sistema Folio/Volt**
 - [laravel/Themes/One/docs/folio-pages.md](../laravel/Themes/One/docs/folio-pages.md)
 - [laravel/Themes/One/docs/routing_with_folio_volt.md](../laravel/Themes/One/docs/routing_with_folio_volt.md)
-=======
 - [laravel/Modules/Cms/project_docs/architecture-xotdata-pattern.md](../laravel/Modules/Cms/project_docs/architecture-xotdata-pattern.md)
 - [laravel/Modules/Xot/project_docs/architecture-violations-and-fixes.md](../laravel/Modules/Xot/project_docs/architecture-violations-and-fixes.md)
 
 ### **Sistema Folio/Volt**
 - [laravel/Themes/One/project_docs/folio-pages.md](../laravel/Themes/One/project_docs/folio-pages.md)
 - [laravel/Themes/One/project_docs/routing_with_folio_volt.md](../laravel/Themes/One/project_docs/routing_with_folio_volt.md)
->>>>>>> b1cd7fc (.)
 
 ### **Test Esistenti di Riferimento**
 - [laravel/Modules/User/tests/Feature/Filament/Widgets/LoginWidgetTest.php](../laravel/Modules/User/tests/Feature/Filament/Widgets/LoginWidgetTest.php)
@@ -178,7 +172,4 @@ function createTestUser(array $attributes = []): UserContract
 3. **SEMPRE** usare pattern XotData
 4. **SEMPRE** approfondire prima di agire
 
-<<<<<<< HEAD
-=======
 *Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
->>>>>>> 3cf55f7 (.)
