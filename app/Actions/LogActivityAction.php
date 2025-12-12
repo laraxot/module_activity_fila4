@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 use Spatie\QueueableAction\QueueableAction;
@@ -38,11 +39,11 @@ class LogActivityAction
                 throw new \InvalidArgumentException('User must be an instance of User');
             }
             // Type narrowing for user ID - use getAttribute for Eloquent models
-            /** @var int|string $causerId */
-            $causerId = $this->user->getAttribute('id');
+            $id = $this->user->getAttribute('id');
+            $causerId = is_int($id) || is_string($id) ? $id : null;
         }
         if ($causerId === null) {
-            $causerId = auth()->id();
+            $causerId = Auth::id();
         }
 
         $activityClass = Activity::class;

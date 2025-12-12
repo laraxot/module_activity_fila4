@@ -6,9 +6,16 @@ namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
+use Modules\Activity\Actions\LogModelCreatedAction;
+use Modules\Activity\Actions\LogModelUpdatedAction;
+use Modules\Activity\Actions\LogModelDeletedAction;
+use Modules\Activity\Actions\LogUserLoginAction;
+use Modules\Activity\Actions\LogUserLogoutAction;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -41,18 +48,19 @@ class ActivityLogger
             $userId = $user->getAttribute('id');
         }
         if ($userId === null) {
-            $userId = auth()->id();
+            $userId = Auth::id();
         }
 
+        /** @var Activity $activity */
         $activity = Activity::create([
-            'type' => $type,
-            'user_id' => $userId,
+            'log_name' => 'default',
+            'description' => $description ?? $type,
             'subject_type' => $subject ? $subject::class : null,
             'subject_id' => $subject?->getKey(),
+            'causer_type' => $user ? $user::class : null,
+            'causer_id' => $userId,
             'properties' => $properties,
-            'description' => $description,
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
+            'event' => $type,
         ]);
 
         Log::info('Activity logged', [
@@ -134,12 +142,15 @@ class ActivityLogger
             throw new \InvalidArgumentException('Limit must be positive');
         }
 
-        return Activity::with('subject')
-            ->where('causer_id', $user->id)
-            ->where('causer_type', User::class)
+        /** @var Collection<int, Activity> $activities */
+        $activities = Activity::with('subject')
+            ->where('causer_id', $user->getKey())
+            ->where('causer_type', $user::class)
             ->latest()
             ->limit($limit)
             ->get();
+
+        return $activities;
     }
 
     /**
@@ -147,12 +158,15 @@ class ActivityLogger
      */
     public function getModelActivities(Model $model, int $limit = 50): Collection
     {
-        return Activity::with('causer')
+        /** @var Collection<int, Activity> $activities */
+        $activities = Activity::with('causer')
             ->where('subject_type', $model::class)
             ->where('subject_id', $model->getKey())
             ->latest()
             ->limit($limit)
             ->get();
+
+        return $activities;
     }
 
     /**
@@ -167,11 +181,14 @@ class ActivityLogger
             throw new \InvalidArgumentException('Limit must be positive');
         }
 
-        return Activity::with(['causer', 'subject'])
-            ->where('description', 'like', '%'.$type.'%')
+        /** @var Collection<int, Activity> $activities */
+        $activities = Activity::with(['causer', 'subject'])
+            ->where('event', $type)
             ->latest()
             ->limit($limit)
             ->get();
+
+        return $activities;
     }
 
     /**
@@ -179,10 +196,17 @@ class ActivityLogger
      */
     public function getRecent(int $limit = 50): Collection
     {
-        return Activity::with(['causer', 'subject'])
+        if ($limit <= 0) {
+            throw new \InvalidArgumentException('Limit must be positive');
+        }
+
+        /** @var Collection<int, Activity> $activities */
+        $activities = Activity::with(['causer', 'subject'])
             ->latest()
             ->limit($limit)
             ->get();
+
+        return $activities;
     }
 
     /**
@@ -190,12 +214,15 @@ class ActivityLogger
      */
     public function cleanOld(int $days = 90): int
     {
-        $deleted = (int) Activity::where('created_at', '<', now()->subDays($days))
+        if ($days <= 0) {
+            throw new \InvalidArgumentException('Days must be positive');
+        }
+
+        $deletedCount = Activity::where('created_at', '<', now()->subDays($days))
             ->delete();
 
-        // Log using dependency injection or a service instead of static access
-        // For now, we'll keep the static access as it's a standard Laravel facade
-        // and this is an acceptable PHPMD violation in Laravel context
+        $deleted = is_int($deletedCount) ? $deletedCount : 0;
+
         Log::info('Old activities cleaned', [
             'deleted_count' => $deleted,
             'older_than_days' => $days,
@@ -209,22 +236,22 @@ class ActivityLogger
      */
     public function getStatistics(?User $user = null): array
     {
-        $activityClass = Activity::class;
-        $query = $activityClass::query();
+        $query = Activity::query();
 
         if ($user) {
-            $query->where('user_id', $user->id);
+            $query->where('causer_id', $user->getKey())
+                  ->where('causer_type', $user::class);
         }
 
         return [
             'total' => $query->count(),
             'by_type' => $query->clone()
-                ->selectRaw('type, COUNT(*) as count')
-                ->groupBy('type')
-                ->pluck('count', 'type')
+                ->selectRaw('event, COUNT(*) as count')
+                ->groupBy('event')
+                ->pluck('count', 'event')
                 ->toArray(),
             'today' => $query->clone()
-                ->whereDate('created_at', today())
+                ->whereDate('created_at', now()->toDateString())
                 ->count(),
             'this_week' => $query->clone()
                 ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
