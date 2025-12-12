@@ -29,7 +29,7 @@ pest()->extend(TestCase::class)->in('Feature', 'Unit');
 |
 */
 
-expect()->extend('toBeActivity', fn () => $this->toBeInstanceOf(Activity::class));
+expect()->extend('toBeActivity', fn () => $this->toBeInstanceOf(Activity::class)); // @phpstan-ignore-line
 
 /*
 |--------------------------------------------------------------------------
