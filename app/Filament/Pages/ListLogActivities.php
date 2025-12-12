@@ -288,20 +288,12 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
         /** @var Collection<string, string> $labelMap */
         $labelMap = $extracted
-            ->filter(static fn (Component $field): bool => $field instanceof Field)
+            ->filter(static fn ($field): bool => $field instanceof Field)
             ->mapWithKeys(
-                /** @return array<string, string> */
+                /** @param Field $field
+                 * @return array<string, string>
+                 */
                 static function (Component $field): array {
-                    if (!$field instanceof Field) {
-                        return [];
-                    }
-                    
-                    $name = $field->getName();
-                    $label = $field->getLabel();
-                    $labelString = $label instanceof Htmlable ? $label->toHtml() : (string) $label;
-
-                    return [$name => $labelString];
-                }
                     $name = $field->getName();
                     $label = $field->getLabel();
                     $labelString = $label instanceof Htmlable ? $label->toHtml() : (string) $label;
