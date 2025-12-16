@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0b410a6 (.)
 # Analisi Modelli, Factory e Seeder - Moduli Activity, Gdpr, Tenant, UI, SaluteMo, Xot
 
 ## Modulo Activity
@@ -144,12 +140,9 @@ Modulo specifico per Modena, attualmente non utilizzato attivamente.
 
 ### Totale Modelli Analizzati
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 - **<nome progetto>**: 20 modelli attivi, 7 obsoleti
 >>>>>>> 3cf55f7 (.)
-=======
->>>>>>> 0b410a6 (.)
 - **SaluteOra**: 20 modelli attivi, 7 obsoleti
 - **User**: 35+ modelli attivi
 - **Geo**: 12 modelli attivi, 1 obsoleto
@@ -181,12 +174,9 @@ Modulo specifico per Modena, attualmente non utilizzato attivamente.
 
 ### Moduli Critici per Business Logic
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 1. **<nome progetto>** - Core sanitario ✅ Completo
 >>>>>>> 3cf55f7 (.)
-=======
->>>>>>> 0b410a6 (.)
 1. **SaluteOra** - Core sanitario ✅ Completo
 2. **User** - Autenticazione ✅ Completo  
 3. **Notify** - Comunicazioni ✅ Completo
@@ -203,13 +193,7 @@ Modulo specifico per Modena, attualmente non utilizzato attivamente.
 
 *Ultimo aggiornamento: Gennaio 2025*
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 *Analisi completa sistema <nome progetto>: 150+ modelli, 14 moduli*
 >>>>>>> 3cf55f7 (.)
 *Analisi completa sistema SaluteOra: 150+ modelli, 14 moduli*
-=======
->>>>>>> ffdf0ec (.)
-=======
-*Analisi completa sistema SaluteOra: 150+ modelli, 14 moduli*
->>>>>>> 0b410a6 (.)

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## phpstan fixes per modulo activity
 
 ### listlogactivities (filament page)
@@ -41,5 +40,3 @@
 
 Queste regole vanno seguite per tutte le future modifiche al modulo Activity e aggiornate in questa doc quando emergono nuovi pattern di correzione.
 
-=======
->>>>>>> ffdf0ec (.)

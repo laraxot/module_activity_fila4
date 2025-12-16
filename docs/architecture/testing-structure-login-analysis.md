@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Struttura Corretta dei Test di Login - Analisi Completa 
 # Struttura Corretta dei Test di Login - Analisi Completa <nome progetto>
-=======
-# Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
->>>>>>> 0b410a6 (.)
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
 
@@ -171,10 +166,4 @@ function createTestUser(array $attributes = []): UserContract
 3. **SEMPRE** usare pattern XotData
 4. **SEMPRE** approfondire prima di agire
 
-<<<<<<< HEAD
 *Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
-=======
->>>>>>> ffdf0ec (.)
-=======
-*Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
->>>>>>> 0b410a6 (.)

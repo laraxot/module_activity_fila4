@@ -4,38 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> b1cd7fc (.)
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Snapshot;
 use Tests\TestCase;
-<<<<<<< HEAD
-=======
-=======
-=======
->>>>>>> origin/develop
-use Modules\Activity\Models\Snapshot;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
-<<<<<<< HEAD
->>>>>>> a12f125f4a (.)
-=======
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
-use Modules\Activity\Models\Snapshot;
-use Tests\TestCase;
->>>>>>> b93ef594b4 (.)
-=======
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
 
 class SnapshotBusinessLogicTest extends TestCase
 {
@@ -233,51 +205,6 @@ class SnapshotBusinessLogicTest extends TestCase
         ]);
 
         // Query per versione specifica
-<<<<<<< HEAD
-        $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)
-            ->where('aggregate_version', 1)
-            ->first();
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> b1cd7fc (.)
-        $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 1)->first();
->>>>>>> 0b410a6 (.)
-
-        $version5Snapshot = Snapshot::where('aggregate_uuid', $uuid)
-            ->where('aggregate_version', 5)
-            ->first();
-
-<<<<<<< HEAD
-        $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)
-            ->where('aggregate_version', 10)
-            ->first();
-=======
-        $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 10)->first();
-<<<<<<< HEAD
-=======
-=======
-        $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)
-            ->where('aggregate_version', 1)
-            ->first();
-=======
-        $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 1)->first();
->>>>>>> b93ef594b4 (.)
-
-        $version5Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 5)->first();
-
-<<<<<<< HEAD
-        $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)
-            ->where('aggregate_version', 10)
-            ->first();
->>>>>>> a12f125f4a (.)
-=======
-        $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)->where('aggregate_version', 10)->first();
->>>>>>> b93ef594b4 (.)
-=======
         $version1Snapshot = Snapshot::where('aggregate_uuid', $uuid)
             ->where('aggregate_version', 1)
             ->first();
@@ -289,9 +216,6 @@ class SnapshotBusinessLogicTest extends TestCase
         $version10Snapshot = Snapshot::where('aggregate_uuid', $uuid)
             ->where('aggregate_version', 10)
             ->first();
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
->>>>>>> 0b410a6 (.)
 
         $this->assertNotNull($version1Snapshot);
         $this->assertNotNull($version5Snapshot);
@@ -411,23 +335,7 @@ class SnapshotBusinessLogicTest extends TestCase
     public function it_can_handle_snapshot_with_timestamps(): void
     {
         $now = now();
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> a12f125f4a (.)
-=======
-
->>>>>>> b93ef594b4 (.)
-=======
-        
->>>>>>> origin/develop
->>>>>>> b1cd7fc (.)
         $snapshot = Snapshot::create([
             'aggregate_uuid' => Str::uuid()->toString(),
             'aggregate_version' => 1,

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0b410a6 (.)
 # Activity Module - Testing Guidelines
 
 ## Testing Framework Requirements
@@ -11,12 +7,8 @@ All tests MUST use `.env.testing` configuration:
 ```env
 APP_ENV=testing
 DB_CONNECTION=sqlite
-<<<<<<< HEAD
 DB_DATABASE=<nome progetto>_data_test
 DB_DATABASE=<nome progetto>_data_test
-=======
-DB_DATABASE=saluteora_data_test
->>>>>>> 0b410a6 (.)
 ```
 
 ### Pest Framework Usage
@@ -254,8 +246,3 @@ it('creates snapshots efficiently', function () {
 **Last Updated**: 2025-08-28
 **Testing Framework**: Pest
 **Environment**: .env.testing
-<<<<<<< HEAD
-=======
->>>>>>> ffdf0ec (.)
-=======
->>>>>>> 0b410a6 (.)

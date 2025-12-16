@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0b410a6 (.)
 # Activity Module Filament Resource Guidelines
 
 ## Extension Patterns
@@ -49,11 +45,7 @@ public static function getRelations(): array
 }
 
 // ❌ WRONG - Don't implement form() or table() directly
-<<<<<<< HEAD
 public static function form(\Filament\Schemas\Schema $form): \Filament\Schemas\Schema { ... }
-=======
-public static function form(Form $form): Form { ... }
->>>>>>> 0b410a6 (.)
 public static function table(Table $table): Table { ... }
 ```
 
@@ -112,7 +104,6 @@ All resources must be tested to ensure:
 ### Related Documentation
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 - [XotBaseResource Documentation](../../Xot/project_docs/filament/resources/xot-base-resource.md)
 - [Filament Best Practices](../../Xot/project_docs/filament-best-practices.md)
 - [Laraxot Extension Patterns](../../Xot/project_docs/base-classes.md)
@@ -121,10 +112,3 @@ All resources must be tested to ensure:
 - [Filament Best Practices](../../Xot/docs/filament-best-practices.md)
 - [Laraxot Extension Patterns](../../Xot/docs/base-classes.md)
 >>>>>>> 3cf55f7 (.)
-=======
->>>>>>> ffdf0ec (.)
-=======
-- [XotBaseResource Documentation](../../Xot/project_docs/filament/resources/xot-base-resource.md)
-- [Filament Best Practices](../../Xot/project_docs/filament-best-practices.md)
-- [Laraxot Extension Patterns](../../Xot/project_docs/base-classes.md)
->>>>>>> 0b410a6 (.)
