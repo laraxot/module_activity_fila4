@@ -4,14 +4,23 @@ declare(strict_types=1);
 
 use Modules\Activity\Models\Activity;
 
+<<<<<<< HEAD
 describe('Activity Business Logic', function (): void {
     test('activity has correct connection configured', function (): void {
+=======
+describe('Activity Business Logic', function () {
+    test('activity has correct connection configured', function () {
+>>>>>>> 9baa519 (.)
         $activity = new Activity;
 
         expect($activity->getConnectionName())->toBe('activity');
     });
 
+<<<<<<< HEAD
     test('activity has expected fillable fields', function (): void {
+=======
+    test('activity has expected fillable fields', function () {
+>>>>>>> 9baa519 (.)
         $activity = new Activity;
         $expectedFillable = [
             'id',
