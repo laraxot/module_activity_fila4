@@ -38,10 +38,14 @@ describe('StoredEvent Business Logic', function () {
     });
 
     test('stored event extends eloquent stored event for event sourcing', function () {
+<<<<<<< HEAD
         expect(is_subclass_of(
             StoredEvent::class,
             EloquentStoredEvent::class,
         ))->toBeTrue();
+=======
+        expect(is_subclass_of(StoredEvent::class, EloquentStoredEvent::class))->toBeTrue();
+>>>>>>> 0a00ff2 (.)
     });
 
     test('stored event has factory trait for testing', function () {
