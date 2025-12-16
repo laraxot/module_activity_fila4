@@ -17,6 +17,7 @@ class ListActivities extends XotBaseListRecords
 
     public function getTableColumns(): array
     {
+        // Git conflict resolved: using multiline format for better readability
         return [
             TextColumn::make('id')
                 ->sortable()
