@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Confronto tra Struttura a Domain e Struttura a Moduli
 
 ## Introduzione
@@ -104,3 +105,5 @@ Questo mantiene la logica di business centralizzata e intuitiva, pur beneficiand
 ## Conclusione
 
 Per il modulo `Activity`, la struttura a moduli di Laravel Modules è la base ideale per garantire isolamento e riutilizzabilità. Tuttavia, integrare una struttura a `Domain` interna ci permette di organizzare la logica di business in modo più intuitivo e allineato ai principi di Domain-Driven Design. Questo approccio combinato massimizza i vantaggi di entrambi i paradigmi, rendendo il nostro codice scalabile, manutenibile e concettualmente chiaro.
+=======
+>>>>>>> ffdf0ec (.)

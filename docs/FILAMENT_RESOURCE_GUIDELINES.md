@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Activity Module Filament Resource Guidelines
 
 ## Extension Patterns
@@ -112,3 +113,5 @@ All resources must be tested to ensure:
 - [Filament Best Practices](../../Xot/docs/filament-best-practices.md)
 - [Laraxot Extension Patterns](../../Xot/docs/base-classes.md)
 >>>>>>> 3cf55f7 (.)
+=======
+>>>>>>> ffdf0ec (.)

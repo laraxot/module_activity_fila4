@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎯 ACTIVITY MODULE - ROADMAP 2025
 
 **Modulo**: Activity ([Description])  
@@ -420,3 +421,5 @@ Activity Module
 * [roadmap.md](laravel/Modules/Cms/docs/roadmap.md)
 * [roadmap.md](laravel/Themes/One/docs/roadmap.md)
 
+=======
+>>>>>>> ffdf0ec (.)

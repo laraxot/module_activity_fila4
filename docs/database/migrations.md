@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Migrazioni del modulo Activity
 
 Questo documento descrive le migrazioni del database per il modulo Activity. Ogni migrazione include un docblock e un type hint `Blueprint $table` per migliorare la leggibilità e l'analisi statica con PHPStan.
@@ -29,3 +30,5 @@ Questo documento descrive le migrazioni del database per il modulo Activity. Ogn
 * [migrations.md](../../../Gdpr/docs/migrations.md)
 * [migrations.md](../../../Notify/docs/migrations.md)
 
+=======
+>>>>>>> ffdf0ec (.)

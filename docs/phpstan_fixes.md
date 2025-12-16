@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Correzioni PHPStan per il Modulo Activity
 
 ## Panoramica
@@ -78,3 +79,5 @@ Il modulo Activity dimostra un'eccellente qualità del codice, raggiungendo il l
 * [phpstan_fixes.md](laravel/Modules/User/docs/fixes/phpstan_fixes.md)
 * [phpstan_fixes.md](laravel/Modules/Activity/docs/phpstan_fixes.md)
 
+=======
+>>>>>>> ffdf0ec (.)

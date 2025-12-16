@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Struttura Corretta dei Test di Login - Analisi Completa 
 # Struttura Corretta dei Test di Login - Analisi Completa <nome progetto>
 
@@ -167,3 +168,5 @@ function createTestUser(array $attributes = []): UserContract
 4. **SEMPRE** approfondire prima di agire
 
 *Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
+=======
+>>>>>>> ffdf0ec (.)
