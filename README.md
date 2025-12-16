@@ -470,8 +470,8 @@ return [
         'enabled' => true,
         'models' => [
             'App\Models\User',
-            'Modules\SaluteOra\Models\Appointment',
-            'Modules\SaluteOra\Models\Patient',
+            'Modules\<nome progetto>\Models\Appointment',
+            'Modules\<nome progetto>\Models\Patient',
         ],
         'events' => [
             'created', 'updated', 'deleted'

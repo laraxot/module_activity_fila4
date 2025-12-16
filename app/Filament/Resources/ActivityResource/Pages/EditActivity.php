@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources\ActivityResource\Pages;
 
-use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
 use Filament\Actions\DeleteAction;
 use Modules\Activity\Filament\Resources\ActivityResource;
+use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
 
 class EditActivity extends XotBaseEditRecord
 {

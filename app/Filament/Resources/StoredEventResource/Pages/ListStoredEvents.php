@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Resources\StoredEventResource\Pages;
 
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables;
 use Modules\Activity\Filament\Resources\StoredEventResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
