@@ -74,6 +74,7 @@ class ActivityServiceProvider extends XotBaseServiceProvider
 - **Modulo User**: Per tracciare gli utenti che eseguono le azioni
 - **spatie/laravel-activitylog**: Core per il tracciamento attività
 - **spatie/laravel-event-sourcing**: Event sourcing pattern
+- **spatie/laravel-translatable**: Per campi multilingua (se necessario)
 
 ## Componenti Forniti
 
@@ -248,6 +249,7 @@ php artisan module:list | grep Activity
 
 ### Guide Generali
 - [Laraxot Conventions](../../../docs/laraxot-conventions.md)
+- [Spatie Translatable](../../../docs/spatie-translatable.md)
 
 ## Testing
 
@@ -275,6 +277,15 @@ php artisan test --filter=Activity
 
 # Eseguire solo i test delle Actions
 php artisan test --filter=ListLogActivitiesActionTest
+
+# Eseguire solo i test di conformità PHPStan
+php artisan test --filter=PHPStanComplianceTest
+
+# Eseguire solo i test di qualità del codice
+php artisan test --filter=CodeQualityTest
+
+# Analizzare qualità del codice con PHPInsights
+./vendor/bin/phpinsights analyze Modules/Activity --no-interaction
 
 # Eseguire test specifici
 php artisan test --filter="test_can_instantiate_action"
