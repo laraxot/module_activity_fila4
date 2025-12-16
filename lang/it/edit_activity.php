@@ -1,6 +1,9 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 18dcd64 (.)
 declare(strict_types=1);
 
 return [
@@ -49,6 +52,7 @@ return [
         'properties.json' => 'Le proprietà devono essere un JSON valido',
     ],
 ];
+<<<<<<< HEAD
 =======
 return array (
   'actions' => 
@@ -68,3 +72,5 @@ return array (
   ),
 );
 >>>>>>> 0a00ff2 (.)
+=======
+>>>>>>> 18dcd64 (.)
