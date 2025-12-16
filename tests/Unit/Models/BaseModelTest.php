@@ -71,8 +71,7 @@ test('base model extends eloquent model', function (): void {
     expect($baseModel)->toBeInstanceOf(Model::class);
 =======
 beforeEach(function () {
-    $this->baseModel = new class extends BaseModel
-    {
+    $this->baseModel = new class extends BaseModel {
         protected $table = 'test_activity_table';
     };
 >>>>>>> 9baa519 (.)

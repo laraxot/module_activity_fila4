@@ -59,40 +59,51 @@ class StoredEventFactory extends Factory
 
     /**
      * Create stored event with specific UUID.
+     *
+     * @param string $uuid
+     * @return static
      */
     public function withUuid(string $uuid): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'aggregate_uuid' => $uuid,
         ]);
     }
 
     /**
      * Create stored event with specific version.
+     *
+     * @param int $version
+     * @return static
      */
     public function withVersion(int $version): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'aggregate_version' => $version,
         ]);
     }
 
     /**
      * Create stored event with specific event class.
+     *
+     * @param string $eventClass
+     * @return static
      */
     public function withEventClass(string $eventClass): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'event_class' => $eventClass,
         ]);
     }
 
     /**
      * Create user-related stored event.
+     *
+     * @return static
      */
     public function userEvent(): static
     {
-        return $this->state(fn (array $attributes): array => [
+        return $this->state(fn(array $attributes): array => [
             'event_class' => 'App\\Events\\UserRegistered',
             'event_properties' => array_merge((array) ($attributes['event_properties'] ?? []), [
                 'user_id' => $this->faker->numberBetween(1, 100),

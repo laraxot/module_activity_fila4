@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Providers\Filament;
 
+use Override;
 use Filament\Panel;
 use Modules\Xot\Providers\Filament\XotBasePanelProvider;
-use Override;
 
 class AdminPanelProvider extends XotBasePanelProvider
 {
@@ -15,6 +15,8 @@ class AdminPanelProvider extends XotBasePanelProvider
     #[Override]
     public function panel(Panel $panel): Panel
     {
-        return parent::panel($panel);
+        $panel = parent::panel($panel);
+
+        return $panel;
     }
 }

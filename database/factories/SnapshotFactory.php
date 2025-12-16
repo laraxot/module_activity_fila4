@@ -46,20 +46,26 @@ class SnapshotFactory extends Factory
 
     /**
      * Create snapshot with specific UUID.
+     *
+     * @param string $uuid
+     * @return static
      */
     public function withUuid(string $uuid): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'aggregate_uuid' => $uuid,
         ]);
     }
 
     /**
      * Create snapshot with specific version.
+     *
+     * @param int $version
+     * @return static
      */
     public function withVersion(int $version): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'aggregate_version' => $version,
         ]);
     }
@@ -67,11 +73,12 @@ class SnapshotFactory extends Factory
     /**
      * Create snapshot with specific state.
      *
-     * @param  array<string, mixed>  $state
+     * @param array<string, mixed> $state
+     * @return static
      */
     public function withState(array $state): static
     {
-        return $this->state(fn (array $_attributes): array => [
+        return $this->state(fn(array $_attributes): array => [
             'state' => $state,
         ]);
     }
