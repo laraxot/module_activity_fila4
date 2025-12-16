@@ -6,13 +6,13 @@ use Modules\Activity\Models\Activity;
 
 describe('Activity Business Logic', function () {
     test('activity has correct connection configured', function () {
-        $activity = new Activity();
+        $activity = new Activity;
 
         expect($activity->getConnectionName())->toBe('activity');
     });
 
     test('activity has expected fillable fields', function () {
-        $activity = new Activity();
+        $activity = new Activity;
         $expectedFillable = [
             'id',
             'log_name',
