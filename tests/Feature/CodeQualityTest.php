@@ -176,22 +176,11 @@ class CodeQualityTest extends TestCase
      */
     private function assertPhpFileHasValidSyntax(string $filePath): void
     {
-        $content = file_get_contents($filePath);
-
-        // Rimuovi il contenuto tra i commenti PHP
-        $content = preg_replace('/\/\*.*?\*\//s', '', $content);
-        $content = preg_replace('/\/\/.*$/m', '', $content);
-
-        // Verifica che non ci siano errori di sintassi evidenti
-        $this->assertNotEmpty($content, "File {$filePath} è vuoto");
-
-        // Verifica che inizi con <?php o declare
-        $this->assertTrue(
-            str_starts_with(trim($content), '<?php') || str_starts_with(trim($content), 'declare'),
-            "File {$filePath} deve iniziare con <?php o declare"
-        );
-
-        // Verifica che termini con ?>
-        $this->assertStringEndsWith('?>', trim($content), "File {$filePath} deve terminare con ?>");
+        // PHPStan Level 10: Use php -l for syntax check
+        $output = [];
+        $resultCode = 0;
+        exec("php -l " . escapeshellarg($filePath) . " 2>&1", $output, $resultCode);
+        
+        $this->assertEquals(0, $resultCode, "File {$filePath} ha errori di sintassi: " . implode("\n", $output));
     }
 }
