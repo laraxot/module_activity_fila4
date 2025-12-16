@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Collection;
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

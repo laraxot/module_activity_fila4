@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature\Actions;
 
-use Modules\IndennitaResponsabilita\Filament\Resources\IndennitaResponsabilitaResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Activity\Filament\Actions\ListLogActivitiesAction;
 use Modules\Activity\Models\Activity;
