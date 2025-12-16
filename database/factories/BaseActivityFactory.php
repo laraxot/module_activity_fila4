@@ -9,10 +9,6 @@ use Modules\Activity\Models\Activity;
 
 /**
  * @extends Factory<Activity>
-use Modules\Activity\Models\BaseActivity;
-
-/**
- * @extends Factory<BaseActivity>
  */
 class BaseActivityFactory extends Factory
 {
@@ -22,9 +18,6 @@ class BaseActivityFactory extends Factory
      * @var class-string<Activity>
      */
     protected $model = Activity::class;
-     * @var string
-     */
-    protected $model = BaseActivity::class;
 
     /**
      * Define the model's default state.
