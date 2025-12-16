@@ -65,9 +65,17 @@ class TestActivityBaseModel extends BaseModel
 
 uses(TestCase::class, RefreshDatabase::class);
 
+<<<<<<< HEAD
 test('base model extends eloquent model', function (): void {
     $baseModel = new TestActivityBaseModel;
     expect($baseModel)->toBeInstanceOf(Model::class);
+=======
+beforeEach(function () {
+    $this->baseModel = new class extends BaseModel
+    {
+        protected $table = 'test_activity_table';
+    };
+>>>>>>> 9baa519 (.)
 });
 
 test('base model has correct table name', function (): void {
