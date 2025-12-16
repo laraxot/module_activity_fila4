@@ -115,6 +115,9 @@ class Activity extends SpatieActivity
         'subject_type',
         'event',
         'subject_id',
+        'causer_type', // Added
+        'causer_id',   // Added
+        'properties', // Added
     ];
 
     

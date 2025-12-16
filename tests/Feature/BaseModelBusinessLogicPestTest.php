@@ -7,7 +7,6 @@ namespace Modules\Activity\Tests\Feature;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
 use Modules\Xot\Traits\Updater;
@@ -15,7 +14,6 @@ use Tests\TestCase;
 
 use function Safe\class_uses;
 
-uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function (): void {
     /* @phpstan-ignore-next-line property.notFound */

@@ -2,25 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Modules\Activity\Tests\Feature;
+use function Safe\class_uses;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
 use Modules\Xot\Traits\Updater;
-use Tests\TestCase;
 
-class BaseModelBusinessLogicTest extends TestCase
-{
-    use RefreshDatabase;
+uses()->group('activity', 'base-model');
 
-    /** @test */
-    public function it_can_create_base_model_instance(): void
-    {
-        // Creiamo una classe concreta che estende BaseModel per i test
+describe('BaseModel Business Logic', function () {
+    test('it can create base model instance', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -29,71 +23,59 @@ class BaseModelBusinessLogicTest extends TestCase
             protected $fillable = ['name', 'value'];
         };
 
-        $this->assertInstanceOf(BaseModel::class, $concreteModel);
-        $this->assertInstanceOf(Model::class, $concreteModel);
-    }
+        expect($concreteModel)->toBeInstanceOf(BaseModel::class)
+            ->and($concreteModel)->toBeInstanceOf(Model::class);
+    });
 
-    /** @test */
-    public function it_has_correct_connection_setting(): void
-    {
+    test('it has correct connection setting', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals('activity', $concreteModel->getConnectionName());
-    }
+        expect($concreteModel->getConnectionName())->toBe('activity');
+    });
 
-    /** @test */
-    public function it_has_correct_primary_key_setting(): void
-    {
+    test('it has correct primary key setting', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals('id', $concreteModel->getKeyName());
-        $this->assertEquals('string', $concreteModel->getKeyType());
-        $this->assertTrue($concreteModel->getIncrementing());
-    }
+        expect($concreteModel->getKeyName())->toBe('id')
+            ->and($concreteModel->getKeyType())->toBe('string')
+            ->and($concreteModel->getIncrementing())->toBeTrue();
+    });
 
-    /** @test */
-    public function it_has_correct_timestamps_setting(): void
-    {
+    test('it has correct timestamps setting', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertTrue($concreteModel->usesTimestamps());
-        $this->assertTrue($concreteModel->timestamps);
-    }
+        expect($concreteModel->usesTimestamps())->toBeTrue()
+            ->and($concreteModel->timestamps)->toBeTrue();
+    });
 
-    /** @test */
-    public function it_has_correct_per_page_setting(): void
-    {
+    test('it has correct per page setting', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals(30, $concreteModel->getPerPage());
-    }
+        expect($concreteModel->getPerPage())->toBe(30);
+    });
 
-    /** @test */
-    public function it_has_correct_snake_attributes_setting(): void
-    {
+    test('it has correct snake attributes setting', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertTrue($concreteModel::$snakeAttributes);
-    }
+        expect($concreteModel::$snakeAttributes)->toBeTrue();
+    });
 
-    /** @test */
-    public function it_has_correct_casts_configuration(): void
-    {
+    test('it has correct casts configuration', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -101,37 +83,27 @@ class BaseModelBusinessLogicTest extends TestCase
 
         $casts = $concreteModel->getCasts();
 
-        $this->assertArrayHasKey('id', $casts);
-        $this->assertEquals('string', $casts['id']);
+        expect($casts)->toHaveKey('id')
+            ->and($casts['id'])->toBe('string')
+            ->and($casts)->toHaveKey('uuid')
+            ->and($casts['uuid'])->toBe('string')
+            ->and($casts)->toHaveKey('created_at')
+            ->and($casts['created_at'])->toBe('datetime')
+            ->and($casts)->toHaveKey('updated_at')
+            ->and($casts['updated_at'])->toBe('datetime')
+            ->and($casts)->toHaveKey('deleted_at')
+            ->and($casts['deleted_at'])->toBe('datetime')
+            ->and($casts)->toHaveKey('updated_by')
+            ->and($casts['updated_by'])->toBe('string')
+            ->and($casts)->toHaveKey('created_by')
+            ->and($casts['created_by'])->toBe('string')
+            ->and($casts)->toHaveKey('deleted_by')
+            ->and($casts['deleted_by'])->toBe('string')
+            ->and($casts)->toHaveKey('published_at')
+            ->and($casts['published_at'])->toBe('datetime');
+    });
 
-        $this->assertArrayHasKey('uuid', $casts);
-        $this->assertEquals('string', $casts['uuid']);
-
-        $this->assertArrayHasKey('created_at', $casts);
-        $this->assertEquals('datetime', $casts['created_at']);
-
-        $this->assertArrayHasKey('updated_at', $casts);
-        $this->assertEquals('datetime', $casts['updated_at']);
-
-        $this->assertArrayHasKey('deleted_at', $casts);
-        $this->assertEquals('datetime', $casts['deleted_at']);
-
-        $this->assertArrayHasKey('updated_by', $casts);
-        $this->assertEquals('string', $casts['updated_by']);
-
-        $this->assertArrayHasKey('created_by', $casts);
-        $this->assertEquals('string', $casts['created_by']);
-
-        $this->assertArrayHasKey('deleted_by', $casts);
-        $this->assertEquals('string', $casts['deleted_by']);
-
-        $this->assertArrayHasKey('published_at', $casts);
-        $this->assertEquals('datetime', $casts['published_at']);
-    }
-
-    /** @test */
-    public function it_can_use_factory(): void
-    {
+    test('it can use factory', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -140,37 +112,31 @@ class BaseModelBusinessLogicTest extends TestCase
             protected $fillable = ['name', 'value'];
         };
 
-        $this->assertTrue(method_exists($concreteModel, 'factory'));
-        $this->assertTrue(method_exists($concreteModel, 'newFactory'));
-    }
+        expect(method_exists($concreteModel, 'factory'))->toBeTrue()
+            ->and(method_exists($concreteModel, 'newFactory'))->toBeTrue();
+    });
 
-    /** @test */
-    public function it_has_updater_trait(): void
-    {
+    test('it has updater trait', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
         $traits = class_uses($concreteModel);
-        $this->assertContains(Updater::class, $traits);
-    }
+        expect($traits)->toContain(Updater::class);
+    });
 
-    /** @test */
-    public function it_has_has_factory_trait(): void
-    {
+    test('it has has factory trait', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
         $traits = class_uses($concreteModel);
-        $this->assertContains(HasFactory::class, $traits);
-    }
+        expect($traits)->toContain(HasFactory::class);
+    });
 
-    /** @test */
-    public function it_can_handle_uuid_generation(): void
-    {
+    test('it can handle uuid generation', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -183,13 +149,11 @@ class BaseModelBusinessLogicTest extends TestCase
         $concreteModel->uuid = $uuid;
         $concreteModel->name = 'Test Model';
 
-        $this->assertEquals($uuid, $concreteModel->uuid);
-        $this->assertEquals('Test Model', $concreteModel->name);
-    }
+        expect($concreteModel->uuid)->toBe($uuid)
+            ->and($concreteModel->name)->toBe('Test Model');
+    });
 
-    /** @test */
-    public function it_can_handle_timestamps(): void
-    {
+    test('it can handle timestamps', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -202,13 +166,11 @@ class BaseModelBusinessLogicTest extends TestCase
         $concreteModel->created_at = $now;
         $concreteModel->updated_at = $now;
 
-        $this->assertEquals($now->timestamp, $concreteModel->created_at->timestamp);
-        $this->assertEquals($now->timestamp, $concreteModel->updated_at->timestamp);
-    }
+        expect($concreteModel->created_at->timestamp)->toBe($now->timestamp)
+            ->and($concreteModel->updated_at->timestamp)->toBe($now->timestamp);
+    });
 
-    /** @test */
-    public function it_can_handle_soft_deletes(): void
-    {
+    test('it can handle soft deletes', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -220,12 +182,10 @@ class BaseModelBusinessLogicTest extends TestCase
         $now = now();
         $concreteModel->deleted_at = $now;
 
-        $this->assertEquals($now->timestamp, $concreteModel->deleted_at->timestamp);
-    }
+        expect($concreteModel->deleted_at->timestamp)->toBe($now->timestamp);
+    });
 
-    /** @test */
-    public function it_can_handle_published_at_timestamp(): void
-    {
+    test('it can handle published at timestamp', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -237,12 +197,10 @@ class BaseModelBusinessLogicTest extends TestCase
         $now = now();
         $concreteModel->published_at = $now;
 
-        $this->assertEquals($now->timestamp, $concreteModel->published_at->timestamp);
-    }
+        expect($concreteModel->published_at->timestamp)->toBe($now->timestamp);
+    });
 
-    /** @test */
-    public function it_can_handle_user_tracking_fields(): void
-    {
+    test('it can handle user tracking fields', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -255,14 +213,12 @@ class BaseModelBusinessLogicTest extends TestCase
         $concreteModel->updated_by = 'user-456';
         $concreteModel->deleted_by = 'user-789';
 
-        $this->assertEquals('user-123', $concreteModel->created_by);
-        $this->assertEquals('user-456', $concreteModel->updated_by);
-        $this->assertEquals('user-789', $concreteModel->deleted_by);
-    }
+        expect($concreteModel->created_by)->toBe('user-123')
+            ->and($concreteModel->updated_by)->toBe('user-456')
+            ->and($concreteModel->deleted_by)->toBe('user-789');
+    });
 
-    /** @test */
-    public function it_has_correct_hidden_attributes(): void
-    {
+    test('it has correct hidden attributes', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -270,120 +226,97 @@ class BaseModelBusinessLogicTest extends TestCase
 
         $hidden = $concreteModel->getHidden();
 
-        // Verifica che gli attributi nascosti siano configurati correttamente
-        $this->assertIsArray($hidden);
-        // Nota: il BaseModel ha un array vuoto per $hidden, quindi non dovrebbe contenere 'password'
-        $this->assertNotContains('password', $hidden);
-    }
+        expect($hidden)->toBeArray()
+            ->and($hidden)->not->toContain('password');
+    });
 
-    /** @test */
-    public function it_can_use_connection_methods(): void
-    {
+    test('it can use connection methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals('activity', $concreteModel->getConnectionName());
-        $this->assertInstanceOf(ConnectionInterface::class, $concreteModel->getConnection());
-    }
+        expect($concreteModel->getConnectionName())->toBe('activity')
+            ->and($concreteModel->getConnection())->toBeInstanceOf(ConnectionInterface::class);
+    });
 
-    /** @test */
-    public function it_can_use_table_methods(): void
-    {
+    test('it can use table methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals('test_models', $concreteModel->getTable());
-    }
+        expect($concreteModel->getTable())->toBe('test_models');
+    });
 
-    /** @test */
-    public function it_can_use_key_methods(): void
-    {
+    test('it can use key methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals('id', $concreteModel->getKeyName());
-        $this->assertEquals('string', $concreteModel->getKeyType());
-        $this->assertTrue($concreteModel->getIncrementing());
-    }
+        expect($concreteModel->getKeyName())->toBe('id')
+            ->and($concreteModel->getKeyType())->toBe('string')
+            ->and($concreteModel->getIncrementing())->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_use_timestamp_methods(): void
-    {
+    test('it can use timestamp methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertTrue($concreteModel->usesTimestamps());
-        $this->assertTrue($concreteModel->timestamps);
+        expect($concreteModel->usesTimestamps())->toBeTrue()
+            ->and($concreteModel->timestamps)->toBeTrue()
+            ->and($concreteModel->getCreatedAtColumn())->toBe('created_at')
+            ->and($concreteModel->getUpdatedAtColumn())->toBe('updated_at');
+    });
 
-        $this->assertEquals('created_at', $concreteModel->getCreatedAtColumn());
-        $this->assertEquals('updated_at', $concreteModel->getUpdatedAtColumn());
-    }
-
-    /** @test */
-    public function it_can_use_per_page_methods(): void
-    {
+    test('it can use per page methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertEquals(30, $concreteModel->getPerPage());
+        expect($concreteModel->getPerPage())->toBe(30);
 
-        // Test setPerPage
         $concreteModel->setPerPage(50);
-        $this->assertEquals(50, $concreteModel->getPerPage());
-    }
+        expect($concreteModel->getPerPage())->toBe(50);
+    });
 
-    /** @test */
-    public function it_can_use_snake_attributes_methods(): void
-    {
+    test('it can use snake attributes methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
-        $this->assertTrue($concreteModel::$snakeAttributes);
+        expect($concreteModel::$snakeAttributes)->toBeTrue();
 
-        // Test setSnakeAttributes
         $concreteModel::$snakeAttributes = false;
-        $this->assertFalse($concreteModel::$snakeAttributes);
+        expect($concreteModel::$snakeAttributes)->toBeFalse();
 
-        // Ripristina il valore originale
         $concreteModel::$snakeAttributes = true;
-        $this->assertTrue($concreteModel::$snakeAttributes);
-    }
+        expect($concreteModel::$snakeAttributes)->toBeTrue();
+    });
 
-    /** @test */
-    public function it_can_use_casts_methods(): void
-    {
+    test('it can use casts methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
         };
 
         $casts = $concreteModel->getCasts();
-        $this->assertIsArray($casts);
-        $this->assertArrayHasKey('id', $casts);
-        $this->assertArrayHasKey('created_at', $casts);
-        $this->assertArrayHasKey('updated_at', $casts);
+        expect($casts)->toBeArray()
+            ->and($casts)->toHaveKey('id')
+            ->and($casts)->toHaveKey('created_at')
+            ->and($casts)->toHaveKey('updated_at');
 
-        // Test setCasts
         $newCasts = ['test_field' => 'string'];
         $concreteModel->setCasts($newCasts);
-        $this->assertEquals($newCasts, $concreteModel->getCasts());
-    }
+        expect($concreteModel->getCasts())->toBe($newCasts);
+    });
 
-    /** @test */
-    public function it_can_use_fillable_methods(): void
-    {
+    test('it can use fillable methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -393,19 +326,16 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $fillable = $concreteModel->getFillable();
-        $this->assertIsArray($fillable);
-        $this->assertContains('name', $fillable);
-        $this->assertContains('value', $fillable);
+        expect($fillable)->toBeArray()
+            ->and($fillable)->toContain('name')
+            ->and($fillable)->toContain('value');
 
-        // Test setFillable
         $newFillable = ['new_field'];
         $concreteModel->setFillable($newFillable);
-        $this->assertEquals($newFillable, $concreteModel->getFillable());
-    }
+        expect($concreteModel->getFillable())->toBe($newFillable);
+    });
 
-    /** @test */
-    public function it_can_use_hidden_methods(): void
-    {
+    test('it can use hidden methods', function () {
         $concreteModel = new class() extends BaseModel
         {
             protected $table = 'test_models';
@@ -415,12 +345,11 @@ class BaseModelBusinessLogicTest extends TestCase
         };
 
         $hidden = $concreteModel->getHidden();
-        $this->assertIsArray($hidden);
-        $this->assertContains('secret_field', $hidden);
+        expect($hidden)->toBeArray()
+            ->and($hidden)->toContain('secret_field');
 
-        // Test setHidden
         $newHidden = ['new_secret'];
         $concreteModel->setHidden($newHidden);
-        $this->assertEquals($newHidden, $concreteModel->getHidden());
-    }
-}
+        expect($concreteModel->getHidden())->toBe($newHidden);
+    });
+});
