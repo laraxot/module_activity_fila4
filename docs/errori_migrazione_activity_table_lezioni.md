@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0b410a6 (.)
 # Lezioni Apprese: Errori Migrazione Activity Table
 
 ## Caso Studio: Errore Critico nella Modifica Migrazione Activity
@@ -39,9 +42,12 @@ Per modificare una tabella esistente:
 
 ### **Problema Identificato**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 Nel sistema <nome progetto> abbiamo modelli con tipi di ID diversi:
 >>>>>>> 3cf55f7 (.)
+=======
+>>>>>>> 0b410a6 (.)
 Nel sistema SaluteOra abbiamo modelli con tipi di ID diversi:
 - **User**: UUID (string 36 caratteri)
 - **Admin**: Integer auto-increment
@@ -65,9 +71,12 @@ causer_type = "Modules\User\Models\User"
 // Caso 2: Admin con integer
 causer_id = "123" (integer convertito in string)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 causer_type = "Modules\<nome progetto>\Models\Admin"
 >>>>>>> 3cf55f7 (.)
+=======
+>>>>>>> 0b410a6 (.)
 causer_type = "Modules\SaluteOra\Models\Admin"
 ```
 
@@ -172,13 +181,19 @@ Questa lezione è ora memorizzata permanentemente per:
 ### Moduli Correlati
 - [User Module UUID](../../User/docs/uuid_implementation.md)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 - [<nome progetto> Models](../../<nome progetto>/docs/model_architecture.md)
 >>>>>>> 3cf55f7 (.)
+=======
+>>>>>>> 0b410a6 (.)
 - [SaluteOra Models](../../SaluteOra/docs/model_architecture.md)
 - [Activity Logging](./activity_logging_system.md)
 
 *Ultimo aggiornamento: Gennaio 2025*
 *Lezione appresa: Context-aware migrations con supporto UUID*
+<<<<<<< HEAD
 =======
 >>>>>>> ffdf0ec (.)
+=======
+>>>>>>> 0b410a6 (.)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ==============================================
 # LARAXOT MODULE ACTIVITY - .GITIGNORE
 # ==============================================
@@ -57,6 +58,112 @@ lerna-debug.log*
 # ==============================================
 # LARAVEL SPECIFIC
 # ==============================================
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+# 🔧 Activity Module .gitignore
+# File di configurazione per ignorare file e directory nel modulo Activity
+
+# 📦 Dipendenze e packages
+<<<<<<< HEAD
+=======
+# Dependencies and packages
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+# Dependencies and packages
+>>>>>>> origin/develop
+/vendor/
+/node_modules/
+/docs/vendor/
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+# 🔒 Lock files e cache
+*.lock
+*.cache
+*.phar
+*.jar
+package-lock.json
+composer.lock
+=======
+# Lock files and cache
+=======
+# 🔒 Lock files e cache
+>>>>>>> b93ef594b4 (.)
+*.lock
+*.cache
+*.phar
+*.jar
+package-lock.json
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+composer.lock
+>>>>>>> b93ef594b4 (.)
+=======
+# Lock files and cache
+*.lock
+*.cache
+*.phar
+package-lock.json
+>>>>>>> origin/develop
+yarn-error.log
+npm-debug.log
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+# 📝 Log files
+*.log
+error_log
+
+# 🏗️ Build directories
+=======
+# Log files
+=======
+# 📝 Log files
+>>>>>>> b93ef594b4 (.)
+*.log
+error_log
+
+<<<<<<< HEAD
+# Build directories
+>>>>>>> a12f125f4a (.)
+=======
+# 🏗️ Build directories
+>>>>>>> b93ef594b4 (.)
+=======
+# Log files
+*.log
+
+# Build directories
+>>>>>>> origin/develop
+/build/
+/build
+build/
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+# 📱 Laravel specifici
+=======
+# Laravel specific
+>>>>>>> a12f125f4a (.)
+=======
+# 📱 Laravel specifici
+>>>>>>> b93ef594b4 (.)
+=======
+# Laravel specific
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -65,6 +172,7 @@ public_html/storage
 public_html/hot
 storage/*.key
 .env
+<<<<<<< HEAD
 .env.*
 !.env.example
 
@@ -155,8 +263,173 @@ test_activity_logs.sql
 # ==============================================
 # END OF ACTIVITY .GITIGNORE
 # ==============================================
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+.env.*
+
+# 🗃️ Database directories
+database/Factories_old
+database/Migrations_old
+database/Seeders_old
+database_old
+
+# ⚙️ Configurazioni locali
+=======
+
+# Local configurations
+>>>>>>> a12f125f4a (.)
+=======
+.env.*
+
+# 🗃️ Database directories
+database/Factories_old
+database/Migrations_old
+database/Seeders_old
+database_old
+
+# ⚙️ Configurazioni locali
+>>>>>>> b93ef594b4 (.)
+=======
+
+# Local configurations
+>>>>>>> origin/develop
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b93ef594b4 (.)
+# 🛠️ IDE e editor
+/.idea
+.phpintel
+.vscode/
+*.swp
+*.swo
+*~
+
+# 🔄 Git specifici
+<<<<<<< HEAD
+=======
+# Git specific
+>>>>>>> a12f125f4a (.)
+=======
+>>>>>>> b93ef594b4 (.)
+=======
+# Git specific
+>>>>>>> origin/develop
+.git-blame-ignore-revs
+.git-rewrite/
+.git-rewrite
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+# 🗂️ File temporanei e di sistema
+*.tmp
+=======
+=======
+>>>>>>> origin/develop
+# Temporary and system files
+*.tmp
+*.swp
+*.swo
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+# 🗂️ File temporanei e di sistema
+*.tmp
+>>>>>>> b93ef594b4 (.)
+=======
+>>>>>>> origin/develop
+*.stackdump
+*.exe
+*:Zone.Identifier
+.DS_Store
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+Thumbs.db
+
+# 📋 Backup files
+=======
+>>>>>>> a12f125f4a (.)
+=======
+Thumbs.db
+
+# 📋 Backup files
+>>>>>>> b93ef594b4 (.)
+*.old
+*.old1
+*.backup
+*.backup.*
+<<<<<<< HEAD
+<<<<<<< HEAD
+*.bak
+*.new
+
+# 📚 Documentation e cache
+docs/phpstan/
+docs/cache/
+cache/
+
+# 🎨 Risorse e componenti
+resources/views/Components_old
+
+# 🔧 Development tools
+.windsurf/
+.cursor/
+>>>>>>> b1cd7fc (.)
 
 # File specifici del progetto
 *.fila2
 laravel
+<<<<<<< HEAD
 public_html
+=======
+<<<<<<< HEAD
+public_html
+=======
+public_html
+=======
+=======
+*.bak
+*.new
+>>>>>>> b93ef594b4 (.)
+
+# 📚 Documentation e cache
+docs/phpstan/
+docs/cache/
+cache/
+<<<<<<< HEAD
+>>>>>>> a12f125f4a (.)
+=======
+
+# 🎨 Risorse e componenti
+resources/views/Components_old
+
+# 🔧 Development tools
+.windsurf/
+.cursor/
+
+# 🚫 File specifici del progetto
+*.fila2
+laravel
+public_html
+>>>>>>> b93ef594b4 (.)
+=======
+*.old
+*.old1
+*.backup
+
+# Documentation and cache
+docs/phpstan/
+docs/cache/
+cache/
+>>>>>>> origin/develop
+>>>>>>> b1cd7fc (.)
+>>>>>>> 0b410a6 (.)
