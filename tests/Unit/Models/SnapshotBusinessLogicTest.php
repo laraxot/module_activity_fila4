@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use function Safe\class_uses;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\Snapshot;
 use Spatie\EventSourcing\Snapshots\EloquentSnapshot;
