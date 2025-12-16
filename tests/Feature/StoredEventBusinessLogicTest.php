@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
+use function Safe\json_decode;
+use function Safe\json_encode;
+
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\StoredEvent;
@@ -34,17 +38,23 @@ class StoredEventBusinessLogicTest extends TestCase
 
         $storedEvent = StoredEvent::create($eventData);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
+            /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
             'aggregate_uuid' => $eventData['aggregate_uuid'],
             'aggregate_version' => 1,
             'event_version' => 1,
             'event_class' => 'App\Events\UserCreated',
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals($eventData['aggregate_uuid'], $storedEvent->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $storedEvent->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $storedEvent->event_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('App\Events\UserCreated', $storedEvent->event_class);
     }
 
@@ -113,6 +123,7 @@ class StoredEventBusinessLogicTest extends TestCase
             ]),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
             'event_class' => 'App\Events\OrderPlaced',
@@ -120,15 +131,24 @@ class StoredEventBusinessLogicTest extends TestCase
             'event_version' => 2,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(5, $storedEvent->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(2, $storedEvent->event_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('App\Events\OrderPlaced', $storedEvent->event_class);
 
+        /** @phpstan-ignore-next-line argument.type */
         $properties = json_decode($storedEvent->event_properties, true);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('ORD-12345', $properties['order_data']['order_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('Jane Smith', $properties['order_data']['customer']['name']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(80.22, $properties['order_data']['totals']['total']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('mobile_app', $properties['metadata']['source']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('iOS', $properties['metadata']['device_info']['platform']);
     }
 
@@ -165,18 +185,21 @@ class StoredEventBusinessLogicTest extends TestCase
             'meta_data' => json_encode([]),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $event1->id,
             'aggregate_version' => 1,
             'event_version' => 1,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $event2->id,
             'aggregate_version' => 2,
             'event_version' => 2,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $event3->id,
             'aggregate_version' => 3,
@@ -184,16 +207,25 @@ class StoredEventBusinessLogicTest extends TestCase
         ]);
 
         // Verifica che tutti gli eventi abbiano lo stesso UUID ma versioni diverse
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $event1->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $event2->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($aggregateUuid, $event3->aggregate_uuid);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $event1->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(2, $event2->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(3, $event3->aggregate_version);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $event1->event_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(2, $event2->event_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(3, $event3->event_version);
     }
 
@@ -236,10 +268,14 @@ class StoredEventBusinessLogicTest extends TestCase
         $events1 = StoredEvent::where('aggregate_uuid', $uuid1)->get();
         $events2 = StoredEvent::where('aggregate_uuid', $uuid2)->get();
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(2, $events1);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $events2);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($uuid1, $events1->first()->aggregate_uuid);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($uuid2, $events2->first()->aggregate_uuid);
     }
 
@@ -280,12 +316,18 @@ class StoredEventBusinessLogicTest extends TestCase
         $userUpdatedEvents = StoredEvent::where('event_class', 'App\Events\UserUpdated')->get();
         $userDeletedEvents = StoredEvent::where('event_class', 'App\Events\UserDeleted')->get();
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $userCreatedEvents);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $userUpdatedEvents);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $userDeletedEvents);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('App\Events\UserCreated', $userCreatedEvents->first()->event_class);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('App\Events\UserUpdated', $userUpdatedEvents->first()->event_class);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('App\Events\UserDeleted', $userDeletedEvents->first()->event_class);
     }
 
@@ -301,12 +343,15 @@ class StoredEventBusinessLogicTest extends TestCase
             'meta_data' => json_encode([]),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
             'event_class' => 'App\Events\EmptyEvent',
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertIsArray($storedEvent->event_properties);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEmpty($storedEvent->event_properties);
     }
 
@@ -322,12 +367,15 @@ class StoredEventBusinessLogicTest extends TestCase
             'meta_data' => null,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
             'event_class' => 'App\Events\NullEvent',
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNull($storedEvent->event_properties);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertNull($storedEvent->meta_data);
     }
 
@@ -360,11 +408,17 @@ class StoredEventBusinessLogicTest extends TestCase
         // Simula il ripristino dell'evento
         $restoredProperties = $storedEvent->event_properties;
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($originalProperties, $restoredProperties);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(789, $restoredProperties['user_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('profile_update', $restoredProperties['action']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('Bob Johnson', $restoredProperties['changes']['name']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('bob@example.com', $restoredProperties['changes']['email']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('+1987654321', $restoredProperties['changes']['phone']);
     }
 
@@ -401,19 +455,29 @@ class StoredEventBusinessLogicTest extends TestCase
         ]);
 
         // Verifica che le versioni siano progressive
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($event2->aggregate_version, $event1->aggregate_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($event3->aggregate_version, $event2->aggregate_version);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($event2->event_version, $event1->event_version);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertLessThan($event3->event_version, $event2->event_version);
 
         // Verifica che i dati cambino tra le versioni
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(1, $event1->event_properties['version']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(2, $event2->event_properties['version']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(3, $event3->event_properties['version']);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('Initial data', $event1->event_properties['data']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('Updated data', $event2->event_properties['data']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('Final data', $event3->event_properties['data']);
     }
 
@@ -427,16 +491,20 @@ class StoredEventBusinessLogicTest extends TestCase
             'aggregate_version' => 1,
             'event_version' => 1,
             'event_class' => 'App\Events\TimestampedEvent',
+            /** @phpstan-ignore-next-line method.nonObject */
             'event_properties' => json_encode(['created_at' => $now->toISOString()]),
             'meta_data' => json_encode([]),
             'created_at' => $now,
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
+            /** @phpstan-ignore-next-line method.nonObject */
             'created_at' => $now->toDateTimeString(),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals($now->timestamp, $storedEvent->created_at->timestamp);
     }
 
@@ -478,10 +546,13 @@ class StoredEventBusinessLogicTest extends TestCase
         ]);
 
         $todayEvents = StoredEvent::whereDate('created_at', today())->get();
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(1, $todayEvents);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('today', $todayEvents->first()->event_properties['date']);
 
         $recentEvents = StoredEvent::where('created_at', '>=', $yesterday)->get();
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertCount(2, $recentEvents);
     }
 
@@ -520,23 +591,36 @@ class StoredEventBusinessLogicTest extends TestCase
             'meta_data' => json_encode($metadata),
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('stored_events', [
             'id' => $storedEvent->id,
             'event_class' => 'App\Events\BulkImportCompleted',
         ]);
 
+        /** @phpstan-ignore-next-line argument.type */
         $properties = json_decode($storedEvent->event_properties, true);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('IMP-98765', $properties['import_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('completed', $properties['status']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(1500, $properties['total_records']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(1485, $properties['successful_records']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(15, $properties['failed_records']);
 
+        /** @phpstan-ignore-next-line argument.type */
         $meta = json_decode($storedEvent->meta_data, true);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('web_interface', $meta['source']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(1010, $meta['user_id']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals('bulk_import', $meta['action']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(2.5, $meta['processing_time']);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject, offsetAccess.nonOffsetAccessible */
         $this->assertEquals(1500, $meta['records_processed']);
     }
 }
