@@ -1,26 +1,43 @@
 <?php
 
 declare(strict_types=1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9baa519 (.)
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\StoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 
+<<<<<<< HEAD
 use function Safe\class_uses;
 
 describe('StoredEvent Business Logic', function (): void {
     test('stored event has correct connection configured', function (): void {
+=======
+describe('StoredEvent Business Logic', function () {
+    test('stored event has correct connection configured', function () {
+>>>>>>> 9baa519 (.)
         $storedEvent = new StoredEvent;
 
         expect($storedEvent->getConnectionName())->toBe('activity');
     });
 
+<<<<<<< HEAD
     test('stored event has correct table configured', function (): void {
+=======
+    test('stored event has correct table configured', function () {
+>>>>>>> 9baa519 (.)
         $storedEvent = new StoredEvent;
 
         expect($storedEvent->getTable())->toBe('stored_events');
     });
 
+<<<<<<< HEAD
     test('stored event has expected fillable fields for event sourcing', function (): void {
+=======
+    test('stored event has expected fillable fields for event sourcing', function () {
+>>>>>>> 9baa519 (.)
         $storedEvent = new StoredEvent;
         $expectedFillable = [
             'id',
