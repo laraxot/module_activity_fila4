@@ -7,6 +7,7 @@ use Modules\Activity\Models\BaseSnapshot;
 use Modules\Activity\Models\Snapshot;
 use Spatie\EventSourcing\Snapshots\EloquentSnapshot;
 
+<<<<<<< HEAD
 use function Safe\class_uses;
 
 <<<<<<< HEAD
