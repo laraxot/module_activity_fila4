@@ -5,32 +5,19 @@ declare(strict_types=1);
 namespace Modules\Activity\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-<<<<<<< HEAD
 use Modules\Activity\Models\Activity;
 
 /**
  * @extends Factory<Activity>
-=======
-use Modules\Activity\Models\BaseActivity;
-
-/**
- * @extends Factory<BaseActivity>
->>>>>>> 97b542c (.)
  */
 class BaseActivityFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-<<<<<<< HEAD
      * @var class-string<Activity>
      */
     protected $model = Activity::class;
-=======
-     * @var string
-     */
-    protected $model = BaseActivity::class;
->>>>>>> 97b542c (.)
 
     /**
      * Define the model's default state.
@@ -42,11 +29,7 @@ class BaseActivityFactory extends Factory
         return [
             'log_name' => $this->faker->randomElement(['default', 'auth', 'user', 'system']),
             'description' => $this->faker->sentence(),
-<<<<<<< HEAD
             'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\<nome progetto>\Models\Appointment']),
-=======
-            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\SaluteOra\Models\Appointment']),
->>>>>>> 97b542c (.)
             'subject_id' => $this->faker->numberBetween(1, 1000),
             'causer_type' => $this->faker->randomElement(['Modules\User\Models\User', null]),
             'causer_id' => $this->faker->optional(0.8)->numberBetween(1, 100),
@@ -71,11 +54,7 @@ class BaseActivityFactory extends Factory
                 'User logged in',
                 'User logged out',
                 'Password changed',
-<<<<<<< HEAD
                 'Profile updated',
-=======
-                'Profile updated'
->>>>>>> 97b542c (.)
             ]),
         ]);
     }
@@ -91,11 +70,7 @@ class BaseActivityFactory extends Factory
                 'User created',
                 'User updated',
                 'User deleted',
-<<<<<<< HEAD
                 'User profile modified',
-=======
-                'User profile modified'
->>>>>>> 97b542c (.)
             ]),
         ]);
     }
