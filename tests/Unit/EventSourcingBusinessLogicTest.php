@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Unit;
 
+use function Safe\json_decode;
+use function Safe\json_encode;
+
 use Carbon\Carbon;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
