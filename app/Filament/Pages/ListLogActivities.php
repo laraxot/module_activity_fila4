@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Activity\Filament\Pages;
 
 use Filament\Forms\Components\Field;
+use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
@@ -56,36 +57,18 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
     public function getBreadcrumb(): string
     {
-        $breadcrumb = static::$breadcrumb ?? __('activity::activities.breadcrumb');
-
-        // Convert to string (__() returns string|array|null)
-        if (is_array($breadcrumb)) {
-            return implode(' ', $breadcrumb);
-        }
-
-        return (string) $breadcrumb;
+        return static::$breadcrumb ?? __('activity::activities.breadcrumb');
     }
 
     public function getTitle(): string
     {
-        // PHPStan Level 10: getRecordTitle returns string|Htmlable
+        // PHPStan Level 10: Convert Htmlable to string
         $recordTitle = $this->getRecordTitle();
+        $titleString = $recordTitle instanceof Htmlable
+            ? $recordTitle->toHtml()
+            : (string) $recordTitle;
 
-        // Convert to string (handle Htmlable)
-        if ($recordTitle instanceof \Illuminate\Contracts\Support\Htmlable) {
-            $titleString = $recordTitle->toHtml();
-        } else {
-            $titleString = (string) $recordTitle;
-        }
-
-        $title = __('activity::activities.title', ['record' => $titleString]);
-
-        // __() returns string|array|null
-        if (is_array($title)) {
-            return implode(' ', $title);
-        }
-
-        return (string) $title;
+        return __('activity::activities.title', ['record' => $titleString]);
     }
 
     public function getActivities(): LengthAwarePaginator
@@ -163,7 +146,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
         $result = $this->prepareRestore($key);
         $error = $result['error'] ?? null;
-        if ($error !== null && $error !== '') {
+        if (null !== $error && '' !== $error) {
             $this->sendRestoreFailureNotification((string) $error);
 
             return;
@@ -179,7 +162,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         }
 
         $oldProperties = data_get($activity, 'properties.old');
-        if ($oldProperties === null) {
+        if (null === $oldProperties) {
             $this->sendRestoreFailureNotification();
 
             return;
@@ -230,11 +213,6 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         }
     }
 
-    /**
-     * Create a map between field names and their labels.
-     *
-     * @return Collection<string, string>
-     */
     protected function createFieldLabelMap(): Collection
     {
         $schema = static::getResource()::form(new Schema($this));
@@ -244,24 +222,14 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             throw new \InvalidArgumentException('Form must return a Schema instance');
         }
 
-        /** @var array<int|string, Component> $componentsArray */
         $componentsArray = $schema->getComponents();
 
-        /** @var Collection<int, Component> $components */
+        // componentsArray is always an array from getComponents()
         $components = collect($componentsArray);
-
-        /** @var Collection<int, Component> $extracted */
         $extracted = collect();
 
-        while (true) {
-            /** @var Component|null $component */
-            $component = $components->shift();
-
-            if ($component === null) {
-                break;
-            }
-
-            if ($component instanceof Field) {
+        while (($component = $components->shift()) !== null) {
+            if ($component instanceof Field || $component instanceof MorphToSelect) {
                 $extracted->push($component);
 
                 continue;
@@ -271,12 +239,10 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             if (method_exists($component, 'getChildComponents')) {
                 $children = $component->getChildComponents();
 
-                if (\is_array($children) && $children !== []) {
+                if (\is_array($children) && count($children) > 0) {
                     /** @var array<int|string, Component> $safeChildren */
                     $safeChildren = $children;
-                    /** @var array<int, Component> $normalizedChildren */
-                    $normalizedChildren = array_values($safeChildren);
-                    $components = $components->merge($normalizedChildren);
+                    $components = $components->merge($safeChildren);
 
                     continue;
                 }
@@ -285,49 +251,27 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             $extracted->push($component);
         }
 
-        /** @var Collection<string, string> $labelMap */
-        $labelMap = $extracted
-            ->filter(static fn ($field): bool => $field instanceof Field)
-            ->mapWithKeys(
-                /** @param Field $field
-                 * @return array<string, string>
-                 */
-                static function (Component $field): array {
-                    $name = $field->getName();
-                    $label = $field->getLabel();
-                    $labelString = $label instanceof Htmlable ? $label->toHtml() : (string) $label;
-
-                    return [$name => $labelString];
-                }
-            );
-
-        return $labelMap;
+        return $extracted
+            ->filter(fn ($field) => $field instanceof Field)
+            ->mapWithKeys(fn (Field $field) => [
+                $field->getName() => $field->getLabel(),
+            ]);
     }
 
     protected function sendRestoreSuccessNotification(): Notification
     {
-        $title = __('activity::activities.events.restore_successful');
-        $titleString = is_array($title) ? implode(' ', $title) : (string) $title;
-
         return Notification::make()
-            ->title($titleString)
+            ->title(__('activity::activities.events.restore_successful'))
             ->success()
             ->send();
     }
 
     protected function sendRestoreFailureNotification(?string $message = null): Notification
     {
-        $title = __('activity::activities.events.restore_failed');
-        $titleString = is_array($title) ? implode(' ', $title) : (string) $title;
-
-        $notification = Notification::make()
-            ->title($titleString)
-            ->danger();
-
-        if ($message !== null) {
-            $notification->body($message);
-        }
-
-        return $notification->send();
+        return Notification::make()
+            ->title(__('activity::activities.events.restore_failed'))
+            ->body($message)
+            ->danger()
+            ->send();
     }
 }

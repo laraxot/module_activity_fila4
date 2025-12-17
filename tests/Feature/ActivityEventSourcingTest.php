@@ -10,9 +10,7 @@ use Modules\Activity\Models\StoredEvent;
 use Modules\User\Models\User;
 
 test('activity event sourcing lifecycle works correctly', function () {
-    $user = User::factory()->create(); // @phpstan-ignore-line method.nonObject // @phpstan-ignore-line method.nonObject
-    \assert($user instanceof User);
-    expect($user)->not->toBeNull();
+    $user = User::factory()->create();
 
     $activityData = [
         'log_name' => 'user_actions',
@@ -22,63 +20,48 @@ test('activity event sourcing lifecycle works correctly', function () {
         'causer_type' => User::class,
         'causer_id' => $user->id,
         'properties' => ['action' => 'test', 'result' => 'success'],
-        'event' => 'created',
+        'event' => 'created'
     ];
 
-    $activity = Activity::query()->create($activityData);
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
+    $activity = Activity::create($activityData);
 
     expect($activity)
-        ->toBeInstanceOf(Activity::class);
-
-    expect($activity->log_name)->toBe('user_actions')
-        ->and($activity->description)->toBe('User performed test action')
-        ->and($activity->subject_type)->toBe(User::class)
-        ->and($activity->subject_id)->toBe($user->id)
-        ->and($activity->causer_type)->toBe(User::class)
-        ->and($activity->causer_id)->toBe($user->id)
-        ->and($activity->event)->toBe('created');
-
-    $properties = $activity->properties;
-    expect($properties)->toHaveKey('action', 'test')
-        ->and($properties)->toHaveKey('result', 'success');
+        ->toBeInstanceOf(Activity::class)
+        ->log_name->toBe('user_actions')
+        ->description->toBe('User performed test action')
+        ->subject_type->toBe(User::class)
+        ->subject_id->toBe($user->id)
+        ->causer_type->toBe(User::class)
+        ->causer_id->toBe($user->id)
+        ->properties->toHaveKey('action', 'test')
+        ->properties->toHaveKey('result', 'success')
+        ->event->toBe('created');
 });
 
 test('activity can be queried with complex scopes', function () {
-    $user1 = User::factory()->create(); // @phpstan-ignore-line method.nonObject
-    \assert($user1 instanceof User);
-    expect($user1)->not->toBeNull();
+    $user1 = User::factory()->create();
+    $user2 = User::factory()->create();
 
-    $user2 = User::factory()->create(); // @phpstan-ignore-line method.nonObject
-    \assert($user2 instanceof User);
-    expect($user2)->not->toBeNull();
-
-    $activity1 = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
+    $activity1 = Activity::factory()->create([
         'log_name' => 'security',
         'event' => 'login',
         'causer_type' => User::class,
-        'causer_id' => $user1->id,
+        'causer_id' => $user1->id
     ]);
-    \assert($activity1 instanceof Activity);
-    expect($activity1)->not->toBeNull();
 
-    $activity2 = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
+    $activity2 = Activity::factory()->create([
         'log_name' => 'security',
         'event' => 'logout',
         'causer_type' => User::class,
-        'causer_id' => $user2->id,
+        'causer_id' => $user2->id
     ]);
-    \assert($activity2 instanceof Activity);
-    expect($activity2)->not->toBeNull();
 
-    $activity3 = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
+    $activity3 = Activity::factory()->create([
         'log_name' => 'audit',
         'event' => 'update',
         'causer_type' => User::class,
-        'causer_id' => $user1->id,
+        'causer_id' => $user1->id
     ]);
-    \assert($activity3 instanceof Activity);
 
     $securityActivities = Activity::inLog('security')->get();
     $user1Activities = Activity::causedBy($user1)->get();
@@ -86,19 +69,11 @@ test('activity can be queried with complex scopes', function () {
 
     expect($securityActivities)->toHaveCount(2);
     expect($user1Activities)->toHaveCount(2);
-
-    /** @var Activity|null $firstLoginActivity */
-    $firstLoginActivity = $loginActivities->first();
-    expect($loginActivities)->toHaveCount(1)
-        ->and($firstLoginActivity)->not->toBeNull();
-
-    // Type narrowing assertion
-    expect($firstLoginActivity)->toBeInstanceOf(Activity::class);
-    expect($firstLoginActivity->id)->toBe($activity1->id);
+    expect($loginActivities)->toHaveCount(1)->first()->id->toBe($activity1->id);
 });
 
 test('snapshot creation and retrieval works correctly', function () {
-    $aggregateUuid = Str::uuid()->toString();
+    $aggregateUuid = Str::uuid();
 
     $snapshotData = [
         'aggregate_uuid' => $aggregateUuid,
@@ -107,35 +82,27 @@ test('snapshot creation and retrieval works correctly', function () {
             'balance' => 1000,
             'transactions' => [
                 ['id' => 1, 'amount' => 100, 'type' => 'credit'],
-                ['id' => 2, 'amount' => 50, 'type' => 'debit'],
+                ['id' => 2, 'amount' => 50, 'type' => 'debit']
             ],
-            'status' => 'active',
-        ],
+            'status' => 'active'
+        ]
     ];
 
     $snapshot = Snapshot::create($snapshotData);
-    \assert($snapshot instanceof Snapshot);
-    expect($snapshot)->not->toBeNull();
 
-    expect($snapshot->aggregate_uuid)->toBe($aggregateUuid)
-        ->and($snapshot->aggregate_version)->toBe(5);
+    expect($snapshot)
+        ->aggregate_uuid->toBe($aggregateUuid)
+        ->aggregate_version->toBe(5)
+        ->state->toHaveKey('balance', 1000)
+        ->state->toHaveKey('status', 'active')
+        ->state->transactions->toHaveCount(2);
 
-    $state = $snapshot->state;
-    expect($state)->toBeArray()
-        ->toHaveKey('balance', 1000)
-        ->toHaveKey('status', 'active');
+    $retrievedSnapshot = Snapshot::uuid($aggregateUuid)->first();
 
-    $transactions = $state['transactions'] ?? null;
-    expect($transactions)->toBeArray()->toHaveCount(2);
-
-    /** @var Snapshot|null $retrievedSnapshot */
-    $retrievedSnapshot = Snapshot::uuid($aggregateUuid->toString())->first();
-    \assert($retrievedSnapshot instanceof Snapshot);
-    expect($retrievedSnapshot)->not->toBeNull()
-        ->and($retrievedSnapshot->id)->toBe($snapshot->id);
+    expect($retrievedSnapshot->id)->toBe($snapshot->id);
 });
 
-test('stored event creation and event reconstruction works', function (): void {
+test('stored event creation and event reconstruction works', function () {
     $eventClass = 'App\\Events\\TestEvent';
     $aggregateUuid = Str::uuid();
 
@@ -144,8 +111,8 @@ test('stored event creation and event reconstruction works', function (): void {
         'action' => 'test_action',
         'metadata' => [
             'ip' => '127.0.0.1',
-            'user_agent' => 'Test Browser',
-        ],
+            'user_agent' => 'Test Browser'
+        ]
     ];
 
     $storedEvent = StoredEvent::create([
@@ -154,114 +121,88 @@ test('stored event creation and event reconstruction works', function (): void {
         'event_version' => 1,
         'event_class' => $eventClass,
         'event_properties' => $eventProperties,
-        'meta_data' => ['processed' => true, 'retry_count' => 0],
+        'meta_data' => ['processed' => true, 'retry_count' => 0]
     ]);
-    \assert($storedEvent instanceof StoredEvent);
-    expect($storedEvent)->not->toBeNull();
 
-    expect($storedEvent->event_class)->toBe($eventClass);
-    expect($storedEvent->aggregate_uuid)->toBe($aggregateUuid);
-    expect($storedEvent->event_properties)->toHaveKey('user_id', 1);
-    expect($storedEvent->event_properties)->toHaveKey('action', 'test_action');
-
-    $metaData = $storedEvent->meta_data;
-    expect($metaData)->toBeArray()
-        ->toHaveKey('processed', true)
-        ->toHaveKey('retry_count', 0);
+    expect($storedEvent)
+        ->event_class->toBe($eventClass)
+        ->aggregate_uuid->toBe($aggregateUuid)
+        ->event_properties->toHaveKey('user_id', 1)
+        ->event_properties->toHaveKey('action', 'test_action')
+        ->meta_data->processed->toBeTrue()
+        ->meta_data->retry_count->toBe(0);
 });
 
 test('activity batch operations work correctly', function () {
-    $batchUuid = Str::uuid()->toString();
+    $batchUuid = Str::uuid();
 
-    $activities = Activity::factory()->count(3)->create([ // @phpstan-ignore-line method.nonObject
+    $activities = Activity::factory()->count(3)->create([
         'batch_uuid' => $batchUuid,
-        'log_name' => 'batch_operation',
+        'log_name' => 'batch_operation'
     ]);
-    \assert($activities instanceof \Illuminate\Database\Eloquent\Collection);
-    expect($activities)->toHaveCount(3);
 
-    $batchActivities = Activity::forBatch((string) $batchUuid)->get();
+    $batchActivities = Activity::forBatch($batchUuid)->get();
 
-    expect($batchActivities)->toHaveCount(3);
-
-    foreach ($batchActivities as $activity) {
-        \assert($activity instanceof Activity);
-        expect($activity->batch_uuid)->toBe($batchUuid)
-            ->and($activity->log_name)->toBe('batch_operation');
-    }
+    expect($batchActivities)
+        ->toHaveCount(3)
+        ->each->batch_uuid->toBe($batchUuid)
+        ->each->log_name->toBe('batch_operation');
 });
 
 test('activity with batch scope returns correct results', function () {
-    $withBatch = Activity::factory()->create(['batch_uuid' => Str::uuid()->toString()]); // @phpstan-ignore-line method.nonObject
-    \assert($withBatch instanceof Activity);
-    expect($withBatch)->not->toBeNull();
-
-    Activity::factory()->create(['batch_uuid' => null]); // @phpstan-ignore-line method.nonObject
+    $withBatch = Activity::factory()->create(['batch_uuid' => Str::uuid()]);
+    $withoutBatch = Activity::factory()->create(['batch_uuid' => null]);
 
     $activitiesWithBatch = Activity::hasBatch()->get();
 
-    $firstActivity = $activitiesWithBatch->first();
-    expect($activitiesWithBatch)->toHaveCount(1);
-    \assert($firstActivity instanceof Activity);
-    expect($firstActivity)->not->toBeNull();
-    expect($firstActivity->id)->toBe($withBatch->id);
+    expect($activitiesWithBatch)
+        ->toHaveCount(1)
+        ->first()->id->toBe($withBatch->id);
 });
 
-test('activity properties support complex nested structures', function (): void {
+test('activity properties support complex nested structures', function () {
     $complexProperties = [
         'user' => [
             'id' => 1,
             'name' => 'Test User',
             'roles' => ['admin', 'user'],
-            'permissions' => ['read', 'write', 'delete'],
+            'permissions' => ['read', 'write', 'delete']
         ],
         'action' => 'complex_operation',
         'context' => [
             'request' => [
                 'method' => 'POST',
                 'url' => '/api/test',
-                'headers' => ['Content-Type' => 'application/json'],
+                'headers' => ['Content-Type' => 'application/json']
             ],
             'response' => [
                 'status' => 200,
-                'data' => ['success' => true, 'message' => 'Operation completed'],
-            ],
+                'data' => ['success' => true, 'message' => 'Operation completed']
+            ]
         ],
         'timestamps' => [
             'started_at' => now()->subMinutes(5)->toISOString(),
             'completed_at' => now()->toISOString(),
-            'duration' => 300,
-        ],
+            'duration' => 300
+        ]
     ];
 
-    $activity = Activity::factory()->create(['properties' => $complexProperties]); // @phpstan-ignore-line method.nonObject
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
+    $activity = Activity::factory()->create(['properties' => $complexProperties]);
 
-    $freshActivity = $activity->fresh();
-    \assert($freshActivity instanceof Activity);
-    expect($freshActivity)->not->toBeNull();
-
-    $properties = $freshActivity->properties;
-    expect($properties)
+    expect($activity->fresh()->properties)
         ->toBeInstanceOf(Collection::class)
         ->toHaveKey('user')
         ->toHaveKey('action')
         ->toHaveKey('context')
-        ->toHaveKey('timestamps');
-
-    $userData = $properties->get('user');
-    $contextData = $properties->get('context');
-    $timestampsData = $properties->get('timestamps');
-
-    expect($userData)->toBeArray()->toHaveKeys(['id', 'name', 'roles', 'permissions'])
-        ->and($contextData)->toBeArray()->toHaveKeys(['request', 'response'])
-        ->and($timestampsData)->toBeArray()->toHaveKeys(['started_at', 'completed_at', 'duration']);
+        ->toHaveKey('timestamps')
+        ->user->toBeArray()->toHaveKeys(['id', 'name', 'roles', 'permissions'])
+        ->context->toBeArray()->toHaveKeys(['request', 'response'])
+        ->timestamps->toBeArray()->toHaveKeys(['started_at', 'completed_at', 'duration']);
 });
 
-test('snapshot state maintains data integrity with large datasets', function (): void {
+test('snapshot state maintains data integrity with large datasets', function () {
     $largeState = [
-        'users' => array_map(fn ($i) => [
+        'users' => array_map(fn($i) => [
             'id' => $i,
             'name' => "User {$i}",
             'email' => "user{$i}@example.com",
@@ -269,54 +210,43 @@ test('snapshot state maintains data integrity with large datasets', function ():
             'preferences' => [
                 'theme' => $i % 2 === 0 ? 'dark' : 'light',
                 'notifications' => true,
-                'language' => 'en',
-            ],
+                'language' => 'en'
+            ]
         ], range(1, 100)),
         'metadata' => [
             'generated_at' => now()->toISOString(),
             'version' => '1.0.0',
-            'checksum' => md5('test'),
-        ],
+            'checksum' => md5('test')
+        ]
     ];
 
-    $snapshot = Snapshot::factory()->create(['state' => $largeState]); // @phpstan-ignore-line method.nonObject
-    \assert($snapshot instanceof Snapshot);
-    expect($snapshot)->not->toBeNull();
+    $snapshot = Snapshot::factory()->create(['state' => $largeState]);
 
-    $freshSnapshot = $snapshot->fresh();
-    \assert($freshSnapshot instanceof Snapshot);
-    expect($freshSnapshot)->not->toBeNull();
-
-    $state = $freshSnapshot->state;
-    expect($state)
+    expect($snapshot->fresh()->state)
         ->toBeArray()
         ->toHaveKey('users')
-        ->toHaveKey('metadata');
-
-    $users = $state['users'] ?? null;
-    $metadata = $state['metadata'] ?? null;
-
-    expect($users)->toBeArray()->toHaveCount(100)
-        ->and($metadata)->toBeArray()->toHaveKeys(['generated_at', 'version', 'checksum']);
+        ->toHaveKey('metadata')
+        ->users->toHaveCount(100)
+        ->metadata->toBeArray()->toHaveKeys(['generated_at', 'version', 'checksum']);
 });
 
-test('stored event handles complex event properties with nested arrays', function (): void {
+test('stored event handles complex event properties with nested arrays', function () {
     $complexEvent = [
         'order' => [
             'id' => 12345,
-            'items' => array_map(fn ($i) => [
+            'items' => array_map(fn($i) => [
                 'product_id' => $i,
                 'name' => "Product {$i}",
                 'quantity' => rand(1, 5),
                 'price' => rand(1000, 5000) / 100,
-                'attributes' => ['color' => 'red', 'size' => 'M'],
+                'attributes' => ['color' => 'red', 'size' => 'M']
             ], range(1, 50)),
             'totals' => [
                 'subtotal' => 1234.56,
                 'tax' => 123.46,
                 'shipping' => 15.00,
-                'total' => 1373.02,
-            ],
+                'total' => 1373.02
+            ]
         ],
         'customer' => [
             'id' => 67890,
@@ -327,40 +257,26 @@ test('stored event handles complex event properties with nested arrays', functio
                 'city' => 'Anytown',
                 'state' => 'CA',
                 'zip' => '12345',
-                'country' => 'US',
-            ],
+                'country' => 'US'
+            ]
         ],
         'payment' => [
             'method' => 'credit_card',
             'transaction_id' => 'txn_123456789',
             'status' => 'completed',
-            'amount' => 1373.02,
-        ],
+            'amount' => 1373.02
+        ]
     ];
 
-    $storedEvent = StoredEvent::factory()->create(['event_properties' => $complexEvent]); // @phpstan-ignore-line method.nonObject
-    \assert($storedEvent instanceof StoredEvent);
-    expect($storedEvent)->not->toBeNull();
+    $storedEvent = StoredEvent::factory()->create(['event_properties' => $complexEvent]);
 
-    $freshStoredEvent = $storedEvent->fresh();
-    \assert($freshStoredEvent instanceof StoredEvent);
-    expect($freshStoredEvent)->not->toBeNull();
-
-    $eventProperties = $freshStoredEvent->event_properties;
-    expect($eventProperties)
+    expect($storedEvent->fresh()->event_properties)
         ->toBeArray()
         ->toHaveKey('order')
         ->toHaveKey('customer')
-        ->toHaveKey('payment');
-
-    $order = $eventProperties['order'] ?? null;
-    $customer = $eventProperties['customer'] ?? null;
-    $payment = $eventProperties['payment'] ?? null;
-
-    expect($order)->toBeArray()->toHaveKeys(['id', 'items', 'totals'])
-        ->and($customer)->toBeArray()->toHaveKeys(['id', 'name', 'email', 'address'])
-        ->and($payment)->toBeArray()->toHaveKeys(['method', 'transaction_id', 'status', 'amount']);
-
-    $items = $order['items'] ?? null;
-    expect($items)->toBeArray()->toHaveCount(50);
+        ->toHaveKey('payment')
+        ->order->toBeArray()->toHaveKeys(['id', 'items', 'totals'])
+        ->customer->toBeArray()->toHaveKeys(['id', 'name', 'email', 'address'])
+        ->payment->toBeArray()->toHaveKeys(['method', 'transaction_id', 'status', 'amount'])
+        ->order->items->toHaveCount(50);
 });

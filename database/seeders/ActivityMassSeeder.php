@@ -150,14 +150,8 @@ class ActivityMassSeeder extends Seeder
 
         try {
             // Conta attività
-            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $activityQuery */
-            $activityQuery = Activity::query();
-            $totalActivities = $activityQuery->count();
-
-            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $recentActivitiesQuery */
-            $recentActivitiesQuery = Activity::query()
-                ->where('created_at', '>=', Carbon::now()->subDays(7));
-            $recentActivities = $recentActivitiesQuery->count();
+            $totalActivities = Activity::count();
+            $recentActivities = Activity::where('created_at', '>=', Carbon::now()->subDays(7))->count();
 
             $this->command->info('│ 📝 Attività totali:          '.
             str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT).
@@ -167,21 +161,15 @@ class ActivityMassSeeder extends Seeder
                 ' │');
 
             // Conta snapshot
-            /** @var \Illuminate\Database\Eloquent\Builder<Snapshot> $snapshotQuery */
-            $snapshotQuery = Snapshot::query();
-            $totalSnapshots = $snapshotQuery->count();
+            $totalSnapshots = Snapshot::count();
 
             $this->command->info('│ 📸 Snapshot totali:           '.
             str_pad((string) $totalSnapshots, 6, ' ', STR_PAD_LEFT).
                 ' │');
 
             // Conta eventi memorizzati
-            /** @var \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<StoredEvent> $storedEventQuery */
-            $storedEventQuery = StoredEvent::query();
-            $totalEvents = $storedEventQuery->count();
-            $recentEvents = $storedEventQuery
-                ->where('created_at', '>=', Carbon::now()->subDays(7))
-                ->count();
+            $totalEvents = StoredEvent::count();
+            $recentEvents = StoredEvent::where('created_at', '>=', Carbon::now()->subDays(7))->count();
 
             $this->command->info('│ 📦 Eventi memorizzati:       '.
             str_pad((string) $totalEvents, 6, ' ', STR_PAD_LEFT).

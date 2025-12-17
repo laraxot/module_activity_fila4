@@ -29,7 +29,7 @@ class BaseActivityFactory extends Factory
         return [
             'log_name' => $this->faker->randomElement(['default', 'auth', 'user', 'system']),
             'description' => $this->faker->sentence(),
-            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\SaluteOra\Models\Appointment']),
+            'subject_type' => $this->faker->randomElement(['Modules\User\Models\User', 'Modules\<nome progetto>\Models\Appointment']),
             'subject_id' => $this->faker->numberBetween(1, 1000),
             'causer_type' => $this->faker->randomElement(['Modules\User\Models\User', null]),
             'causer_id' => $this->faker->optional(0.8)->numberBetween(1, 100),
@@ -54,7 +54,7 @@ class BaseActivityFactory extends Factory
                 'User logged in',
                 'User logged out',
                 'Password changed',
-                'Profile updated'
+                'Profile updated',
             ]),
         ]);
     }
@@ -70,7 +70,7 @@ class BaseActivityFactory extends Factory
                 'User created',
                 'User updated',
                 'User deleted',
-                'User profile modified'
+                'User profile modified',
             ]),
         ]);
     }

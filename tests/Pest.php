@@ -16,7 +16,6 @@ use Modules\Activity\Tests\TestCase;
 |
 */
 
-/** @mixin \Modules\Activity\Tests\TestCase */
 pest()->extend(TestCase::class)->in('Feature', 'Unit');
 
 /*
@@ -30,10 +29,7 @@ pest()->extend(TestCase::class)->in('Feature', 'Unit');
 |
 */
 
-expect()->extend('toBeActivity', function () {
-    /** @phpstan-ignore-next-line */
-    return $this->toBeInstanceOf(Activity::class);
-});
+expect()->extend('toBeActivity', fn () => $this->toBeInstanceOf(Activity::class));
 
 /*
 |--------------------------------------------------------------------------
@@ -48,16 +44,10 @@ expect()->extend('toBeActivity', function () {
 
 function createActivity(array $attributes = []): Activity
 {
-    $activity = Activity::factory()->create($attributes);
-    \assert($activity instanceof Activity);
-
-    return $activity;
+    return Activity::factory()->create($attributes);
 }
 
 function makeActivity(array $attributes = []): Activity
 {
-    $activity = Activity::factory()->make($attributes);
-    \assert($activity instanceof Activity);
-
-    return $activity;
+    return Activity::factory()->make($attributes);
 }

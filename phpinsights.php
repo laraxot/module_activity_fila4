@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenNormalClassesSniff;
-use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenTraitsSniff;
+use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 
 return [
     /*
@@ -65,7 +65,7 @@ return [
         ForbiddenSetterSniff::class,
     ],
 
-    'config' => [
+        'config' => [
         /*
         |--------------------------------------------------------------------------
         | Excluded Files
@@ -145,6 +145,20 @@ return [
         'min-architecture' => 80,
         'min-style' => 80,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Threads
+    |--------------------------------------------------------------------------
+    |
+    | Here you may adjust how many threads (core) PHPInsights can use to perform
+    | the analyse. This is optional, don't provide it and the tool will guess
+    | the max core number available. It accepts null value or integer > 0.
+    |
+    */
+
+    'threads' => null,
+];
 
     /*
     |--------------------------------------------------------------------------

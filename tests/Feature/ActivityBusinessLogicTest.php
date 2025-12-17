@@ -5,9 +5,6 @@ declare(strict_types=1);
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 
-use function Safe\json_decode;
-use function Safe\json_encode;
-
 describe('Activity Business Logic', function () {
     it('can create activity with basic information', function () {
         $activityData = [
@@ -190,34 +187,17 @@ describe('Activity Business Logic', function () {
         $authActivities = Activity::where('log_name', 'auth')->get();
         $modelActivities = Activity::where('log_name', 'models')->get();
 
-        /** @var Activity|null $firstAuthActivity */
-        $firstAuthActivity = $authActivities->first();
-        /** @var Activity|null $firstModelActivity */
-        $firstModelActivity = $modelActivities->first();
-
         expect($authActivities)
             ->toHaveCount(1)
             ->and($modelActivities)
             ->toHaveCount(1)
-            ->and($firstAuthActivity)
-            ->not->toBeNull()
-            ->and($firstModelActivity)
-            ->not->toBeNull();
-
-        // Type narrowing assertions
-        expect($firstAuthActivity)->toBeInstanceOf(Activity::class);
-        \assert($firstAuthActivity instanceof Activity);
-        expect($firstModelActivity)->toBeInstanceOf(Activity::class);
-        \assert($firstModelActivity instanceof Activity);
-
-        expect($firstAuthActivity->log_name)
+            ->and($authActivities->first()->log_name)
             ->toBe('auth')
-            ->and($firstModelActivity->log_name)
+            ->and($modelActivities->first()->log_name)
             ->toBe('models');
     });
 
     it('can handle activity with complex properties', function () {
-        /** @var Activity $complexActivity */
         $complexActivity = Activity::create([
             'log_name' => 'complex',
             'description' => 'Complex operation with nested data',
@@ -241,35 +221,13 @@ describe('Activity Business Logic', function () {
             ]),
             'event' => 'order_placed',
         ]);
-        expect($complexActivity)->not->toBeNull();
 
         expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
 
-        $propertiesValue = $complexActivity->properties;
-        // properties può essere Collection, array o stringa, convertiamo sempre a array
-        /** @var array<string, mixed> $properties */
-        $properties = [];
-        if (is_string($propertiesValue)) {
-            $decoded = json_decode($propertiesValue, true);
-            $properties = is_array($decoded) ? $decoded : [];
-        } elseif (is_array($propertiesValue)) {
-            $properties = $propertiesValue;
-        } elseif ($propertiesValue !== null && method_exists($propertiesValue, 'toArray')) {
-            $properties = $propertiesValue->toArray();
-        }
-
-        expect($properties)->toBeArray();
-        expect(isset($properties['order_details']))->toBeTrue();
-        expect(isset($properties['customer_info']))->toBeTrue();
-
-        /** @var array<string, mixed> $orderDetails */
-        $orderDetails = $properties['order_details'];
-        /** @var array<string, mixed> $customerInfo */
-        $customerInfo = $properties['customer_info'];
-
-        expect($orderDetails)->toBeArray()
-            ->and($orderDetails['total_amount'])->toBe(67.48)
-            ->and($customerInfo)->toBeArray()
-            ->and($customerInfo['name'])->toBe('Jane Smith');
+        $properties = json_decode($complexActivity->properties, true);
+        expect($properties['order_details']['total_amount'])
+            ->toBe(67.48)
+            ->and($properties['customer_info']['name'])
+            ->toBe('Jane Smith');
     });
 });

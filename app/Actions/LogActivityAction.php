@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Modules\Activity\Models\Activity;
-use Modules\User\Models\User;
+use Modules\Xot\Datas\XotData;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -29,21 +28,26 @@ class LogActivityAction
         if ($type === '') {
             throw new \InvalidArgumentException('Type cannot be empty');
         }
+        if ($user !== null) {
+            // Type already narrowed to Model|null, assertion not needed
+        }
     }
 
     public function execute(): Activity
     {
+        $userClass = XotData::make()->getUserClass();
+
         $causerId = null;
         if ($this->user !== null) {
-            if (! $this->user instanceof User) {
-                throw new \InvalidArgumentException('User must be an instance of User');
+            if (! is_object($this->user)) {
+                throw new \InvalidArgumentException('User must be an object');
             }
             // Type narrowing for user ID - use getAttribute for Eloquent models
-            $id = $this->user->getAttribute('id');
-            $causerId = is_int($id) || is_string($id) ? $id : null;
+            /** @var int|string $causerId */
+            $causerId = $this->user->getAttribute('id');
         }
         if ($causerId === null) {
-            $causerId = Auth::id();
+            $causerId = auth()->id();
         }
 
         $activityClass = Activity::class;
@@ -53,7 +57,7 @@ class LogActivityAction
             'description' => $this->description ?? sprintf('Activity: %s', $this->type),
             'subject_type' => $this->subject ? get_class($this->subject) : null,
             'subject_id' => $this->subject?->getKey(),
-            'causer_type' => $this->user ? User::class : null,
+            'causer_type' => $this->user ? $userClass : null,
             'causer_id' => $causerId,
             'properties' => $this->properties,
             'event' => $this->type,

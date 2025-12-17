@@ -29,15 +29,13 @@ class LogoutListener
         // Handle session duration if last_login_at is available
         // Assuming last_login_at is a Casted Carbon instance or string
         if (isset($event->user->last_login_at)) {
-            /** @var mixed $lastLoginRaw */
-            $lastLoginRaw = $event->user->last_login_at;
-
-            // Type narrowing for $lastLoginRaw
-            if (is_string($lastLoginRaw) || $lastLoginRaw instanceof \DateTimeInterface) {
-                /** @var \Illuminate\Support\Carbon $lastLogin */
-                $lastLogin = \Illuminate\Support\Carbon::parse($lastLoginRaw);
-                $properties['session_duration'] = abs(now()->diffInSeconds($lastLogin));
+            $lastLogin = $event->user->last_login_at;
+            // Ensure $lastLogin is a Carbon instance
+            if (! $lastLogin instanceof \Carbon\Carbon && ! $lastLogin instanceof \Illuminate\Support\Carbon) {
+                $lastLogin = \Illuminate\Support\Carbon::parse($lastLogin);
             }
+
+            $properties['session_duration'] = abs(now()->diffInSeconds($lastLogin));
         }
 
         // Handle logout reason from request
@@ -49,16 +47,11 @@ class LogoutListener
         // We use the Activity model directly as per the test expectations
         // The test expects 'event' column to be set to 'logout'
 
-        $activity = new Activity;
+        $activity = new Activity();
         $activity->log_name = 'auth';
         $activity->description = 'User logged out'; // specific string not enforced but 'logout' must be contained
         $activity->event = 'logout';
-
-        // Type narrowing for $event->user to ensure it's a Model
-        if ($event->user instanceof \Illuminate\Database\Eloquent\Model) {
-            $activity->causer()->associate($event->user);
-        }
-
+        $activity->causer()->associate($event->user);
         $activity->properties = $properties;
         $activity->save();
     }

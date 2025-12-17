@@ -6,74 +6,48 @@ use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 
 test('user can create activity', function () {
-    $user = User::factory()->create(); // @phpstan-ignore-line method.nonObject
-    \assert($user instanceof User);
-    expect($user)->not->toBeNull();
-
-    $activity = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
-        'log_name' => 'test',
+    $user = User::factory()->create();
+    
+    $activityData = [
+        'name' => 'Test Activity',
         'description' => 'Test Description',
-        'causer_type' => User::class,
-        'causer_id' => $user->id,
-    ]);
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
-
+        'user_id' => $user->id,
+    ];
+    
+    $activity = createActivity($activityData);
+    
     expect($activity)
-        ->toBeInstanceOf(Activity::class)
-        ->and($activity->description)->toBe('Test Description')
-        ->and($activity->causer_id)->toBe($user->id);
+        ->toBeActivity()
+        ->and($activity->name)->toBe('Test Activity')
+        ->and($activity->user_id)->toBe($user->id);
 });
 
 test('activity can be updated', function () {
-    $activity = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
-        'log_name' => 'test',
-        'description' => 'Original Description',
-    ]);
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
-
+    $activity = createActivity();
+    
     $activity->update([
+        'name' => 'Updated Activity',
         'description' => 'Updated Description',
     ]);
-
-    $freshActivity = $activity->fresh();
-    \assert($freshActivity instanceof Activity);
-    expect($freshActivity)->not->toBeNull();
-    expect($freshActivity->description)->toBe('Updated Description');
+    
+    expect($activity->fresh())
+        ->name->toBe('Updated Activity')
+        ->description->toBe('Updated Description');
 });
 
 test('activity can be deleted', function () {
-    $activity = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
-        'log_name' => 'test',
-        'description' => 'Test Description',
-    ]);
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
-
-    $activityId = $activity->id;
+    $activity = createActivity();
+    
     $activity->delete();
-
-    expect(Activity::find($activityId))->toBeNull();
+    
+    expect(Activity::find($activity->id))->toBeNull();
 });
 
 test('activity belongs to user', function () {
-    $user = User::factory()->create(); // @phpstan-ignore-line method.nonObject
-    \assert($user instanceof User);
-    expect($user)->not->toBeNull();
-
-    $activity = Activity::factory()->create([ // @phpstan-ignore-line method.nonObject
-        'log_name' => 'test',
-        'description' => 'Test Description',
-        'causer_type' => User::class,
-        'causer_id' => $user->id,
-    ]);
-    \assert($activity instanceof Activity);
-    expect($activity)->not->toBeNull();
-
-    $causer = $activity->causer;
-    \assert($causer instanceof User);
-    expect($causer)->not->toBeNull()
-        ->toBeInstanceOf(User::class);
-    expect($causer->id)->toBe($user->id);
+    $user = User::factory()->create();
+    $activity = createActivity(['user_id' => $user->id]);
+    
+    expect($activity->user)
+        ->toBeInstanceOf(User::class)
+        ->and($activity->user->id)->toBe($user->id);
 });

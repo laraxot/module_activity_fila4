@@ -33,7 +33,6 @@ use Spatie\EventSourcing\Snapshots\EloquentSnapshot as SpatieSnapshot;
  * @method static Builder<static>|Snapshot whereState($value)
  * @method static Builder<static>|Snapshot whereUpdatedAt($value)
  * @method static Builder<static>|Snapshot whereUpdatedBy($value)
- * @method static \Modules\Activity\Database\Factories\SnapshotFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
