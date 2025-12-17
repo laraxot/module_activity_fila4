@@ -56,9 +56,8 @@ test('snapshot resource should not implement unnecessary methods', function () {
         // If it returns standard pages, it shouldn't be implemented
         $isStandardPages = isset($pagesValue['index'], $pagesValue['create'], $pagesValue['edit']);
 
-        expect($isStandardPages)
-            ->toBeFalse()
-            ->with('SnapshotResource should not implement getPages() for standard pages');
+        expect($isStandardPages, 'SnapshotResource should not implement getPages() for standard pages')
+            ->toBeFalse();
     }
 
     if ($hasUnnecessaryRelations) {
@@ -68,9 +67,8 @@ test('snapshot resource should not implement unnecessary methods', function () {
         // If it returns empty array, it shouldn't be implemented
         $isEmptyRelations = empty($relationsValue);
 
-        expect($isEmptyRelations)
-            ->toBeFalse()
-            ->with('SnapshotResource should not implement getRelations() for empty relations');
+        expect($isEmptyRelations, 'SnapshotResource should not implement getRelations() for empty relations')
+            ->toBeFalse();
     }
 });
 
@@ -88,9 +86,8 @@ test('stored event resource should not implement unnecessary methods', function 
         // If it returns standard pages, it shouldn't be implemented
         $isStandardPages = isset($pagesValue['index'], $pagesValue['create'], $pagesValue['edit']);
 
-        expect($isStandardPages)
-            ->toBeFalse()
-            ->with('StoredEventResource should not implement getPages() for standard pages');
+        expect($isStandardPages, 'StoredEventResource should not implement getPages() for standard pages')
+            ->toBeFalse();
     }
 
     if ($hasUnnecessaryRelations) {
@@ -100,9 +97,8 @@ test('stored event resource should not implement unnecessary methods', function 
         // If it returns empty array, it shouldn't be implemented
         $isEmptyRelations = empty($relationsValue);
 
-        expect($isEmptyRelations)
-            ->toBeFalse()
-            ->with('StoredEventResource should not implement getRelations() for empty relations');
+        expect($isEmptyRelations, 'StoredEventResource should not implement getRelations() for empty relations')
+            ->toBeFalse();
     }
 });
 

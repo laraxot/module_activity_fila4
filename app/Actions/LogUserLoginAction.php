@@ -6,8 +6,7 @@ namespace Modules\Activity\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Activity\Models\Activity;
-use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Datas\XotData;
+use Modules\User\Models\User;
 use Spatie\QueueableAction\QueueableAction;
 
 /**
@@ -20,29 +19,16 @@ class LogUserLoginAction
     use QueueableAction;
 
     public function __construct(
-        public mixed $user
+        public User $user
     ) {
-        $userClass = XotData::make()->getUserClass();
-        if (! $user instanceof $userClass) {
-            throw new \InvalidArgumentException('User must be an instance of '.$userClass);
-        }
     }
 
     public function execute(): Activity
     {
-        // Cast user to Model for type safety
-        $userClass = XotData::make()->getUserClass();
-        if (! $this->user instanceof $userClass) {
-            throw new \InvalidArgumentException('User must be an instance of '.$userClass);
-        }
-
-        /** @var Model&UserContract $userModel */
-        $userModel = $this->user;
-
         $action = new LogActivityAction(
             type: 'login',
             user: $this->user,
-            subject: $userModel,
+            subject: $this->user,
             description: 'User logged in'
         );
 

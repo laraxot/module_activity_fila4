@@ -159,17 +159,3 @@ return [
 
     'threads' => null,
 ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Threads
-    |--------------------------------------------------------------------------
-    |
-    | Here you may adjust how many threads (core) PHPInsights can use to perform
-    | the analyse. This is optional, don't provide it and the tool will guess
-    | the max core number available. It accepts null value or integer > 0.
-    |
-    */
-
-    'threads' => null,
-];
