@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
+use LogicException;
 use Livewire\WithPagination;
 use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
 use Modules\Activity\Models\Activity;
@@ -73,11 +75,9 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         $recordTitle = $this->getRecordTitle();
         
         // Convert to string (handle Htmlable)
-        if ($recordTitle instanceof \Illuminate\Contracts\Support\Htmlable) {
-            $titleString = $recordTitle->toHtml();
-        } else {
-            $titleString = (string) $recordTitle;
-        }
+        $titleString = ($recordTitle instanceof Htmlable)
+            ? $recordTitle->toHtml()
+            : (string) $recordTitle;
 
         $title = __('activity::activities.title', ['record' => $titleString]);
         
@@ -94,16 +94,16 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         // PHPStan Level 10: Type safety for Eloquent relations
         $record = $this->record;
         if (! $record instanceof Model) {
-            throw new \InvalidArgumentException('Record must be an Eloquent Model');
+            throw new InvalidArgumentException('Record must be an Eloquent Model');
         }
 
         if (! method_exists($record, 'activities')) {
-            throw new \LogicException('Record must have activities relationship');
+            throw new LogicException('Record must have activities relationship');
         }
 
         $relation = $record->activities();
         if (! $relation instanceof Relation) {
-            throw new \InvalidArgumentException('activities() must return a Relation');
+            throw new InvalidArgumentException('activities() must return a Relation');
         }
 
         $builderQuery = $relation
@@ -119,7 +119,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         $paginated = $this->paginateQuery($builderQuery);
 
         if (! $paginated instanceof LengthAwarePaginator) {
-            throw new \InvalidArgumentException('paginateQuery() with PaginationMode::Default must return LengthAwarePaginator');
+            throw new InvalidArgumentException('paginateQuery() with PaginationMode::Default must return LengthAwarePaginator');
         }
 
         return $paginated;
@@ -242,7 +242,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
         // PHPStan Level 10: Type safety for schema components
         if (! $schema instanceof Schema) {
-            throw new \InvalidArgumentException('Form must return a Schema instance');
+            throw new InvalidArgumentException('Form must return a Schema instance');
         }
 
         /** @var array<int|string, Component> $componentsArray */
