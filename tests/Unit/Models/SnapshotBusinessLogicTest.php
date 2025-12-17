@@ -17,6 +17,7 @@ describe('Snapshot Business Logic', function () {
 
     test('snapshot has expected fillable fields for event sourcing', function () {
         $snapshot = new Snapshot;
+
         $expectedFillable = [
             'id',
             'aggregate_uuid',

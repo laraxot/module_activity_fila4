@@ -71,16 +71,8 @@ test('snapshot resource should not implement unnecessary methods', function (): 
         /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
         $isStandardPages = isset($pagesValue['index'], $pagesValue['create'], $pagesValue['edit']);
 
-<<<<<<< HEAD
         expect($isStandardPages, 'SnapshotResource should not implement getPages() for standard pages')
             ->toBeFalse();
-=======
-        /* @phpstan-ignore-next-line method.notFound */
-        expect($isStandardPages)
-            ->toBeFalse()
-            /* @phpstan-ignore-next-line method.notFound */
-            ->with('SnapshotResource should not implement getPages() for standard pages');
->>>>>>> 1e9f71a (.)
     }
 
     if ($hasUnnecessaryRelations) {
@@ -92,16 +84,8 @@ test('snapshot resource should not implement unnecessary methods', function (): 
         // If it returns empty array, it shouldn't be implemented
         $isEmptyRelations = empty($relationsValue);
 
-<<<<<<< HEAD
         expect($isEmptyRelations, 'SnapshotResource should not implement getRelations() for empty relations')
             ->toBeFalse();
-=======
-        /* @phpstan-ignore-next-line method.notFound */
-        expect($isEmptyRelations)
-            ->toBeFalse()
-            /* @phpstan-ignore-next-line method.notFound */
-            ->with('SnapshotResource should not implement getRelations() for empty relations');
->>>>>>> 1e9f71a (.)
     }
 });
 
@@ -124,16 +108,8 @@ test('stored event resource should not implement unnecessary methods', function 
         /** @phpstan-ignore-next-line offsetAccess.nonOffsetAccessible */
         $isStandardPages = isset($pagesValue['index'], $pagesValue['create'], $pagesValue['edit']);
 
-<<<<<<< HEAD
         expect($isStandardPages, 'StoredEventResource should not implement getPages() for standard pages')
             ->toBeFalse();
-=======
-        /* @phpstan-ignore-next-line method.notFound */
-        expect($isStandardPages)
-            ->toBeFalse()
-            /* @phpstan-ignore-next-line method.notFound */
-            ->with('StoredEventResource should not implement getPages() for standard pages');
->>>>>>> 1e9f71a (.)
     }
 
     if ($hasUnnecessaryRelations) {
@@ -145,16 +121,8 @@ test('stored event resource should not implement unnecessary methods', function 
         // If it returns empty array, it shouldn't be implemented
         $isEmptyRelations = empty($relationsValue);
 
-<<<<<<< HEAD
         expect($isEmptyRelations, 'StoredEventResource should not implement getRelations() for empty relations')
             ->toBeFalse();
-=======
-        /* @phpstan-ignore-next-line method.notFound */
-        expect($isEmptyRelations)
-            ->toBeFalse()
-            /* @phpstan-ignore-next-line method.notFound */
-            ->with('StoredEventResource should not implement getRelations() for empty relations');
->>>>>>> 1e9f71a (.)
     }
 });
 

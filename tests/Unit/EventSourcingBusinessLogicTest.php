@@ -14,16 +14,9 @@ use function Safe\json_encode;
 
 uses(TestCase::class);
 
-<<<<<<< HEAD
 describe('Event Sourcing Business Logic', function () {
     beforeEach(function () {
         /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-describe('Event Sourcing Business Logic', function (): void {
-    beforeEach(function (): void {
-        // @phpstan-ignore-next-line
-        /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
         // In-memory test objects following CLAUDE.md guidelines - no database
         $this->activityData = [ // @phpstan-ignore-line
             'id' => 1001,
@@ -80,15 +73,9 @@ describe('Event Sourcing Business Logic', function (): void {
         ];
     });
 
-<<<<<<< HEAD
     describe('Activity Logging Business Logic', function () {
         it('records activity with proper causer and subject relationship', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-    describe('Activity Logging Business Logic', function (): void {
-        it('records activity with proper causer and subject relationship', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $activity = (object) $this->activityData;
 
             // Business Logic: Activity must have both causer and subject
@@ -98,13 +85,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($activity->subject_type)->toBe('App\\Models\\User');
         });
 
-<<<<<<< HEAD
         it('validates activity properties structure', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('validates activity properties structure', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $activity = (object) $this->activityData;
             $properties = $activity->properties;
             /** @var array<string, mixed> $properties */
@@ -120,13 +102,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($properties['ip_address'])->toMatch('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/');
         });
 
-<<<<<<< HEAD
         it('handles batch activity grouping', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('handles batch activity grouping', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $activity = (object) $this->activityData;
 
             // Business Logic: Batch activities must have same UUID
@@ -134,26 +111,16 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($activity->batch_uuid)->toStartWith('batch-');
         });
 
-<<<<<<< HEAD
         it('validates activity event types', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('validates activity event types', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $validEvents = ['created', 'updated', 'deleted', 'restored', 'viewed', 'logged_in', 'logged_out'];
             $activity = (object) $this->activityData;
 
             expect($validEvents)->toContain($activity->event);
         });
 
-<<<<<<< HEAD
         it('ensures proper activity description format', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('ensures proper activity description format', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $activity = (object) $this->activityData;
 
             // Business Logic: Description should be human readable
@@ -165,15 +132,9 @@ describe('Event Sourcing Business Logic', function (): void {
         });
     });
 
-<<<<<<< HEAD
     describe('Event Sourcing Business Logic', function () {
         it('maintains event ordering with versions', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-    describe('Event Sourcing Business Logic', function (): void {
-        it('maintains event ordering with versions', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $event = (object) $this->storedEventData;
 
             // Business Logic: Event versions must be sequential
@@ -182,13 +143,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($event->aggregate_version)->toBeGreaterThan(0);
         });
 
-<<<<<<< HEAD
         it('validates event class structure', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('validates event class structure', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $event = (object) $this->storedEventData;
 
             // Business Logic: Event class must be valid PHP class name
@@ -196,13 +152,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($event->event_class)->toContain('\\');
         });
 
-<<<<<<< HEAD
         it('ensures event properties contain business data', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('ensures event properties contain business data', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $event = (object) $this->storedEventData;
             /** @var array<string, mixed> $properties */
             $properties = $event->event_properties;
@@ -214,13 +165,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($properties['timestamp'])->toBeString();
         });
 
-<<<<<<< HEAD
         it('validates metadata structure for tracing', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('validates metadata structure for tracing', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $event = (object) $this->storedEventData;
             /** @var array<string, mixed> $metadata */
             $metadata = $event->meta_data;
@@ -234,13 +180,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($metadata['causation_id'])->toStartWith('cause-');
         });
 
-<<<<<<< HEAD
         it('maintains aggregate UUID consistency', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('maintains aggregate UUID consistency', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $event = (object) $this->storedEventData;
 
             // Business Logic: Aggregate UUID must be consistent across events
@@ -249,15 +190,9 @@ describe('Event Sourcing Business Logic', function (): void {
         });
     });
 
-<<<<<<< HEAD
     describe('Snapshot Business Logic', function () {
         it('creates snapshots at version intervals', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-    describe('Snapshot Business Logic', function (): void {
-        it('creates snapshots at version intervals', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $snapshot = (object) $this->snapshotData;
 
             // Business Logic: Snapshots created every 10 versions
@@ -266,13 +201,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect((int) $snapshot->aggregate_version % 10)->toBe(0);
         });
 
-<<<<<<< HEAD
         it('preserves complete aggregate state', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('preserves complete aggregate state', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $snapshot = (object) $this->snapshotData;
             $state = $snapshot->state;
             /** @var array<string, mixed> $state */
@@ -291,13 +221,8 @@ describe('Event Sourcing Business Logic', function (): void {
             /** @var array<string, mixed> $state */ expect($state['preferences'])->toBeArray();
         });
 
-<<<<<<< HEAD
         it('validates snapshot performance requirements', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('validates snapshot performance requirements', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $snapshot = (object) $this->snapshotData;
 
             // Business Logic: Snapshots must be relatively recent
@@ -306,13 +231,8 @@ describe('Event Sourcing Business Logic', function (): void {
             expect($ageInHours)->toBeLessThan(24); // Snapshots should be recent
         });
 
-<<<<<<< HEAD
         it('ensures snapshot state serialization', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-        it('ensures snapshot state serialization', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $snapshot = (object) $this->snapshotData;
 
             // Business Logic: State must be serializable
@@ -387,15 +307,9 @@ describe('Event Sourcing Business Logic', function (): void {
         });
     });
 
-<<<<<<< HEAD
     describe('Performance and Scalability Logic', function () {
         it('validates batch processing efficiency', function () {
             /** @var \Modules\Activity\Tests\TestCase $this */
-=======
-    describe('Performance and Scalability Logic', function (): void {
-        it('validates batch processing efficiency', function (): void {
-            /** @var object{activityData: array<string, mixed>, storedEventData: array<string, mixed>, snapshotData: array<string, mixed>} $this */
->>>>>>> 1e9f71a (.)
             $batchSize = 100;
             $events = array_fill(0, $batchSize, $this->storedEventData);
 
