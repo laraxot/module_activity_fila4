@@ -368,5 +368,8 @@ public function getActivities(array $filters = []): Collection
 This analysis provides a comprehensive roadmap for improving code quality in the Activity module while maintaining data integrity and performance.
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> laraxot/develop
