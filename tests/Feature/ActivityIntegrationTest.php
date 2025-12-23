@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
@@ -90,7 +91,7 @@ test('activity batch processing with multiple models', function () {
         'causer_type' => User::class,
         'causer_id' => $user->id
     ]);
-    \assert($activities instanceof \Illuminate\Database\Eloquent\Collection);
+    \assert($activities instanceof Collection);
     expect($activities)->toHaveCount(5);
 
     $snapshot = Snapshot::factory()->create([ // @phpstan-ignore-line method.nonObject
@@ -111,7 +112,7 @@ test('activity batch processing with multiple models', function () {
             'processed_activities' => $activities->pluck('id')->toArray()
         ]
     ]);
-    \assert($storedEvents instanceof \Illuminate\Database\Eloquent\Collection);
+    \assert($storedEvents instanceof Collection);
     expect($storedEvents)->toHaveCount(3);
 
     $batchActivities = Activity::forBatch($batchUuid)->get();

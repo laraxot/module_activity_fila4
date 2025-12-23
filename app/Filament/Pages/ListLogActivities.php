@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Filament\Pages;
 
+use Exception;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
@@ -111,7 +112,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             ->getQuery();
 
         if (! $builderQuery instanceof Builder) {
-            throw new \InvalidArgumentException('Query must be an Eloquent Builder');
+            throw new InvalidArgumentException('Query must be an Eloquent Builder');
         }
 
         /** @var Builder<Activity> $builderQuery */
@@ -225,7 +226,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             $record->update($safeProperties);
 
             $this->sendRestoreSuccessNotification();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
     }
@@ -269,7 +270,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
             // PHPStan Level 10: Type-safe child components
             if (method_exists($component, 'getChildComponents')) {
-                $children = $component->getChildComponents();
+                $children = $component->getDefaultChildComponents();
 
                 if (\is_array($children) && $children !== []) {
                     /** @var array<int|string, Component> $safeChildren */

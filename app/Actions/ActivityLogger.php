@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Actions;
 
+use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ class ActivityLogger
         if ($user !== null) {
             // Type checking for User model
             if (! $user instanceof User) {
-                throw new \InvalidArgumentException('User must be an instance of User');
+                throw new InvalidArgumentException('User must be an instance of User');
             }
 
             // Type narrowing for user ID - use getAttribute for Eloquent models
@@ -139,7 +140,7 @@ class ActivityLogger
     public function getUserActivities(User $user, int $limit = 50): Collection
     {
         if ($limit <= 0) {
-            throw new \InvalidArgumentException('Limit must be positive');
+            throw new InvalidArgumentException('Limit must be positive');
         }
 
         /** @var Collection<int, Activity> $activities */
@@ -175,10 +176,10 @@ class ActivityLogger
     public function getByType(string $type, int $limit = 50): Collection
     {
         if ($type === '') {
-            throw new \InvalidArgumentException('Type cannot be empty');
+            throw new InvalidArgumentException('Type cannot be empty');
         }
         if ($limit <= 0) {
-            throw new \InvalidArgumentException('Limit must be positive');
+            throw new InvalidArgumentException('Limit must be positive');
         }
 
         /** @var Collection<int, Activity> $activities */
@@ -197,7 +198,7 @@ class ActivityLogger
     public function getRecent(int $limit = 50): Collection
     {
         if ($limit <= 0) {
-            throw new \InvalidArgumentException('Limit must be positive');
+            throw new InvalidArgumentException('Limit must be positive');
         }
 
         /** @var Collection<int, Activity> $activities */
@@ -215,7 +216,7 @@ class ActivityLogger
     public function cleanOld(int $days = 90): int
     {
         if ($days <= 0) {
-            throw new \InvalidArgumentException('Days must be positive');
+            throw new InvalidArgumentException('Days must be positive');
         }
 
         $deletedCount = Activity::where('created_at', '<', now()->subDays($days))

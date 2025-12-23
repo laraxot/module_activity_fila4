@@ -14,7 +14,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
  * Class Activity.
- * 
+ *
  * This class extends the BaseActivity model to represent activities in the application.
  *
  * @property int $id
@@ -98,7 +98,7 @@ use Spatie\Activitylog\Models\Activity as SpatieActivity;
  * @method static Builder<static>|Activity leftJoin(string $table, string $first, string $operator = null, string $second = null)
  * @method static Builder<static>|Activity rightJoin(string $table, string $first, string $operator = null, string $second = null)
  * @method static Builder<static>|Activity crossJoin(string $table)
- * @method static Builder<static>|Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
+ * @method static Builder<static>|Activity causedBy(Model $causer)
  * @mixin \Eloquent
  */
 class Activity extends SpatieActivity
@@ -120,7 +120,7 @@ class Activity extends SpatieActivity
         'properties', // Added
     ];
 
-    
+
 
     // NOTE
     // ----

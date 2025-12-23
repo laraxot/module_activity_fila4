@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Collection;
 use Modules\Activity\Models\Activity;
 use Modules\User\Models\User;
 use Modules\Activity\Tests\TestCase; // Added
@@ -25,7 +26,7 @@ it('can create activity with basic information', function () {
     \assert($activity instanceof Activity);
 
     $properties = $activity->properties;
-    \assert($properties instanceof \Illuminate\Support\Collection);
+    \assert($properties instanceof Collection);
     $propertiesArray = $properties->toArray();
 
     expect($activity->log_name)->toBe('default')

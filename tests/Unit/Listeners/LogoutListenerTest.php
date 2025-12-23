@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Event;
 use Modules\Activity\Listeners\LogoutListener;
@@ -13,7 +14,7 @@ uses(TestCase::class);
 
 test('logout listener is registered for logout event', function () {
     Event::fake();
-    
+
     Event::assertListening(
         Logout::class,
         LogoutListener::class
@@ -125,12 +126,12 @@ test('logout listener uses correct log name for activities', function () {
 
 test('logout listener handles event without user gracefully', function () {
     $event = new Logout('web', null);
-    
+
 
     $listener = new LogoutListener();
 
     expect(fn () => $listener->handle($event))->not->toThrow(Exception::class);
-    
+
     $activities = Activity::where('event', 'logout')->get();
     expect($activities)->toBeEmpty();
 });
@@ -181,7 +182,7 @@ test('logout listener tracks logout reason when provided', function () {
 
 test('logout listener handles concurrent logout events', function () {
     $users = User::factory()->count(5)->create(); // @phpstan-ignore-line method.nonObject
-    \assert($users instanceof \Illuminate\Database\Eloquent\Collection);
+    \assert($users instanceof Collection);
 
 
     $events = $users->map(fn ($user) => new Logout('web', $user));

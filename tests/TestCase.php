@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests;
 
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Modules\Activity\Providers\ActivityServiceProvider;
 use Modules\User\Models\User;
 use Modules\User\Providers\UserServiceProvider;
 use Modules\Xot\Providers\XotServiceProvider;
 use Mockery; // Added
-
 /**
  * Base test case for Activity module tests.
  *
- * @property \Modules\User\Models\User $user
+ * @property User $user
  * @property mixed $activityData
  * @property mixed $storedEventData
  * @property mixed $snapshotData
@@ -73,8 +74,8 @@ abstract class TestCase extends BaseTestCase
             '--path' => 'Modules/Activity/database/migrations',
             '--realpath' => true,
         ]);
-        $xotBaseMigrationClass = \Modules\Xot\Database\Migrations\XotBaseMigration::class;
-        $mockModelClass = \Illuminate\Database\Eloquent\Model::class;
+        $xotBaseMigrationClass = XotBaseMigration::class;
+        $mockModelClass = Model::class;
 
         // Bind a fallback model to the container for non-existent model classes
         // This attempts to prevent BindingResolutionException during XotBaseMigration construction.

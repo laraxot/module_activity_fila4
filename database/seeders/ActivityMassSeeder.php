@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
+use Illuminate\Database\Eloquent\Builder;
+use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -150,11 +152,11 @@ class ActivityMassSeeder extends Seeder
 
         try {
             // Conta attività
-            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $activityQuery */
+            /** @var Builder<Activity> $activityQuery */
             $activityQuery = Activity::query();
             $totalActivities = $activityQuery->count();
 
-            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $recentActivitiesQuery */
+            /** @var Builder<Activity> $recentActivitiesQuery */
             $recentActivitiesQuery = Activity::query()
                 ->where('created_at', '>=', Carbon::now()->subDays(7));
             $recentActivities = $recentActivitiesQuery->count();
@@ -167,7 +169,7 @@ class ActivityMassSeeder extends Seeder
                 ' │');
 
             // Conta snapshot
-            /** @var \Illuminate\Database\Eloquent\Builder<Snapshot> $snapshotQuery */
+            /** @var Builder<Snapshot> $snapshotQuery */
             $snapshotQuery = Snapshot::query();
             $totalSnapshots = $snapshotQuery->count();
 
@@ -176,7 +178,7 @@ class ActivityMassSeeder extends Seeder
                 ' │');
 
             // Conta eventi memorizzati
-            /** @var \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<StoredEvent> $storedEventQuery */
+            /** @var EloquentStoredEventQueryBuilder<StoredEvent> $storedEventQuery */
             $storedEventQuery = StoredEvent::query();
             $totalEvents = $storedEventQuery->count();
             $recentEvents = $storedEventQuery
