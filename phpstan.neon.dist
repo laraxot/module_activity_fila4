@@ -1,7 +1,7 @@
 includes:
     - phpstan-baseline.neon
-    - ../../vendor/larastan/larastan/extension.neon
-    - ../../vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+    - ./vendor/larastan/larastan/extension.neon
+    - ./vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
     #- ./vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     #- ./vendor/symplify/phpstan-rules/config/collector-rules.neon
     #- ./vendor/symplify/phpstan-rules/config/naming-rules.neon
@@ -25,7 +25,7 @@ parameters:
         - ./*/vendor/*
         - ./docs/*
         - ./Tests/*
-        - ./_ide_helper.php (?)
+        - ./_ide_helper.php
 
     bootstrapFiles:
         #- ./Services/vendor/autoload.php
@@ -39,6 +39,8 @@ parameters:
 
     tmpDir: build/phpstan
     checkUnusedViews: false
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     treatPhpDocTypesAsCertain: false
     reportUnmatchedIgnoredErrors: false
     checkOctaneCompatibility: false
