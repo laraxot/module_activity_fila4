@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8aceea5 (.)
 # ==============================================
 # LARAXOT MODULE ACTIVITY - .GITIGNORE
 # ==============================================
@@ -64,53 +57,6 @@ lerna-debug.log*
 # ==============================================
 # LARAVEL SPECIFIC
 # ==============================================
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3b1902f (.)
-=======
->>>>>>> 8aceea5 (.)
->>>>>>> laraxot/develop
-# 🔧 Activity Module .gitignore
-# File di configurazione per ignorare file e directory nel modulo Activity
-
-# 📦 Dipendenze e packages
-/vendor/
-/node_modules/
-/docs/vendor/
-
-# 🔒 Lock files e cache
-*.lock
-*.cache
-*.phar
-*.jar
-package-lock.json
-composer.lock
-yarn-error.log
-npm-debug.log
-.phpunit.result.cache
-.php-cs-fixer.cache
-
-# 📝 Log files
-*.log
-error_log
-
-# 🏗️ Build directories
-/build/
-/build
-build/
-
-# 📱 Laravel specifici
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 2506997 (.)
-=======
->>>>>>> 3b1902f (.)
-=======
->>>>>>> 8aceea5 (.)
->>>>>>> laraxot/develop
 bootstrap/compiled.php
 app/storage/
 public/storage
@@ -120,13 +66,6 @@ public_html/hot
 storage/*.key
 .env
 .env.*
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8aceea5 (.)
 !.env.example
 
 # ==============================================
@@ -218,77 +157,6 @@ test_activity_logs.sql
 # ==============================================
 
 # File specifici del progetto
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3b1902f (.)
-=======
->>>>>>> 8aceea5 (.)
->>>>>>> laraxot/develop
-
-# 🗃️ Database directories
-database/Factories_old
-database/Migrations_old
-database/Seeders_old
-database_old
-
-# ⚙️ Configurazioni locali
-Homestead.yaml
-Homestead.json
-/.vagrant
-
-# 🛠️ IDE e editor
-/.idea
-.phpintel
-.vscode/
-*.swp
-*.swo
-*~
-
-# 🔄 Git specifici
-.git-blame-ignore-revs
-.git-rewrite/
-.git-rewrite
-
-# 🗂️ File temporanei e di sistema
-*.tmp
-*.stackdump
-*.exe
-*:Zone.Identifier
-.DS_Store
-Thumbs.db
-
-# 📋 Backup files
-*.old
-*.old1
-*.backup
-*.backup.*
-*.bak
-*.new
-
-# 📚 Documentation e cache
-docs/phpstan/
-docs/cache/
-cache/
-
-# 🎨 Risorse e componenti
-resources/views/Components_old
-
-# 🔧 Development tools
-.windsurf/
-.cursor/
-
-# 🚫 File specifici del progetto
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 2506997 (.)
-=======
->>>>>>> 3b1902f (.)
-=======
->>>>>>> 8aceea5 (.)
->>>>>>> laraxot/develop
 *.fila2
 laravel
 public_html

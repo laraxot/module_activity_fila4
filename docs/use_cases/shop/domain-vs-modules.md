@@ -32,32 +32,7 @@ Nei progetti di Spatie come `laravel-shop-main`, la logica di business è organi
 
 ### Descrizione
 
-Il pacchetto Laravel Modules (documentazione: [https://laravelmodules.com/docs/12/getting-started/introduction](https://laravelmodules.com/docs/12/getting-started/introduction)) consente di organizzare un'applicazione Laravel in moduli separati, ognuno con la propria struttura di directory simile a un'applicazione Laravel completa. Nel nostro progetto, il modulo `Activity` si trova in `/var/www/html/_bases/base_techplanner_fila3_mono/laravel/Modules/Activity`.
-<<<<<<< HEAD
-=======
-Il pacchetto Laravel Modules (documentazione: [https://laravelmodules.com/docs/12/getting-started/introduction](https://laravelmodules.com/docs/12/getting-started/introduction)) consente di organizzare un'applicazione Laravel in moduli separati, ognuno con la propria struttura di directory simile a un'applicazione Laravel completa. Nel nostro progetto, il modulo `Activity` si trova in `/var/www/html/<nome progetto>/laravel/Modules/Activity`.
->>>>>>> laraxot/develop
-
-### Struttura Tipica
-
-- `Modules/Activity/app`: Contiene modelli, controller e altra logica di business.
-- `Modules/Activity/config`: File di configurazione specifici del modulo.
-- `Modules/Activity/database`: Migrazioni e seeders.
-- `Modules/Activity/resources`: Viste, asset, ecc.
-- `Modules/Activity/routes`: Route definite per il modulo.
-- `Modules/Activity/tests`: Test specifici del modulo.
-
-### Vantaggi
-
-- **Isolamento**: Ogni modulo è una mini-applicazione, con dipendenze chiare e separazione fisica dal resto del progetto.
-- **Riutilizzabilità**: Un modulo può essere facilmente condiviso o riutilizzato in altri progetti.
-- **Scalabilità**: Ideale per progetti grandi o con team multipli, poiché i moduli possono essere sviluppati indipendentemente.
-- **Manutenzione**: Facilita l'aggiornamento o la sostituzione di funzionalità senza toccare il core dell'applicazione.
-
-### Svantaggi
-
-- **Complessità Iniziale**: Configurare e comprendere i moduli richiede tempo, specialmente per chi è abituato alla struttura standard di Laravel.
-- **Overhead**: Per progetti piccoli, la struttura a moduli può sembrare eccessiva e aggiungere complessità non necessaria.
+Il pacchetto Laravel Modules (documentazione: [https://laravelmodules.com/docs/12/getting-started/introduction](https://laravelmodules.com/docs/12/getting-started/introduction)) consente di organizzare un'applicazione Laravel in moduli separati, ognuno con la propria struttura di directory simile a un'applicazione Laravel completa. Nel nostro progetto, il modulo `Activity` si trova in `/var/www/html/<nome progetto>/laravel/Modules/Activity`.iungere complessità non necessaria.
 - **Possibile Frammentazione**: Se non gestiti bene, i moduli possono portare a duplicazione di codice o incoerenze.
 
 ## Confronto Diretto
