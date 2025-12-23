@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Activity\Filament\Pages;
 
 use Filament\Forms\Components\Field;
-use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
@@ -180,7 +179,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         }
 
         $oldProperties = data_get($activity, 'properties.old');
-        if (null === $oldProperties) {
+        if ($oldProperties === null) {
             $this->sendRestoreFailureNotification();
 
             return;
