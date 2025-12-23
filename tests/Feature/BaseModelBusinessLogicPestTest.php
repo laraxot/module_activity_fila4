@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\ConnectionInterface;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\BaseModel;
-use Modules\Activity\Tests\Feature\TestActivityModel;
 use Modules\Xot\Traits\Updater;
 use Tests\TestCase;
 
 use function Safe\class_uses;
 
-uses(TestCase::class, RefreshDatabase::class);
 
 beforeEach(function (): void {
     /* @phpstan-ignore-next-line property.notFound */
-    $this->model = new TestActivityModel;
+    $this->model = new TestActivityModel();
 });
 
 test('can create base model instance', function (): void {

@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use function Safe\class_uses;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Activity\Models\BaseSnapshot;
 use Modules\Activity\Models\Snapshot;
+use Spatie\EventSourcing\Snapshots\EloquentSnapshot;
 
 describe('Snapshot Business Logic', function () {
     test('snapshot has correct connection configured', function () {
@@ -21,14 +23,14 @@ describe('Snapshot Business Logic', function () {
             'aggregate_version',
             'state',
             'created_at',
-            'updated_at',
+            'updated_at'
         ];
 
         expect($snapshot->getFillable())->toEqual($expectedFillable);
     });
 
-    test('snapshot extends base snapshot', function () {
-        expect(is_subclass_of(Snapshot::class, BaseSnapshot::class))->toBeTrue();
+    test('snapshot extends eloquent snapshot from spatie', function () {
+        expect(is_subclass_of(Snapshot::class, EloquentSnapshot::class))->toBeTrue();
     });
 
     test('snapshot has factory trait for testing', function () {

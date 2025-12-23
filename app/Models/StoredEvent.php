@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Models;
 
-use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 use Modules\Xot\Models\Traits\HasXotFactory;
-use Spatie\SchemalessAttributes\SchemalessAttributes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventCollection;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder;
-use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStoredEvent;
+use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
+use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 /**
  * Class StoredEvent.
- *
+ * 
  * Represents a stored event in the activity module.
  *
  * @property int $id
@@ -28,7 +27,6 @@ use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStored
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property-read ShouldBeStored|null $event
- *
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent afterVersion(int $version)
  * @method static EloquentStoredEventCollection<static> all($columns = ['*'])
  * @method static EloquentStoredEventCollection<static> get($columns = ['*'])
@@ -52,7 +50,7 @@ use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieStored
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent wherePropertyIsNot(string $property, ?mixed $value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent whereUpdatedBy($value)
  * @method static EloquentStoredEventQueryBuilder<static>|StoredEvent withMetaDataAttributes()
- *
+ * @method static \Modules\Activity\Database\Factories\StoredEventFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class StoredEvent extends SpatieStoredEvent

@@ -22,9 +22,7 @@ class ListStoredEvents extends XotBaseListRecords
         return [
             TextColumn::make('id'),
             TextColumn::make('event_class'),
-            ViewColumn::make('event_properties')->view(
-                'activity::filament.tables.columns.event-properties',
-            ),
+            ViewColumn::make('event_properties')->view('activity::filament.tables.columns.event-properties'),
         ];
     }
 }

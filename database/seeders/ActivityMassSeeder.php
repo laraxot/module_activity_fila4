@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Collection;
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Seeder;
 use Modules\Activity\Database\Factories\ActivityFactory;
 use Modules\Activity\Models\Activity;
 use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * Seeder per creare grandi quantità di dati per il modulo Activity.
@@ -150,8 +150,14 @@ class ActivityMassSeeder extends Seeder
 
         try {
             // Conta attività
-            $totalActivities = Activity::count();
-            $recentActivities = Activity::where('created_at', '>=', Carbon::now()->subDays(7))->count();
+            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $activityQuery */
+            $activityQuery = Activity::query();
+            $totalActivities = $activityQuery->count();
+
+            /** @var \Illuminate\Database\Eloquent\Builder<Activity> $recentActivitiesQuery */
+            $recentActivitiesQuery = Activity::query()
+                ->where('created_at', '>=', Carbon::now()->subDays(7));
+            $recentActivities = $recentActivitiesQuery->count();
 
             $this->command->info('│ 📝 Attività totali:          '.
             str_pad((string) $totalActivities, 6, ' ', STR_PAD_LEFT).
@@ -161,15 +167,21 @@ class ActivityMassSeeder extends Seeder
                 ' │');
 
             // Conta snapshot
-            $totalSnapshots = Snapshot::count();
+            /** @var \Illuminate\Database\Eloquent\Builder<Snapshot> $snapshotQuery */
+            $snapshotQuery = Snapshot::query();
+            $totalSnapshots = $snapshotQuery->count();
 
             $this->command->info('│ 📸 Snapshot totali:           '.
             str_pad((string) $totalSnapshots, 6, ' ', STR_PAD_LEFT).
                 ' │');
 
             // Conta eventi memorizzati
-            $totalEvents = StoredEvent::count();
-            $recentEvents = StoredEvent::where('created_at', '>=', Carbon::now()->subDays(7))->count();
+            /** @var \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEventQueryBuilder<StoredEvent> $storedEventQuery */
+            $storedEventQuery = StoredEvent::query();
+            $totalEvents = $storedEventQuery->count();
+            $recentEvents = $storedEventQuery
+                ->where('created_at', '>=', Carbon::now()->subDays(7))
+                ->count();
 
             $this->command->info('│ 📦 Eventi memorizzati:       '.
             str_pad((string) $totalEvents, 6, ' ', STR_PAD_LEFT).
