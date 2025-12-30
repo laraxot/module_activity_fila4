@@ -30,6 +30,8 @@ class ActivityLogger
 
     /**
      * Log activity.
+     *
+     * @param array<string, mixed>|null $properties
      */
     public function log(
         string $type,
@@ -124,6 +126,8 @@ class ActivityLogger
 
     /**
      * Log custom event.
+     *
+     * @param array<string, mixed>|null $properties
      */
     public function custom(
         string $type,
@@ -136,6 +140,8 @@ class ActivityLogger
 
     /**
      * Get activities for user.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
      */
     public function getUserActivities(User $user, int $limit = 50): Collection
     {
@@ -156,6 +162,8 @@ class ActivityLogger
 
     /**
      * Get activities for model.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
      */
     public function getModelActivities(Model $model, int $limit = 50): Collection
     {
@@ -172,6 +180,8 @@ class ActivityLogger
 
     /**
      * Get activities by type.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
      */
     public function getByType(string $type, int $limit = 50): Collection
     {
@@ -194,6 +204,8 @@ class ActivityLogger
 
     /**
      * Get recent activities.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
      */
     public function getRecent(int $limit = 50): Collection
     {
@@ -234,6 +246,8 @@ class ActivityLogger
 
     /**
      * Get activity statistics.
+     *
+     * @return array{total: int, by_type: array<string, int>, today: int, this_week: int, this_month: int}
      */
     public function getStatistics(?User $user = null): array
     {
@@ -246,11 +260,21 @@ class ActivityLogger
 
         return [
             'total' => $query->count(),
-            'by_type' => $query->clone()
-                ->selectRaw('event, COUNT(*) as count')
-                ->groupBy('event')
-                ->pluck('count', 'event')
-                ->toArray(),
+            'by_type' => (function () use ($query): array {
+                /** @var \Illuminate\Database\Eloquent\Builder<Activity> $clonedQuery */
+                $clonedQuery = $query->clone();
+
+                /** @var \Illuminate\Support\Collection<int, object{event: string, count: int}> $results */
+                $results = $clonedQuery
+                    ->selectRaw('event, COUNT(*) as count')
+                    ->groupBy('event')
+                    ->get();
+
+                // Explicitly map and cast to ensure types
+                return $results->mapWithKeys(function (\stdClass $item) {
+                    return [(string) $item->event => (int) $item->count];
+                })->toArray();
+            })(),
             'today' => $query->clone()
                 ->whereDate('created_at', now()->toDateString())
                 ->count(),
