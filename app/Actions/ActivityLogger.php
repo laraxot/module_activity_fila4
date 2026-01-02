@@ -271,9 +271,17 @@ class ActivityLogger
                     ->get();
 
                 // Explicitly map and cast to ensure types
-                return $results->mapWithKeys(function (\stdClass $item) {
+                /** @var array<string, int> $byType */
+                $byType = $results->mapWithKeys(function (object $item, int $_key): array {
+                    // PHPStan L10: isset() per magic attributes invece di property_exists()
+                    if (! isset($item->event, $item->count)) {
+                        return [];
+                    }
+
                     return [(string) $item->event => (int) $item->count];
                 })->toArray();
+
+                return $byType;
             })(),
             'today' => $query->clone()
                 ->whereDate('created_at', now()->toDateString())

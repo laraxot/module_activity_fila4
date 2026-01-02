@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Testing\TestResponse;
 use Livewire\Features\SupportTesting\Testable;
-use Illuminate\Database\Eloquent\Model;
 
 // This file provides stubs for Pest Laravel and Livewire global functions for PHPStan analysis.
 // It is intended to resolve 'function.notFound' errors without modifying phpstan.neon.
@@ -14,11 +14,9 @@ if (! function_exists('actingAs')) { // Changed from Pest\Laravel\actingAs
     /**
      * Authenticate as a given user.
      *
-     * @param Authenticatable|Model $user
-     * @param string|null $driver
-     * @return TestResponse
+     * @param  Authenticatable|Model  $user
      */
-    function actingAs(Authenticatable $user, string $driver = null): TestResponse
+    function actingAs(Authenticatable $user, ?string $driver = null): TestResponse
     {
         return test()->actingAs($user, $driver);
     }
@@ -27,10 +25,6 @@ if (! function_exists('actingAs')) { // Changed from Pest\Laravel\actingAs
 if (! function_exists('livewire')) { // Changed from Pest\Laravel\livewire
     /**
      * Create a new Livewire test helper instance.
-     *
-     * @param string $component
-     * @param array $params
-     * @return Testable
      */
     function livewire(string $component, array $params = []): Testable
     {
