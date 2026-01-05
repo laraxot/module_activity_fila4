@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Actions;
 
+use Illuminate\Database\Eloquent\Builder;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -141,7 +142,7 @@ class ActivityLogger
     /**
      * Get activities for user.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
+     * @return Collection<int, Activity>
      */
     public function getUserActivities(User $user, int $limit = 50): Collection
     {
@@ -163,7 +164,7 @@ class ActivityLogger
     /**
      * Get activities for model.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
+     * @return Collection<int, Activity>
      */
     public function getModelActivities(Model $model, int $limit = 50): Collection
     {
@@ -181,7 +182,7 @@ class ActivityLogger
     /**
      * Get activities by type.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
+     * @return Collection<int, Activity>
      */
     public function getByType(string $type, int $limit = 50): Collection
     {
@@ -205,7 +206,7 @@ class ActivityLogger
     /**
      * Get recent activities.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, Activity>
+     * @return Collection<int, Activity>
      */
     public function getRecent(int $limit = 50): Collection
     {
@@ -261,7 +262,7 @@ class ActivityLogger
         return [
             'total' => $query->count(),
             'by_type' => (function () use ($query): array {
-                /** @var \Illuminate\Database\Eloquent\Builder<Activity> $clonedQuery */
+                /** @var Builder<Activity> $clonedQuery */
                 $clonedQuery = $query->clone();
 
                 /** @var \Illuminate\Support\Collection<int, object{event: string, count: int}> $results */
