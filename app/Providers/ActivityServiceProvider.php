@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Providers;
 
+use Override;
 use Modules\Xot\Providers\XotBaseServiceProvider;
 use Override;
 
