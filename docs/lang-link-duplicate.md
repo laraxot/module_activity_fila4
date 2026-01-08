@@ -7,6 +7,7 @@ Consulta la documentazione delle traduzioni qui:
 - [Struttura delle Traduzioni](../../Lang/docs/structure.md)
 - [Gestione dei File di Lingua](../../Lang/docs/module_lang.md)
 
+<<<<<<< HEAD
 Questo modulo utilizza le traduzioni centralizzate nella cartella [Lang](../../Lang/docs/).
 
 Consulta la documentazione delle traduzioni qui:
@@ -14,6 +15,8 @@ Consulta la documentazione delle traduzioni qui:
 - [Struttura delle Traduzioni](../../Lang/docs/structure.md)
 - [Gestione dei File di Lingua](../../Lang/docs/module_lang.md)
 
+=======
+>>>>>>> ed5e95a4 (.)
 ## Collegamento Bidirezionale
 
 ## Collegamenti
@@ -22,6 +25,7 @@ Consulta la documentazione delle traduzioni qui:
 - [Vai a Struttura](./structure.md)
 - [Vai a Traduzioni](./translations.md)
 
+<<<<<<< HEAD
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
 
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
@@ -31,6 +35,11 @@ Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in quest
 Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
 
 
+=======
+
+Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in questo modulo e la relativa sezione in [Lang](../../Lang/docs/).
+
+>>>>>>> ed5e95a4 (.)
 > Aggiorna entrambi i riferimenti se aggiungi nuove chiavi di traduzione o modifichi la struttura.
 
 ## Collegamenti tra versioni di lang-link.md
@@ -49,6 +58,7 @@ Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in quest
 * [lang-link.md](laravel/Modules/Patient/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Cms/docs/lang-link.md)
 
+<<<<<<< HEAD
 * [lang-link.md](laravel/Modules/Chart/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Reporting/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Gdpr/docs/lang-link.md)
@@ -64,3 +74,5 @@ Per ogni risorsa o campo localizzato, vedi anche il file corrispondente in quest
 * [lang-link.md](laravel/Modules/Patient/docs/lang-link.md)
 * [lang-link.md](laravel/Modules/Cms/docs/lang-link.md)
 
+=======
+>>>>>>> ed5e95a4 (.)

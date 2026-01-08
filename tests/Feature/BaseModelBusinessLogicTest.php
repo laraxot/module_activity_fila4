@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
 use function Safe\class_uses;
 
 use Illuminate\Database\ConnectionInterface;
@@ -17,12 +18,36 @@ describe('BaseModel Business Logic', function () {
     test('it can create base model instance', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+namespace Modules\Activity\Tests\Feature;
+
+use Illuminate\Database\Eloquent\Model;
+use Modules\Xot\Traits\Updater;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Modules\Activity\Models\BaseModel;
+use Tests\TestCase;
+
+class BaseModelBusinessLogicTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    public function it_can_create_base_model_instance(): void
+    {
+        // Creiamo una classe concreta che estende BaseModel per i test
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
             protected $fillable = ['name', 'value'];
         };
 
+<<<<<<< HEAD
         expect($concreteModel)->toBeInstanceOf(BaseModel::class)
             ->and($concreteModel)->toBeInstanceOf(Model::class);
     });
@@ -78,11 +103,75 @@ describe('BaseModel Business Logic', function () {
     test('it has correct casts configuration', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertInstanceOf(BaseModel::class, $concreteModel);
+        $this->assertInstanceOf(Model::class, $concreteModel);
+    }
+
+    /** @test */
+    public function it_has_correct_connection_setting(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals('activity', $concreteModel->getConnectionName());
+    }
+
+    /** @test */
+    public function it_has_correct_primary_key_setting(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals('id', $concreteModel->getKeyName());
+        $this->assertEquals('string', $concreteModel->getKeyType());
+        $this->assertTrue($concreteModel->getIncrementing());
+    }
+
+    /** @test */
+    public function it_has_correct_timestamps_setting(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertTrue($concreteModel->usesTimestamps());
+        $this->assertTrue($concreteModel->timestamps);
+    }
+
+    /** @test */
+    public function it_has_correct_per_page_setting(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals(30, $concreteModel->getPerPage());
+    }
+
+    /** @test */
+    public function it_has_correct_snake_attributes_setting(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertTrue($concreteModel::$snakeAttributes);
+    }
+
+    /** @test */
+    public function it_has_correct_casts_configuration(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
         };
 
         $casts = $concreteModel->getCasts();
 
+<<<<<<< HEAD
         expect($casts)->toHaveKey('id')
             ->and($casts['id'])->toBe('string')
             ->and($casts)->toHaveKey('uuid')
@@ -106,12 +195,47 @@ describe('BaseModel Business Logic', function () {
     test('it can use factory', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertArrayHasKey('id', $casts);
+        $this->assertEquals('string', $casts['id']);
+
+        $this->assertArrayHasKey('uuid', $casts);
+        $this->assertEquals('string', $casts['uuid']);
+
+        $this->assertArrayHasKey('created_at', $casts);
+        $this->assertEquals('datetime', $casts['created_at']);
+
+        $this->assertArrayHasKey('updated_at', $casts);
+        $this->assertEquals('datetime', $casts['updated_at']);
+
+        $this->assertArrayHasKey('deleted_at', $casts);
+        $this->assertEquals('datetime', $casts['deleted_at']);
+
+        $this->assertArrayHasKey('updated_by', $casts);
+        $this->assertEquals('string', $casts['updated_by']);
+
+        $this->assertArrayHasKey('created_by', $casts);
+        $this->assertEquals('string', $casts['created_by']);
+
+        $this->assertArrayHasKey('deleted_by', $casts);
+        $this->assertEquals('string', $casts['deleted_by']);
+
+        $this->assertArrayHasKey('published_at', $casts);
+        $this->assertEquals('datetime', $casts['published_at']);
+    }
+
+    /** @test */
+    public function it_can_use_factory(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
             protected $fillable = ['name', 'value'];
         };
 
+<<<<<<< HEAD
         expect(method_exists($concreteModel, 'factory'))->toBeTrue()
             ->and(method_exists($concreteModel, 'newFactory'))->toBeTrue();
     });
@@ -119,26 +243,56 @@ describe('BaseModel Business Logic', function () {
     test('it has updater trait', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertTrue(method_exists($concreteModel, 'factory'));
+        $this->assertTrue(method_exists($concreteModel, 'newFactory'));
+    }
+
+    /** @test */
+    public function it_has_updater_trait(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
         };
 
         $traits = class_uses($concreteModel);
+<<<<<<< HEAD
         expect($traits)->toContain(Updater::class);
     });
 
     test('it has has factory trait', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertContains(Updater::class, $traits);
+    }
+
+    /** @test */
+    public function it_has_has_factory_trait(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
         };
 
         $traits = class_uses($concreteModel);
+<<<<<<< HEAD
         expect($traits)->toContain(HasFactory::class);
     });
 
     test('it can handle uuid generation', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertContains(HasFactory::class, $traits);
+    }
+
+    /** @test */
+    public function it_can_handle_uuid_generation(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -149,6 +303,7 @@ describe('BaseModel Business Logic', function () {
         $concreteModel->uuid = $uuid;
         $concreteModel->name = 'Test Model';
 
+<<<<<<< HEAD
         expect($concreteModel->uuid)->toBe($uuid)
             ->and($concreteModel->name)->toBe('Test Model');
     });
@@ -156,6 +311,16 @@ describe('BaseModel Business Logic', function () {
     test('it can handle timestamps', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertEquals($uuid, $concreteModel->uuid);
+        $this->assertEquals('Test Model', $concreteModel->name);
+    }
+
+    /** @test */
+    public function it_can_handle_timestamps(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -166,6 +331,7 @@ describe('BaseModel Business Logic', function () {
         $concreteModel->created_at = $now;
         $concreteModel->updated_at = $now;
 
+<<<<<<< HEAD
         expect($concreteModel->created_at->timestamp)->toBe($now->timestamp)
             ->and($concreteModel->updated_at->timestamp)->toBe($now->timestamp);
     });
@@ -173,6 +339,16 @@ describe('BaseModel Business Logic', function () {
     test('it can handle soft deletes', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertEquals($now->timestamp, $concreteModel->created_at->timestamp);
+        $this->assertEquals($now->timestamp, $concreteModel->updated_at->timestamp);
+    }
+
+    /** @test */
+    public function it_can_handle_soft_deletes(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -182,12 +358,22 @@ describe('BaseModel Business Logic', function () {
         $now = now();
         $concreteModel->deleted_at = $now;
 
+<<<<<<< HEAD
         expect($concreteModel->deleted_at->timestamp)->toBe($now->timestamp);
     });
 
     test('it can handle published at timestamp', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertEquals($now->timestamp, $concreteModel->deleted_at->timestamp);
+    }
+
+    /** @test */
+    public function it_can_handle_published_at_timestamp(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -197,12 +383,22 @@ describe('BaseModel Business Logic', function () {
         $now = now();
         $concreteModel->published_at = $now;
 
+<<<<<<< HEAD
         expect($concreteModel->published_at->timestamp)->toBe($now->timestamp);
     });
 
     test('it can handle user tracking fields', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertEquals($now->timestamp, $concreteModel->published_at->timestamp);
+    }
+
+    /** @test */
+    public function it_can_handle_user_tracking_fields(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -213,6 +409,7 @@ describe('BaseModel Business Logic', function () {
         $concreteModel->updated_by = 'user-456';
         $concreteModel->deleted_by = 'user-789';
 
+<<<<<<< HEAD
         expect($concreteModel->created_by)->toBe('user-123')
             ->and($concreteModel->updated_by)->toBe('user-456')
             ->and($concreteModel->deleted_by)->toBe('user-789');
@@ -221,11 +418,23 @@ describe('BaseModel Business Logic', function () {
     test('it has correct hidden attributes', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertEquals('user-123', $concreteModel->created_by);
+        $this->assertEquals('user-456', $concreteModel->updated_by);
+        $this->assertEquals('user-789', $concreteModel->deleted_by);
+    }
+
+    /** @test */
+    public function it_has_correct_hidden_attributes(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
         };
 
         $hidden = $concreteModel->getHidden();
 
+<<<<<<< HEAD
         expect($hidden)->toBeArray()
             ->and($hidden)->not->toContain('password');
     });
@@ -302,10 +511,102 @@ describe('BaseModel Business Logic', function () {
     test('it can use casts methods', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        // Verifica che gli attributi nascosti siano configurati correttamente
+        $this->assertIsArray($hidden);
+        // Nota: il BaseModel ha un array vuoto per $hidden, quindi non dovrebbe contenere 'password'
+        $this->assertNotContains('password', $hidden);
+    }
+
+    /** @test */
+    public function it_can_use_connection_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals('activity', $concreteModel->getConnectionName());
+        $this->assertInstanceOf(ConnectionInterface::class, $concreteModel->getConnection());
+    }
+
+    /** @test */
+    public function it_can_use_table_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals('test_models', $concreteModel->getTable());
+    }
+
+    /** @test */
+    public function it_can_use_key_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals('id', $concreteModel->getKeyName());
+        $this->assertEquals('string', $concreteModel->getKeyType());
+        $this->assertTrue($concreteModel->getIncrementing());
+    }
+
+    /** @test */
+    public function it_can_use_timestamp_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertTrue($concreteModel->usesTimestamps());
+        $this->assertTrue($concreteModel->timestamps);
+
+        $this->assertEquals('created_at', $concreteModel->getCreatedAtColumn());
+        $this->assertEquals('updated_at', $concreteModel->getUpdatedAtColumn());
+    }
+
+    /** @test */
+    public function it_can_use_per_page_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertEquals(30, $concreteModel->getPerPage());
+
+        // Test setPerPage
+        $concreteModel->setPerPage(50);
+        $this->assertEquals(50, $concreteModel->getPerPage());
+    }
+
+    /** @test */
+    public function it_can_use_snake_attributes_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+            protected $table = 'test_models';
+        };
+
+        $this->assertTrue($concreteModel::$snakeAttributes);
+
+        // Test setSnakeAttributes
+        $concreteModel::$snakeAttributes = false;
+        $this->assertFalse($concreteModel::$snakeAttributes);
+
+        // Ripristina il valore originale
+        $concreteModel::$snakeAttributes = true;
+        $this->assertTrue($concreteModel::$snakeAttributes);
+    }
+
+    /** @test */
+    public function it_can_use_casts_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
         };
 
         $casts = $concreteModel->getCasts();
+<<<<<<< HEAD
         expect($casts)->toBeArray()
             ->and($casts)->toHaveKey('id')
             ->and($casts)->toHaveKey('created_at')
@@ -319,6 +620,23 @@ describe('BaseModel Business Logic', function () {
     test('it can use fillable methods', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertIsArray($casts);
+        $this->assertArrayHasKey('id', $casts);
+        $this->assertArrayHasKey('created_at', $casts);
+        $this->assertArrayHasKey('updated_at', $casts);
+
+        // Test setCasts
+        $newCasts = ['test_field' => 'string'];
+        $concreteModel->setCasts($newCasts);
+        $this->assertEquals($newCasts, $concreteModel->getCasts());
+    }
+
+    /** @test */
+    public function it_can_use_fillable_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -326,6 +644,7 @@ describe('BaseModel Business Logic', function () {
         };
 
         $fillable = $concreteModel->getFillable();
+<<<<<<< HEAD
         expect($fillable)->toBeArray()
             ->and($fillable)->toContain('name')
             ->and($fillable)->toContain('value');
@@ -338,6 +657,22 @@ describe('BaseModel Business Logic', function () {
     test('it can use hidden methods', function () {
         $concreteModel = new class() extends BaseModel
         {
+=======
+        $this->assertIsArray($fillable);
+        $this->assertContains('name', $fillable);
+        $this->assertContains('value', $fillable);
+
+        // Test setFillable
+        $newFillable = ['new_field'];
+        $concreteModel->setFillable($newFillable);
+        $this->assertEquals($newFillable, $concreteModel->getFillable());
+    }
+
+    /** @test */
+    public function it_can_use_hidden_methods(): void
+    {
+        $concreteModel = new class extends BaseModel {
+>>>>>>> ed5e95a4 (.)
             protected $table = 'test_models';
 
             /** @var list<string> */
@@ -345,6 +680,7 @@ describe('BaseModel Business Logic', function () {
         };
 
         $hidden = $concreteModel->getHidden();
+<<<<<<< HEAD
         expect($hidden)->toBeArray()
             ->and($hidden)->toContain('secret_field');
 
@@ -353,3 +689,14 @@ describe('BaseModel Business Logic', function () {
         expect($concreteModel->getHidden())->toBe($newHidden);
     });
 });
+=======
+        $this->assertIsArray($hidden);
+        $this->assertContains('secret_field', $hidden);
+
+        // Test setHidden
+        $newHidden = ['new_secret'];
+        $concreteModel->setHidden($newHidden);
+        $this->assertEquals($newHidden, $concreteModel->getHidden());
+    }
+}
+>>>>>>> ed5e95a4 (.)

@@ -1,5 +1,9 @@
 # Struttura Corretta dei Test di Login - Analisi Completa 
+<<<<<<< HEAD
 # Struttura Corretta dei Test di Login - Analisi Completa <nome progetto>
+=======
+# Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
+>>>>>>> ed5e95a4 (.)
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
 
