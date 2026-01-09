@@ -1,9 +1,5 @@
-# Struttura Corretta dei Test di Login - Analisi Completa 
-<<<<<<< HEAD
+# Struttura Corretta dei Test di Login - Analisi Completa
 # Struttura Corretta dei Test di Login - Analisi Completa <nome progetto>
-=======
-# Struttura Corretta dei Test di Login - Analisi Completa SaluteOra
->>>>>>> ed5e95a4 (.)
 
 ## 🎯 **Struttura del Sistema di Autenticazione**
 
@@ -27,7 +23,7 @@
 ### **Widget Test** - `laravel/Modules/User/tests/Feature/Filament/Widgets/LoginWidgetTest.php`
 ```php
 ✅ Test del widget Livewire LoginWidget
-✅ Test delle validazioni del form  
+✅ Test delle validazioni del form
 ✅ Test dell'autenticazione via widget
 ✅ Pattern XotData corretto
 ```
@@ -35,7 +31,7 @@
 ### **Pagina Test** - `laravel/Modules/Cms/tests/Feature/Auth/AuthenticationTest.php`
 ```php
 ✅ Test dell'autenticazione Volt
-✅ Test della pagina /it/auth/login  
+✅ Test della pagina /it/auth/login
 ✅ Pattern XotData corretto
 ```
 
@@ -59,7 +55,7 @@ describe('Login Authentication') // ← Test autenticazione (duplicato)
 ```php
 // ✅ SOLO test della pagina /it/auth/login
 describe('Frontend Login Page Rendering')
-describe('Frontend Login Page Authentication') 
+describe('Frontend Login Page Authentication')
 describe('Frontend Login Page Localization')
 describe('Frontend Login Page Integration')
 ```
@@ -84,7 +80,7 @@ LoginTest.php (Feature)
 ├── Localizzazione (it/en/...)
 └── Redirects e session management
 
-LoginWidgetTest.php (Unit)  
+LoginWidgetTest.php (Unit)
 ├── Widget rendering
 ├── Livewire methods (login, validate)
 ├── Form state management
@@ -151,15 +147,12 @@ function createTestUser(array $attributes = []): UserContract
 ### **Sistema Folio/Volt**
 - [laravel/Themes/One/docs/folio-pages.md](../laravel/Themes/One/docs/folio-pages.md)
 - [laravel/Themes/One/docs/routing_with_folio_volt.md](../laravel/Themes/One/docs/routing_with_folio_volt.md)
-<<<<<<< HEAD
 - [laravel/Modules/Cms/project_docs/architecture-xotdata-pattern.md](../laravel/Modules/Cms/project_docs/architecture-xotdata-pattern.md)
 - [laravel/Modules/Xot/project_docs/architecture-violations-and-fixes.md](../laravel/Modules/Xot/project_docs/architecture-violations-and-fixes.md)
 
 ### **Sistema Folio/Volt**
 - [laravel/Themes/One/project_docs/folio-pages.md](../laravel/Themes/One/project_docs/folio-pages.md)
 - [laravel/Themes/One/project_docs/routing_with_folio_volt.md](../laravel/Themes/One/project_docs/routing_with_folio_volt.md)
-=======
->>>>>>> ed5e95a4 (.)
 
 ### **Test Esistenti di Riferimento**
 - [laravel/Modules/User/tests/Feature/Filament/Widgets/LoginWidgetTest.php](../laravel/Modules/User/tests/Feature/Filament/Widgets/LoginWidgetTest.php)
@@ -179,8 +172,4 @@ function createTestUser(array $attributes = []): UserContract
 3. **SEMPRE** usare pattern XotData
 4. **SEMPRE** approfondire prima di agire
 
-<<<<<<< HEAD
-*Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
-=======
-*Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login* 
->>>>>>> ed5e95a4 (.)
+*Ultimo aggiornamento: Dicembre 2024 - Analisi completa struttura login*
