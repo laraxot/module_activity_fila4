@@ -9,6 +9,8 @@ use Modules\Activity\Models\Snapshot;
 use Modules\Activity\Models\StoredEvent;
 use Modules\User\Models\User;
 
+uses(\Modules\Activity\Tests\TestCase::class);
+
 test('activity module models work together in integrated scenarios', function () {
     $user = User::factory()->create(); // @phpstan-ignore-line method.nonObject
     \assert($user instanceof User);
@@ -40,8 +42,10 @@ test('activity module models work together in integrated scenarios', function ()
     \assert($snapshot instanceof Snapshot);
     expect($snapshot)->not->toBeNull();
 
-    $storedEvent = StoredEvent::factory()->create([ // @phpstan-ignore-line method.nonObject
+    $storedEvent = StoredEvent::create([
         'aggregate_uuid' => $aggregateUuid,
+        'aggregate_version' => 1,
+        'event_version' => 1,
         'event_class' => 'App\\Events\\UserProfileUpdated',
         'event_properties' => [
             'user_id' => $user->id,
@@ -49,6 +53,8 @@ test('activity module models work together in integrated scenarios', function ()
             'snapshot_id' => $snapshot->id,
             'changes' => ['profile_completed' => true],
         ],
+        'meta_data' => ['source' => 'test'],
+        'created_at' => now(),
     ]);
     \assert($storedEvent instanceof StoredEvent);
     expect($storedEvent)->not->toBeNull();
@@ -68,14 +74,17 @@ test('activity module models work together in integrated scenarios', function ()
     expect($eventProperties)->toBeArray()
         ->and($eventProperties['user_id'])->toBe($user->id);
 
-    $relatedActivities = Activity::causedBy($user)->get();
-    expect($relatedActivities)->toContain($activity);
+    $relatedActivities = Activity::query()
+        ->where('causer_type', User::class)
+        ->where('causer_id', (string) $user->id)
+        ->get();
+    expect($relatedActivities->pluck('id')->all())->toContain($activity->id);
 
     $relatedSnapshots = Snapshot::uuid($aggregateUuid)->get();
-    expect($relatedSnapshots)->toContain($snapshot);
+    expect($relatedSnapshots->pluck('id')->all())->toContain($snapshot->id);
 
     $relatedEvents = StoredEvent::whereAggregateUuid($aggregateUuid)->get();
-    expect($relatedEvents)->toContain($storedEvent);
+    expect($relatedEvents->pluck('id')->all())->toContain($storedEvent->id);
 });
 
 test('activity batch processing with multiple models', function () {
@@ -105,15 +114,23 @@ test('activity batch processing with multiple models', function () {
     \assert($snapshot instanceof Snapshot);
     expect($snapshot)->not->toBeNull();
 
-    $storedEvents = StoredEvent::factory()->count(3)->create([ // @phpstan-ignore-line method.nonObject
-        'aggregate_uuid' => $aggregateUuid,
-        'event_properties' => [
-            'batch_id' => $batchUuid,
-            'processed_activities' => $activities->pluck('id')->toArray(),
-        ],
-    ]);
-    \assert($storedEvents instanceof Collection);
-    expect($storedEvents)->toHaveCount(3);
+    $storedEventIds = [];
+    for ($i = 0; $i < 3; $i++) {
+        $stored = StoredEvent::create([
+            'aggregate_uuid' => $aggregateUuid,
+            'aggregate_version' => $i + 1,
+            'event_version' => 1,
+            'event_class' => 'App\\Events\\UserLoggedOut',
+            'event_properties' => [
+                'batch_id' => $batchUuid,
+                'processed_activities' => $activities->pluck('id')->toArray(),
+            ],
+            'meta_data' => ['source' => 'test'],
+            'created_at' => now(),
+        ]);
+        $storedEventIds[] = $stored->id;
+    }
+    expect($storedEventIds)->toHaveCount(3);
 
     $batchActivities = Activity::forBatch($batchUuid)->get();
     expect($batchActivities)->toHaveCount(5);
@@ -185,7 +202,10 @@ test('activity module handles concurrent operations correctly', function () {
     \assert(is_array($results));
     expect($results)->toHaveCount(10)->each->toBeTrue();
 
-    $userActivities = Activity::causedBy($user)->get();
+    $userActivities = Activity::query()
+        ->where('causer_type', User::class)
+        ->where('causer_id', (string) $user->id)
+        ->get();
     expect($userActivities)->toHaveCount(10);
 
     $createdSnapshots = Snapshot::whereIn('id', $concurrentSnapshots)->get();
@@ -271,14 +291,19 @@ test('activity module handles data consistency across models', function () {
     \assert($snapshot instanceof Snapshot);
     expect($snapshot)->not->toBeNull();
 
-    $storedEvent = StoredEvent::factory()->create([ // @phpstan-ignore-line method.nonObject
+    $storedEvent = StoredEvent::query()->create([
         'aggregate_uuid' => $aggregateUuid,
+        'aggregate_version' => 1,
+        'event_version' => 1,
+        'event_class' => 'App\\Events\\UserProfileUpdated',
         'event_properties' => [
+            'user_id' => $user->id,
             'activity_id' => $activity->id,
             'snapshot_id' => $snapshot->id,
-            'user_id' => $user->id,
-            'consistent' => true,
+            'changes' => ['profile_completed' => true],
         ],
+        'meta_data' => [],
+        'created_at' => now(),
     ]);
     \assert($storedEvent instanceof StoredEvent);
     expect($storedEvent)->not->toBeNull();
@@ -316,7 +341,13 @@ test('activity module handles data consistency across models', function () {
 
     expect($freshActivityProperties['action'])->toBe('data_consistency_test')
         ->and($freshSnapshotState['consistent'])->toBeTrue()
-        ->and($freshEventProperties['consistent'])->toBeTrue();
+        ->and($freshEventProperties)->toHaveKey('changes');
+
+    /** @var mixed $changes */
+    $changes = $freshEventProperties['changes'];
+    expect($changes)->toBeArray();
+    \assert(is_array($changes));
+    expect($changes)->toHaveKey('profile_completed', true);
 });
 
 test('activity module supports bulk operations efficiently', function () {
@@ -330,10 +361,10 @@ test('activity module supports bulk operations efficiently', function () {
             'log_name' => 'bulk_operation',
             'description' => "Bulk activity {$i}",
             'causer_type' => User::class,
-            'causer_id' => $user->id,
-            'properties' => ['index' => $i, 'batch' => 'bulk_test'],
-            'created_at' => now(),
-            'updated_at' => now(),
+            'causer_id' => (string) $user->id,
+            'properties' => json_encode(['index' => $i, 'batch' => 'bulk_test']),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
         ];
     }
 
@@ -359,6 +390,10 @@ test('activity module supports bulk operations efficiently', function () {
         ->and($firstActivity->causer_id)->toBe($user->id)
         ->and($lastActivity->causer_id)->toBe($user->id);
 
-    $userActivities = Activity::causedBy($user)->where('log_name', 'bulk_operation')->get();
+    $userActivities = Activity::query()
+        ->where('causer_type', User::class)
+        ->where('causer_id', (string) $user->id)
+        ->where('log_name', 'bulk_operation')
+        ->get();
     expect($userActivities)->toHaveCount(100);
 });

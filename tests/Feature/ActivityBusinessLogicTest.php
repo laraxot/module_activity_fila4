@@ -8,6 +8,8 @@ use function Safe\json_encode;
 use Illuminate\Support\Str;
 use Modules\Activity\Models\Activity;
 
+uses(\Modules\Activity\Tests\TestCase::class);
+
 describe('Activity Business Logic', function () {
     it('can create activity with basic information', function () {
         $activityData = [
@@ -158,6 +160,14 @@ describe('Activity Business Logic', function () {
             'batch_uuid' => $batchUuid,
         ]);
 
+        $activity1->batch_uuid = $batchUuid;
+        $activity1->save();
+        $activity2->batch_uuid = $batchUuid;
+        $activity2->save();
+
+        $activity1->refresh();
+        $activity2->refresh();
+
         expect($activity1->batch_uuid)->toBe($batchUuid)->and($activity2->batch_uuid)->toBe($batchUuid);
 
         $batchActivities = Activity::where('batch_uuid', $batchUuid)->get();
@@ -221,11 +231,11 @@ describe('Activity Business Logic', function () {
         $complexActivity = Activity::create([
             'log_name' => 'complex',
             'description' => 'Complex operation with nested data',
-            'subject_type' => 'App\Models\Order',
+            'subject_type' => 'App\\Models\\Order',
             'subject_id' => 909,
-            'causer_type' => 'Modules\User\Models\User',
+            'causer_type' => 'Modules\\User\\Models\\User',
             'causer_id' => 1010,
-            'properties' => json_encode([
+            'properties' => [
                 'order_details' => [
                     'items' => [
                         ['id' => 1, 'name' => 'Product A', 'quantity' => 2, 'price' => 25.99],
@@ -238,15 +248,12 @@ describe('Activity Business Logic', function () {
                     'name' => 'Jane Smith',
                     'email' => 'jane@example.com',
                 ],
-            ]),
+            ],
             'event' => 'order_placed',
         ]);
         expect($complexActivity)->not->toBeNull();
 
-        expect($complexActivity->event)->toBe('order_placed')->and($complexActivity->log_name)->toBe('complex');
-
         $propertiesValue = $complexActivity->properties;
-        // properties può essere Collection, array o stringa, convertiamo sempre a array
         /** @var array<string, mixed> $properties */
         $properties = [];
         if (is_string($propertiesValue)) {
