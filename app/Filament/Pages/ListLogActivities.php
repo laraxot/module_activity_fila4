@@ -22,10 +22,7 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Livewire\WithPagination;
 use LogicException;
-<<<<<<< HEAD
-=======
 use Modules\Activity\Actions\RestoreActivityAction;
->>>>>>> a51f2cf8 (.)
 use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
 use Modules\Activity\Models\Activity;
 use Modules\Xot\Filament\Resources\Pages\XotBasePage;
@@ -167,39 +164,6 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             abort(403);
         }
 
-<<<<<<< HEAD
-        $result = $this->prepareRestore($key);
-        $error = $result['error'] ?? null;
-        if ($error !== null && $error !== '') {
-            $this->sendRestoreFailureNotification((string) $error);
-
-            return;
-        }
-
-        $activity = $result['activity'] ?? null;
-        $record = $result['record'] ?? null;
-
-        if (! $record instanceof Model) {
-            $this->sendRestoreFailureNotification('Invalid record type');
-
-            return;
-        }
-
-        $oldProperties = data_get($activity, 'properties.old');
-        if ($oldProperties === null) {
-            $this->sendRestoreFailureNotification();
-
-            return;
-        }
-
-        if (! \is_array($oldProperties)) {
-            $this->sendRestoreFailureNotification('Invalid properties format');
-
-            return;
-        }
-
-        $this->performRestore($record, $oldProperties);
-=======
         try {
             $activity = $this->resolveActivity($key);
             $oldProperties = $this->getOldProperties($activity);
@@ -211,7 +175,6 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         } catch (Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
->>>>>>> a51f2cf8 (.)
     }
 
     /**
@@ -316,42 +279,6 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         return $notification->send();
     }
 
-<<<<<<< HEAD
-    private function prepareRestore(int|string $key): array
-    {
-        $record = $this->record;
-        if (! \is_object($record) || ! method_exists($record, 'activities')) {
-            return ['error' => 'Invalid record', 'activity' => null, 'record' => null];
-        }
-
-        $activitiesRelation = $record->activities();
-        if (! \is_object($activitiesRelation) || ! method_exists($activitiesRelation, 'whereKey')) {
-            return ['error' => 'Invalid activities relation', 'activity' => null, 'record' => null];
-        }
-
-        $whereKeyQuery = $activitiesRelation->whereKey($key);
-        if (! \is_object($whereKeyQuery) || ! method_exists($whereKeyQuery, 'first')) {
-            return ['error' => 'Invalid query', 'activity' => null, 'record' => null];
-        }
-
-        $activity = $whereKeyQuery->first();
-
-        return ['error' => null, 'activity' => $activity, 'record' => $record];
-    }
-
-    private function performRestore(Model $record, array $oldProperties): void
-    {
-        try {
-            /** @var array<string, mixed> $safeProperties */
-            $safeProperties = $oldProperties;
-
-            $record->update($safeProperties);
-
-            $this->sendRestoreSuccessNotification();
-        } catch (Exception $e) {
-            $this->sendRestoreFailureNotification($e->getMessage());
-        }
-=======
     private function resolveActivity(int|string $key): Activity
     {
         $record = $this->record;
@@ -391,6 +318,5 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
 
         /** @var array<string, mixed> $old */
         return $old;
->>>>>>> a51f2cf8 (.)
     }
 }
