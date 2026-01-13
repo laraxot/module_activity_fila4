@@ -22,9 +22,14 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Livewire\WithPagination;
 use LogicException;
+<<<<<<< HEAD
+=======
+use Modules\Activity\Actions\RestoreActivityAction;
+>>>>>>> a51f2cf8 (.)
 use Modules\Activity\Filament\Pages\Concerns\CanPaginate;
 use Modules\Activity\Models\Activity;
 use Modules\Xot\Filament\Resources\Pages\XotBasePage;
+use Webmozart\Assert\Assert;
 
 /**
  * Classe base per visualizzare lo storico delle attività di un record.
@@ -162,6 +167,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
             abort(403);
         }
 
+<<<<<<< HEAD
         $result = $this->prepareRestore($key);
         $error = $result['error'] ?? null;
         if ($error !== null && $error !== '') {
@@ -193,6 +199,19 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         }
 
         $this->performRestore($record, $oldProperties);
+=======
+        try {
+            $activity = $this->resolveActivity($key);
+            $oldProperties = $this->getOldProperties($activity);
+
+            Assert::isInstanceOf($this->record, Model::class);
+            app(RestoreActivityAction::class)->execute($this->record, $oldProperties);
+
+            $this->sendRestoreSuccessNotification();
+        } catch (Exception $e) {
+            $this->sendRestoreFailureNotification($e->getMessage());
+        }
+>>>>>>> a51f2cf8 (.)
     }
 
     /**
@@ -297,6 +316,7 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         return $notification->send();
     }
 
+<<<<<<< HEAD
     private function prepareRestore(int|string $key): array
     {
         $record = $this->record;
@@ -331,5 +351,46 @@ abstract class ListLogActivities extends XotBasePage implements HasForms
         } catch (Exception $e) {
             $this->sendRestoreFailureNotification($e->getMessage());
         }
+=======
+    private function resolveActivity(int|string $key): Activity
+    {
+        $record = $this->record;
+        if (! $record instanceof Model) {
+            throw new Exception('Invalid record');
+        }
+
+        if (! method_exists($record, 'activities')) {
+            throw new LogicException('Record must have activities relationship');
+        }
+
+        $relation = $record->activities();
+        if (! $relation instanceof Relation) {
+            throw new Exception('Invalid activities relation');
+        }
+
+        /** @var Activity|null $activity */
+        $activity = $relation->whereKey($key)->first();
+
+        if (! $activity instanceof Activity) {
+            throw new Exception('Activity not found');
+        }
+
+        return $activity;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function getOldProperties(Activity $activity): array
+    {
+        $old = data_get($activity, 'properties.old');
+
+        if (! \is_array($old)) {
+            throw new Exception('Invalid properties format in activity log');
+        }
+
+        /** @var array<string, mixed> $old */
+        return $old;
+>>>>>>> a51f2cf8 (.)
     }
 }
