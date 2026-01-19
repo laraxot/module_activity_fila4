@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Activity\Tests\Feature;
 
+
 use Modules\Activity\Models\BaseModel;
 
 /**
@@ -29,8 +30,8 @@ class TestActivityModel extends BaseModel
      */
     protected function casts(): array
     {
-        return [
-            'published_at' => 'datetime',
-        ];
+        return array_merge(parent::casts(), [
+            // Module-specific casts only
+        ]);
     }
 }

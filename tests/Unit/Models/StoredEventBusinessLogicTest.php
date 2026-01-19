@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+
+uses(\Modules\Activity\Tests\TestCase::class);
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Activity\Models\StoredEvent;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
